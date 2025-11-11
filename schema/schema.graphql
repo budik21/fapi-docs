@@ -144,285 +144,568 @@ enum CardType {
   RED_CARD_INDIRECT
 }
 
+"""
+Standardized country code for each nation or football association.
+The enum values reflect the name (using underscores) while the docstrings provide the full name and its ISO 3166-1 alpha-2 code where applicable.
+"""
 enum CountryCode {
+  "Afghanistan (AF)"
   AFGHANISTAN
+  "Albania (AL)"
   ALBANIA
+  "Algeria (DZ)"
   ALGERIA
+  "American Samoa (AS)"
   AMERICAN_SAMOA
+  "Andorra (AD)"
   ANDORRA
+  "Angola (AO)"
   ANGOLA
+  "Anguilla (AI)"
   ANGUILLA
+  "Antigua and Barbuda (AG)"
   ANTIGUA_AND_BARBUDA
+  "Argentina (AR)"
   ARGENTINA
+  "Armenia (AM)"
   ARMENIA
+  "Aruba (AW)"
   ARUBA
+  "Australia (AU)"
   AUSTRALIA
+  "Austria (AT)"
   AUSTRIA
+  "Azerbaijan (AZ)"
   AZERBAIJAN
+  "Bahamas (BS)"
   BAHAMAS
+  "Bahrain (BH)"
   BAHRAIN
+  "Bangladesh (BD)"
   BANGLADESH
+  "Barbados (BB)"
   BARBADOS
+  "Belarus (BY)"
   BELARUS
+  "Belgium (BE)"
   BELGIUM
+  "Belize (BZ)"
   BELIZE
+  "Benin (BJ)"
   BENIN
+  "Bermuda (BM)"
   BERMUDA
+  "Bhutan (BT)"
   BHUTAN
+  "Bolivia (BO)"
   BOLIVIA
+  "Bosnia and Herzegovina (BA)"
   BOSNIA_AND_HERZEGOVINA
+  "Botswana (BW)"
   BOTSWANA
+  "Brazil (BR)"
   BRAZIL
+  "British Virgin Islands (VG)"
   BRITISH_VIRGIN_ISLANDS
+  "Brunei (BN)"
   BRUNEI
+  "Bulgaria (BG)"
   BULGARIA
+  "Burkina Faso (BF)"
   BURKINA_FASO
+  "Burundi (BI)"
   BURUNDI
+  "Cambodia (KH)"
   CAMBODIA
+  "Cameroon (CM)"
   CAMEROON
+  "Canada (CA)"
   CANADA
+  "Cape Verde (CV)"
   CAPE_VERDE
+  "Cayman Islands (KY)"
   CAYMAN_ISLANDS
+  "Central African Republic (CF)"
   CENTRAL_AFRICAN_REPUBLIC
+  "Chad (TD)"
   CHAD
+  "Chile (CL)"
   CHILE
+  "China (CN)"
   CHINA
+  "Chinese Taipei (Taiwan, TW)"
   CHINESE_TAIPEI
+  "Colombia (CO)"
   COLOMBIA
+  "Comoros (KM)"
   COMOROS
+  "Congo (CG)"
   CONGO
+  "Cook Islands (CK)"
   COOK_ISLANDS
+  "Costa Rica (CR)"
   COSTA_RICA
+  "Croatia (HR)"
   CROATIA
+  "Cuba (CU)"
   CUBA
+  "Curaçao (CW)"
   CURACAO
+  "Cyprus (CY)"
   CYPRUS
+  "Czech Republic (CZ)"
   CZECH_REPUBLIC
+  "Denmark (DK)"
   DENMARK
+  "Djibouti (DJ)"
   DJIBOUTI
+  "Dominica (DM)"
   DOMINICA
+  "Dominican Republic (DO)"
   DOMINICAN_REPUBLIC
+  "DR Congo (CD)"
   DR_CONGO
+  "East Timor (TL)"
   EAST_TIMOR
+  "Ecuador (EC)"
   ECUADOR
+  "Egypt (EG)"
   EGYPT
+  "El Salvador (SV)"
   EL_SALVADOR
+  "England (GB)"
   ENGLAND
+  "Equatorial Guinea (GQ)"
   EQUATORIAL_GUINEA
+  "Eritrea (ER)"
   ERITREA
+  "Estonia (EE)"
   ESTONIA
+  "Eswatini (SZ)"
   ESWATINI
+  "Ethiopia (ET)"
   ETHIOPIA
+  "Faroe Islands (FO)"
   FAROE_ISLANDS
+  "Fiji (FJ)"
   FIJI
+  "Finland (FI)"
   FINLAND
+  "France (FR)"
   FRANCE
+  "Gabon (GA)"
   GABON
+  "Gambia (GM)"
   GAMBIA
+  "Georgia (GE)"
   GEORGIA
+  "Germany (DE)"
   GERMANY
+  "Ghana (GH)"
   GHANA
+  "Gibraltar (GI)"
   GIBRALTAR
+  "Greece (GR)"
   GREECE
+  "Grenada (GD)"
   GRENADA
+  "Guam (GU)"
   GUAM
+  "Guatemala (GT)"
   GUATEMALA
+  "Guinea (GN)"
   GUINEA
+  "Guinea-Bissau (GW)"
   GUINEA_BISSAU
+  "Guyana (GY)"
   GUYANA
+  "Haiti (HT)"
   HAITI
+  "Honduras (HN)"
   HONDURAS
+  "Hong Kong (HK)"
   HONG_KONG
+  "Hungary (HU)"
   HUNGARY
+  "Iceland (IS)"
   ICELAND
+  "India (IN)"
   INDIA
+  "Indonesia (ID)"
   INDONESIA
+  "Iran (IR)"
   IRAN
+  "Iraq (IQ)"
   IRAQ
+  "Israel (IL)"
   ISRAEL
+  "Italy (IT)"
   ITALY
+  "Ivory Coast (CI)"
   IVORY_COAST
+  "Jamaica (JM)"
   JAMAICA
+  "Japan (JP)"
   JAPAN
+  "Jordan (JO)"
   JORDAN
+  "Kazakhstan (KZ)"
   KAZAKHSTAN
+  "Kenya (KE)"
   KENYA
+  "Kosovo (XK)"
   KOSOVO
+  "Kuwait (KW)"
   KUWAIT
+  "Kyrgyzstan (KG)"
   KYRGYZSTAN
+  "Laos (LA)"
   LAOS
+  "Latvia (LV)"
   LATVIA
+  "Lebanon (LB)"
   LEBANON
+  "Lesotho (LS)"
   LESOTHO
+  "Liberia (LR)"
   LIBERIA
+  "Libya (LY)"
   LIBYA
+  "Liechtenstein (LI)"
   LIECHTENSTEIN
+  "Lithuania (LT)"
   LITHUANIA
+  "Luxembourg (LU)"
   LUXEMBOURG
+  "Macau (MO)"
   MACAU
+  "Madagascar (MG)"
   MADAGASCAR
+  "Malawi (MW)"
   MALAWI
+  "Malaysia (MY)"
   MALAYSIA
+  "Maldives (MV)"
   MALDIVES
+  "Mali (ML)"
   MALI
+  "Malta (MT)"
   MALTA
+  "Mauritania (MR)"
   MAURITANIA
+  "Mauritius (MU)"
   MAURITIUS
+  "Mexico (MX)"
   MEXICO
+  "Moldova (MD)"
   MOLDOVA
+  "Mongolia (MN)"
   MONGOLIA
+  "Montenegro (ME)"
   MONTENEGRO
+  "Montserrat (MS)"
   MONTSERRAT
+  "Morocco (MA)"
   MOROCCO
+  "Mozambique (MZ)"
   MOZAMBIQUE
+  "Myanmar (MM)"
   MYANMAR
+  "Namibia (NA)"
   NAMIBIA
+  "Nepal (NP)"
   NEPAL
+  "Netherlands (NL)"
   NETHERLANDS
+  "New Caledonia (NC)"
   NEW_CALEDONIA
+  "New Zealand (NZ)"
   NEW_ZEALAND
+  "Nicaragua (NI)"
   NICARAGUA
+  "Niger (NE)"
   NIGER
+  "Nigeria (NG)"
   NIGERIA
+  "North Korea (KP)"
   NORTH_KOREA
+  "North Macedonia (MK)"
   NORTH_MACEDONIA
+  "Northern Ireland (GB)"
   NORTHERN_IRELAND
+  "Norway (NO)"
   NORWAY
+  "Oman (OM)"
   OMAN
+  "Pakistan (PK)"
   PAKISTAN
+  "Palestine (PS)"
   PALESTINE
+  "Panama (PA)"
   PANAMA
+  "Papua New Guinea (PG)"
   PAPUA_NEW_GUINEA
+  "Paraguay (PY)"
   PARAGUAY
+  "Peru (PE)"
   PERU
+  "Philippines (PH)"
   PHILIPPINES
+  "Poland (PL)"
   POLAND
+  "Portugal (PT)"
   PORTUGAL
+  "Puerto Rico (PR)"
   PUERTO_RICO
+  "Qatar (QA)"
   QATAR
+  "Republic of Ireland (IE)"
   REPUBLIC_OF_IRELAND
+  "Romania (RO)"
   ROMANIA
+  "Russia (RU)"
   RUSSIA
+  "Rwanda (RW)"
   RWANDA
+  "Saint Kitts and Nevis (KN)"
   SAINT_KITTS_AND_NEVIS
+  "Saint Lucia (LC)"
   SAINT_LUCIA
+  "Saint Vincent and the Grenadines (VC)"
   SAINT_VINCENT_AND_THE_GRENADINES
+  "Samoa (WS)"
   SAMOA
+  "San Marino (SM)"
   SAN_MARINO
+  "Sao Tome and Principe (ST)"
   SAO_TOME_AND_PRINCIPE
+  "Saudi Arabia (SA)"
   SAUDI_ARABIA
+  "Scotland (GB)"
   SCOTLAND
+  "Senegal (SN)"
   SENEGAL
+  "Serbia (RS)"
   SERBIA
+  "Seychelles (SC)"
   SEYCHELLES
+  "Sierra Leone (SL)"
   SIERRA_LEONE
+  "Singapore (SG)"
   SINGAPORE
+  "Slovakia (SK)"
   SLOVAKIA
+  "Slovenia (SI)"
   SLOVENIA
+  "Solomon Islands (SB)"
   SOLOMON_ISLANDS
+  "Somalia (SO)"
   SOMALIA
+  "South Africa (ZA)"
   SOUTH_AFRICA
+  "South Korea (KR)"
   SOUTH_KOREA
+  "South Sudan (SS)"
   SOUTH_SUDAN
+  "Spain (ES)"
   SPAIN
+  "Sri Lanka (LK)"
   SRI_LANKA
+  "Sudan (SD)"
   SUDAN
+  "Suriname (SR)"
   SURINAME
+  "Sweden (SE)"
   SWEDEN
+  "Switzerland (CH)"
   SWITZERLAND
+  "Syria (SY)"
   SYRIA
+  "Tahiti (French Polynesia, PF)"
   TAHITI
+  "Tajikistan (TJ)"
   TAJIKISTAN
+  "Tanzania (TZ)"
   TANZANIA
+  "Thailand (TH)"
   THAILAND
+  "Togo (TG)"
   TOGO
+  "Tonga (TO)"
   TONGA
+  "Trinidad and Tobago (TT)"
   TRINIDAD_AND_TOBAGO
+  "Tunisia (TN)"
   TUNISIA
+  "Turkey (TR)"
   TURKEY
+  "Turkmenistan (TM)"
   TURKMENISTAN
+  "Turks and Caicos Islands (TC)"
   TURKS_AND_CAICOS_ISLANDS
+  "Uganda (UG)"
   UGANDA
+  "Ukraine (UA)"
   UKRAINE
+  "United Arab Emirates (AE)"
   UNITED_ARAB_EMIRATES
+  "United States (US)"
   UNITED_STATES
+  "Uruguay (UY)"
   URUGUAY
+  "US Virgin Islands (VI)"
   US_VIRGIN_ISLANDS
+  "Uzbekistan (UZ)"
   UZBEKISTAN
+  "Vanuatu (VU)"
   VANUATU
+  "Venezuela (VE)"
   VENEZUELA
+  "Vietnam (VN)"
   VIETNAM
+  "Wales (GB)"
   WALES
+  "Yemen (YE)"
   YEMEN
+  "Zambia (ZM)"
   ZAMBIA
+  "Zimbabwe (ZW)"
   ZIMBABWE
+  "Bonaire (BQ)"
   BONAIRE
+  "French Guiana (GF)"
   FRENCH_GUIANA
+  "Great Britain (GB)"
   GREAT_BRITAIN
+  "Guadeloupe (GP)"
   GUADELOUPE
+  "Kiribati (KI)"
   KIRIBATI
+  "Martinique (MQ)"
   MARTINIQUE
+  "Niue (NU)"
   NIUE
+  "Northern Cyprus"
   NORTHERN_CYPRUS
+  "Northern Mariana Islands (MP)"
   NORTHERN_MARIANA_ISLANDS
+  "Réunion (RE)"
   REUNION
+  "Saint Martin (French part, MF)"
   SAINT_MARTIN
+  "Sint Maarten (Dutch part, SX)"
   SINT_MAARTEN
+  "Tuvalu (TV)"
   TUVALU
+  "Western Sahara (EH)"
   WESTERN_SAHARA
+  "Zanzibar (TZ)"
   ZANZIBAR
+  "Basque Country"
   BASQUE_COUNTRY
+  "Catalonia"
   CATALONIA
+  "Micronesia (FM)"
   MICRONESIA
+  "Greenland (GL)"
   GREENLAND
+  "Marshall Islands (MH)"
   MARSHALL_ISLANDS
+  "Monaco (MC)"
   MONACO
+  "Nauru (NR)"
   NAURU
+  "Palau (PW)"
   PALAU
+  "Saint Barthelemy (BL)"
   SAINT_BARTHELEMY
+  "Saint Pierre and Miquelon (PM)"
   SAINT_PIERRE_AND_MIQUELON
+  "Saint Helena (SH)"
   SAINT_HELENA
+  "Transnistria"
   TRANSNISTRIA
+  "Tokelau (TK)"
   TOKELAU
+  "Vatican City (VA)"
   VATICAN_CITY
+  "Wallis and Futuna (WF)"
   WALLIS_AND_FUTUNA
+  "Isle of Man (IM)"
   ISLE_OF_MAN
+  "Guernsey (GG)"
   GUERNSEY
+  "Jersey (JE)"
   JERSEY
+  "Bohemia (Historical)"
   BOHEMIA
+  "Guiana (Historical)"
   GUIANA
+  "British India (Historical)"
   BRITISH_INDIA
+  "Burma (Historical)"
   BURMA
+  "Ceylon (Historical)"
   CEYLON
+  "CIS (Commonwealth of Independent States, Historical)"
   CIS
+  "Czechoslovakia (Historical)"
   CZECHOSLOVAKIA
+  "Dahomey (Historical)"
   DAHOMEY
+  "Dutch East Indies (Historical)"
   DUTCH_EAST_INDIES
+  "East Germany (Historical)"
   EAST_GERMANY
+  "Gold Coast (Historical)"
   GOLD_COAST
+  "Ireland (Historical designation)"
   IRELAND
+  "Malaya (Historical)"
   MALAYA
+  "Netherlands Antilles (Historical)"
   NETHERLANDS_ANTILLES
+  "New Hebrides (Historical)"
   NEW_HEBRIDES
+  "North Vietnam (Historical)"
   NORTH_VIETNAM
+  "North Yemen (Historical)"
   NORTH_YEMEN
+  "Northern Rhodesia (Historical)"
   NORTHERN_RHODESIA
+  "Palestine (British Mandate, Historical)"
   PALESTINE_BRITISH_MANDATE
+  "Rhodesia (Historical)"
   RHODESIA
+  "Saar (Historical)"
   SAAR
+  "Serbia and Montenegro (Historical)"
   SERBIA_AND_MONTENEGRO
+  "Siam (Historical)"
   SIAM
+  "South Vietnam (Historical)"
   SOUTH_VIETNAM
+  "South Yemen (Historical)"
   SOUTH_YEMEN
+  "Southern Rhodesia (Historical)"
   SOUTHERN_RHODESIA
+  "Soviet Union (Historical)"
   SOVIET_UNION
+  "Taiwan (Historical)"
   TAIWAN
+  "Tanganyika (Historical)"
   TANGANYIKA
+  "United Arab Republic (Historical)"
   UNITED_ARAB_REPUBLIC
+  "Upper Volta (Historical)"
   UPPER_VOLTA
+  "West Germany (Historical)"
   WEST_GERMANY
+  "Western Samoa (Historical)"
   WESTERN_SAMOA
+  "Yugoslavia (Historical)"
   YUGOSLAVIA
+  "Zaire (Historical)"
   ZAIRE
 }
 
@@ -454,15 +737,19 @@ enum FoulContext {
   OFF_THE_PLAY
 }
 
+"""
+Specifies the type of foul committed during a football match, categorizing rule violations by their nature and severity.
+"""
 enum FoulType {
+  "Represents NULL or UNKNOWN value."
   UNSPECIFIED
-  "The common foul was made"
+  "The common foul was made."
   COMMON
-  "The player violates the rule and played the ball with the hand"
+  "The player violates the rule and played the ball with the hand."
   HANDBALL
   "When a player uses their leg to make an opponent fall."
   TRIPPING
-  "Using hands or body forcefully to shove an opponent"
+  "Using hands or body forcefully to shove an opponent."
   PUSHING
   "Grabbing an opponent's body or kit to prevent movement."
   HOLDING
@@ -470,21 +757,21 @@ enum FoulType {
   CHARGING
   "Raising a foot dangerously near an opponent's head or upper body."
   HIGH_FOOT
-  "The goalkeeper holds the ball more than six seconds (DEPRECATED)"
+  "The goalkeeper holds the ball more than six seconds (DEPRECATED after the rules have changed in 2025)."
   SIX_SECOND_VIOLATION
   "Any action that endangers another player, such as attempting a kick in a dangerous position."
   DANGEROUS_PLAY
-  "A deliberate back pass (illegal pass) that is picked up or handled by the goalkeeper."
+  "A deliberate back pass (illegal pass) that is picked up or handled by the goalkeeper."
   BACK_PASS
-  "The player violated the rule against unsportsmanlike behavior by simulating being fouled"
+  "The player violated the rule against unsportsmanlike behavior by simulating being fouled."
   SIMULATION
-  "The foul committed was for obstruction"
+  "The foul committed was for obstruction."
   OBSTRUCTION
-  "A foul where a player strikes an opponent with the arm, usually during an aerial duel"
+  "A foul where a player strikes an opponent with the arm, usually during an aerial duel."
   ELBOWING
   "A foul is awarded due to inappropriate behavior of the player towards the referee."
   REFEREE_ABUSE
-  "Showing disagreement with the referee, often verbally or through gestures"
+  "Showing disagreement with the referee, often verbally or through gestures."
   DISSENT
 }
 
@@ -498,147 +785,293 @@ enum Gender {
   WOMEN
 }
 
+"""
+Specifies the team's tactical formation, indicating how players are arranged on the pitch at the start of the match.
+"""
 enum LineupFormation {
-  FORMATION_442
-  FORMATION_41212
-  FORMATION_433
-  FORMATION_451
-  FORMATION_4411
-  FORMATION_4141
-  FORMATION_4231
-  FORMATION_4321
-  FORMATION_532
-  FORMATION_541
-  FORMATION_352
-  FORMATION_4222
-  FORMATION_3511
-  FORMATION_3421
-  FORMATION_3412
-  FORMATION_343
-  FORMATION_4132
-  FORMATION_4240
-  FORMATION_4312
-  FORMATION_3241
-  FORMATION_3331
+  "The team's starting lineup will play in a 3-1-4-2 formation."
   FORMATION_3142
+  "The team's starting lineup will play in a 3-2-4-1 formation."
+  FORMATION_3241
+  "The team's starting lineup will play in a 3-3-3-1 formation."
+  FORMATION_3331
+  "The team's starting lineup will play in a 3-4-1-2 formation."
+  FORMATION_3412
+  "The team's starting lineup will play in a 3-4-2-1 formation."
+  FORMATION_3421
+  "The team's starting lineup will play in a 3-4-3 formation."
+  FORMATION_343
+  "The team's starting lineup will play in a 3-5-1-1 formation."
+  FORMATION_3511
+  "The team's starting lineup will play in a 3-5-2 formation."
+  FORMATION_352
+  "The team's starting lineup will play in a 4-1-2-1-2 formation."
+  FORMATION_41212
+  "The team's starting lineup will play in a 4-1-3-2 formation."
+  FORMATION_4132
+  "The team's starting lineup will play in a 4-1-4-1 formation."
+  FORMATION_4141
+  "The team's starting lineup will play in a 4-2-2-2 formation."
+  FORMATION_4222
+  "The team's starting lineup will play in a 4-2-3-1 formation."
+  FORMATION_4231
+  "The team's starting lineup will play in a 4-2-4-0 formation."
+  FORMATION_4240
+  "The team's starting lineup will play in a 4-3-1-2 formation."
+  FORMATION_4312
+  "The team's starting lineup will play in a 4-3-2-1 formation."
+  FORMATION_4321
+  "The team's starting lineup will play in a 4-3-3 formation."
+  FORMATION_433
+  "The team's starting lineup will play in a 4-4-1-1 formation."
+  FORMATION_4411
+  "The team's starting lineup will play in a 4-4-2 formation."
+  FORMATION_442
+  "The team's starting lineup will play in a 4-5-1 formation."
+  FORMATION_451
+  "The team's starting lineup will play in a 5-3-2 formation."
+  FORMATION_532
+  "The team's starting lineup will play in a 5-4-1 formation."
+  FORMATION_541
 }
 
+"""
+Specifies the exact role and typical location of a player on the field within the team's starting lineup.
+"""
 enum LineupPosition {
+  "The goalkeeper, the only player allowed to handle the ball within their own penalty area."
   GOALKEEPER
+  "General wide defender/wingback position"
   WINGBACK
+  "Left-sided wingback."
   WINGBACK_LEFT
+  "Right-sided wingback."
   WINGBACK_RIGHT
+  "General wide defender/fullback position."
   FULLBACK
+  "Left-sided fullback."
   FULLBACK_LEFT
+  "Right-sided fullback."
   FULLBACK_RIGHT
+  "General central defender position."
   CENTREBACK
+  "Left-sided central defender (LCB)."
   CENTREBACK_LEFT
+  "Right-sided central defender (RCB)."
   CENTREBACK_RIGHT
+  "General central midfield position."
   MIDFIELDER
+  "Wide midfield position on the left flank (LM)."
   MIDFIELDER_LEFT
+  "Standard central midfield position (CM)."
   MIDFIELDER_CENTRE
+  "Wide midfield position on the right flank (RM)."
   MIDFIELDER_RIGHT
+  "Central midfielder operating slightly to the left side."
   MIDFIELDER_CENTRE_LEFT
+  "Central midfielder operating slightly to the right side."
   MIDFIELDER_CENTRE_RIGHT
+  "General midfield position primarily focused on defensive tasks."
   DEFENSIVE_MIDFIELDER
+  "Defensive midfielder operating on the left side."
   DEFENSIVE_MIDFIELDER_LEFT
+  "Defensive midfielder operating on the right side."
   DEFENSIVE_MIDFIELDER_RIGHT
+  "The primary defensive central midfield position (CDM) often referred to as the 'Number 6'."
   DEFENSIVE_MIDFIELDER_CENTRE
+  "Central defensive midfielder operating slightly to the left."
   DEFENSIVE_MIDFIELDER_CENTRE_LEFT
+  "Central defensive midfielder operating slightly to the right."
   DEFENSIVE_MIDFIELDER_CENTRE_RIGHT
+  "General midfield position primarily focused on attacking and playmaking."
   ATTACKING_MIDFIELDER
+  "Attacking midfielder operating on the left side."
   ATTACKING_MIDFIELDER_LEFT
+  "Attacking midfielder operating on the right side."
   ATTACKING_MIDFIELDER_RIGHT
+  "The central attacking midfield position (ACM), often referred to as the 'Number 10'."
   ATTACKING_MIDFIELDER_CENTRE
+  "Central attacking midfielder operating slightly to the left."
   ATTACKING_MIDFIELDER_CENTRE_LEFT
+  "Central attacking midfielder operating slightly to the right."
   ATTACKING_MIDFIELDER_CENTRE_RIGHT
+  "General forward position."
   STRIKER
+  "Forward operating on the left side."
   STRIKER_LEFT
+  "Forward operating on the right side."
   STRIKER_RIGHT
+  "The central forward position, often referred to as the 'Number 9'."
   STRIKER_CENTRE
+  "Central striker operating slightly to the left."
   STRIKER_CENTRE_LEFT
+  "Central striker operating slightly to the right."
   STRIKER_CENTRE_RIGHT
+  "General wide attacking position, typically a fast player providing crosses and goals."
   WINGER
+  "Left-sided winger (LW)."
   WINGER_LEFT
+  "Right-sided winger (RW)."
   WINGER_RIGHT
 }
 
+"""
+Specifies a language and optionally a region (locale) used for internationalization and localization.
+The format is generally ISO 639-1 language code, optionally followed by an underscore and an ISO 3166-1 alpha-2 country code.
+"""
 enum Locale {
+  "Afrikaans (South Africa)"
   AF
+  "Arabic (Generic/Standard)"
   AR
+  "Bulgarian (Bulgaria)"
   BG_BG
+  "Bengali (India)"
   BN_IN
+  "Catalan (Spain)"
   CA_ES
+  "Czech (Czech Republic)"
   CS_CZ
+  "Danish (Denmark)"
   DA_DK
+  "German (Austria)"
   DE_AT
+  "German (Germany)"
   DE_DE
+  "Greek (Greece)"
   EL_GR
+  "English (Generic/Standard)"
   EN
+  "English (United Arab Emirates)"
   EN_AE
+  "English (Afghanistan)"
   EN_AF
+  "English (Australia)"
   EN_AU
+  "English (Canada)"
   EN_CA
+  "English (United Kingdom)"
   EN_GB
+  "English (Ghana)"
   EN_GH
+  "English (India)"
   EN_IN
+  "English (Kenya)"
   EN_KE
+  "English (Nigeria)"
   EN_NG
+  "English (Philippines)"
   EN_PH
+  "English (United Kingdom)"
   EN_UK
+  "English (United States)"
   EN_US
+  "English (South Africa)"
   EN_ZA
+  "English (Zambia)"
   EN_ZM
+  "Spanish (Argentina)"
   ES_AR
+  "Spanish (Chile)"
   ES_CL
+  "Spanish (Colombia)"
   ES_CO
+  "Spanish (Spain)"
   ES_ES
+  "Spanish (Mexico)"
   ES_MX
+  "Spanish (Peru)"
   ES_PE
+  "Spanish (United States)"
   ES_US
+  "Spanish (Venezuela)"
   ES_VE
+  "Estonian (Estonia)"
   ET_EE
+  "Persian / Farsi (Generic/Standard)"
   FA
+  "Finnish (Finland)"
   FI_FI
+  "French (Belgium)"
   FR_BE
+  "French (France)"
   FR_FR
+  "Hebrew (Israel)"
   HE_IL
+  "Hindi (India)"
   HI_IN
+  "Croatian (Croatia)"
   HR_HR
+  "Hungarian (Hungary)"
   HU_HU
+  "Indonesian (Indonesia)"
   ID_ID
+  "Italian (Italy)"
   IT_IT
+  "Japanese (Japan)"
   JA_JP
+  "Georgian (Georgia)"
   KA_GE
+  "Kazakh (Kazakhstan)"
   KK_KZ
+  "Kannada (India)"
   KN_IN
+  "Korean (South Korea)"
   KO_KR
+  "Lithuanian (Lithuania)"
   LT_LT
+  "Malay (Malaysia)"
   MS_MY
+  "Dutch (Belgium)"
   NL_BE
+  "Dutch (Netherlands)"
   NL_NL
+  "Norwegian (Norway)"
   NO_NO
+  "Polish (Poland)"
   PL_PL
+  "Portuguese (Brazil)"
   PT_BR
+  "Portuguese (Portugal)"
   PT_PT
+  "Romanian (Romania)"
   RO_RO
+  "Russian (Russia)"
   RU_RU
+  "Russian (Uzbekistan)"
   RU_UZ
+  "Slovak (Slovakia)"
   SK_SK
+  "Slovenian (Slovenia)"
   SL_SL
+  "Serbian (Serbia)"
   SR_RS
+  "Swedish (Sweden)"
   SV_SE
+  "Tamil (India)"
   TA_IN
+  "Telugu (India)"
   TE_IN
+  "Thai (Thailand)"
   TH_TH
+  "Tagalog / Filipino (Philippines)"
   TL_PH
+  "Turkish (Turkey)"
   TR_TR
+  "Ukrainian (Ukraine)"
   UK_UA
+  "Vietnamese (Vietnam)"
   VI_VN
+  "Chinese (Mainland China / Simplified)"
   ZH_CN
+  "Chinese (Taiwan / Traditional)"
   ZH_TW
 }
 
+"""
+Represents the official chronological phases or periods of a football (soccer) match.
+This includes defined playing times (e.g., halves and extra time periods) as well as significant non-playing intervals (e.g., half-time breaks and pre-game states) and final resolution phases.
+"""
 enum MatchPeriod {
   "First period of the match. Usually a timeframe 0-45 min. of the match"
   HALF_FIRST
@@ -662,29 +1095,47 @@ enum MatchPeriod {
   MATCH_OVERALL
 }
 
+"""
+Defines the standard duration, in minutes, for a specific period of a match,
+most commonly representing the length of a single half or an extra time segment.
+"""
 enum MatchPeriodLength {
+  "Represents a NULL or UNKNOWN value."
   UNSPECIFIED
-  "One half of the match durates 30 minutes"
+  "One half of the match durates 30 minutes (e.g., often used in youth or minor league games)."
   LENGTH_30
-  "One half of the match durates 35 minutes"
+  "One half of the match durates 35 minutes (e.g., often used in youth or minor league games)."
   LENGTH_35
-  "One half of the match durates 40 minutes"
+  "One half of the match durates 40 minutes (e.g., common in women's football or specific youth categories)."
   LENGTH_40
-  "One half of the match durates 45 minutes"
+  "One half of the match durates 45 minutes (The standard duration for one half in senior professional football)."
   LENGTH_45
-  "Duration of the period is 10 minutes"
+  "Duration of the period is 10 minutes (Often the length of a single extra time half in some competitions)."
   LENGTH_10
-  "Duration of the period is 15 minutes"
+  "Duration of the period is 15 minutes (The standard length of a single extra time half in senior professional football, or half-time break)."
   LENGTH_15
 }
 
+"""
+Represents the major, high-level phases of an entire sports fixture relative to the actual playing time.
+This is used to clearly define the temporal context of match-related data.
+For example, the win probability calculated BEFORE_MATCH is considered a distinct data point from the probability calculated IN_MATCH.
+"""
 enum MatchPhase {
+  "The match has not yet started (pre-game state)."
   BEFORE_MATCH
+  "The match is currently being played, including all official periods and breaks (live state)."
   IN_MATCH
+  "The match has concluded, and a final result has been determined (post-game state)."
   AFTER_MATCH
 }
 
+"""
+Defines a high-level segment or area on the pitch where a specific event took place.
+This categorization divides the field into two main halves and further segments the attacking half for more detailed location tracking.
+"""
 enum PitchZone {
+  "Represents a NULL or UNKNOWN value."
   UNSPECIFIED
   "The event occured on the defending half"
   DEFENDING_HALF
@@ -698,6 +1149,10 @@ enum PitchZone {
   ATTACKING_HALF_RIGHT
 }
 
+"""
+Defines specific, measurable statistical metrics used to quantify and track a player's performance in a single match.
+These metrics are primarily player-centric and can be secondarily aggregated across a season, team, or the player's entire career.
+"""
 enum PlayerMatchMetric {
   """
   Default (EN) Name: Assists to goal
@@ -1720,6 +2175,26 @@ enum PlayerMatchMetric {
   """
   MATCH_LINEUP_STARTING
   """
+  Default (EN) Name: Match drawing team
+  
+  Default (EN) Description: Indicates whether the player played for the team that drew the match (1 if yes, 0 if no)
+  
+  CZ Name: Remízový tým
+  
+  CZ Description: Indikuje, zda hráč hrál za tým, který remizoval zápas (1 pokud ano, 0 pokud ne)
+  """
+  MATCH_DRAWING_TEAM
+  """
+  Default (EN) Name: Match losing team
+  
+  Default (EN) Description: Indicates whether the player played for the team that lost the match (1 if yes, 0 if no)
+  
+  CZ Name: Prohrávající tým
+  
+  CZ Description: Indikuje, zda hráč hrál za tým, který prohrál zápas (1 pokud ano, 0 pokud ne)
+  """
+  MATCH_LOSING_TEAM
+  """
   Default (EN) Name: Minutes played
   
   Default (EN) Description: The total number of minutes a player actively spends on the field as part of the team. If he plays the full match without any extra time, 90 minutes are recorded. Added time is not included, but any extra time is counted.
@@ -1759,6 +2234,16 @@ enum PlayerMatchMetric {
   CZ Description: Celkový počet minut, které strávil hráč na hřišti. Počítáno během zápasu. Nastavení nad řádný hrací čas všech částí hry je započteno. Odečteme významná přerušení hry (např. zranění, přezkumy VAR) pro přesnější vyjádření skutečného hracího času.
   """
   MATCH_MINUTES_PLAYED_LIVE_INPLAY
+  """
+  Default (EN) Name: Match winning team
+  
+  Default (EN) Description: Indicates whether the player played for the team that won the match (1 if yes, 0 if no)
+  
+  CZ Name: Vítězný tým
+  
+  CZ Description: Indikuje, zda hráč hrál za tým, který vyhrál zápas (1 pokud ano, 0 pokud ne)
+  """
+  MATCH_WINNING_TEAM
   """
   Default (EN) Name: Offsides
   
@@ -1921,6 +2406,16 @@ enum PlayerMatchMetric {
   CZ Description: Poměr nebo procento přihrávek dopředu provedených hráčem ve srovnání se všemi přihrávkami, indikující jeho herní styl a tendenci posouvat míč dopředu.
   """
   PASSES_FORWARD_TENDENCY
+  """
+  Default (EN) Name: Points plus minus
+  
+  Default (EN) Description: Plus/minus statistic - positive value when the player's team scores a goal while the player is on the field, negative value when the player's team concedes a goal while the player is on the field
+  
+  CZ Name: Plus/minus body
+  
+  CZ Description: Plus/minus statistika - kladná hodnota když tým hráče vstřelí gól, zatímco hráč je na hřišti, záporná hodnota když tým hráče obdrží gól, zatímco hráč je na hřišti
+  """
+  POINTS_PLUS_MINUS
   """
   Default (EN) Name: Penalties committed
   
@@ -2303,7 +2798,11 @@ enum PlayerMatchMetric {
   TURNOVERS
 }
 
+"""
+Defines the different types of restart kicks or set-pieces awarded by the referee as a consequence of a foul or infringement committed by a player.
+"""
 enum PunishmentKickType {
+  "Represents a NULL or UNKNOWN value."
   UNSPECIFIED
   "The referee awards a direct free kick as a result of the foul committed"
   DIRECT_FREE_KICK
@@ -2313,7 +2812,11 @@ enum PunishmentKickType {
   PENALTY
 }
 
+"""
+Defines the key actions performed by the referee that officially mark the beginning or end of a specific match period (half, extra time, etc.).
+"""
 enum RefereeAction {
+  "Represents a NULL or UNKNOWN value."
   UNSPECIFIED
   "The referee starts the period"
   PERIOD_START
@@ -3688,6 +4191,26 @@ type PlayerMatchStatsV2 {
   """
   matchLineupStarting: PlayerMatchMetricInt!
   """
+  Default (EN) Name: Match drawing team
+  
+  Default (EN) Description: Indicates whether the player played for the team that drew the match (1 if yes, 0 if no)
+  
+  CZ Name: Remízový tým
+  
+  CZ Description: Indikuje, zda hráč hrál za tým, který remizoval zápas (1 pokud ano, 0 pokud ne)
+  """
+  matchDrawingTeam: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Match losing team
+  
+  Default (EN) Description: Indicates whether the player played for the team that lost the match (1 if yes, 0 if no)
+  
+  CZ Name: Prohrávající tým
+  
+  CZ Description: Indikuje, zda hráč hrál za tým, který prohrál zápas (1 pokud ano, 0 pokud ne)
+  """
+  matchLosingTeam: PlayerMatchMetricInt!
+  """
   Default (EN) Name: Minutes played
   
   Default (EN) Description: The total number of minutes a player actively spends on the field as part of the team. If he plays the full match without any extra time, 90 minutes are recorded. Added time is not included, but any extra time is counted.
@@ -3727,6 +4250,16 @@ type PlayerMatchStatsV2 {
   CZ Description: Celkový počet minut, které strávil hráč na hřišti. Počítáno během zápasu. Nastavení nad řádný hrací čas všech částí hry je započteno. Odečteme významná přerušení hry (např. zranění, přezkumy VAR) pro přesnější vyjádření skutečného hracího času.
   """
   matchMinutesPlayedLiveInplay: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Match winning team
+  
+  Default (EN) Description: Indicates whether the player played for the team that won the match (1 if yes, 0 if no)
+  
+  CZ Name: Vítězný tým
+  
+  CZ Description: Indikuje, zda hráč hrál za tým, který vyhrál zápas (1 pokud ano, 0 pokud ne)
+  """
+  matchWinningTeam: PlayerMatchMetricInt!
   """
   Default (EN) Name: Offsides
   
@@ -4349,6 +4882,16 @@ type PlayerMatchStatsV2 {
   CZ Description: Procento přihrávek směřující od hráče směrem k bráně soupeře vzhledem k celkovému počtu přihrávek z otevřené hry. Odráží tendenci hráče hrát progresivně spíše než konzervativně (bočně nebo zpět).
   """
   passesForwardTendency: PlayerMatchMetricFloat!
+  """
+  Default (EN) Name: Points plus minus
+  
+  Default (EN) Description: Plus/minus statistic - positive value when the player's team scores a goal while the player is on the field, negative value when the player's team concedes a goal while the player is on the field
+  
+  CZ Name: Plus/minus body
+  
+  CZ Description: Plus/minus statistika - kladná hodnota když tým hráče vstřelí gól, zatímco hráč je na hřišti, záporná hodnota když tým hráče obdrží gól, zatímco hráč je na hřišti
+  """
+  pointsPlusMinus: PlayerMatchMetricInt!
   """
   Default (EN) Name: Turnovers
   

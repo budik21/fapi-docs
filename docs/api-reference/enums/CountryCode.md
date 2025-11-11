@@ -6,288 +6,294 @@ sidebar_label: "Country Code"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
+:::info
+Standardized country code for each nation or football association. The enum values reflect the name (using underscores) while the docstrings provide the full name and its ISO 3166-1 alpha-2 code where applicable.
+:::
+
+---
+
 ## Enum Values
 
 | Value | Description |
 |---|---|
-| `AFGHANISTAN` |  |
-| `ALBANIA` |  |
-| `ALGERIA` |  |
-| `AMERICAN_SAMOA` |  |
-| `ANDORRA` |  |
-| `ANGOLA` |  |
-| `ANGUILLA` |  |
-| `ANTIGUA_AND_BARBUDA` |  |
-| `ARGENTINA` |  |
-| `ARMENIA` |  |
-| `ARUBA` |  |
-| `AUSTRALIA` |  |
-| `AUSTRIA` |  |
-| `AZERBAIJAN` |  |
-| `BAHAMAS` |  |
-| `BAHRAIN` |  |
-| `BANGLADESH` |  |
-| `BARBADOS` |  |
-| `BELARUS` |  |
-| `BELGIUM` |  |
-| `BELIZE` |  |
-| `BENIN` |  |
-| `BERMUDA` |  |
-| `BHUTAN` |  |
-| `BOLIVIA` |  |
-| `BOSNIA_AND_HERZEGOVINA` |  |
-| `BOTSWANA` |  |
-| `BRAZIL` |  |
-| `BRITISH_VIRGIN_ISLANDS` |  |
-| `BRUNEI` |  |
-| `BULGARIA` |  |
-| `BURKINA_FASO` |  |
-| `BURUNDI` |  |
-| `CAMBODIA` |  |
-| `CAMEROON` |  |
-| `CANADA` |  |
-| `CAPE_VERDE` |  |
-| `CAYMAN_ISLANDS` |  |
-| `CENTRAL_AFRICAN_REPUBLIC` |  |
-| `CHAD` |  |
-| `CHILE` |  |
-| `CHINA` |  |
-| `CHINESE_TAIPEI` |  |
-| `COLOMBIA` |  |
-| `COMOROS` |  |
-| `CONGO` |  |
-| `COOK_ISLANDS` |  |
-| `COSTA_RICA` |  |
-| `CROATIA` |  |
-| `CUBA` |  |
-| `CURACAO` |  |
-| `CYPRUS` |  |
-| `CZECH_REPUBLIC` |  |
-| `DENMARK` |  |
-| `DJIBOUTI` |  |
-| `DOMINICA` |  |
-| `DOMINICAN_REPUBLIC` |  |
-| `DR_CONGO` |  |
-| `EAST_TIMOR` |  |
-| `ECUADOR` |  |
-| `EGYPT` |  |
-| `EL_SALVADOR` |  |
-| `ENGLAND` |  |
-| `EQUATORIAL_GUINEA` |  |
-| `ERITREA` |  |
-| `ESTONIA` |  |
-| `ESWATINI` |  |
-| `ETHIOPIA` |  |
-| `FAROE_ISLANDS` |  |
-| `FIJI` |  |
-| `FINLAND` |  |
-| `FRANCE` |  |
-| `GABON` |  |
-| `GAMBIA` |  |
-| `GEORGIA` |  |
-| `GERMANY` |  |
-| `GHANA` |  |
-| `GIBRALTAR` |  |
-| `GREECE` |  |
-| `GRENADA` |  |
-| `GUAM` |  |
-| `GUATEMALA` |  |
-| `GUINEA` |  |
-| `GUINEA_BISSAU` |  |
-| `GUYANA` |  |
-| `HAITI` |  |
-| `HONDURAS` |  |
-| `HONG_KONG` |  |
-| `HUNGARY` |  |
-| `ICELAND` |  |
-| `INDIA` |  |
-| `INDONESIA` |  |
-| `IRAN` |  |
-| `IRAQ` |  |
-| `ISRAEL` |  |
-| `ITALY` |  |
-| `IVORY_COAST` |  |
-| `JAMAICA` |  |
-| `JAPAN` |  |
-| `JORDAN` |  |
-| `KAZAKHSTAN` |  |
-| `KENYA` |  |
-| `KOSOVO` |  |
-| `KUWAIT` |  |
-| `KYRGYZSTAN` |  |
-| `LAOS` |  |
-| `LATVIA` |  |
-| `LEBANON` |  |
-| `LESOTHO` |  |
-| `LIBERIA` |  |
-| `LIBYA` |  |
-| `LIECHTENSTEIN` |  |
-| `LITHUANIA` |  |
-| `LUXEMBOURG` |  |
-| `MACAU` |  |
-| `MADAGASCAR` |  |
-| `MALAWI` |  |
-| `MALAYSIA` |  |
-| `MALDIVES` |  |
-| `MALI` |  |
-| `MALTA` |  |
-| `MAURITANIA` |  |
-| `MAURITIUS` |  |
-| `MEXICO` |  |
-| `MOLDOVA` |  |
-| `MONGOLIA` |  |
-| `MONTENEGRO` |  |
-| `MONTSERRAT` |  |
-| `MOROCCO` |  |
-| `MOZAMBIQUE` |  |
-| `MYANMAR` |  |
-| `NAMIBIA` |  |
-| `NEPAL` |  |
-| `NETHERLANDS` |  |
-| `NEW_CALEDONIA` |  |
-| `NEW_ZEALAND` |  |
-| `NICARAGUA` |  |
-| `NIGER` |  |
-| `NIGERIA` |  |
-| `NORTH_KOREA` |  |
-| `NORTH_MACEDONIA` |  |
-| `NORTHERN_IRELAND` |  |
-| `NORWAY` |  |
-| `OMAN` |  |
-| `PAKISTAN` |  |
-| `PALESTINE` |  |
-| `PANAMA` |  |
-| `PAPUA_NEW_GUINEA` |  |
-| `PARAGUAY` |  |
-| `PERU` |  |
-| `PHILIPPINES` |  |
-| `POLAND` |  |
-| `PORTUGAL` |  |
-| `PUERTO_RICO` |  |
-| `QATAR` |  |
-| `REPUBLIC_OF_IRELAND` |  |
-| `ROMANIA` |  |
-| `RUSSIA` |  |
-| `RWANDA` |  |
-| `SAINT_KITTS_AND_NEVIS` |  |
-| `SAINT_LUCIA` |  |
-| `SAINT_VINCENT_AND_THE_GRENADINES` |  |
-| `SAMOA` |  |
-| `SAN_MARINO` |  |
-| `SAO_TOME_AND_PRINCIPE` |  |
-| `SAUDI_ARABIA` |  |
-| `SCOTLAND` |  |
-| `SENEGAL` |  |
-| `SERBIA` |  |
-| `SEYCHELLES` |  |
-| `SIERRA_LEONE` |  |
-| `SINGAPORE` |  |
-| `SLOVAKIA` |  |
-| `SLOVENIA` |  |
-| `SOLOMON_ISLANDS` |  |
-| `SOMALIA` |  |
-| `SOUTH_AFRICA` |  |
-| `SOUTH_KOREA` |  |
-| `SOUTH_SUDAN` |  |
-| `SPAIN` |  |
-| `SRI_LANKA` |  |
-| `SUDAN` |  |
-| `SURINAME` |  |
-| `SWEDEN` |  |
-| `SWITZERLAND` |  |
-| `SYRIA` |  |
-| `TAHITI` |  |
-| `TAJIKISTAN` |  |
-| `TANZANIA` |  |
-| `THAILAND` |  |
-| `TOGO` |  |
-| `TONGA` |  |
-| `TRINIDAD_AND_TOBAGO` |  |
-| `TUNISIA` |  |
-| `TURKEY` |  |
-| `TURKMENISTAN` |  |
-| `TURKS_AND_CAICOS_ISLANDS` |  |
-| `UGANDA` |  |
-| `UKRAINE` |  |
-| `UNITED_ARAB_EMIRATES` |  |
-| `UNITED_STATES` |  |
-| `URUGUAY` |  |
-| `US_VIRGIN_ISLANDS` |  |
-| `UZBEKISTAN` |  |
-| `VANUATU` |  |
-| `VENEZUELA` |  |
-| `VIETNAM` |  |
-| `WALES` |  |
-| `YEMEN` |  |
-| `ZAMBIA` |  |
-| `ZIMBABWE` |  |
-| `BONAIRE` |  |
-| `FRENCH_GUIANA` |  |
-| `GREAT_BRITAIN` |  |
-| `GUADELOUPE` |  |
-| `KIRIBATI` |  |
-| `MARTINIQUE` |  |
-| `NIUE` |  |
-| `NORTHERN_CYPRUS` |  |
-| `NORTHERN_MARIANA_ISLANDS` |  |
-| `REUNION` |  |
-| `SAINT_MARTIN` |  |
-| `SINT_MAARTEN` |  |
-| `TUVALU` |  |
-| `WESTERN_SAHARA` |  |
-| `ZANZIBAR` |  |
-| `BASQUE_COUNTRY` |  |
-| `CATALONIA` |  |
-| `MICRONESIA` |  |
-| `GREENLAND` |  |
-| `MARSHALL_ISLANDS` |  |
-| `MONACO` |  |
-| `NAURU` |  |
-| `PALAU` |  |
-| `SAINT_BARTHELEMY` |  |
-| `SAINT_PIERRE_AND_MIQUELON` |  |
-| `SAINT_HELENA` |  |
-| `TRANSNISTRIA` |  |
-| `TOKELAU` |  |
-| `VATICAN_CITY` |  |
-| `WALLIS_AND_FUTUNA` |  |
-| `ISLE_OF_MAN` |  |
-| `GUERNSEY` |  |
-| `JERSEY` |  |
-| `BOHEMIA` |  |
-| `GUIANA` |  |
-| `BRITISH_INDIA` |  |
-| `BURMA` |  |
-| `CEYLON` |  |
-| `CIS` |  |
-| `CZECHOSLOVAKIA` |  |
-| `DAHOMEY` |  |
-| `DUTCH_EAST_INDIES` |  |
-| `EAST_GERMANY` |  |
-| `GOLD_COAST` |  |
-| `IRELAND` |  |
-| `MALAYA` |  |
-| `NETHERLANDS_ANTILLES` |  |
-| `NEW_HEBRIDES` |  |
-| `NORTH_VIETNAM` |  |
-| `NORTH_YEMEN` |  |
-| `NORTHERN_RHODESIA` |  |
-| `PALESTINE_BRITISH_MANDATE` |  |
-| `RHODESIA` |  |
-| `SAAR` |  |
-| `SERBIA_AND_MONTENEGRO` |  |
-| `SIAM` |  |
-| `SOUTH_VIETNAM` |  |
-| `SOUTH_YEMEN` |  |
-| `SOUTHERN_RHODESIA` |  |
-| `SOVIET_UNION` |  |
-| `TAIWAN` |  |
-| `TANGANYIKA` |  |
-| `UNITED_ARAB_REPUBLIC` |  |
-| `UPPER_VOLTA` |  |
-| `WEST_GERMANY` |  |
-| `WESTERN_SAMOA` |  |
-| `YUGOSLAVIA` |  |
-| `ZAIRE` |  |
+| `AFGHANISTAN` | Afghanistan (AF) |
+| `ALBANIA` | Albania (AL) |
+| `ALGERIA` | Algeria (DZ) |
+| `AMERICAN_SAMOA` | American Samoa (AS) |
+| `ANDORRA` | Andorra (AD) |
+| `ANGOLA` | Angola (AO) |
+| `ANGUILLA` | Anguilla (AI) |
+| `ANTIGUA_AND_BARBUDA` | Antigua and Barbuda (AG) |
+| `ARGENTINA` | Argentina (AR) |
+| `ARMENIA` | Armenia (AM) |
+| `ARUBA` | Aruba (AW) |
+| `AUSTRALIA` | Australia (AU) |
+| `AUSTRIA` | Austria (AT) |
+| `AZERBAIJAN` | Azerbaijan (AZ) |
+| `BAHAMAS` | Bahamas (BS) |
+| `BAHRAIN` | Bahrain (BH) |
+| `BANGLADESH` | Bangladesh (BD) |
+| `BARBADOS` | Barbados (BB) |
+| `BELARUS` | Belarus (BY) |
+| `BELGIUM` | Belgium (BE) |
+| `BELIZE` | Belize (BZ) |
+| `BENIN` | Benin (BJ) |
+| `BERMUDA` | Bermuda (BM) |
+| `BHUTAN` | Bhutan (BT) |
+| `BOLIVIA` | Bolivia (BO) |
+| `BOSNIA_AND_HERZEGOVINA` | Bosnia and Herzegovina (BA) |
+| `BOTSWANA` | Botswana (BW) |
+| `BRAZIL` | Brazil (BR) |
+| `BRITISH_VIRGIN_ISLANDS` | British Virgin Islands (VG) |
+| `BRUNEI` | Brunei (BN) |
+| `BULGARIA` | Bulgaria (BG) |
+| `BURKINA_FASO` | Burkina Faso (BF) |
+| `BURUNDI` | Burundi (BI) |
+| `CAMBODIA` | Cambodia (KH) |
+| `CAMEROON` | Cameroon (CM) |
+| `CANADA` | Canada (CA) |
+| `CAPE_VERDE` | Cape Verde (CV) |
+| `CAYMAN_ISLANDS` | Cayman Islands (KY) |
+| `CENTRAL_AFRICAN_REPUBLIC` | Central African Republic (CF) |
+| `CHAD` | Chad (TD) |
+| `CHILE` | Chile (CL) |
+| `CHINA` | China (CN) |
+| `CHINESE_TAIPEI` | Chinese Taipei (Taiwan, TW) |
+| `COLOMBIA` | Colombia (CO) |
+| `COMOROS` | Comoros (KM) |
+| `CONGO` | Congo (CG) |
+| `COOK_ISLANDS` | Cook Islands (CK) |
+| `COSTA_RICA` | Costa Rica (CR) |
+| `CROATIA` | Croatia (HR) |
+| `CUBA` | Cuba (CU) |
+| `CURACAO` | Curaçao (CW) |
+| `CYPRUS` | Cyprus (CY) |
+| `CZECH_REPUBLIC` | Czech Republic (CZ) |
+| `DENMARK` | Denmark (DK) |
+| `DJIBOUTI` | Djibouti (DJ) |
+| `DOMINICA` | Dominica (DM) |
+| `DOMINICAN_REPUBLIC` | Dominican Republic (DO) |
+| `DR_CONGO` | DR Congo (CD) |
+| `EAST_TIMOR` | East Timor (TL) |
+| `ECUADOR` | Ecuador (EC) |
+| `EGYPT` | Egypt (EG) |
+| `EL_SALVADOR` | El Salvador (SV) |
+| `ENGLAND` | England (GB) |
+| `EQUATORIAL_GUINEA` | Equatorial Guinea (GQ) |
+| `ERITREA` | Eritrea (ER) |
+| `ESTONIA` | Estonia (EE) |
+| `ESWATINI` | Eswatini (SZ) |
+| `ETHIOPIA` | Ethiopia (ET) |
+| `FAROE_ISLANDS` | Faroe Islands (FO) |
+| `FIJI` | Fiji (FJ) |
+| `FINLAND` | Finland (FI) |
+| `FRANCE` | France (FR) |
+| `GABON` | Gabon (GA) |
+| `GAMBIA` | Gambia (GM) |
+| `GEORGIA` | Georgia (GE) |
+| `GERMANY` | Germany (DE) |
+| `GHANA` | Ghana (GH) |
+| `GIBRALTAR` | Gibraltar (GI) |
+| `GREECE` | Greece (GR) |
+| `GRENADA` | Grenada (GD) |
+| `GUAM` | Guam (GU) |
+| `GUATEMALA` | Guatemala (GT) |
+| `GUINEA` | Guinea (GN) |
+| `GUINEA_BISSAU` | Guinea-Bissau (GW) |
+| `GUYANA` | Guyana (GY) |
+| `HAITI` | Haiti (HT) |
+| `HONDURAS` | Honduras (HN) |
+| `HONG_KONG` | Hong Kong (HK) |
+| `HUNGARY` | Hungary (HU) |
+| `ICELAND` | Iceland (IS) |
+| `INDIA` | India (IN) |
+| `INDONESIA` | Indonesia (ID) |
+| `IRAN` | Iran (IR) |
+| `IRAQ` | Iraq (IQ) |
+| `ISRAEL` | Israel (IL) |
+| `ITALY` | Italy (IT) |
+| `IVORY_COAST` | Ivory Coast (CI) |
+| `JAMAICA` | Jamaica (JM) |
+| `JAPAN` | Japan (JP) |
+| `JORDAN` | Jordan (JO) |
+| `KAZAKHSTAN` | Kazakhstan (KZ) |
+| `KENYA` | Kenya (KE) |
+| `KOSOVO` | Kosovo (XK) |
+| `KUWAIT` | Kuwait (KW) |
+| `KYRGYZSTAN` | Kyrgyzstan (KG) |
+| `LAOS` | Laos (LA) |
+| `LATVIA` | Latvia (LV) |
+| `LEBANON` | Lebanon (LB) |
+| `LESOTHO` | Lesotho (LS) |
+| `LIBERIA` | Liberia (LR) |
+| `LIBYA` | Libya (LY) |
+| `LIECHTENSTEIN` | Liechtenstein (LI) |
+| `LITHUANIA` | Lithuania (LT) |
+| `LUXEMBOURG` | Luxembourg (LU) |
+| `MACAU` | Macau (MO) |
+| `MADAGASCAR` | Madagascar (MG) |
+| `MALAWI` | Malawi (MW) |
+| `MALAYSIA` | Malaysia (MY) |
+| `MALDIVES` | Maldives (MV) |
+| `MALI` | Mali (ML) |
+| `MALTA` | Malta (MT) |
+| `MAURITANIA` | Mauritania (MR) |
+| `MAURITIUS` | Mauritius (MU) |
+| `MEXICO` | Mexico (MX) |
+| `MOLDOVA` | Moldova (MD) |
+| `MONGOLIA` | Mongolia (MN) |
+| `MONTENEGRO` | Montenegro (ME) |
+| `MONTSERRAT` | Montserrat (MS) |
+| `MOROCCO` | Morocco (MA) |
+| `MOZAMBIQUE` | Mozambique (MZ) |
+| `MYANMAR` | Myanmar (MM) |
+| `NAMIBIA` | Namibia (NA) |
+| `NEPAL` | Nepal (NP) |
+| `NETHERLANDS` | Netherlands (NL) |
+| `NEW_CALEDONIA` | New Caledonia (NC) |
+| `NEW_ZEALAND` | New Zealand (NZ) |
+| `NICARAGUA` | Nicaragua (NI) |
+| `NIGER` | Niger (NE) |
+| `NIGERIA` | Nigeria (NG) |
+| `NORTH_KOREA` | North Korea (KP) |
+| `NORTH_MACEDONIA` | North Macedonia (MK) |
+| `NORTHERN_IRELAND` | Northern Ireland (GB) |
+| `NORWAY` | Norway (NO) |
+| `OMAN` | Oman (OM) |
+| `PAKISTAN` | Pakistan (PK) |
+| `PALESTINE` | Palestine (PS) |
+| `PANAMA` | Panama (PA) |
+| `PAPUA_NEW_GUINEA` | Papua New Guinea (PG) |
+| `PARAGUAY` | Paraguay (PY) |
+| `PERU` | Peru (PE) |
+| `PHILIPPINES` | Philippines (PH) |
+| `POLAND` | Poland (PL) |
+| `PORTUGAL` | Portugal (PT) |
+| `PUERTO_RICO` | Puerto Rico (PR) |
+| `QATAR` | Qatar (QA) |
+| `REPUBLIC_OF_IRELAND` | Republic of Ireland (IE) |
+| `ROMANIA` | Romania (RO) |
+| `RUSSIA` | Russia (RU) |
+| `RWANDA` | Rwanda (RW) |
+| `SAINT_KITTS_AND_NEVIS` | Saint Kitts and Nevis (KN) |
+| `SAINT_LUCIA` | Saint Lucia (LC) |
+| `SAINT_VINCENT_AND_THE_GRENADINES` | Saint Vincent and the Grenadines (VC) |
+| `SAMOA` | Samoa (WS) |
+| `SAN_MARINO` | San Marino (SM) |
+| `SAO_TOME_AND_PRINCIPE` | Sao Tome and Principe (ST) |
+| `SAUDI_ARABIA` | Saudi Arabia (SA) |
+| `SCOTLAND` | Scotland (GB) |
+| `SENEGAL` | Senegal (SN) |
+| `SERBIA` | Serbia (RS) |
+| `SEYCHELLES` | Seychelles (SC) |
+| `SIERRA_LEONE` | Sierra Leone (SL) |
+| `SINGAPORE` | Singapore (SG) |
+| `SLOVAKIA` | Slovakia (SK) |
+| `SLOVENIA` | Slovenia (SI) |
+| `SOLOMON_ISLANDS` | Solomon Islands (SB) |
+| `SOMALIA` | Somalia (SO) |
+| `SOUTH_AFRICA` | South Africa (ZA) |
+| `SOUTH_KOREA` | South Korea (KR) |
+| `SOUTH_SUDAN` | South Sudan (SS) |
+| `SPAIN` | Spain (ES) |
+| `SRI_LANKA` | Sri Lanka (LK) |
+| `SUDAN` | Sudan (SD) |
+| `SURINAME` | Suriname (SR) |
+| `SWEDEN` | Sweden (SE) |
+| `SWITZERLAND` | Switzerland (CH) |
+| `SYRIA` | Syria (SY) |
+| `TAHITI` | Tahiti (French Polynesia, PF) |
+| `TAJIKISTAN` | Tajikistan (TJ) |
+| `TANZANIA` | Tanzania (TZ) |
+| `THAILAND` | Thailand (TH) |
+| `TOGO` | Togo (TG) |
+| `TONGA` | Tonga (TO) |
+| `TRINIDAD_AND_TOBAGO` | Trinidad and Tobago (TT) |
+| `TUNISIA` | Tunisia (TN) |
+| `TURKEY` | Turkey (TR) |
+| `TURKMENISTAN` | Turkmenistan (TM) |
+| `TURKS_AND_CAICOS_ISLANDS` | Turks and Caicos Islands (TC) |
+| `UGANDA` | Uganda (UG) |
+| `UKRAINE` | Ukraine (UA) |
+| `UNITED_ARAB_EMIRATES` | United Arab Emirates (AE) |
+| `UNITED_STATES` | United States (US) |
+| `URUGUAY` | Uruguay (UY) |
+| `US_VIRGIN_ISLANDS` | US Virgin Islands (VI) |
+| `UZBEKISTAN` | Uzbekistan (UZ) |
+| `VANUATU` | Vanuatu (VU) |
+| `VENEZUELA` | Venezuela (VE) |
+| `VIETNAM` | Vietnam (VN) |
+| `WALES` | Wales (GB) |
+| `YEMEN` | Yemen (YE) |
+| `ZAMBIA` | Zambia (ZM) |
+| `ZIMBABWE` | Zimbabwe (ZW) |
+| `BONAIRE` | Bonaire (BQ) |
+| `FRENCH_GUIANA` | French Guiana (GF) |
+| `GREAT_BRITAIN` | Great Britain (GB) |
+| `GUADELOUPE` | Guadeloupe (GP) |
+| `KIRIBATI` | Kiribati (KI) |
+| `MARTINIQUE` | Martinique (MQ) |
+| `NIUE` | Niue (NU) |
+| `NORTHERN_CYPRUS` | Northern Cyprus |
+| `NORTHERN_MARIANA_ISLANDS` | Northern Mariana Islands (MP) |
+| `REUNION` | Réunion (RE) |
+| `SAINT_MARTIN` | Saint Martin (French part, MF) |
+| `SINT_MAARTEN` | Sint Maarten (Dutch part, SX) |
+| `TUVALU` | Tuvalu (TV) |
+| `WESTERN_SAHARA` | Western Sahara (EH) |
+| `ZANZIBAR` | Zanzibar (TZ) |
+| `BASQUE_COUNTRY` | Basque Country |
+| `CATALONIA` | Catalonia |
+| `MICRONESIA` | Micronesia (FM) |
+| `GREENLAND` | Greenland (GL) |
+| `MARSHALL_ISLANDS` | Marshall Islands (MH) |
+| `MONACO` | Monaco (MC) |
+| `NAURU` | Nauru (NR) |
+| `PALAU` | Palau (PW) |
+| `SAINT_BARTHELEMY` | Saint Barthelemy (BL) |
+| `SAINT_PIERRE_AND_MIQUELON` | Saint Pierre and Miquelon (PM) |
+| `SAINT_HELENA` | Saint Helena (SH) |
+| `TRANSNISTRIA` | Transnistria |
+| `TOKELAU` | Tokelau (TK) |
+| `VATICAN_CITY` | Vatican City (VA) |
+| `WALLIS_AND_FUTUNA` | Wallis and Futuna (WF) |
+| `ISLE_OF_MAN` | Isle of Man (IM) |
+| `GUERNSEY` | Guernsey (GG) |
+| `JERSEY` | Jersey (JE) |
+| `BOHEMIA` | Bohemia (Historical) |
+| `GUIANA` | Guiana (Historical) |
+| `BRITISH_INDIA` | British India (Historical) |
+| `BURMA` | Burma (Historical) |
+| `CEYLON` | Ceylon (Historical) |
+| `CIS` | CIS (Commonwealth of Independent States, Historical) |
+| `CZECHOSLOVAKIA` | Czechoslovakia (Historical) |
+| `DAHOMEY` | Dahomey (Historical) |
+| `DUTCH_EAST_INDIES` | Dutch East Indies (Historical) |
+| `EAST_GERMANY` | East Germany (Historical) |
+| `GOLD_COAST` | Gold Coast (Historical) |
+| `IRELAND` | Ireland (Historical designation) |
+| `MALAYA` | Malaya (Historical) |
+| `NETHERLANDS_ANTILLES` | Netherlands Antilles (Historical) |
+| `NEW_HEBRIDES` | New Hebrides (Historical) |
+| `NORTH_VIETNAM` | North Vietnam (Historical) |
+| `NORTH_YEMEN` | North Yemen (Historical) |
+| `NORTHERN_RHODESIA` | Northern Rhodesia (Historical) |
+| `PALESTINE_BRITISH_MANDATE` | Palestine (British Mandate, Historical) |
+| `RHODESIA` | Rhodesia (Historical) |
+| `SAAR` | Saar (Historical) |
+| `SERBIA_AND_MONTENEGRO` | Serbia and Montenegro (Historical) |
+| `SIAM` | Siam (Historical) |
+| `SOUTH_VIETNAM` | South Vietnam (Historical) |
+| `SOUTH_YEMEN` | South Yemen (Historical) |
+| `SOUTHERN_RHODESIA` | Southern Rhodesia (Historical) |
+| `SOVIET_UNION` | Soviet Union (Historical) |
+| `TAIWAN` | Taiwan (Historical) |
+| `TANGANYIKA` | Tanganyika (Historical) |
+| `UNITED_ARAB_REPUBLIC` | United Arab Republic (Historical) |
+| `UPPER_VOLTA` | Upper Volta (Historical) |
+| `WEST_GERMANY` | West Germany (Historical) |
+| `WESTERN_SAMOA` | Western Samoa (Historical) |
+| `YUGOSLAVIA` | Yugoslavia (Historical) |
+| `ZAIRE` | Zaire (Historical) |
 
-<JsonExportButton data={[{"value":"AFGHANISTAN","description":""},{"value":"ALBANIA","description":""},{"value":"ALGERIA","description":""},{"value":"AMERICAN_SAMOA","description":""},{"value":"ANDORRA","description":""},{"value":"ANGOLA","description":""},{"value":"ANGUILLA","description":""},{"value":"ANTIGUA_AND_BARBUDA","description":""},{"value":"ARGENTINA","description":""},{"value":"ARMENIA","description":""},{"value":"ARUBA","description":""},{"value":"AUSTRALIA","description":""},{"value":"AUSTRIA","description":""},{"value":"AZERBAIJAN","description":""},{"value":"BAHAMAS","description":""},{"value":"BAHRAIN","description":""},{"value":"BANGLADESH","description":""},{"value":"BARBADOS","description":""},{"value":"BELARUS","description":""},{"value":"BELGIUM","description":""},{"value":"BELIZE","description":""},{"value":"BENIN","description":""},{"value":"BERMUDA","description":""},{"value":"BHUTAN","description":""},{"value":"BOLIVIA","description":""},{"value":"BOSNIA_AND_HERZEGOVINA","description":""},{"value":"BOTSWANA","description":""},{"value":"BRAZIL","description":""},{"value":"BRITISH_VIRGIN_ISLANDS","description":""},{"value":"BRUNEI","description":""},{"value":"BULGARIA","description":""},{"value":"BURKINA_FASO","description":""},{"value":"BURUNDI","description":""},{"value":"CAMBODIA","description":""},{"value":"CAMEROON","description":""},{"value":"CANADA","description":""},{"value":"CAPE_VERDE","description":""},{"value":"CAYMAN_ISLANDS","description":""},{"value":"CENTRAL_AFRICAN_REPUBLIC","description":""},{"value":"CHAD","description":""},{"value":"CHILE","description":""},{"value":"CHINA","description":""},{"value":"CHINESE_TAIPEI","description":""},{"value":"COLOMBIA","description":""},{"value":"COMOROS","description":""},{"value":"CONGO","description":""},{"value":"COOK_ISLANDS","description":""},{"value":"COSTA_RICA","description":""},{"value":"CROATIA","description":""},{"value":"CUBA","description":""},{"value":"CURACAO","description":""},{"value":"CYPRUS","description":""},{"value":"CZECH_REPUBLIC","description":""},{"value":"DENMARK","description":""},{"value":"DJIBOUTI","description":""},{"value":"DOMINICA","description":""},{"value":"DOMINICAN_REPUBLIC","description":""},{"value":"DR_CONGO","description":""},{"value":"EAST_TIMOR","description":""},{"value":"ECUADOR","description":""},{"value":"EGYPT","description":""},{"value":"EL_SALVADOR","description":""},{"value":"ENGLAND","description":""},{"value":"EQUATORIAL_GUINEA","description":""},{"value":"ERITREA","description":""},{"value":"ESTONIA","description":""},{"value":"ESWATINI","description":""},{"value":"ETHIOPIA","description":""},{"value":"FAROE_ISLANDS","description":""},{"value":"FIJI","description":""},{"value":"FINLAND","description":""},{"value":"FRANCE","description":""},{"value":"GABON","description":""},{"value":"GAMBIA","description":""},{"value":"GEORGIA","description":""},{"value":"GERMANY","description":""},{"value":"GHANA","description":""},{"value":"GIBRALTAR","description":""},{"value":"GREECE","description":""},{"value":"GRENADA","description":""},{"value":"GUAM","description":""},{"value":"GUATEMALA","description":""},{"value":"GUINEA","description":""},{"value":"GUINEA_BISSAU","description":""},{"value":"GUYANA","description":""},{"value":"HAITI","description":""},{"value":"HONDURAS","description":""},{"value":"HONG_KONG","description":""},{"value":"HUNGARY","description":""},{"value":"ICELAND","description":""},{"value":"INDIA","description":""},{"value":"INDONESIA","description":""},{"value":"IRAN","description":""},{"value":"IRAQ","description":""},{"value":"ISRAEL","description":""},{"value":"ITALY","description":""},{"value":"IVORY_COAST","description":""},{"value":"JAMAICA","description":""},{"value":"JAPAN","description":""},{"value":"JORDAN","description":""},{"value":"KAZAKHSTAN","description":""},{"value":"KENYA","description":""},{"value":"KOSOVO","description":""},{"value":"KUWAIT","description":""},{"value":"KYRGYZSTAN","description":""},{"value":"LAOS","description":""},{"value":"LATVIA","description":""},{"value":"LEBANON","description":""},{"value":"LESOTHO","description":""},{"value":"LIBERIA","description":""},{"value":"LIBYA","description":""},{"value":"LIECHTENSTEIN","description":""},{"value":"LITHUANIA","description":""},{"value":"LUXEMBOURG","description":""},{"value":"MACAU","description":""},{"value":"MADAGASCAR","description":""},{"value":"MALAWI","description":""},{"value":"MALAYSIA","description":""},{"value":"MALDIVES","description":""},{"value":"MALI","description":""},{"value":"MALTA","description":""},{"value":"MAURITANIA","description":""},{"value":"MAURITIUS","description":""},{"value":"MEXICO","description":""},{"value":"MOLDOVA","description":""},{"value":"MONGOLIA","description":""},{"value":"MONTENEGRO","description":""},{"value":"MONTSERRAT","description":""},{"value":"MOROCCO","description":""},{"value":"MOZAMBIQUE","description":""},{"value":"MYANMAR","description":""},{"value":"NAMIBIA","description":""},{"value":"NEPAL","description":""},{"value":"NETHERLANDS","description":""},{"value":"NEW_CALEDONIA","description":""},{"value":"NEW_ZEALAND","description":""},{"value":"NICARAGUA","description":""},{"value":"NIGER","description":""},{"value":"NIGERIA","description":""},{"value":"NORTH_KOREA","description":""},{"value":"NORTH_MACEDONIA","description":""},{"value":"NORTHERN_IRELAND","description":""},{"value":"NORWAY","description":""},{"value":"OMAN","description":""},{"value":"PAKISTAN","description":""},{"value":"PALESTINE","description":""},{"value":"PANAMA","description":""},{"value":"PAPUA_NEW_GUINEA","description":""},{"value":"PARAGUAY","description":""},{"value":"PERU","description":""},{"value":"PHILIPPINES","description":""},{"value":"POLAND","description":""},{"value":"PORTUGAL","description":""},{"value":"PUERTO_RICO","description":""},{"value":"QATAR","description":""},{"value":"REPUBLIC_OF_IRELAND","description":""},{"value":"ROMANIA","description":""},{"value":"RUSSIA","description":""},{"value":"RWANDA","description":""},{"value":"SAINT_KITTS_AND_NEVIS","description":""},{"value":"SAINT_LUCIA","description":""},{"value":"SAINT_VINCENT_AND_THE_GRENADINES","description":""},{"value":"SAMOA","description":""},{"value":"SAN_MARINO","description":""},{"value":"SAO_TOME_AND_PRINCIPE","description":""},{"value":"SAUDI_ARABIA","description":""},{"value":"SCOTLAND","description":""},{"value":"SENEGAL","description":""},{"value":"SERBIA","description":""},{"value":"SEYCHELLES","description":""},{"value":"SIERRA_LEONE","description":""},{"value":"SINGAPORE","description":""},{"value":"SLOVAKIA","description":""},{"value":"SLOVENIA","description":""},{"value":"SOLOMON_ISLANDS","description":""},{"value":"SOMALIA","description":""},{"value":"SOUTH_AFRICA","description":""},{"value":"SOUTH_KOREA","description":""},{"value":"SOUTH_SUDAN","description":""},{"value":"SPAIN","description":""},{"value":"SRI_LANKA","description":""},{"value":"SUDAN","description":""},{"value":"SURINAME","description":""},{"value":"SWEDEN","description":""},{"value":"SWITZERLAND","description":""},{"value":"SYRIA","description":""},{"value":"TAHITI","description":""},{"value":"TAJIKISTAN","description":""},{"value":"TANZANIA","description":""},{"value":"THAILAND","description":""},{"value":"TOGO","description":""},{"value":"TONGA","description":""},{"value":"TRINIDAD_AND_TOBAGO","description":""},{"value":"TUNISIA","description":""},{"value":"TURKEY","description":""},{"value":"TURKMENISTAN","description":""},{"value":"TURKS_AND_CAICOS_ISLANDS","description":""},{"value":"UGANDA","description":""},{"value":"UKRAINE","description":""},{"value":"UNITED_ARAB_EMIRATES","description":""},{"value":"UNITED_STATES","description":""},{"value":"URUGUAY","description":""},{"value":"US_VIRGIN_ISLANDS","description":""},{"value":"UZBEKISTAN","description":""},{"value":"VANUATU","description":""},{"value":"VENEZUELA","description":""},{"value":"VIETNAM","description":""},{"value":"WALES","description":""},{"value":"YEMEN","description":""},{"value":"ZAMBIA","description":""},{"value":"ZIMBABWE","description":""},{"value":"BONAIRE","description":""},{"value":"FRENCH_GUIANA","description":""},{"value":"GREAT_BRITAIN","description":""},{"value":"GUADELOUPE","description":""},{"value":"KIRIBATI","description":""},{"value":"MARTINIQUE","description":""},{"value":"NIUE","description":""},{"value":"NORTHERN_CYPRUS","description":""},{"value":"NORTHERN_MARIANA_ISLANDS","description":""},{"value":"REUNION","description":""},{"value":"SAINT_MARTIN","description":""},{"value":"SINT_MAARTEN","description":""},{"value":"TUVALU","description":""},{"value":"WESTERN_SAHARA","description":""},{"value":"ZANZIBAR","description":""},{"value":"BASQUE_COUNTRY","description":""},{"value":"CATALONIA","description":""},{"value":"MICRONESIA","description":""},{"value":"GREENLAND","description":""},{"value":"MARSHALL_ISLANDS","description":""},{"value":"MONACO","description":""},{"value":"NAURU","description":""},{"value":"PALAU","description":""},{"value":"SAINT_BARTHELEMY","description":""},{"value":"SAINT_PIERRE_AND_MIQUELON","description":""},{"value":"SAINT_HELENA","description":""},{"value":"TRANSNISTRIA","description":""},{"value":"TOKELAU","description":""},{"value":"VATICAN_CITY","description":""},{"value":"WALLIS_AND_FUTUNA","description":""},{"value":"ISLE_OF_MAN","description":""},{"value":"GUERNSEY","description":""},{"value":"JERSEY","description":""},{"value":"BOHEMIA","description":""},{"value":"GUIANA","description":""},{"value":"BRITISH_INDIA","description":""},{"value":"BURMA","description":""},{"value":"CEYLON","description":""},{"value":"CIS","description":""},{"value":"CZECHOSLOVAKIA","description":""},{"value":"DAHOMEY","description":""},{"value":"DUTCH_EAST_INDIES","description":""},{"value":"EAST_GERMANY","description":""},{"value":"GOLD_COAST","description":""},{"value":"IRELAND","description":""},{"value":"MALAYA","description":""},{"value":"NETHERLANDS_ANTILLES","description":""},{"value":"NEW_HEBRIDES","description":""},{"value":"NORTH_VIETNAM","description":""},{"value":"NORTH_YEMEN","description":""},{"value":"NORTHERN_RHODESIA","description":""},{"value":"PALESTINE_BRITISH_MANDATE","description":""},{"value":"RHODESIA","description":""},{"value":"SAAR","description":""},{"value":"SERBIA_AND_MONTENEGRO","description":""},{"value":"SIAM","description":""},{"value":"SOUTH_VIETNAM","description":""},{"value":"SOUTH_YEMEN","description":""},{"value":"SOUTHERN_RHODESIA","description":""},{"value":"SOVIET_UNION","description":""},{"value":"TAIWAN","description":""},{"value":"TANGANYIKA","description":""},{"value":"UNITED_ARAB_REPUBLIC","description":""},{"value":"UPPER_VOLTA","description":""},{"value":"WEST_GERMANY","description":""},{"value":"WESTERN_SAMOA","description":""},{"value":"YUGOSLAVIA","description":""},{"value":"ZAIRE","description":""}]} fileName="CountryCode" />
+<JsonExportButton data={[{"value":"AFGHANISTAN","description":"Afghanistan (AF)"},{"value":"ALBANIA","description":"Albania (AL)"},{"value":"ALGERIA","description":"Algeria (DZ)"},{"value":"AMERICAN_SAMOA","description":"American Samoa (AS)"},{"value":"ANDORRA","description":"Andorra (AD)"},{"value":"ANGOLA","description":"Angola (AO)"},{"value":"ANGUILLA","description":"Anguilla (AI)"},{"value":"ANTIGUA_AND_BARBUDA","description":"Antigua and Barbuda (AG)"},{"value":"ARGENTINA","description":"Argentina (AR)"},{"value":"ARMENIA","description":"Armenia (AM)"},{"value":"ARUBA","description":"Aruba (AW)"},{"value":"AUSTRALIA","description":"Australia (AU)"},{"value":"AUSTRIA","description":"Austria (AT)"},{"value":"AZERBAIJAN","description":"Azerbaijan (AZ)"},{"value":"BAHAMAS","description":"Bahamas (BS)"},{"value":"BAHRAIN","description":"Bahrain (BH)"},{"value":"BANGLADESH","description":"Bangladesh (BD)"},{"value":"BARBADOS","description":"Barbados (BB)"},{"value":"BELARUS","description":"Belarus (BY)"},{"value":"BELGIUM","description":"Belgium (BE)"},{"value":"BELIZE","description":"Belize (BZ)"},{"value":"BENIN","description":"Benin (BJ)"},{"value":"BERMUDA","description":"Bermuda (BM)"},{"value":"BHUTAN","description":"Bhutan (BT)"},{"value":"BOLIVIA","description":"Bolivia (BO)"},{"value":"BOSNIA_AND_HERZEGOVINA","description":"Bosnia and Herzegovina (BA)"},{"value":"BOTSWANA","description":"Botswana (BW)"},{"value":"BRAZIL","description":"Brazil (BR)"},{"value":"BRITISH_VIRGIN_ISLANDS","description":"British Virgin Islands (VG)"},{"value":"BRUNEI","description":"Brunei (BN)"},{"value":"BULGARIA","description":"Bulgaria (BG)"},{"value":"BURKINA_FASO","description":"Burkina Faso (BF)"},{"value":"BURUNDI","description":"Burundi (BI)"},{"value":"CAMBODIA","description":"Cambodia (KH)"},{"value":"CAMEROON","description":"Cameroon (CM)"},{"value":"CANADA","description":"Canada (CA)"},{"value":"CAPE_VERDE","description":"Cape Verde (CV)"},{"value":"CAYMAN_ISLANDS","description":"Cayman Islands (KY)"},{"value":"CENTRAL_AFRICAN_REPUBLIC","description":"Central African Republic (CF)"},{"value":"CHAD","description":"Chad (TD)"},{"value":"CHILE","description":"Chile (CL)"},{"value":"CHINA","description":"China (CN)"},{"value":"CHINESE_TAIPEI","description":"Chinese Taipei (Taiwan, TW)"},{"value":"COLOMBIA","description":"Colombia (CO)"},{"value":"COMOROS","description":"Comoros (KM)"},{"value":"CONGO","description":"Congo (CG)"},{"value":"COOK_ISLANDS","description":"Cook Islands (CK)"},{"value":"COSTA_RICA","description":"Costa Rica (CR)"},{"value":"CROATIA","description":"Croatia (HR)"},{"value":"CUBA","description":"Cuba (CU)"},{"value":"CURACAO","description":"Curaçao (CW)"},{"value":"CYPRUS","description":"Cyprus (CY)"},{"value":"CZECH_REPUBLIC","description":"Czech Republic (CZ)"},{"value":"DENMARK","description":"Denmark (DK)"},{"value":"DJIBOUTI","description":"Djibouti (DJ)"},{"value":"DOMINICA","description":"Dominica (DM)"},{"value":"DOMINICAN_REPUBLIC","description":"Dominican Republic (DO)"},{"value":"DR_CONGO","description":"DR Congo (CD)"},{"value":"EAST_TIMOR","description":"East Timor (TL)"},{"value":"ECUADOR","description":"Ecuador (EC)"},{"value":"EGYPT","description":"Egypt (EG)"},{"value":"EL_SALVADOR","description":"El Salvador (SV)"},{"value":"ENGLAND","description":"England (GB)"},{"value":"EQUATORIAL_GUINEA","description":"Equatorial Guinea (GQ)"},{"value":"ERITREA","description":"Eritrea (ER)"},{"value":"ESTONIA","description":"Estonia (EE)"},{"value":"ESWATINI","description":"Eswatini (SZ)"},{"value":"ETHIOPIA","description":"Ethiopia (ET)"},{"value":"FAROE_ISLANDS","description":"Faroe Islands (FO)"},{"value":"FIJI","description":"Fiji (FJ)"},{"value":"FINLAND","description":"Finland (FI)"},{"value":"FRANCE","description":"France (FR)"},{"value":"GABON","description":"Gabon (GA)"},{"value":"GAMBIA","description":"Gambia (GM)"},{"value":"GEORGIA","description":"Georgia (GE)"},{"value":"GERMANY","description":"Germany (DE)"},{"value":"GHANA","description":"Ghana (GH)"},{"value":"GIBRALTAR","description":"Gibraltar (GI)"},{"value":"GREECE","description":"Greece (GR)"},{"value":"GRENADA","description":"Grenada (GD)"},{"value":"GUAM","description":"Guam (GU)"},{"value":"GUATEMALA","description":"Guatemala (GT)"},{"value":"GUINEA","description":"Guinea (GN)"},{"value":"GUINEA_BISSAU","description":"Guinea-Bissau (GW)"},{"value":"GUYANA","description":"Guyana (GY)"},{"value":"HAITI","description":"Haiti (HT)"},{"value":"HONDURAS","description":"Honduras (HN)"},{"value":"HONG_KONG","description":"Hong Kong (HK)"},{"value":"HUNGARY","description":"Hungary (HU)"},{"value":"ICELAND","description":"Iceland (IS)"},{"value":"INDIA","description":"India (IN)"},{"value":"INDONESIA","description":"Indonesia (ID)"},{"value":"IRAN","description":"Iran (IR)"},{"value":"IRAQ","description":"Iraq (IQ)"},{"value":"ISRAEL","description":"Israel (IL)"},{"value":"ITALY","description":"Italy (IT)"},{"value":"IVORY_COAST","description":"Ivory Coast (CI)"},{"value":"JAMAICA","description":"Jamaica (JM)"},{"value":"JAPAN","description":"Japan (JP)"},{"value":"JORDAN","description":"Jordan (JO)"},{"value":"KAZAKHSTAN","description":"Kazakhstan (KZ)"},{"value":"KENYA","description":"Kenya (KE)"},{"value":"KOSOVO","description":"Kosovo (XK)"},{"value":"KUWAIT","description":"Kuwait (KW)"},{"value":"KYRGYZSTAN","description":"Kyrgyzstan (KG)"},{"value":"LAOS","description":"Laos (LA)"},{"value":"LATVIA","description":"Latvia (LV)"},{"value":"LEBANON","description":"Lebanon (LB)"},{"value":"LESOTHO","description":"Lesotho (LS)"},{"value":"LIBERIA","description":"Liberia (LR)"},{"value":"LIBYA","description":"Libya (LY)"},{"value":"LIECHTENSTEIN","description":"Liechtenstein (LI)"},{"value":"LITHUANIA","description":"Lithuania (LT)"},{"value":"LUXEMBOURG","description":"Luxembourg (LU)"},{"value":"MACAU","description":"Macau (MO)"},{"value":"MADAGASCAR","description":"Madagascar (MG)"},{"value":"MALAWI","description":"Malawi (MW)"},{"value":"MALAYSIA","description":"Malaysia (MY)"},{"value":"MALDIVES","description":"Maldives (MV)"},{"value":"MALI","description":"Mali (ML)"},{"value":"MALTA","description":"Malta (MT)"},{"value":"MAURITANIA","description":"Mauritania (MR)"},{"value":"MAURITIUS","description":"Mauritius (MU)"},{"value":"MEXICO","description":"Mexico (MX)"},{"value":"MOLDOVA","description":"Moldova (MD)"},{"value":"MONGOLIA","description":"Mongolia (MN)"},{"value":"MONTENEGRO","description":"Montenegro (ME)"},{"value":"MONTSERRAT","description":"Montserrat (MS)"},{"value":"MOROCCO","description":"Morocco (MA)"},{"value":"MOZAMBIQUE","description":"Mozambique (MZ)"},{"value":"MYANMAR","description":"Myanmar (MM)"},{"value":"NAMIBIA","description":"Namibia (NA)"},{"value":"NEPAL","description":"Nepal (NP)"},{"value":"NETHERLANDS","description":"Netherlands (NL)"},{"value":"NEW_CALEDONIA","description":"New Caledonia (NC)"},{"value":"NEW_ZEALAND","description":"New Zealand (NZ)"},{"value":"NICARAGUA","description":"Nicaragua (NI)"},{"value":"NIGER","description":"Niger (NE)"},{"value":"NIGERIA","description":"Nigeria (NG)"},{"value":"NORTH_KOREA","description":"North Korea (KP)"},{"value":"NORTH_MACEDONIA","description":"North Macedonia (MK)"},{"value":"NORTHERN_IRELAND","description":"Northern Ireland (GB)"},{"value":"NORWAY","description":"Norway (NO)"},{"value":"OMAN","description":"Oman (OM)"},{"value":"PAKISTAN","description":"Pakistan (PK)"},{"value":"PALESTINE","description":"Palestine (PS)"},{"value":"PANAMA","description":"Panama (PA)"},{"value":"PAPUA_NEW_GUINEA","description":"Papua New Guinea (PG)"},{"value":"PARAGUAY","description":"Paraguay (PY)"},{"value":"PERU","description":"Peru (PE)"},{"value":"PHILIPPINES","description":"Philippines (PH)"},{"value":"POLAND","description":"Poland (PL)"},{"value":"PORTUGAL","description":"Portugal (PT)"},{"value":"PUERTO_RICO","description":"Puerto Rico (PR)"},{"value":"QATAR","description":"Qatar (QA)"},{"value":"REPUBLIC_OF_IRELAND","description":"Republic of Ireland (IE)"},{"value":"ROMANIA","description":"Romania (RO)"},{"value":"RUSSIA","description":"Russia (RU)"},{"value":"RWANDA","description":"Rwanda (RW)"},{"value":"SAINT_KITTS_AND_NEVIS","description":"Saint Kitts and Nevis (KN)"},{"value":"SAINT_LUCIA","description":"Saint Lucia (LC)"},{"value":"SAINT_VINCENT_AND_THE_GRENADINES","description":"Saint Vincent and the Grenadines (VC)"},{"value":"SAMOA","description":"Samoa (WS)"},{"value":"SAN_MARINO","description":"San Marino (SM)"},{"value":"SAO_TOME_AND_PRINCIPE","description":"Sao Tome and Principe (ST)"},{"value":"SAUDI_ARABIA","description":"Saudi Arabia (SA)"},{"value":"SCOTLAND","description":"Scotland (GB)"},{"value":"SENEGAL","description":"Senegal (SN)"},{"value":"SERBIA","description":"Serbia (RS)"},{"value":"SEYCHELLES","description":"Seychelles (SC)"},{"value":"SIERRA_LEONE","description":"Sierra Leone (SL)"},{"value":"SINGAPORE","description":"Singapore (SG)"},{"value":"SLOVAKIA","description":"Slovakia (SK)"},{"value":"SLOVENIA","description":"Slovenia (SI)"},{"value":"SOLOMON_ISLANDS","description":"Solomon Islands (SB)"},{"value":"SOMALIA","description":"Somalia (SO)"},{"value":"SOUTH_AFRICA","description":"South Africa (ZA)"},{"value":"SOUTH_KOREA","description":"South Korea (KR)"},{"value":"SOUTH_SUDAN","description":"South Sudan (SS)"},{"value":"SPAIN","description":"Spain (ES)"},{"value":"SRI_LANKA","description":"Sri Lanka (LK)"},{"value":"SUDAN","description":"Sudan (SD)"},{"value":"SURINAME","description":"Suriname (SR)"},{"value":"SWEDEN","description":"Sweden (SE)"},{"value":"SWITZERLAND","description":"Switzerland (CH)"},{"value":"SYRIA","description":"Syria (SY)"},{"value":"TAHITI","description":"Tahiti (French Polynesia, PF)"},{"value":"TAJIKISTAN","description":"Tajikistan (TJ)"},{"value":"TANZANIA","description":"Tanzania (TZ)"},{"value":"THAILAND","description":"Thailand (TH)"},{"value":"TOGO","description":"Togo (TG)"},{"value":"TONGA","description":"Tonga (TO)"},{"value":"TRINIDAD_AND_TOBAGO","description":"Trinidad and Tobago (TT)"},{"value":"TUNISIA","description":"Tunisia (TN)"},{"value":"TURKEY","description":"Turkey (TR)"},{"value":"TURKMENISTAN","description":"Turkmenistan (TM)"},{"value":"TURKS_AND_CAICOS_ISLANDS","description":"Turks and Caicos Islands (TC)"},{"value":"UGANDA","description":"Uganda (UG)"},{"value":"UKRAINE","description":"Ukraine (UA)"},{"value":"UNITED_ARAB_EMIRATES","description":"United Arab Emirates (AE)"},{"value":"UNITED_STATES","description":"United States (US)"},{"value":"URUGUAY","description":"Uruguay (UY)"},{"value":"US_VIRGIN_ISLANDS","description":"US Virgin Islands (VI)"},{"value":"UZBEKISTAN","description":"Uzbekistan (UZ)"},{"value":"VANUATU","description":"Vanuatu (VU)"},{"value":"VENEZUELA","description":"Venezuela (VE)"},{"value":"VIETNAM","description":"Vietnam (VN)"},{"value":"WALES","description":"Wales (GB)"},{"value":"YEMEN","description":"Yemen (YE)"},{"value":"ZAMBIA","description":"Zambia (ZM)"},{"value":"ZIMBABWE","description":"Zimbabwe (ZW)"},{"value":"BONAIRE","description":"Bonaire (BQ)"},{"value":"FRENCH_GUIANA","description":"French Guiana (GF)"},{"value":"GREAT_BRITAIN","description":"Great Britain (GB)"},{"value":"GUADELOUPE","description":"Guadeloupe (GP)"},{"value":"KIRIBATI","description":"Kiribati (KI)"},{"value":"MARTINIQUE","description":"Martinique (MQ)"},{"value":"NIUE","description":"Niue (NU)"},{"value":"NORTHERN_CYPRUS","description":"Northern Cyprus"},{"value":"NORTHERN_MARIANA_ISLANDS","description":"Northern Mariana Islands (MP)"},{"value":"REUNION","description":"Réunion (RE)"},{"value":"SAINT_MARTIN","description":"Saint Martin (French part, MF)"},{"value":"SINT_MAARTEN","description":"Sint Maarten (Dutch part, SX)"},{"value":"TUVALU","description":"Tuvalu (TV)"},{"value":"WESTERN_SAHARA","description":"Western Sahara (EH)"},{"value":"ZANZIBAR","description":"Zanzibar (TZ)"},{"value":"BASQUE_COUNTRY","description":"Basque Country"},{"value":"CATALONIA","description":"Catalonia"},{"value":"MICRONESIA","description":"Micronesia (FM)"},{"value":"GREENLAND","description":"Greenland (GL)"},{"value":"MARSHALL_ISLANDS","description":"Marshall Islands (MH)"},{"value":"MONACO","description":"Monaco (MC)"},{"value":"NAURU","description":"Nauru (NR)"},{"value":"PALAU","description":"Palau (PW)"},{"value":"SAINT_BARTHELEMY","description":"Saint Barthelemy (BL)"},{"value":"SAINT_PIERRE_AND_MIQUELON","description":"Saint Pierre and Miquelon (PM)"},{"value":"SAINT_HELENA","description":"Saint Helena (SH)"},{"value":"TRANSNISTRIA","description":"Transnistria"},{"value":"TOKELAU","description":"Tokelau (TK)"},{"value":"VATICAN_CITY","description":"Vatican City (VA)"},{"value":"WALLIS_AND_FUTUNA","description":"Wallis and Futuna (WF)"},{"value":"ISLE_OF_MAN","description":"Isle of Man (IM)"},{"value":"GUERNSEY","description":"Guernsey (GG)"},{"value":"JERSEY","description":"Jersey (JE)"},{"value":"BOHEMIA","description":"Bohemia (Historical)"},{"value":"GUIANA","description":"Guiana (Historical)"},{"value":"BRITISH_INDIA","description":"British India (Historical)"},{"value":"BURMA","description":"Burma (Historical)"},{"value":"CEYLON","description":"Ceylon (Historical)"},{"value":"CIS","description":"CIS (Commonwealth of Independent States, Historical)"},{"value":"CZECHOSLOVAKIA","description":"Czechoslovakia (Historical)"},{"value":"DAHOMEY","description":"Dahomey (Historical)"},{"value":"DUTCH_EAST_INDIES","description":"Dutch East Indies (Historical)"},{"value":"EAST_GERMANY","description":"East Germany (Historical)"},{"value":"GOLD_COAST","description":"Gold Coast (Historical)"},{"value":"IRELAND","description":"Ireland (Historical designation)"},{"value":"MALAYA","description":"Malaya (Historical)"},{"value":"NETHERLANDS_ANTILLES","description":"Netherlands Antilles (Historical)"},{"value":"NEW_HEBRIDES","description":"New Hebrides (Historical)"},{"value":"NORTH_VIETNAM","description":"North Vietnam (Historical)"},{"value":"NORTH_YEMEN","description":"North Yemen (Historical)"},{"value":"NORTHERN_RHODESIA","description":"Northern Rhodesia (Historical)"},{"value":"PALESTINE_BRITISH_MANDATE","description":"Palestine (British Mandate, Historical)"},{"value":"RHODESIA","description":"Rhodesia (Historical)"},{"value":"SAAR","description":"Saar (Historical)"},{"value":"SERBIA_AND_MONTENEGRO","description":"Serbia and Montenegro (Historical)"},{"value":"SIAM","description":"Siam (Historical)"},{"value":"SOUTH_VIETNAM","description":"South Vietnam (Historical)"},{"value":"SOUTH_YEMEN","description":"South Yemen (Historical)"},{"value":"SOUTHERN_RHODESIA","description":"Southern Rhodesia (Historical)"},{"value":"SOVIET_UNION","description":"Soviet Union (Historical)"},{"value":"TAIWAN","description":"Taiwan (Historical)"},{"value":"TANGANYIKA","description":"Tanganyika (Historical)"},{"value":"UNITED_ARAB_REPUBLIC","description":"United Arab Republic (Historical)"},{"value":"UPPER_VOLTA","description":"Upper Volta (Historical)"},{"value":"WEST_GERMANY","description":"West Germany (Historical)"},{"value":"WESTERN_SAMOA","description":"Western Samoa (Historical)"},{"value":"YUGOSLAVIA","description":"Yugoslavia (Historical)"},{"value":"ZAIRE","description":"Zaire (Historical)"}]} fileName="CountryCode" />

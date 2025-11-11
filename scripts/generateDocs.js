@@ -38,20 +38,30 @@ const schema = buildSchema(schemaSDL);
 // Output directories
 const baseOutputDir = path.resolve(__dirname, "../docs/api-reference");
 const folders = {
-    Enum:       "enums",
-    Input:      "inputs",
-    Object:     "objects",
-    Interface:  "interfaces",
-    Scalar:     "scalars",
+    Enum: "enums",
+    Input: "inputs",
+    Object: "objects",
+    Interface: "interfaces",
+    Scalar: "scalars",
 };
 // Mapping of folder names to type suffix for the title
 const typeSuffixMap = {
-    [folders.Enum]:         'Enum',
-    [folders.Input]:        'Input',
-    [folders.Object]:       'Object',
-    [folders.Interface]:    'Interface',
-    [folders.Scalar]:       'Scalar',
+    [folders.Enum]: 'Enum',
+    [folders.Input]: 'Input',
+    [folders.Object]: 'Object',
+    [folders.Interface]: 'Interface',
+    [folders.Scalar]: 'Scalar',
 };
+
+
+// --- !! ATTENTION: Clean Slate Protocol !! ---
+// Delete the entire output directory before starting to ensure
+// no stale files from previous runs cause conflicts.
+console.log(`🧹 Cleaning output directory: ${baseOutputDir}`);
+fs.rmSync(baseOutputDir, { recursive: true, force: true });
+console.log("... Directory cleaned.");
+// --- End of Clean Slate ---
+
 
 // Create folders if they don't exist
 Object.values(folders).forEach((folder) => {
@@ -137,6 +147,8 @@ function getLinkForType(typeName, rawTypeString) {
 
     if (targetFolder) {
         // Create relative path to the document: ../[folder]/[Type].md
+        // NOTE: This does not account for special filename overrides (like for MatchEvent).
+        // This is handled in a post-processing step.
         const path = `../${targetFolder}/${typeName}`;
         return `[${rawTypeString}](${path})`;
     }
@@ -253,11 +265,15 @@ function generateMarkdownForType(type) {
 
         // SPECIAL FOR MATCH EVENT OBJECTS: All MatchEvents objects will have the same prefix in sidebar, to stay together
         if (typeName.includes('Event') && fields.type) {
-            const fieldTypeObject = fields.type.type.ofType.name;
-            if (fieldTypeObject === 'MatchEventType') {
-                sidebarPrefix = 'Match Event >';
-                //Change the ID of the page to be proper ordered in sidebar AND FILE NAME
-                idPage = 'MatchEvent' + typeName;
+
+            // This logic MUST be robust. Check if type.type.ofType exists.
+            if (fields.type.type && fields.type.type.ofType) {
+                const fieldTypeObject = fields.type.type.ofType.name;
+                if (fieldTypeObject === 'MatchEventType') {
+                    sidebarPrefix = 'Match Event >';
+                    //Change the ID of the page to be proper ordered in sidebar AND FILE NAME
+                    idPage = 'MatchEvent' + typeName;
+                }
             }
 
         }
@@ -310,7 +326,7 @@ function generateMarkdownForType(type) {
         writeMarkdown(idPage,typeName, folder, content); // Voláme s idPage jako název souboru
 
         // Logging with the final label (zahrnuje uvozovky pro přesnost výstupu)
-        console.log(`✅ ${typeName} -> ${folder} (Sidebar Label: "${finalSidebarLabel}")`);
+        console.log(`✅ ${typeName} -> ${folder} (File: "${idPage}.md", Sidebar: "${finalSidebarLabel}")`);
     }
 }
 
@@ -332,4 +348,141 @@ function main() {
     console.log("✅ All Markdown files generated!");
 }
 
+
+// --- 5. Post-Processing Step ---
+
+/**
+ * Post-processes the generated Markdown files to fix links
+ * pointing to 'MatchEvent' types, which have special filenames.
+ */
+function postProcessMatchEventLinks() {
+    console.log("\n🔥 Post-processing MatchEvent links...");
+
+    // First, determine which types were given a special filename.
+    // We must re-run the same logic used during generation.
+    const specialMatchEventTypes = new Set();
+
+    // We also need to map the original typeName to its special filename
+    // e.g., 'CardEvent' -> 'matchevent-CardEvent'
+    const specialTypeNameToFilename = new Map();
+
+    const typeMap = schema.getTypeMap();
+
+    for (const typeName in typeMap) {
+        const type = typeMap[typeName];
+
+        if (isObjectType(type) && !typeName.startsWith("__") && !internalGraphQLTypes.has(typeName)) {
+            const fields = type.getFields();
+
+            // This logic MUST match the logic in generateMarkdownForType
+            if (typeName.includes('Event') && fields.type) {
+                if (fields.type.type && fields.type.type.ofType) {
+                    const fieldTypeObject = fields.type.type.ofType.name;
+                    if (fieldTypeObject === 'MatchEventType') {
+                        specialMatchEventTypes.add(typeName);
+                        // Store the mapping
+                        specialTypeNameToFilename.set(typeName, 'MatchEvent' + typeName);
+                    }
+                }
+            }
+        }
+    }
+
+    if (specialMatchEventTypes.size === 0) {
+        console.log("... No special MatchEvent types found. Skipping link processing.");
+        return;
+    }
+
+    console.log(`... Found ${specialMatchEventTypes.size} special types to process:`, Array.from(specialMatchEventTypes));
+
+    // Now, iterate through all generated files and fix links.
+    const linkRegex = /\[([^\]]+)\]\(\.\.\/objects\/([^)]+)\)/g;
+    let filesChanged = 0;
+    let linksFixed = 0;
+    let filesProcessed = 0;
+
+    Object.values(folders).forEach((folder) => {
+        const dir = path.join(baseOutputDir, folder);
+        try {
+            const files = fs.readdirSync(dir).filter(f => f.endsWith('.md'));
+
+            files.forEach(file => {
+                filesProcessed++;
+                const filePath = path.join(dir, file);
+
+                // Read the file *content*
+                let content;
+                try {
+                    content = fs.readFileSync(filePath, 'utf8');
+                } catch (readErr) {
+                    console.error(`  ❌ ERROR reading file ${filePath}: ${readErr.message}`);
+                    return; // Skip this file
+                }
+
+                let changed = false;
+                let logDetails = [];
+
+                const newContent = content.replace(linkRegex, (match, linkText, typeName) => {
+                    // typeName is the captured path component, e.g., "FoulEvent"
+
+                    // Check if this typeName is one of our special types
+                    if (specialMatchEventTypes.has(typeName)) {
+
+                        // Get the correct filename (e.g., 'matchevent-FoulEvent')
+                        const correctFilename = specialTypeNameToFilename.get(typeName);
+                        const newLink = `[${linkText}](../objects/${correctFilename})`;
+
+                        // Zkontrolujeme, zda se link skutečně liší
+                        if (match !== newLink) {
+                            changed = true;
+                            linksFixed++;
+                            logDetails.push(`    ✅ Fixing link: "${match}"  ==>  "${newLink}"`);
+                        } else {
+                            logDetails.push(`    ☑️ Link already correct: "${match}"`);
+                        }
+
+                        return newLink; // Vrací (potenciálně) nový link
+                    }
+                    // Otherwise, leave the match as is
+                    return match;
+                });
+
+                if (changed) {
+                    // Logujeme pouze soubory, kde se reálně něco změnilo
+                    console.log(`  🔄 Processing file: ${file}`);
+                    logDetails.filter(log => log.includes('✅')).forEach(log => console.log(log));
+
+                    try {
+                        // Write the *newContent* back to the *filePath*
+                        fs.writeFileSync(filePath, newContent, 'utf8');
+                        console.log(`  💾 File saved: ${filePath}`);
+                        filesChanged++;
+                    } catch (writeErr) {
+                        console.error(`  ❌ ERROR writing file ${filePath}: ${writeErr.message}`);
+                    }
+                }
+            });
+        } catch (err) {
+            console.error(`Could not process folder ${dir}: ${err.message}`);
+        }
+    });
+
+    // Závěrečný souhrn
+    console.log(`\n... Checked ${filesProcessed} markdown files in total.`);
+    if (linksFixed > 0) {
+        console.log(`🔥 Fixed ${linksFixed} links in ${filesChanged} files.`);
+    } else {
+        console.log("... No links needed fixing.");
+    }
+
+    console.log("✅ Post-processing complete!");
+}
+
+
+// --- RUN SCRIPT ---
+
+// Run the main generation
 main();
+
+// Run the post-processing step
+postProcessMatchEventLinks();

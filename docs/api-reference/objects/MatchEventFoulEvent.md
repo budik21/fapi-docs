@@ -29,7 +29,7 @@ import JsonExportButton from '@site/src/components/JsonExportButton';
 | `isFastBreakFoul` | `Boolean` | Was the foul committed during a fast break action or during normal play? |
 | `executorPlayer` | [Player](../objects/Player) | Player who will execute the kick awarded as the consequence of the foul |
 | `executorTeam` | [Team](../interfaces/Team) | Team of the player who will execute the kick awarded as the consequence of the foul |
-| `cardEvent` | [CardEvent](../objects/CardEvent) | The card event which the foul was awarded by a referee (if any) |
+| `cardEvent` | [CardEvent](../objects/MatchEventCardEvent) | The card event which the foul was awarded by a referee (if any) |
 | `boxArea` | [BoxArea](../enums/BoxArea) | The area where the foul was committed regarding to the boxes |
 | `coordX` | `Float` | The horizontal coordinate on the pitch indicating the location from which a foul was committed, measured along the X-axis running parallel to the goal line |
 | `coordY` | `Float` | The vertical coordinate on the pitch indicating the location from which a foul was committed, measured along the Y-axis running parallel to the touchline |

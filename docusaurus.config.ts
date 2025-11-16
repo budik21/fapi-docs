@@ -15,10 +15,10 @@ const config: Config = {
     },
 
     // Set the production url of your site here
-    url: 'https://your-docusaurus-site.example.com',
+    url: 'https://opta.lsoffice.cz',
     // Set the /<baseUrl>/ pathname under which your site is served
     // For GitHub pages deployment, it is often '/<projectName>/'
-    baseUrl: '/',
+    baseUrl: '/docs',
 
     // GitHub pages deployment config.
     // If you aren't using GitHub pages, you don't need these.
@@ -43,6 +43,8 @@ const config: Config = {
                     sidebarPath: './sidebars.ts',
                     // Undefined disallows to modify a documetation page.
                     editUrl: undefined,
+                    // To avoid "docs/docs" duplication
+                    routeBasePath: '/',
                 },
                 theme: {
                     customCss: './src/css/custom.css',
@@ -67,7 +69,7 @@ const config: Config = {
             },
             items: [
                 {
-                    to:         '/docs/intro',
+                    to:         '/intro',
                     label:      'Intro',
                     position:   'left',
                 },
@@ -102,8 +104,8 @@ const config: Config = {
                     label:      'Inputs',
                 },*/
                 {
-                    to:         '/docs/contact',
-                    label:      'Contact',
+                    to:         '/contacts/contacts',
+                    label:      'Contacts',
                     position:   'left',
                 }
             ]
@@ -117,7 +119,7 @@ const config: Config = {
                  items: [
                      {
                          label: 'Tutorial',
-                         to: '/docs/intro',
+                         to: 'intro',
                      },
                  ],
                  },
@@ -145,9 +147,11 @@ const config: Config = {
         prism: {
             theme: prismThemes.github,
             darkTheme: prismThemes.dracula,
+            additionalLanguages: ['php'],
         },
 
     } satisfies Preset.ThemeConfig,
 };
 
 export default config;
+

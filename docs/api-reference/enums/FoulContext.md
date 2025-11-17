@@ -6,7 +6,7 @@ sidebar_label: "Foul Context"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Classifies a foul based on the context or situation in which it was committed during the match.
 :::
 

@@ -6,7 +6,7 @@ sidebar_label: "Referee Action"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Defines the key actions performed by the referee that officially mark the beginning or end of a specific match period (half, extra time, etc.).
 :::
 

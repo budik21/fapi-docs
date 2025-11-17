@@ -6,7 +6,7 @@ sidebar_label: "Match Event Sort Field"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Specifies the fields available for sorting match events.
 :::
 

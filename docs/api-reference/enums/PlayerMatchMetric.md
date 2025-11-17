@@ -6,7 +6,7 @@ sidebar_label: "Player Match Metric"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Defines specific, measurable statistical metrics used to quantify and track a player's performance in a single match. These metrics are primarily player-centric and can be secondarily aggregated across a season, team, or the player's entire career.
 :::
 

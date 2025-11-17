@@ -6,7 +6,7 @@ sidebar_label: "Lineup Position"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Specifies the exact role and typical location of a player on the field within the team's starting lineup.
 :::
 

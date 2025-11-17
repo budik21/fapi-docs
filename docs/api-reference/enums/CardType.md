@@ -6,7 +6,7 @@ sidebar_label: "Card Type"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Indicates the type (yellow or red) of card awarded to a player or coach.
 :::
 

@@ -57,9 +57,69 @@ const typeSuffixMap = {
 // --- !! ATTENTION: Clean Slate Protocol !! ---
 // Delete the entire output directory before starting to ensure
 // no stale files from previous runs cause conflicts.
-console.log(`🧹 Cleaning output directory: ${baseOutputDir}`);
-fs.rmSync(baseOutputDir, { recursive: true, force: true });
-console.log("... Directory cleaned.");
+//
+// console.log(`🧹 Cleaning output directory: ${baseOutputDir}`);
+// fs.rmSync(baseOutputDir, { recursive: true, force: true });
+// console.log("... Directory cleaned.");
+
+// --- 1. CUSTOM CLEAN: recursively delete all files except protected ones ---
+console.log(`🧹 Cleaning output directory (except protected files): ${baseOutputDir}`);
+
+// Files to protect (regex)
+const protectedPatterns = [
+    /^_category_\.json$/   // you can add more later
+];
+
+// Check if filename matches any protected pattern
+function isProtectedFile(fileName) {
+    return protectedPatterns.some((regex) => regex.test(fileName));
+}
+
+// Recursive cleaner
+function cleanDirectory(directory) {
+    const items = fs.readdirSync(directory);
+
+    items.forEach(item => {
+        const fullPath = path.join(directory, item);
+        const stats = fs.statSync(fullPath);
+
+        // Skip protected files
+        if (stats.isFile() && isProtectedFile(item)) {
+            console.log(`⏭️ Keeping protected file: ${fullPath}`);
+            return;
+        }
+
+        if (stats.isDirectory()) {
+            // Clean recursively first
+            cleanDirectory(fullPath);
+
+            // After cleaning, check if directory is empty
+            const remaining = fs.readdirSync(fullPath);
+            if (remaining.length === 0) {
+                fs.rmdirSync(fullPath);
+                console.log(`🗑️ Deleted empty folder: ${fullPath}`);
+            } else {
+                console.log(`⏭️ Keeping folder (contains protected files): ${fullPath}`);
+            }
+        } else {
+            // Normal file → delete
+            fs.unlinkSync(fullPath);
+            console.log(`🗑️ Deleted file: ${fullPath}`);
+        }
+    });
+}
+
+// Ensure directory exists
+if (!fs.existsSync(baseOutputDir)) {
+    fs.mkdirSync(baseOutputDir, { recursive: true });
+}
+
+cleanDirectory(baseOutputDir);
+
+console.log("... Cleaning done.");
+
+// --- END CUSTOM CLEAN ---
+
 // --- End of Clean Slate ---
 
 
@@ -186,7 +246,7 @@ function generateMarkdownForType(type) {
 
         const description = formatDescription(getDescription(type));
         if (description) {
-            content += `:::info\n${description}\n:::\n\n`;
+            content += `:::info[no-header]\n${description}\n:::\n\n`;
             content += '---\n\n';
         }
 

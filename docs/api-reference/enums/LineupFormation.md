@@ -6,7 +6,7 @@ sidebar_label: "Lineup Formation"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Specifies the team's tactical formation, indicating how players are arranged on the pitch at the start of the match.
 :::
 

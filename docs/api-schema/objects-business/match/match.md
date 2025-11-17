@@ -7,7 +7,7 @@ title:      Match
 Object `Match` is a child of the `Season` object. A specific match is in all cases related to just one [season](../season).
 
 ## Business purpose
-:::info
+:::info[no-header]
 Object `Match` provides all data for a specific match using the provided `MatchId`. This includes details such as the teams involved, their lineups, team and player statistics, match momentum, and other related data (see the list of all available child objects).
 :::
 

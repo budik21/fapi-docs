@@ -6,7 +6,7 @@ sidebar_label: "Gender"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Specifies whether a competition, team, or player belongs to the men's or women's category.
 :::
 

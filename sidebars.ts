@@ -50,7 +50,7 @@ const sidebars: SidebarsConfig = {
                                   items: [
                                       'api-schema/objects-business/match/match',
                                       'api-schema/objects-business/match/lineup',
-                                      'api-schema/objects-business/match/lineupPlayer',
+                                      'api-schema/objects-business/match/lineup-player',
                                       'api-schema/objects-business/match/match-events',
                                       'api-schema/objects-business/match/match-momentum'
                                   ],

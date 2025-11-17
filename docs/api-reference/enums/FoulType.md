@@ -6,7 +6,7 @@ sidebar_label: "Foul Type"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Specifies the type of foul committed during a football match, categorizing rule violations by their nature and severity.
 :::
 

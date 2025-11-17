@@ -6,7 +6,7 @@ sidebar_label: "Box Area"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Represents the location on the pitch where the match event occurred, described in relation to the penalty areas of both teams.
 :::
 

@@ -6,7 +6,7 @@ sidebar_label: "Match Phase"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Represents the major, high-level phases of an entire sports fixture relative to the actual playing time. This is used to clearly define the temporal context of match-related data. For example, the win probability calculated BEFORE_MATCH is considered a distinct data point from the probability calculated IN_MATCH.
 :::
 

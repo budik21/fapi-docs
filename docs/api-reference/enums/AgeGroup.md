@@ -6,7 +6,7 @@ sidebar_label: "Age Group"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Represents the competition’s age restriction category.
 :::
 

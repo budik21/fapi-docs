@@ -6,7 +6,7 @@ sidebar_label: "Foul Category"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Classifies a foul based on whether it was committed during a defensive or offensive action by the player.
 :::
 

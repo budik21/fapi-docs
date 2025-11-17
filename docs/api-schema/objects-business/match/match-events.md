@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 Object `MatchEvents` is a child of `Match` object.
 
 ## Business purpose
-:::info
+:::info[no-header]
 Represents all events occurring during a match—such as shots, passes, fouls, and more—captured with a highly detailed set of data. This level of granularity allows a clear understanding of what is happening (or has happened) during the match.
 The data is relevant for `IN_MATCH` and `AFTER_MATCH` phase of the match.
 :::

@@ -6,7 +6,7 @@ sidebar_label: "Match Period"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Represents the official chronological phases or periods of a football (soccer) match. This includes defined playing times (e.g., halves and extra time periods) as well as significant non-playing intervals (e.g., half-time breaks and pre-game states) and final resolution phases.
 :::
 

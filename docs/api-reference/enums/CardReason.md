@@ -6,7 +6,7 @@ sidebar_label: "Card Reason"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Indicates the specific reason why the referee issued a card to a player or coach, either during or after the match.
 :::
 

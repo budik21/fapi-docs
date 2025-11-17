@@ -6,7 +6,7 @@ sidebar_label: "Country Code"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Standardized country code for each nation or football association. The enum values reflect the name (using underscores) while the docstrings provide the full name and its ISO 3166-1 alpha-2 code where applicable.
 :::
 

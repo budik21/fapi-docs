@@ -6,7 +6,7 @@ sidebar_label: "Match Event Type"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Enumeration of all possible types of events that can occur during a match.
 :::
 

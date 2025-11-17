@@ -6,7 +6,7 @@ sidebar_label: "Punishment Kick Type"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Defines the different types of restart kicks or set-pieces awarded by the referee as a consequence of a foul or infringement committed by a player.
 :::
 

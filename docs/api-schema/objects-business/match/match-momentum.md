@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 Object `Momentum` is a child of `Match` object.
 
 ## Business purpose
-:::info
+:::info[no-header]
 For any given minute of a match, the momentum expresses how likely it is that a specific team will score a goal. The data is relevant for `IN_MATCH` and `AFTER_MATCH` phase of the match.
 :::
 

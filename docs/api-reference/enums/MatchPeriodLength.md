@@ -6,7 +6,7 @@ sidebar_label: "Match Period Length"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Defines the standard duration, in minutes, for a specific period of a match, most commonly representing the length of a single half or an extra time segment.
 :::
 

@@ -6,7 +6,7 @@ sidebar_label: "Team Level"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Defines the internal team hierarchy within a club structure. The level indicates whether the team is the main squad, reserve, or youth (lower level)
 :::
 

@@ -1,5 +1,5 @@
 ---
-id:         lineupPlayer
+id:         lineup-player
 title:      Lineup Player
 ---
 ### Lineup Player

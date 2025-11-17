@@ -6,7 +6,7 @@ sidebar_label: "Pitch Zone"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Defines a high-level segment or area on the pitch where a specific event took place. This categorization divides the field into two main halves and further segments the attacking half for more detailed location tracking.
 :::
 

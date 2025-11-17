@@ -6,7 +6,7 @@ sidebar_label: "Locale"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Specifies a language and optionally a region (locale) used for internationalization and localization. The format is generally ISO 639-1 language code, optionally followed by an underscore and an ISO 3166-1 alpha-2 country code.
 :::
 

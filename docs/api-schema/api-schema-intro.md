@@ -1,5 +1,5 @@
 ---
-id:     apiSchemaIntro
+id:     api-schema-intro
 title:  API Schema
 ---
 

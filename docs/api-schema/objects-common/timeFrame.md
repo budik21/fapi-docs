@@ -1,5 +1,5 @@
 ---
-id:     timeFrame
+id:     time-frame
 title:  Time Frame
 ---
 import Tabs from '@theme/Tabs';
@@ -9,8 +9,14 @@ import TabItem from '@theme/TabItem';
 The `timeFrame` object is used with all event-related business objects in a match.
 
 ## Business purpose
-:::info
+:::info[no-header]
 The `timeFrame` object defines the exact moment in the match when an event occurred, using **match phase**, **match period**, and **match time** attributes.
+:::
+
+:::tip[Mind the timeFrame and matchTime difference]
+The `timeFrame` object is similar to [matchTime object](match-time), but there is a fundamental difference between them.
+
+While the `timeFrame` represents the **static moment** an event occurred (like a snapshot), `matchTime` represents the **dynamic running clock** of the match. You typically query `matchTime` to display a live timer, whereas `timeFrame` is used to list match events.
 :::
 
 The [match phase](../../api-reference/enums/MatchPhase) and [match period](../../api-reference/enums/MatchPeriod) are represented by enum values.

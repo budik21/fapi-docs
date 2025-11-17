@@ -25,13 +25,14 @@ const sidebars: SidebarsConfig = {
               {
                   type:     'doc',
                   label:    'Intro',
-                  id:       'api-schema/apiSchemaIntro'
+                  id:       'api-schema/api-schema-intro'
               },
               {
                   type:     'category',
                   label:    'Common objects',
                   items: [
-                            'api-schema/objects-common/timeFrame'
+                            'api-schema/objects-common/match-time',
+                            'api-schema/objects-common/time-frame'
                   ],
               },
               {

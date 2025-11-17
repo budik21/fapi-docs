@@ -8,7 +8,9 @@ import TabItem from '@theme/TabItem';
 ## What is Football API?
 Football API a GraphQL API allowing to access football data stored in Livesport Football Database.
 
-If you are a football enthusiastic and understand how the football domain works, you will understand the Football API without anything to study before. If not, please, meet the [API Schema](api-schema/api-schema-intro.md) before you start to query the Football API, 
+While football enthusiasts will find the API structure intuitive immediately, we strongly recommend the [API Schema](api-schema/api-schema-intro) section to everyone. It is an essential guide to the domain logic, especially if you are new to the sport. This chapter explains the structure of API objects from a business perspective rather than a technical one. 
+
+If you are interested in the technical details, please refer to chapter [API Reference](api-reference/api-reference-intro). 
 
 ## Getting Started
 1. Understand the domain

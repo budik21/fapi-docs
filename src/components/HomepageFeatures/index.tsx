@@ -17,13 +17,12 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Provider Agnostic',
+    title: 'Easy to understand',
     //Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     imgPath: 'img/fapi-feature1.png',
     description: (
       <>
-          Livesport Football API integrates data from multiple sources and delivers a unified output,
-          regardless of where the data comes from.
+          Football API empowers you to build flexible queries using standardized objects. With familiar football terminology, <strong>integration is seamless and intuitive</strong>.
       </>
     ),
   },
@@ -33,7 +32,7 @@ const FeatureList: FeatureItem[] = [
     imgPath: 'img/fapi-feature2.png',
     description: (
       <>
-          The unified API output simplifies maintenance and maximizes reusability, leaving each frontend free to present the data its own way
+          The <strong>unified API output</strong> simplifies maintenance and maximizes reusability, leaving each frontend free to present the data its own way.
       </>
     ),
   },
@@ -43,7 +42,7 @@ const FeatureList: FeatureItem[] = [
     imgPath: 'img/fapi-feature3.png',
     description: (
       <>
-          Every shot, every touch, every save is described through a set of standardized attributes — allowing you
+          Every shot, every touch, every save is described through a <strong>set of standardized attributes</strong> — allowing you
           to read the game like no one else.
       </>
     ),

@@ -1,0 +1,9 @@
+{
+    "label":      "Objects",
+    "collapsed":  true,
+    "position":   2,
+    "link": {
+      "type": "generated-index",
+      "description": "List of all available objects"
+    }
+}

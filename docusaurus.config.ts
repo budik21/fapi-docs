@@ -69,8 +69,8 @@ const config: Config = {
             },
             items: [
                 {
-                    to:         '/intro',
-                    label:      'Intro',
+                    to:         '/api-essentials',
+                    label:      'API Essentials',
                     position:   'left',
                 },
                 {

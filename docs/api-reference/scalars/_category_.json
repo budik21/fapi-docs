@@ -1,0 +1,9 @@
+{
+    "label":      "Scalars",
+    "collapsed":  true,
+    "position":   5,
+    "link": {
+      "type": "generated-index",
+      "description": "List of all available scalars"
+    }
+}

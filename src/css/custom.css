@@ -28,3 +28,15 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+/* Define the height of the code block to shorten long code into normalised contained */
+.theme-code-block pre {
+    max-height: 480px;
+    overflow-y: auto;
+}
+
+/* Allow to wrap long lines in code block to avoid adding horizontal scrollbar */
+.theme-code-block code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}

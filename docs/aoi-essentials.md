@@ -1,11 +1,9 @@
 ---
-id:     intro
-title:  Football API Intro
+id:     api-essentials
+title:  API Essentials
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# Football API Intro
 
 ## What is Football API?
 Football API a GraphQL API allowing to access football data stored in Livesport Football Database.
@@ -19,10 +17,13 @@ If you are a football enthusiastic and understand how the football domain works,
 4. Run the Query
 5. Process the data
 
-### Understand the domain
-The documentation is divided into two base parts.
-* **Business oriented chapters**
-* **Technical oriented chapters**
+### Understanding the Domain
+The Football API provides data exclusively for football.
+
+All API objects are named using standard football terminology. If you are familiar with the sport, you will easily understand the API object structure and be able to build queries to retrieve the data you need.
+
+Otherwise you can learn the basics in [API Schema](api-schema/apiSchemaIntro) chapter. This chapter presents API Schema from the business point of view. If you need to get technical oriented information about the API objects, enums, interfaces etc. follow the [API Reference](api-reference/apiReferenceIntro)
+
 
 ### Get Credentials
 The Football API does not allow anonymous access.
@@ -254,7 +255,6 @@ The example below demonstrates how to send a request. It assumes you have:
         func CallFootballAPI(environmentBaseURL string, query string, accessToken string) APIResponse {
         
             // 1. Prepare the request body (JSON payload)
-            // Equivalent to: json_encode(array("query" => $query))
             requestBodyMap := map[string]string{"query": query}
             requestBodyBytes, err := json.Marshal(requestBodyMap)
             if err != nil {
@@ -263,7 +263,6 @@ The example below demonstrates how to send a request. It assumes you have:
             }
         
             // 2. Create a new HTTP POST request
-            // Equivalent to curl_init() and setting POST, URL, and POSTFIELDS
             req, err := http.NewRequest("POST", environmentBaseURL, bytes.NewBuffer(requestBodyBytes))
             if err != nil {
                 // Return error if request creation fails
@@ -271,7 +270,6 @@ The example below demonstrates how to send a request. It assumes you have:
             }
         
             // 3. Set the HTTP Headers
-            // Equivalent to CURLOPT_HTTPHEADER
             req.Header.Set("Content-Type", "application/json")
         
             // Authorization using the Bearer token
@@ -300,18 +298,16 @@ The example below demonstrates how to send a request. It assumes you have:
                 // This captures transport errors (equivalent to curl_error)
                 return APIResponse{ErrorMessage: "Failed to execute request: " + err.Error()}
             }
-            // We must close the body when the function exits
+            // Close the body when the function exits
             defer resp.Body.Close()
         
             // 5. Read the response body
-            // Equivalent to curl_exec() (when CURLOPT_RETURNTRANSFER is true)
             responseBody, err := io.ReadAll(resp.Body)
             if err != nil {
                 return APIResponse{ErrorMessage: "Failed to read response body: " + err.Error()}
             }
         
             // 6. Unmarshal the response
-            // Equivalent to json_decode(...)
             var responseData interface{}
             err = json.Unmarshal(responseBody, &responseData)
             if err != nil {
@@ -319,7 +315,6 @@ The example below demonstrates how to send a request. It assumes you have:
             }
         
             // 7. Prepare response
-            // Success: return the data and an empty error message
             return APIResponse{
                 ResponseData: responseData,
                 ErrorMessage: "",
@@ -329,7 +324,7 @@ The example below demonstrates how to send a request. It assumes you have:
     </TabItem>
 </Tabs>
 
-## Process the response
+### Process the response
 If you run 
 
 ## Environments

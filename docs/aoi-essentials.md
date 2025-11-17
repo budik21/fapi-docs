@@ -24,7 +24,7 @@ The Football API provides data exclusively for football.
 
 All API objects are named using standard football terminology. If you are familiar with the sport, you will easily understand the API object structure and be able to build queries to retrieve the data you need.
 
-Otherwise you can learn the basics in [API Schema](api-schema/apiSchemaIntro) chapter. This chapter presents API Schema from the business point of view. If you need to get technical oriented information about the API objects, enums, interfaces etc. follow the [API Reference](api-reference/apiReferenceIntro)
+Otherwise you can learn the basics in [API Schema](api-schema/api-schema-intro) chapter. This chapter presents API Schema from the business point of view. If you need to get technical oriented information about the API objects, enums, interfaces etc. follow the [API Reference](api-reference/api-reference-intro)
 
 
 ### Get Credentials

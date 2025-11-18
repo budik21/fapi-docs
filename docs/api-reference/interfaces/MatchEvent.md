@@ -6,7 +6,7 @@ sidebar_label: "Match Event"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Interface defining the common properties shared by all match events. Specific event types (e.g., GoalEvent, CardEvent) would implement this and would add event specific attributes.
 :::
 

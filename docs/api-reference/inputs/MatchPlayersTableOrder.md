@@ -6,7 +6,7 @@ sidebar_label: "Match Players Table Order"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Input param object for ordering players in a table of a match for a specific individual metric.
 :::
 

@@ -6,7 +6,7 @@ sidebar_label: "Match Momentum Entry"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 MatchMomentumEntry defines a single data point (values for a specific minute of the match) within the match momentum, including momentum values for both teams and a combined value for a specific time frame.
 :::
 

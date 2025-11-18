@@ -6,7 +6,7 @@ sidebar_label: "Match Event Sort"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Input object defining the sorting criteria for a query.
 :::
 

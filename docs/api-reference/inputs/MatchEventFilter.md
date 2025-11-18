@@ -6,7 +6,7 @@ sidebar_label: "Match Event Filter"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Input object used to filter a list of match events. All fields are optional and are combined using AND logic.
 :::
 

@@ -6,7 +6,7 @@ sidebar_label: "Page Info"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Contains pagination information for cursor-based pagination.
 :::
 

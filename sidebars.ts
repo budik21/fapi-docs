@@ -51,7 +51,8 @@ const sidebars: SidebarsConfig = {
                                       'api-schema/objects-business/match/lineup',
                                       'api-schema/objects-business/match/lineup-player',
                                       'api-schema/objects-business/match/match-events',
-                                      'api-schema/objects-business/match/match-momentum'
+                                      'api-schema/objects-business/match/match-momentum',
+                                      'api-schema/objects-business/match/player-rating'
                                   ],
                               },
                             'api-schema/objects-business/player',
@@ -62,6 +63,8 @@ const sidebars: SidebarsConfig = {
                                   label: 'Stats',
                                   items: [
                                       'api-schema/objects-business/stats/stats',
+                                      'api-schema/objects-business/stats/stats-team-match',
+                                      'api-schema/objects-business/stats/stats-player-match',
                                       'api-schema/objects-business/stats/stats-team-aggregated',
                                       'api-schema/objects-business/stats/stats-player-aggregated',
                                   ],

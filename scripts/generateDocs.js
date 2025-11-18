@@ -67,7 +67,8 @@ console.log(`🧹 Cleaning output directory (except protected files): ${baseOutp
 
 // Files to protect (regex)
 const protectedPatterns = [
-    /^_category_\.json$/   // you can add more later
+    /^_category_\.json$/,
+    /^api-reference-intro\.md$/,
 ];
 
 // Check if filename matches any protected pattern
@@ -272,7 +273,7 @@ function generateMarkdownForType(type) {
 
         const description = formatDescription(getDescription(type));
         if (description) {
-            content += `:::info\n${description}\n:::\n\n`;
+            content += `:::info[no-header]\n${description}\n:::\n\n`;
             content += '---\n\n';
         }
 
@@ -298,7 +299,7 @@ function generateMarkdownForType(type) {
 
         const description = formatDescription(getDescription(type));
         if (description) {
-            content += `:::info\n${description}\n:::\n\n`;
+            content += `:::info[no-header]\n${description}\n:::\n\n`;
             content += '---\n\n';
         }
 
@@ -342,7 +343,7 @@ function generateMarkdownForType(type) {
 
         const description = formatDescription(getDescription(type));
         if (description) {
-            content += `:::info\n${description}\n:::\n\n`;
+            content += `:::info[no-header]\n${description}\n:::\n\n`;
             content += '---\n\n';
         }
 
@@ -368,7 +369,7 @@ function generateMarkdownForType(type) {
 
         const description = formatDescription(getDescription(type));
         if (description) {
-            content += `:::info\n${description}\n:::\n\n`;
+            content += `:::info[no-header]\n${description}\n:::\n\n`;
         }
     }
 

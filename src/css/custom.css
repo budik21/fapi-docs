@@ -40,3 +40,33 @@
     white-space: pre-wrap;
     overflow-wrap: anywhere;
 }
+
+/* === Search Bar Customization === */
+/* Increase base width */
+.navbar__search-input {
+    width: 20rem;                           /* Default is approx. 9rem */
+    transition: width 0.2s ease-in-out;     /* Adds a smooth transition effect */
+}
+
+/* Focus state (optional) */
+/* Expands the input field when clicked/active */
+.navbar__search-input:focus {
+    width: 25rem;
+    border-color: var(--ifm-color-primary); /* Highlights border using the site's primary color */
+}
+
+/* Mobile responsiveness */
+/* Prevents the input from overflowing on smaller screens */
+@media (max-width: 996px) {
+    .navbar__search-input {
+        width: 10rem;
+    }
+    .navbar__search-input:focus {
+        width: 12rem;
+    }
+}
+
+/* Remove Search Shortcut Hint (Ctrl+K) */
+.navbar__search-keys {
+    display: none !important;
+}

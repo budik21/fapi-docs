@@ -6,7 +6,7 @@ sidebar_label: "Match Events Result"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Represents a paginated result set of match events.
 :::
 

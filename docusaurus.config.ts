@@ -18,13 +18,15 @@ const config: Config = {
     url: 'https://opta.lsoffice.cz',
     // Set the /<baseUrl>/ pathname under which your site is served
     // For GitHub pages deployment, it is often '/<projectName>/'
-    baseUrl: '/docs',
+    // !!! Keep in the mind the slash after the last folder !!!
+    baseUrl: '/docs/',
 
     // GitHub pages deployment config.
     // If you aren't using GitHub pages, you don't need these.
     //organizationName: 'facebook', // Usually your GitHub org/user name.
     //projectName: 'docusaurus', // Usually your repo name.
 
+    //Generates an error during the build if some broken link is found
     onBrokenLinks: 'throw',
 
     // Even if you don't use internationalization, you can use this field to set
@@ -52,8 +54,6 @@ const config: Config = {
             } satisfies Preset.Options,
         ],
     ],
-
-    // ... zbytek konfigurace themeConfig zůstává stejný ...
 
     themeConfig: {
         // Replace with your project's social card
@@ -107,6 +107,11 @@ const config: Config = {
                     to:         '/contacts/contacts',
                     label:      'Contacts',
                     position:   'left',
+                },
+                //Add the search bar to the right (before dark/light mode switcher which is hardcoded as last one)
+                {
+                    type: 'search',
+                    position: 'right',
                 }
             ]
         },
@@ -151,6 +156,26 @@ const config: Config = {
         },
 
     } satisfies Preset.ThemeConfig,
+
+    plugins: [
+        [
+            require.resolve("@easyops-cn/docusaurus-search-local"),
+            {
+                //true, if the doc is not ruinning from file system, but from web server
+                hashed: true,
+                //Which language is the index build in?
+                language: ["en"],
+                // May the phrase found be highleded?
+                highlightSearchTermsOnTargetPage: true,
+                // May the blog be indexed (no blog at this time, so showtched off)
+                indexBlog: false,
+                // May the documentation be indexed
+                indexDocs: true,
+                //Key setting for Football API setup
+                docsRouteBasePath: '/',
+            },
+        ],
+    ],
 };
 
 export default config;

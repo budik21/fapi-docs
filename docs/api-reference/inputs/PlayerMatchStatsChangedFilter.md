@@ -6,7 +6,7 @@ sidebar_label: "Player Match Stats Changed Filter"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
-:::info
+:::info[no-header]
 Input param used for filtering player match stats.
 :::
 

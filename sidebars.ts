@@ -39,11 +39,10 @@ const sidebars: SidebarsConfig = {
                   type:     'category',
                   label:    'Business objects',
                   items: [
-                            'api-schema/objects-business/player',
-                            'api-schema/objects-business/team',
                             'api-schema/objects-business/competition',
                             'api-schema/objects-business/season',
-                            //Object Match has child object
+                            'api-schema/objects-business/season-stage',
+                              //Object Match has child objects
                               {
                                   type:  'category',
                                   label: 'Match',
@@ -55,6 +54,19 @@ const sidebars: SidebarsConfig = {
                                       'api-schema/objects-business/match/match-momentum'
                                   ],
                               },
+                            'api-schema/objects-business/player',
+                            'api-schema/objects-business/team',
+                            //Object Stats has child objects
+                              {
+                                  type:  'category',
+                                  label: 'Stats',
+                                  items: [
+                                      'api-schema/objects-business/stats/stats',
+                                      'api-schema/objects-business/stats/stats-team-aggregated',
+                                      'api-schema/objects-business/stats/stats-player-aggregated',
+                                  ],
+                              },
+
                   ],
               },
           ],

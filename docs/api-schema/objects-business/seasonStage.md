@@ -1,15 +1,13 @@
 ---
-id:         season
-title:      Season
+id:         season-stage
+title:      Season stage
 ---
-## Depenndecies
-Object `Season` is a child object of the `Competition` season. A specific season is in all cases related to just one [competition](competition).
+## Dependecies
+Object `SeasonSatge` is a child object of the `Season` object. A specific season stage is in all cases related to just one [Season](season).
 
 ## Business purpose
 :::info[no-header]
-The `Season` object encompasses all data for a specific timeframe of the `Competition`, accessible via the provided `SeasonId`. Regardless of whether the format of the competition is a "cup" (FA Cup) or a "league" (Premier League), every season is defined by a specific start and end date. Typically, the conclusion of a season results in a designated winner (champion).
-
-Each `Season` has at least one `SeasonStage` 
+The `SeasonStage` object encompasses all data for a specific phase of a `Season`. While many competitions (such as the **English Premier League**) consist of a single stage, others (like the **UEFA Champions League**) divide a single season into multiple distinct stages (e.g., Qualifying Round, League Phase, Knockout Phase). 
 :::
 :::tip[Competition > Season > Season Stage]
 Understanding the distinction between `Competition`, `Season`, and `Season Stage` objects is crucial.

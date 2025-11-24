@@ -2457,16 +2457,6 @@ enum PlayerMatchMetric {
   """
   PENALTIES_SAVED
   """
-  Default (EN) Name: Penalties scored
-  
-  Default (EN) Description: The number of penalty kick attempts that a player successfully converts into goals. The penalties scored during the shootout are not included
-  
-  CZ Name: Proměněné penalty
-  
-  CZ Description: Celkový počet pokutových kopů, které byly proměněné v gól vlastního týmu. Neproměněné pokutové kopy během penaltových rozstřelů nejsou započteny
-  """
-  PENALTIES_SCORED
-  """
   Default (EN) Name: Penalties won
   
   Default (EN) Description: The count of times a player is fouled in the opponent's penalty area, resulting in a penalty kick being awarded to their team
@@ -2476,6 +2466,26 @@ enum PlayerMatchMetric {
   CZ Description: Celkový počet situací, kdy byl hráč faulovaný v soupeřově pokutovém území a rozhodčí nařídil ve prospěch jeho týmu pokutový kop
   """
   PENALTIES_WON
+  """
+  Default (EN) Name: Player Rating
+  
+  Default (EN) Description: Describes the performance of each player who participated in the match for at least a minimum number of minutes, rated on a scale from 1 (very poor performance) to 10 (excellent performance).
+  
+  CZ Name: Hodnocení hráče
+  
+  CZ Description: Popisuje výkon každého hráče, který se účastnil zápasu alespoň minimální počet minut, hodnocený na stupnici od 1 (velmi špatný výkon) do 10 (vynikající výkon).
+  """
+  RATING_PLAYER
+  """
+  Default (EN) Name: Player Rating Raw
+  
+  Default (EN) Description: Describes the uncapped performance value of each player who participated in the match for at least the minimum required number of minutes. This value is used internally for Player of the Match voting. The real public value for Player's rating is in RATING_PLAYER metric.
+  
+  CZ Name: Neořezané hodnocení hráče
+  
+  CZ Description: Popisuje neořezanou hodnotu výkonu každého hráče, který se zápasu zúčastnil alespoň minimální požadovaný počet minut. Tato hodnota se používá interně pro vyhodnocení Hráče zápasu. Skutečná veřejně dostupná hodnota hodnocení hráče je metrika RATING_PLAYER.
+  """
+  RATING_PLAYER_RAW
   """
   Default (EN) Name: Penalties Missed (Post)
   
@@ -2996,11 +3006,17 @@ type LocalizedText {
   text(locale: Locale = EN): String! @goField(forceResolver: true)
 }
 
+"""
+The Match object represents a single football match and provides structured access to team
+information, lineups, scores, player data, match events, statistical outputs,
+and computed probabilistic models.
+It serves as the primary entry point for retrieving all match-related information.
+"""
 type Match {
   id: ID!
-  "Home team"
+  "The homeTeam object provides metadata for the team designated as the home side, including its name, age category, gender, and hierarchical level (main team, reserve team) within the club structure."
   homeTeam: Team! @goField(forceResolver: true)
-  "Away team"
+  "The awayTeam object provides metadata for the team designated as the away side, including its name, age category, gender, and hierarchical level (main team, reserve team) within the club structure."
   awayTeam: Team! @goField(forceResolver: true)
   "Individual statistics of players in a match."
   playerStats(
@@ -3008,7 +3024,7 @@ type Match {
     playerIDs: [String!]
     "The number of players you want to return in result set. E.g 3 for three players in a given order. If not given or 0, than all players are returned."
     numberOfPlayers: Int
-    "Array of order rules consisting of a metric you want to order by and direction. If more than one given than rules are resolved one by another in case of an equal statistics"
+    "Array of order rules consisting of a metric you want to order by and direction. If more than one given than rules are resolved one by another in case of an equal statistics."
     order: [MatchPlayersTableOrder!]
     "Filter only players from home team or away team. If not provided, than players from both teams return."
     teamHomeAway: TeamHomeAway
@@ -3017,16 +3033,18 @@ type Match {
   homeTeamLineup: Lineup @goField(forceResolver: true)
   "Lineup of the away team"
   awayTeamLineup: Lineup @goField(forceResolver: true)
-  "Momentum of the match"
+  "The momentum object represents the estimated probability of a team scoring during a specific minute of the match. These values are provided for matches in the IN_MATCH and AFTER_MATCH phases."
   momentum: MatchMomentum @goField(forceResolver: true)
-  "Win probability of the match"
+  "The winProbability object contains probability metrics estimating each team's chance of winning, calculated using the current match phase, time played, and the live score."
   winProbability: WinProbability @goField(forceResolver: true)
-  "Player ratings (Rating 2.0) for players in this match. If playerIDs omitted, returns all."
+  "The playerRatings object provides performance evaluations (ratings) for players who participated in the match. If no playerIds are specified, the response returns ratings for all players who took part and met the criteria for rating calculation."
   playerRatings(playerIDs: [ID!]): [PlayerRating!]! @goField(forceResolver: true)
-  "Statistics of the home team"
+  "The teamStats object contains overall match statistics for each team and period-based splits, allowing consumers to analyse team performance across the full match and within specific periods."
   teamStats(filter: MatchTimeFrameFilter): [TeamMatchStats!]! @goField(forceResolver: true)
-  "Events of the match"
+  "The matchEvents object contains the list of all events which happened during the match as the result of player's or referee's activity, such as goal scored, foul committed or card given (see MatchEventTypeEnum for list of all supported events)."
   matchEvents(filter: MatchEventFilter, sort: MatchEventSort, first: Int!, after: String): MatchEventsResult! @goField(forceResolver: true)
+  "Get match time frame at specific date time. If 'at' is not provided, current time is used."
+  timeFrameAt(at: DateTime): MatchTimeFrame! @goField(forceResolver: true)
 }
 
 """
@@ -3255,6 +3273,10 @@ type NationalTeam implements Team {
   localizedName: LocalizedText! @goField(forceResolver: true)
 }
 
+"""
+The Player object provides core identity and descriptive information about an individual football
+player, including localized naming data, personal details, and their primary playing position.
+"""
 type Player {
   id: ID!
   "Localized name of the player"
@@ -3271,7 +3293,7 @@ type Player {
   localizedNickname: LocalizedText @goField(forceResolver: true)
   "Birth date of the player"
   birthDate: Date @goField(forceResolver: true)
-  "Position of the player on field"
+  "The player’s usual playing position. Note that this can vary from the position the player takes up in a particular match."
   position: String @goField(forceResolver: true)
 }
 
@@ -4453,16 +4475,6 @@ type PlayerMatchStatsV2 {
   """
   penaltiesSaved: PlayerMatchMetricInt!
   """
-  Default (EN) Name: Penalties scored
-  
-  Default (EN) Description: The number of penalty kick attempts that a player successfully converts into goals. The penalties scored during the shootout are not included
-  
-  CZ Name: Proměněné penalty
-  
-  CZ Description: Celkový počet pokutových kopů, které byly proměněné v gól vlastního týmu. Neproměněné pokutové kopy během penaltových rozstřelů nejsou započteny
-  """
-  penaltiesScored: PlayerMatchMetricInt!
-  """
   Default (EN) Name: Penalties won
   
   Default (EN) Description: The count of times a player is fouled in the opponent's penalty area, resulting in a penalty kick being awarded to their team
@@ -4472,6 +4484,26 @@ type PlayerMatchStatsV2 {
   CZ Description: Celkový počet situací, kdy byl hráč faulovaný v soupeřově pokutovém území a rozhodčí nařídil ve prospěch jeho týmu pokutový kop
   """
   penaltiesWon: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Player Rating
+  
+  Default (EN) Description: Describes the performance of each player who participated in the match for at least a minimum number of minutes, rated on a scale from 1 (very poor performance) to 10 (excellent performance).
+  
+  CZ Name: Hodnocení hráče
+  
+  CZ Description: Popisuje výkon každého hráče, který se účastnil zápasu alespoň minimální počet minut, hodnocený na stupnici od 1 (velmi špatný výkon) do 10 (vynikající výkon).
+  """
+  ratingPlayer: PlayerMatchMetricFloat!
+  """
+  Default (EN) Name: Player Rating Raw
+  
+  Default (EN) Description: Describes the uncapped performance value of each player who participated in the match for at least the minimum required number of minutes. This value is used internally for Player of the Match voting. The real public value for Player's rating is in RATING_PLAYER metric.
+  
+  CZ Name: Neořezané hodnocení hráče
+  
+  CZ Description: Popisuje neořezanou hodnotu výkonu každého hráče, který se zápasu zúčastnil alespoň minimální požadovaný počet minut. Tato hodnota se používá interně pro vyhodnocení Hráče zápasu. Skutečná veřejně dostupná hodnota hodnocení hráče je metrika RATING_PLAYER.
+  """
+  ratingPlayerRaw: PlayerMatchMetricFloat!
   """
   Default (EN) Name: Possession lost
   
@@ -4940,44 +4972,52 @@ type PlayerMatchMetricFloat {
   rankInTeamComposite: Int
 }
 
-type PlayerRating {
+"""
+Provides performance evaluations (ratings) for players who participated in the match using a standardised scale from 1 (worst performance) to 10 (best performance).
+If no playerIds are specified, the response returns ratings for all players who took part and met the criteria for rating calculation.
+"""
+type PlayerRating @goExtraField(name: "MatchID", type: "string", description: "The ID of the match") {
+  "The player being evaluated."
   player: Player!
-  ratingConfigID: ID
-  ratingFinal: Float
-  ratingRaw: Float
-  ratingRawWithBonuses: Float
-  ratingRawAfterCorrections: Float
-  position: String
-  roles: [PlayerRole!]
-  profiles: [PlayerProfile!]
-  bonusTotal: Float
-  bonuses: [PlayerBonus!]
-  corrections: [PlayerCorrection!]
-  createdAt: DateTime
-  updatedAt: DateTime
+  "ID of the configuration ruleset applied to calculate this rating."
+  ratingConfigID: ID!
+  "The final calculated rating, normalized and capped to the 1-10 scale."
+  value: Float!
+  "The raw rating value before capping. Useful for breaking ties when multiple players have the same final rating."
+  valueUncapped: Float!
+  "Breakdown of bonuses and penalties that contributed to the final rating."
+  bonuses: PlayerRatingBonuses!
+  "The timestamp of when the rating was created. ISO 8601 (RFC 3339)."
+  createdAt: DateTime!
+  "The timestamp of when the rating was last updated. ISO 8601 (RFC 3339)."
+  updatedAt: DateTime!
+  "Historical rating data for player throughout the match, sorted by minute in ascending order."
+  ratingHistory: [PlayerRatingMinute!]! @goField(forceResolver: true)
 }
 
-type PlayerRole {
-  roleType: String
-  score: Float
+type PlayerRatingBonuses {
+  "List of individual bonus entries"
+  entries: [PlayerRatingBonus!]!
+  "Total sum of all bonuses and penalties"
+  total: Float!
 }
 
-type PlayerProfile {
-  profileType: String
-  score: Float
-  rating: Float
-}
-
-type PlayerBonus {
-  bonusType: String
+type PlayerRatingBonus {
+  "Type of the bonus or penalty"
+  type: String!
+  "Subtype providing additional categorization"
   subtype: String
-  value: Float
+  "Numeric value of the bonus (positive) or penalty (negative)"
+  value: Float!
 }
 
-type PlayerCorrection {
-  correctionType: String
-  before: Float
-  after: Float
+type PlayerRatingMinute {
+  "Time frame information"
+  timeFrame: MatchTimeFrame!
+  "Rating value at this point in time"
+  value: Float!
+  "Bonuses applied at this time"
+  bonuses: PlayerRatingBonuses!
 }
 
 "Date in YYYY-MM-DD format"
@@ -5136,7 +5176,6 @@ type TeamMatchStatsWrapper {
   penaltiesMissedSave: TeamMatchStatHeadToHeadInt!
   penaltiesNotConverted: TeamMatchStatHeadToHeadInt!
   penaltiesSaved: TeamMatchStatHeadToHeadInt!
-  penaltiesScored: TeamMatchStatHeadToHeadInt!
   penaltiesWon: TeamMatchStatHeadToHeadInt!
   possessionLost: TeamMatchStatHeadToHeadInt!
   possessionPercentage: TeamMatchStatHeadToHeadFloat!

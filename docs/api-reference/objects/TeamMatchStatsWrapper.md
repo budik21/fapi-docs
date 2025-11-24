@@ -142,7 +142,6 @@ import JsonExportButton from '@site/src/components/JsonExportButton';
 | `penaltiesMissedSave` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `penaltiesNotConverted` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `penaltiesSaved` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
-| `penaltiesScored` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `penaltiesWon` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `possessionLost` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `possessionPercentage` | [TeamMatchStatHeadToHeadFloat!](../objects/TeamMatchStatHeadToHeadFloat) |  |

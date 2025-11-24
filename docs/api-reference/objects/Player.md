@@ -6,6 +6,12 @@ sidebar_label: "Player"
 
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
+:::info[no-header]
+The Player object provides core identity and descriptive information about an individual football player, including localized naming data, personal details, and their primary playing position.
+:::
+
+---
+
 ## Fields
 
 | Field | Type | Description |
@@ -18,4 +24,4 @@ import JsonExportButton from '@site/src/components/JsonExportButton';
 | `localizedShortName` | [LocalizedText](../objects/LocalizedText) | Localized short name of the player |
 | `localizedNickname` | [LocalizedText](../objects/LocalizedText) | Localized nickname of the player |
 | `birthDate` | [Date](../scalars/Date) | Birth date of the player |
-| `position` | `String` | Position of the player on field |
+| `position` | `String` | The player’s usual playing position. Note that this can vary from the position the player takes up in a particular match. |

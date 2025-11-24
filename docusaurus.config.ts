@@ -16,10 +16,11 @@ const config: Config = {
 
     // Set the production url of your site here
     url: 'https://opta.lsoffice.cz',
+
     // Set the /<baseUrl>/ pathname under which your site is served
     // For GitHub pages deployment, it is often '/<projectName>/'
     // !!! Keep in the mind the slash after the last folder !!!
-    baseUrl: '/docs/',
+    baseUrl: '/football-api-docs/',
 
     // GitHub pages deployment config.
     // If you aren't using GitHub pages, you don't need these.
@@ -42,10 +43,13 @@ const config: Config = {
             'classic',
             {
                 docs: {
+                    //where the local documentation is taken from
+                    path: 'docs',
+                    //where the sidebar config is taken from
                     sidebarPath: './sidebars.ts',
-                    // Undefined disallows to modify a documetation page.
+                    // Undefined disallows to modify a documentation page.
                     editUrl: undefined,
-                    // To avoid "docs/docs" duplication
+                    // To avoid "docs/docs" duplication - do not add "docs" folder to baseURL
                     routeBasePath: '/',
                 },
                 theme: {
@@ -75,9 +79,9 @@ const config: Config = {
                 },
                 {
                     type:       'docSidebar',
-                    sidebarId:  'apiSchemaSidebar',
+                    sidebarId:  'apiGuideSidebar',
                     position:   'left',
-                    label:      'API Schema',
+                    label:      'API Guide',
                 },
                 {
                     type:       'docSidebar',

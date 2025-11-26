@@ -17,6 +17,7 @@ The Match object represents a single football match and provides structured acce
 | Field | Type | Description |
 |---|---|---|
 | `id` | `ID!` |  |
+| `status` | [MatchStatus!](../enums/MatchStatus) | The current status of the match. |
 | `homeTeam` | [Team!](../interfaces/Team) | The homeTeam object provides metadata for the team designated as the home side, including its name, age category, gender, and hierarchical level (main team, reserve team) within the club structure. |
 | `awayTeam` | [Team!](../interfaces/Team) | The awayTeam object provides metadata for the team designated as the away side, including its name, age category, gender, and hierarchical level (main team, reserve team) within the club structure. |
 | `playerStats` | [[PlayerMatchStatsV2!]!](../objects/PlayerMatchStatsV2) | Individual statistics of players in a match. |

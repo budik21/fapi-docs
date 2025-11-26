@@ -1130,6 +1130,20 @@ enum MatchPhase {
   AFTER_MATCH
 }
 
+"""Represents the current status of a football match."""
+enum MatchStatus {
+  "Match is scheduled but has not started."
+  SCHEDULED
+  "Match is currently in progress."
+  IN_PROGRESS
+  "Match is suspended (temporarily stopped)."
+  SUSPENDED
+  "Match has finished."
+  FINISHED
+  "Match has been cancelled."
+  CANCELLED
+}
+
 """
 Defines a high-level segment or area on the pitch where a specific event took place.
 This categorization divides the field into two main halves and further segments the attacking half for more detailed location tracking.
@@ -3014,6 +3028,8 @@ It serves as the primary entry point for retrieving all match-related informatio
 """
 type Match {
   id: ID!
+  "The current status of the match."
+  status: MatchStatus! @goField(forceResolver: true)
   "The homeTeam object provides metadata for the team designated as the home side, including its name, age category, gender, and hierarchical level (main team, reserve team) within the club structure."
   homeTeam: Team! @goField(forceResolver: true)
   "The awayTeam object provides metadata for the team designated as the away side, including its name, age category, gender, and hierarchical level (main team, reserve team) within the club structure."
@@ -4985,16 +5001,19 @@ type PlayerRating @goExtraField(name: "MatchID", type: "string", description: "T
   value: Float!
   "The raw rating value before capping. Useful for breaking ties when multiple players have the same final rating."
   valueUncapped: Float!
-  "Breakdown of bonuses and penalties that contributed to the final rating."
+  "Breakdown of bonuses and penalties that contributed to the rating value."
   bonuses: PlayerRatingBonuses!
   "The timestamp of when the rating was created. ISO 8601 (RFC 3339)."
   createdAt: DateTime!
   "The timestamp of when the rating was last updated. ISO 8601 (RFC 3339)."
   updatedAt: DateTime!
   "Historical rating data for player throughout the match, sorted by minute in ascending order."
-  ratingHistory: [PlayerRatingMinute!]! @goField(forceResolver: true)
+  ratingHistory: [PlayerRatingHistory!]! @goField(forceResolver: true)
 }
 
+"""
+Aggregates all bonuses and penalties that impacted the player's calculated rating.
+"""
 type PlayerRatingBonuses {
   "List of individual bonus entries"
   entries: [PlayerRatingBonus!]!
@@ -5002,21 +5021,29 @@ type PlayerRatingBonuses {
   total: Float!
 }
 
+"""
+List of all bonuses that contributed to the rating value including including their
+type (indicating the specific activity generating the bonus) and subtype (indicating performance level: excellent, normal, or poor)."
+"""
 type PlayerRatingBonus {
   "Type of the bonus or penalty"
   type: String!
-  "Subtype providing additional categorization"
+  "Subtype providing level of the bonus, if available"
   subtype: String
   "Numeric value of the bonus (positive) or penalty (negative)"
   value: Float!
 }
 
-type PlayerRatingMinute {
-  "Time frame information"
+"""
+Represents a snapshot of a player's rating and associated bonuses at a specific point in the match.
+Allows tracking the rating progression while the player was active on the pitch.
+"""
+type PlayerRatingHistory {
+  "The match clock value indicating when this rating was captured."
   timeFrame: MatchTimeFrame!
-  "Rating value at this point in time"
+  "The rating value valid for this specific play time."
   value: Float!
-  "Bonuses applied at this time"
+  "The specific bonuses assigned for this play time."
   bonuses: PlayerRatingBonuses!
 }
 

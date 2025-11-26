@@ -176,7 +176,7 @@ Once the game concludes, this value represents the player's **Final Rating**. Pl
                 {
                   "timeFrame": {
                     "phase": "IN_MATCH",
-                    "period": "HALF_SECOND",
+                    "period": "HALF_FIRST",
                     "elapsedMinute": 10,
                     "elapsedSecond": 0
                   },
@@ -185,7 +185,7 @@ Once the game concludes, this value represents the player's **Final Rating**. Pl
                 {
                   "timeFrame": {
                     "phase": "IN_MATCH",
-                    "period": "HALF_SECOND",
+                    "period": "HALF_FIRST",
                     "elapsedMinute": 11,
                     "elapsedSecond": 0
                   },

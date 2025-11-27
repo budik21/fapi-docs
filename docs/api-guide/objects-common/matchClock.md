@@ -18,7 +18,7 @@ If no timestamp is specified, it defaults to the current time (the time when the
 :::tip[Mind the matchClock and timeFrame difference]
 The `matchClock` object is similar to [timeFrame object](time-frame), but there is a fundamental difference between them.
 
-While `matchClock` represents the **dynamic running clock** of the match, the `timeFrame` represents the **static moment** an event occurred (like a snapshot), . You typically query `matchClock` to display a live timer, whereas `timeFrame` is used to list match events.
+While `matchClock` represents the **dynamic running clock** of the match, [timeFrame](./time-frame) represents the **static moment** an event occurred (like a snapshot). You typically use `matchClock` to display a live timer, whereas `timeFrame` is used to identify exactly when an event took place, particularly when querying data after the match has finished.
 :::
 
 ## How to get the match clock data

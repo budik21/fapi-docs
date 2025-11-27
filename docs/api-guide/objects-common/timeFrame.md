@@ -13,10 +13,10 @@ The `timeFrame` object is used with all event-related business objects in a matc
 The `timeFrame` object defines the exact moment in the match when an event occurred, using **match phase**, **match period**, and **match time** attributes.
 :::
 
-:::tip[Mind the timeFrame and matchTime difference]
+:::tip[Mind the timeFrame and matchClock difference]
 The `timeFrame` object is similar to [matchClock object](match-clock), but there is a fundamental difference between them.
 
-While the `timeFrame` represents the **static moment** an event occurred (like a snapshot), `matchClock` represents the **dynamic running clock** of the match. You typically query `matchClock` to display a live timer, whereas `timeFrame` is used to list match events.
+While `timeFrame` represents the **static moment** an event occurred (like a snapshot), [matchClock](./match-clock) represents the **dynamic running clock** of the match. You typically use `matchClock` to display a live timer, whereas `timeFrame` is used to identify exactly when an event took place, particularly when querying data after the match has finished.`
 :::
 
 The [match phase](../../api-reference/enums/MatchPhase) and [match period](../../api-reference/enums/MatchPeriod) are represented by enum values.

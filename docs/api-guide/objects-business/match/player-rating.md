@@ -46,6 +46,13 @@ Once the game concludes, this value represents the player's **Final Rating**. Pl
 
 ## How to get the rating data
 ### Live and final rating
+:::info[no-icon]
+The following query is an example of how to retrieve the base rating value. The query is valid for both `IN_MATCH` (live data) and `AFTER_MATCH` (final data) phases.
+:::
+:::tip[no-icon]
+Please note that the same base rating value is also available via the `RATING_PLAYER` metric in the [PlayerMatchStat](../stats/stats-player-match.md) object.
+:::
+
 <Tabs>
     <TabItem value="query" label="Query" default>
     ```graphql showLineNumbers title="Query: Live rating" 
@@ -124,7 +131,100 @@ Once the game concludes, this value represents the player's **Final Rating**. Pl
     </TabItem>
 </Tabs>
 
+### Rating (all data) with bonuses
+:::info[no-icon]
+The following query is an example of how to retrieve all the rating values including all information about bonuses. The query is valid for both `IN_MATCH` (live data) and `AFTER_MATCH` (final data) phases.
+:::
+:::tip[no-icon]
+Please note that the base rating value is also available via the `RATING_PLAYER` metric and uncapped value via `RATING_PLAYER_RAW` metric in the [PlayerMatchStat](../stats/stats-player-match.md) object.
+:::
+<Tabs>
+    <TabItem value="query1" label="Query" default>
+    ```graphql showLineNumbers title="Query: Live rating with bonuses" 
+    query Match($matchId: ID!) {
+      match(id: $matchId) {    
+        playerRatings {
+          player {
+            id
+            localizedName {
+              text
+            }
+          }
+          value
+          valueUncapped
+          ratingConfigID
+          createdAt
+          updatedAt
+          bonuses {
+            total
+            entries {
+              type
+              subtype
+              value
+            }
+          }
+        }   
+      }
+    }
+    ```
+    </TabItem>
+    <TabItem value="variables1" label="Variables" default>
+    ```json showLineNumbers title="Variables: ID of desired match"
+    {
+        //Premier League, Arsenal - Tottenham 4:1, 23.11.2025
+        "matchId": "1935259478450778112"
+    }
+    ```
+    </TabItem>
+    <TabItem value="response1" label="Response" default>
+    ```json showLineNumbers title="Response: Live rating  with bonuses"
+    {
+        "player": {
+            "id": "1897697037663862785",
+            "localizedName": {
+              "text": "Saliba William"
+            }
+        },
+        "value": 6.20866,
+        "valueUncapped": 6.20866,
+        "ratingConfigID": "1991831638732181504",
+        "createdAt": "2025-11-23T16:39:34Z",
+        "updatedAt": "2025-11-24T14:21:54Z",
+        "bonuses": {
+            "total": 0.2,
+            "entries": [
+              {
+                "type": "dueling",
+                "subtype": "weak",
+                "value": -0.2
+              },
+              {
+                "type": "finishing_quality_nonpen",
+                "subtype": "neutral",
+                "value": 0
+              },
+              {
+                "type": "open_play_pass_accuracy",
+                "subtype": "very_good",
+                "value": 0.4
+              }
+            ]
+          }
+        }
+    }
+    ```
+    </TabItem>
+</Tabs>
+
 ### Rating history
+:::info[no-icon]
+The following query demonstrates how to retrieve historical rating values. It is valid for both `IN_MATCH` (live data) and `AFTER_MATCH` (final data) phases.
+
+During the `IN_MATCH` phase, it returns data calculated from the match start up to the minute preceding the current one. In the `AFTER_MATCH` phase, it returns rating values for every minute the player spent on the pitch.
+:::
+:::tip[no-icon]
+Each historical value contains the [timeFrame](./../../objects-common/time-frame) object specifying the play time for which the rating was calculated.
+:::
 <Tabs>
     <TabItem value="query2" label="Query" default>
     ```graphql showLineNumbers title="Query: Rating history in a specific match" 

@@ -24,7 +24,7 @@ Player ratings are calculated based on individual [player's match stats](../../o
 ### Rating calculation
 The calculation takes the player's lineup position into account and evaluates their performance based on **how well they fulfill the common tasks associated with that specific role**. 
 
-Additionally, players receive **bonuses or penalties** based on special events. Bonuses are awarded for positive actions, such as scoring a goal or preventing a clear scoring opportunity. Conversely, penalties are applied for negative actions, such as an error leading to a goal or being sent off. See [Bonuses chapter](#bonuses) for more details.
+Additionally, players receive **bonuses or penalties** based on special events. Bonuses are awarded for positive actions, such as scoring a goal or preventing a clear scoring opportunity. Conversely, penalties are applied for negative actions, such as an error leading to a goal or being sent off. See [Bonuses chapter](#bonuses-and-penalties) for more details.
 
 The player rating calculation runs every minute (for players who met the minimal time condition). However, specific events — such as a goal or a red card — [trigger an immediate recalculation](#events-triggering-rating-recalculation). Consequently, ratings for all players are not updated simultaneously, but you receive the most precise rating value in each moment.
 

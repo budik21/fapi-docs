@@ -41,6 +41,11 @@
     overflow-wrap: anywhere;
 }
 
+/* Allow to align the  content of the table cell to the top */
+table td {
+    vertical-align: top;
+}
+
 /* === Search Bar Customization === */
 /* Increase base width */
 .navbar__search-input {

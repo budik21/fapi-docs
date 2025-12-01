@@ -41,12 +41,10 @@ The centerpiece of the rating data is the `value` attribute within the `playerRa
 In this phase, the attribute represents the **Live Rating** (or current rating). It is dynamic and updates in real-time whenever the underlying player statistics used for the calculation change.
 
 #### After the Match (`AFTER_MATCH`)
-Once the game concludes, this value represents the player's **Final Rating**. Please note that even in this phase, the value may still be subject to updates if post-match statistical corrections are applied (e.g., reassigning a shot on target).
+Once the game is finished, this value represents the player's **Final Rating**. Please note that **even in this phase, the value may still be subject to updates** if post-match statistical corrections are applied (e.g., reassigning a shot on target).
 
 ### Bonuses and Penalties
 Bonuses or penalties are applied to the rating calculation based on specific events. These calculations rely on player match statistics, taking the values of one or more metrics into account.
-
-If the calculated result is positive, it is considered a **bonus**; if negative, it is considered a **penalty**. Refer to the table below for details.
 
 #### Bonus type and subtype
  * **Bonus type** (`bonuses.type`) identifies the specific bonus. While it often corresponds to the metric involved, this abstraction allows for bonuses calculated from multiple metrics. The type is a static string acting as a stable ID (guaranteed to remain unchanged once released).
@@ -54,6 +52,8 @@ If the calculated result is positive, it is considered a **bonus**; if negative,
  * **Bonus subtype** (`bonuses.subtype`) represents the "performance level" or tier. This field is populated only for specific bonuses that produce tiered outputs.
 
 For example, a passing bonus might have three tiers based on accuracy (>90%, >93%, or >96%), resulting in subtypes of `good`, `very_good`, or `excellent`. You can display this information to help users better understand the quality of the player's performance.
+
+If the calculated result is positive, it is considered a **bonus**; if negative, it is considered a **penalty**. Refer to the table below for details.
 
 | Bonus Type                 | Bonus Subtype                                                                                                       | Metrics Involved                                          | Output range       |
 |:---------------------------|:--------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------|:-------------------|
@@ -90,7 +90,7 @@ Once a rating is calculated, the rating value and all applicable bonuses are pro
 
 To retrieve the **current rating**, read the attributes directly within the `playerRating` object. See the [query example](#live-and-final-rating) for this approach.
 
-To track the **rating progression** minute-by-minute, read the `playerRating.ratingHistory` object. In addition to the rating and bonus values, this object includes a [timeFrame](../../objects-common/time-frame) object to identify the specific match minute associated with the data. See the [query example](#rating-history) for this approach.
+To track the **player's rating progression** minute-by-minute, read the `playerRating.ratingHistory` object. In addition to the rating and bonus values, this object includes a [timeFrame](../../objects-common/time-frame) object to identify the specific match minute associated with the data. See the [query example](#rating-history) for this approach.
 
 ### Events triggering rating recalculation
 A player's rating is calculated at least once during each minute the player spends on the pitch (the responsible metric is `MATCH_MINUTES_PLAYED_LIVE`). In some cases, the rating is recalculated immediately after an event occurs.

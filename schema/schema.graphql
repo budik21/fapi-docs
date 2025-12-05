@@ -1169,1655 +1169,713 @@ These metrics are primarily player-centric and can be secondarily aggregated acr
 """
 enum PlayerMatchMetric {
   """
-  Default (EN) Name: Assists to goal
-  
-  Default (EN) Description: A player contributes to a goal by making the final pass or play that directly leads to a teammate scoring the goal
-  
-  CZ Name: Asistence
-  
-  CZ Description: Nahrávka na gólovou střelu spoluhráči
+  A player contributes to a goal by making the final pass or play that directly leads to a teammate scoring the goal
   """
   ASSISTS_GOAL
   """
-  Default (EN) Name: Assists to goal (second)
-  
-  Default (EN) Description: A player contributes to a goal by making the pass or play that sets up the teammate who provides the final pass or play directly leading to a goal
-  
-  CZ Name: Druhé asistence
-  
-  CZ Description: Hráč se podílí na vstřeleném gólu tak, že nahraje hráči, který následně nahraje přímo na gól svého týmu
+  A player contributes to a goal by making the pass or play that sets up the teammate who provides the final pass or play directly leading to a goal
   """
   ASSISTS_GOAL_SECOND
   """
-  Default (EN) Name: Assists to shot
-  
-  Default (EN) Description: The total number of times a player successfully passes the ball to a teammate who then takes a shot on goal, regardless of the shot's outcome. This includes all intentional passes leading directly to a shooting opportunity, reflecting the player's contribution to creating scoring chances
-  
-  CZ Name: Asistence na střelu
-  
-  CZ Description: Nahrávka, ze které spoluhráč vystřelil (bez pohledu na to, zda střela šla na bránu nebo ne)
+  The total number of times a player successfully passes the ball to a teammate who then takes a shot on goal, regardless of the shot's outcome.
+  This includes all intentional passes leading directly to a shooting opportunity, reflecting the player's contribution to creating scoring chances
   """
   ASSISTS_SHOT
   """
-  Default (EN) Name: Assists to shot off target
-  
-  Default (EN) Description: A player makes a pass or play that directly results in a teammate taking a shot off the target (shot wide of or over the goal, or hits the goalposrt or crossbar)
-  
-  CZ Name: Asistence na střelu mimo bránu
-  
-  CZ Description: Nahrávka, ze které spoluhráč vystřelil mimo bránu
+  A player makes a pass or play that directly results in a teammate taking a shot off the target (shot wide of or over the goal, or hits the goalposrt or crossbar)
   """
   ASSISTS_SHOT_OFF_TARGET
   """
-  Default (EN) Name: Assists to shot on target
-  
-  Default (EN) Description: A player makes a pass or play that directly results in a teammate taking a shot on target and forcing the goalkeeper to make a save to prevent a opponent to score a goal
-  
-  CZ Name: Asistence na střelu na bránu
-  
-  CZ Description: Nahrávka, ze které spoluhráč vystřelil na bránu
+  A player makes a pass or play that directly results in a teammate taking a shot on target and forcing the goalkeeper to make a save to prevent a opponent to score a goal
   """
   ASSISTS_SHOT_ON_TARGET
   """
-  Default (EN) Name: Openplay assists to shot
-  
-  Default (EN) Description: The total number of passes from open play that directly create a shot attempt by a teammate.
-  
-  CZ Name: Asistence na střelu z otevřené hry
-  
-  CZ Description: Celkový počet přihrávek z otevřené hry, které přímo vytvořily pokus o střelu spoluhráčem
+  The total number of passes from open play that directly create a shot attempt by a teammate.
   """
   ASSISTS_SHOT_OPEN_PLAY
   """
-  Default (EN) Name: Setpiece assists to shot
-  
-  Default (EN) Description: The total number of passes from set pieces that directly create a shot attempt by a teammate.
-  
-  CZ Name: Asistence na střelu ze standardních situací
-  
-  CZ Description: Celkový počet přihrávek ze standardních situací, které přímo vytvořily pokus o střelu spoluhráčem
+  The total number of passes from set pieces that directly create a shot attempt by a teammate.
   """
   ASSISTS_SHOT_SET_PIECE
   """
-  Default (EN) Name: Big chances created
-  
-  Default (EN) Description: The total number of clear scoring opportunities set up by a player for his teammates.
-  
-  CZ Name: Vytvořené velké šance
-  
-  CZ Description: Celkový počet jasných gólových příležitostí, které hráč vytvořil pro své spoluhráče
+  The total number of clear scoring opportunities set up by a player for his teammates.
   """
   BIG_CHANCES_CREATED
   """
-  Default (EN) Name: Big chances missed
-  
-  Default (EN) Description: The total number of clear scoring opportunities that were not converted into goals.
-  
-  CZ Name: Neproměněné velké šance
-  
-  CZ Description: Celkový počet jasných gólových příležitostí, které neskončily vstřeleném gólu
+  The total number of clear scoring opportunities that were not converted into goals.
   """
   BIG_CHANCES_MISSED
   """
-  Default (EN) Name: Big Chances Saved
-  
-  Default (EN) Description: The total number of clear scoring opportunities (big chances) that a goalkeeper successfully prevented from becoming goals through saves.
-  
-  CZ Name: Chycené velké šance
-  
-  CZ Description: Celkový počet jasných gólových příležitostí (velkých šancí), kterým brankář úspěšně zabránil stát se gólem prostřednictvím zákroků.
+  The total number of clear scoring opportunities (big chances) that a goalkeeper successfully prevented from becoming goals through saves.
   """
   BIG_CHANCES_SAVED
   """
-  Default (EN) Name: Big chances scored
-  
-  Default (EN) Description: The total number of clear scoring opportunities that were successfully converted into goals.
-  
-  CZ Name: Využité velké šance
-  
-  CZ Description: Celkový počet jasných gólových příležitostí, ze kterých byl zároveň vstřelený gól
+  The total number of clear scoring opportunities that were successfully converted into goals.
   """
   BIG_CHANCES_SCORED
   """
-  Default (EN) Name: Big chances total
-  
-  Default (EN) Description: The total count of clear scoring opportunities, regardless of whether they were converted into goals or not. These occur in situations where a player can reasonably be expected to score, typically in a one-on-one scenario or from very close range, where the ball has a clear path to the goal, and the shooter faces low to moderate defensive pressure. Penalties are always classified as big chances.
-  
-  CZ Name: Velké šance celkem
-  
-  CZ Description: Celkový počet jasných gólových příležitostí bez ohledu na to, zda skončily gólem nebo ne. Jedná se o situace, kdy je hráč ve velmi výhodné pozici ke skórování, například při situaci jeden na jednoho proti brankáři nebo při zakončení z bezprostřední blízkosti. Každá penalta je vždy považována za velkou šanci.
+  The total count of clear scoring opportunities, regardless of whether they were converted into goals or not.
+  These occur in situations where a player can reasonably be expected to score, typically in a one-on-one scenario or from very close range, where the ball has a clear path to the goal, and the shooter faces low to moderate defensive pressure.
+  Penalties are always classified as big chances.
   """
   BIG_CHANCES_TOTAL
   """
-  Default (EN) Name: Ball Recoveries
-  
-  Default (EN) Description: The total number of times a player regains possession for their team during open play following a switch of possession, typically by collecting a loose ball, intercepting a pass, or picking up a deflection
-  
-  CZ Name: Získané míče
-  
-  CZ Description: Celkový počet případů, kdy hráč znovu získal držení míče pro svůj tým během otevřené hry po výměně držení, typicky sesbíráním volného míče, zachycením přihrávky nebo sebrání odraženého míče
+  The total number of times a player regains possession for their team during open play following a switch of possession, typically by collecting a loose ball, intercepting a pass, or picking up a deflection
   """
   BALL_RECOVERIES
   """
-  Default (EN) Name: Blocked shots
-  
-  Default (EN) Description: The total number of shot attempts by opponents that a player has blocked before they could reach the goal. This is a defensive metric
-  
-  CZ Name: Zablokované střely
-  
-  CZ Description: Celkový počet situací, kdy hráč svou akcí zabránil soupeřově střele, aby ohrozila bránu jeho vlastního týmu. Jedná se o defenzivní statistiku
+  The total number of shot attempts by opponents that a player has blocked before they could reach the goal.
+  This is a defensive metric
   """
   BLOCKED_SHOTS
   """
-  Default (EN) Name: Red cards
-  
-  Default (EN) Description: A player is sent-off the play, he receives a disciplinary penalty (red card) from the referee for serious misconduct, violent conduct, denying an obvious goal-scoring opportunity, or accumulating two cautionary penalties (yellow cards) in the same match
-  
-  CZ Name: Červené karty
-  
-  CZ Description: Celkový počea situací, kdy byl hráč vyloučený ze hry za vážné porušení pravidel hry nebo byl napomenut druhou žlutou kartou
+  A player is sent-off the play, he receives a disciplinary penalty (red card) from the referee for serious misconduct, violent conduct, denying an obvious goal-scoring opportunity, or accumulating two cautionary penalties (yellow cards) in the same match
   """
   CARDS_RED
   """
-  Default (EN) Name: Yellow cards
-  
-  Default (EN) Description: The count of times a player receives a cautionary penalty (yellow card) from the referee for unsporting behavior, repeated infringements, delaying the restart of play, or other minor offenses.
-  
-  CZ Name: Žluté karty
-  
-  CZ Description: Celkový počet situací, kdy byl hráč napomenutý rozhodčím za nesportovní chování nebo jiné porušení pravidel hry
+  The count of times a player receives a cautionary penalty (yellow card) from the referee for unsporting behavior, repeated infringements, delaying the restart of play, or other minor offenses.
   """
   CARDS_YELLOW
   """
-  Default (EN) Name: Progressive carries
-  
-  Default (EN) Description: The total number of times a player receives the ball and carries (drives) it forward towards the opposition's goal before making a pass, taking a shot, or losing possession. A carry must result in the ball being moved at least 5 meters closer to the opposition's goal to be counted as progressive.
-  
-  CZ Name: Progresivní vedení míče
-  
-  CZ Description: Celkový počet situací, kdy hráč obdrží míč a vede (pohání) ho dopředu směrem k bráně soupeře, než provede přihrávku, střelu nebo ztratí držení míče. Pro vedení míče, aby bylo považováno za progresivní, musí dojít k posunu míče alespoň o 5 metrů blíže k bráně soupeře.
+  The total number of times a player receives the ball and carries (drives) it forward towards the opposition's goal before making a pass, taking a shot, or losing possession.
+  A carry must result in the ball being moved at least 5 meters closer to the opposition's goal to be counted as progressive.
   """
   CARRIES_PROGRESSIVE
   """
-  Default (EN) Name: Total carries
-  
-  Default (EN) Description: The total number of times where a player receives the ball and carries (drives) it in any direction before making a pass, taking a shot, or losing possession. The difference from Dribbles is that this metric focuses on the movement with the ball without actively attempting to take on and go past an opponent.
-  
-  CZ Name: Celkový počet vedení míče
-  
-  CZ Description: Celkový počet situací, kdy hráč obdrží míč a vede (pohání) ho v libovolném směru, než provede přihrávku, střelu nebo ztratí držení míče. Rozdíl oproti Driblinku spočívá v tom, že tato metrika se zaměřuje na pohyb s míčem bez aktivního pokusu o překonání a přejetí soupeře.
+  The total number of times where a player receives the ball and carries (drives) it in any direction before making a pass, taking a shot, or losing possession.
+  The difference from Dribbles is that this metric focuses on the movement with the ball without actively attempting to take on and go past an opponent.
   """
   CARRIES_TOTAL
   """
-  Default (EN) Name: Challenges Lost
-  
-  Default (EN) Description: The total number of defensive challenges or contests where a player fails to win possession or prevent the opponent from advancing.
-  
-  CZ Name: Prohrané výzvy
-  
-  CZ Description: Celkový počet obranných výzev nebo soubojů, kdy hráč nezískal míč nebo nezabránil soupeři v postupu.
+  The total number of defensive challenges or contests where a player fails to win possession or prevent the opponent from advancing.
   """
   CHALLENGE_LOST
   """
-  Default (EN) Name: Clean sheets
-  
-  Default (EN) Description: A player (not only a goalkeeper) achieves a clean sheet by preventing the opposing team from scoring any goals throughout the match. A player will be awarded a clean sheet only if he plays the full 90 minutes in a match
-  
-  CZ Name: Čistá konta
-  
-  CZ Description: Hráč zapíše čisté konto tenhdy, pokud v řádné hrací době neondrží jeho tým gól. Statistika je počítaná pro všechny hráče, nejenom pro brankáře. Aby bylo čisté konto hráči započteno, musí odehrát celé utkání
+  A player (not only a goalkeeper) achieves a clean sheet by preventing the opposing team from scoring any goals throughout the match.
+  A player will be awarded a clean sheet only if he plays the full 90 minutes in a match
   """
   CLEAN_SHEETS
   """
-  Default (EN) Name: High Claim Efficiency
-  
-  Default (EN) Description: The percentage of successful high claims made by a goalkeeper in relation to the total number of high claim attempts. A higher value indicates greater effectiveness in dealing with aerial deliveries.
-  
-  CZ Name: Úspěšnost vysokých chytání
-  
-  CZ Description: Procentuální úspěšnost vysokých chytání hráče, vypočtená jako podíl úspěšných chytání k celkovému počtu pokusů o chytání
+  The percentage of successful high claims made by a goalkeeper in relation to the total number of high claim attempts.
+  A higher value indicates greater effectiveness in dealing with aerial deliveries.
   """
   CLAIM_HIGH_EFFICIENCY
   """
-  Default (EN) Name: High Claim Saved
-  
-  Default (EN) Description: The total number of times a goalkeeper successfully catches or takes control of a high ball delivered into the penalty area, preventing the opponent from retaining possession.
-  
-  CZ Name: Úspěšná vysoká chytání
-  
-  CZ Description: Počet úspěšných vysokých chytání hráče při chytání míče ve vzduchu
+  The total number of times a goalkeeper successfully catches or takes control of a high ball delivered into the penalty area, preventing the opponent from retaining possession.
   """
   CLAIM_HIGH_SAVED
   """
-  Default (EN) Name: High Claim Total
-  
-  Default (EN) Description: The total number of times a goalkeeper attempts to catch or take control of a high ball delivered into the penalty area, typically from crosses, corners, or set pieces, regardless of whether the attempt is successful.
-  
-  CZ Name: Celkový počet vysokých chytání
-  
-  CZ Description: Celkový počet pokusů hráče o chytání míče ve vysokých vzdušných situacích
+  The total number of times a goalkeeper attempts to catch or take control of a high ball delivered into the penalty area, typically from crosses, corners, or set pieces, regardless of whether the attempt is successful.
   """
   CLAIM_HIGH_TOTAL
   """
-  Default (EN) Name: Clearances
-  
-  Default (EN) Description: A player kicks the ball away from the defensive area to avoid danger, often moving it upfield or out of play
-  
-  CZ Name: Odvrácené míče
-  
-  CZ Description: Hráč odehrál míč v obranném prostoru, aby zabránil ohrožení vlastní brány směrem dopředu nebo do zámezí
+  A player kicks the ball away from the defensive area to avoid danger, often moving it upfield or out of play
   """
   CLEARANCES
   """
-  Default (EN) Name: Clearances off line
-  
-  Default (EN) Description: The number of times a player clears or blocks a shot from crossing the goal line, preventing a certain goal.
-  
-  CZ Name: Odvrácené míče z brankové čáry
-  
-  CZ Description: Celkový počet situací, kdy hrář zabránil gólu soupěře odehráním míče do bezpečí z vlasní brankové čáry
+  The number of times a player clears or blocks a shot from crossing the goal line, preventing a certain goal.
   """
   CLEARANCES_OFF_LINE
   """
-  Default (EN) Name: Crosses Accuracy
-  
-  Default (EN) Description: The percentage of successful crosses (passes from wide areas aimed at a teammate in front of the goal) completed out of the total number of cross attempts. Successful crosses are those received by a teammate and include crosses from corner kicks and set pieces.
-  
-  CZ Name: Úspěšnost centrů
-  
-  CZ Description: Procentní úspěšnost centroů vyjadřující podíl úspěšných centrů k celkovému počtu centrů. Zahrnuje centry z rohových kopů a standardních situací
+  The percentage of successful crosses (passes from wide areas aimed at a teammate in front of the goal) completed out of the total number of cross attempts.
+  Successful crosses are those received by a teammate and include crosses from corner kicks and set pieces.
   """
   CROSSES_ACCURACY
   """
-  Default (EN) Name: Crosses accurate
-  
-  Default (EN) Description: Total number of crosses pass - a pass from the side aimed at a teammate in front of the goal. The ball should move from the wide area towards the center near the goal which were successfuly completed. Includes the crosses from the corner kick and set pieces
-  
-  CZ Name: Úpsěšné centry
-  
-  CZ Description: Celkový počet úspěšných centrů (přihrávek ze strany hřiště na spoluhráče před bránu soupeře). V metrice jsou zahrnuty centry z rohových a přímých kopů
+  Total number of crosses pass - a pass from the side aimed at a teammate in front of the goal.
+  The ball should move from the wide area towards the center near the goal which were successfuly completed.
+  Includes the crosses from the corner kick and set pieces
   """
   CROSSES_ACCURATE
   """
-  Default (EN) Name: Crosses total
-  
-  Default (EN) Description: Total number of crosses pass - a pass from the side aimed at a teammate in front of the goal. The ball should move from the wide area towards the center near the goal. Includes the crosses from the corner kick and set pieces
-  
-  CZ Name: Centry celkem
-  
-  CZ Description: Celkový počet centrů (přihrávek ze strany hřiště na spoluhráče před bránu soupeře). V metrice jsou zahrnuty centry z rohových a přímých kopů
+  Total number of crosses pass - a pass from the side aimed at a teammate in front of the goal.
+  The ball should move from the wide area towards the center near the goal.
+  Includes the crosses from the corner kick and set pieces
   """
   CROSSES_TOTAL
   """
-  Default (EN) Name: Dribbles efficiency
-  
-  Default (EN) Description: The percentage of successful dribbles in relation to the total number of dribble attempts. A higher efficiency indicates a player's effectiveness in retaining possession after attempting to dribble past an opponent.
-  
-  CZ Name: Úspěšnost driblinků
-  
-  CZ Description: Úspěšnost driblinků vyjadřuje podíl situací, kdy hráč pomocí kličky přešel přes bránícíhio hráče vůči všem takovým situacím, kterých se hráč zúčastnil. Vyšší úspěšnost driblinku indiikuje vyšší ofenzivní schopnost hráče přejít přes bránícího hráče
+  The percentage of successful dribbles in relation to the total number of dribble attempts.
+  A higher efficiency indicates a player's effectiveness in retaining possession after attempting to dribble past an opponent.
   """
   DRIBBLES_EFFICIENCY
   """
-  Default (EN) Name: Dribbles lost
-  
-  Default (EN) Description: The total number of times a player attempts to dribble past an opponent but fails to do so, either by losing possession of the ball, being tackled by the opponent, or pushing the ball too far to retain control.
-  
-  CZ Name: Neúspěšné driblinky
-  
-  CZ Description: Celkový počet neúspěšných průniků hráče přes bránícího protihráče pomocí kličky, ať už při kličce opustil míč hřiště nebo hráč ztratil nad míčem kontrolu.
+  The total number of times a player attempts to dribble past an opponent but fails to do so, either by losing possession of the ball, being tackled by the opponent, or pushing the ball too far to retain control.
   """
   DRIBBLES_LOST
-  """
-  Default (EN) Name: Dribbles total
-  
-  Default (EN) Description: The total number of times a player try to dribble past an opponent
-  
-  CZ Name: Driblinky celkem
-  
-  CZ Description: Celkový počet pokusů útočníka o překonání obránce pomocí kličky.
-  """
+  """The total number of times a player try to dribble past an opponent"""
   DRIBBLES_TOTAL
   """
-  Default (EN) Name: Dribbles won
-  
-  Default (EN) Description: The total number of times a player successfully dribbles past an opponent and retains possession of the ball. If the player pushes the ball too far and loses possession, the action is not counted as a successful dribble but is instead classified as an overrun.
-  
-  CZ Name: Úspěšné driblinky
-  
-  CZ Description: Celkový počet úspěšných průniků hráče přes bránícího pomocí kličky. Pronikající hráč musí udržet držení míče pro svůj tým. Za úspěšnou kličku se nepočítá obejití protihráče, přičemž míč skončí v zámezí.
+  The total number of times a player successfully dribbles past an opponent and retains possession of the ball.
+  If the player pushes the ball too far and loses possession, the action is not counted as a successful dribble but is instead classified as an overrun.
   """
   DRIBBLES_WON
   """
-  Default (EN) Name: Aerial duels efficiency
-  
-  Default (EN) Description: The percentage of aerial duels won by a player in relation to the total number of aerial duels contested. A higher efficiency indicates greater effectiveness in winning aerial challenges.
-  
-  CZ Name: Úspěšnost vzdušných soubojů
-  
-  CZ Description: Úspěšnost vzdušných soubojů vyjadřuje podíl hlavičkových soubojů s proltihráčem, které hráč vyhrál vůči všem takovým soubojům, kterých se hráč zúčastnil. Vyšší úspěšnost vzdušných soubojů indikuje vyšší schopnosts hráče vyhrát souboj o míč s protihráčem ve vzduchu
+  The percentage of aerial duels won by a player in relation to the total number of aerial duels contested.
+  A higher efficiency indicates greater effectiveness in winning aerial challenges.
   """
   DUELS_AERIAL_EFFICIENCY
   """
-  Default (EN) Name: Aerial Duels Lost
-  
-  Default (EN) Description: The total number of times a player fails to win the ball during an aerial duel against an opponent.
-  
-  CZ Name: Prohrané hlavičkové souboje
-  
-  CZ Description: Celkový počet prohraných hlavičklových soubojů
+  The total number of times a player fails to win the ball during an aerial duel against an opponent.
   """
   DUELS_AERIAL_LOST
   """
-  Default (EN) Name: Aerial Duels Total
-  
-  Default (EN) Description: The total number of times a player contests an aerial duel to win the ball, regardless of the outcome.
-  
-  CZ Name: Hlavičkové souboje celkem
-  
-  CZ Description: Celkový počet hlavičkových soubojů.
+  The total number of times a player contests an aerial duel to win the ball, regardless of the outcome.
   """
   DUELS_AERIAL_TOTAL
   """
-  Default (EN) Name: Aerial Duels Won
-  
-  Default (EN) Description: The total number of times a player successfully wins the ball during an aerial duel against an opponent.
-  
-  CZ Name: Vyhrané hlavičkové souboje
-  
-  CZ Description: Celkový počet vyhraných hlavičkových soubojů
+  The total number of times a player successfully wins the ball during an aerial duel against an opponent.
   """
   DUELS_AERIAL_WON
   """
-  Default (EN) Name: Duels efficiency
-  
-  Default (EN) Description: The percentage of one-on-one duels successfully won by a player in relation to the total number of duels contested, whether on the ground or in the air. A higher efficiency indicates greater effectiveness in winning individual battles.
-  
-  CZ Name: Úspěšnost soubojů
-  
-  CZ Description: Úspěšnost soubojů vyjadřuje podíl soubojů o míč s proltihráčem, které hráč vyhrál vůči všem takovým soubojům, kterých se hráč zúčastnil. Vyšší úspěšnost soubojů indikuje vyšší schopnosts hráče vyhrát souboj o míč s protihráčem
+  The percentage of one-on-one duels successfully won by a player in relation to the total number of duels contested, whether on the ground or in the air.
+  A higher efficiency indicates greater effectiveness in winning individual battles.
   """
   DUELS_EFFICIENCY
   """
-  Default (EN) Name: Ground duels efficiency
-  
-  Default (EN) Description: The percentage of one-on-one contests on the ground successfully won by a player in relation to the total number of ground duels contested. A higher efficiency indicates greater effectiveness in winning ground challenges.
-  
-  CZ Name: Úspěšnost pozemních soubojů
-  
-  CZ Description: Úspěšnost pozemních soubojů vyjadřuje podíl pozemních soubojů s protihráčem, které hráč vyhrál vůči všem takovým soubojům, kterých se hráč zúčastnil. Vyšší úspěšnost pozemních soubojů indikuje vyšší schopnosts hráče vyhrát souboj o míč s protihráčem na zemi
+  The percentage of one-on-one contests on the ground successfully won by a player in relation to the total number of ground duels contested.
+  A higher efficiency indicates greater effectiveness in winning ground challenges.
   """
   DUELS_GROUND_EFFICIENCY
   """
-  Default (EN) Name: Ground duels lost
-  
-  Default (EN) Description: The total number of one-to-one contests on the ground where a player is unsuccessful against an opponent
-  
-  CZ Name: Prohrané pozemní souboje
-  
-  CZ Description: Celkový počet pozemních soubojů jeden na jednoho, ve kterých bránící hráč neuspěl (soupeř udržel kontrolu nad míčem).
+  The total number of one-to-one contests on the ground where a player is unsuccessful against an opponent
   """
   DUELS_GROUND_LOST
   """
-  Default (EN) Name: Ground duels total
-  
-  Default (EN) Description: The total number of one-to-one contests between a player and an opponent on the ground during. For every duel won, there is a corresponding duel lost, depending on the outcome.
-  
-  CZ Name: Pozemní souboje celkem
-  
-  CZ Description: Celkový počet pozemních soubojů jeden na jednoho. Výsledkem každého pozemního souboje je, že jeden z hráčů získá „vyhraný pozemní souboj“ a druhý „prohraný pozemní souboj“.
+  The total number of one-to-one contests between a player and an opponent on the ground during.
+  For every duel won, there is a corresponding duel lost, depending on the outcome.
   """
   DUELS_GROUND_TOTAL
   """
-  Default (EN) Name: Groud duels won
-  
-  Default (EN) Description: The total number of one-to-one contests on the ground that a player successfully wins against an opponent
-  
-  CZ Name: Vyhrané pozemní souboje
-  
-  CZ Description: Celkový počet pozemních soubojů jeden na jednoho, ve kterých bránící hráč získal pro svůj tým kontrolu nad míčem
+  The total number of one-to-one contests on the ground that a player successfully wins against an opponent
   """
   DUELS_GROUND_WON
   """
-  Default (EN) Name: Duels Lost
-  
-  Default (EN) Description: The total number of times a player is unsuccessful in a one-on-one duel with an opponent, whether on the ground or in the air
-  
-  CZ Name: Prohrané souboje
-  
-  CZ Description: Celkový počet situací, kdy hráč prohraje souboj jeden na jednoho se soupeřem, ať už na zemi nebo ve vzduchu.
+  The total number of times a player is unsuccessful in a one-on-one duel with an opponent, whether on the ground or in the air
   """
   DUELS_LOST
   """
-  Default (EN) Name: Duels Total
-  
-  Default (EN) Description: The total number of times a player engages in a one-on-one duel with an opponent, whether on the ground or in the air. For every duel won, there is a corresponding duel lost, depending on the outcome.
-  
-  CZ Name: Souboje celkem
-  
-  CZ Description: Celkový počet situací, kdy se hráč účastní souboje jeden na jednoho se soupeřem, ať už na zemi nebo ve vzduchu. Výsledkem každého souboje je, že jeden z hráčů získá „vyhraný souboj“ a druhý „prohraný souboj“.
+  The total number of times a player engages in a one-on-one duel with an opponent, whether on the ground or in the air.
+  For every duel won, there is a corresponding duel lost, depending on the outcome.
   """
   DUELS_TOTAL
   """
-  Default (EN) Name: Duels Won
-  
-  Default (EN) Description: The total number of times a player successfully wins a one-on-one duel with an opponent, whether on the ground or in the air.
-  
-  CZ Name: Vyhrané souboje
-  
-  CZ Description: Celkový počet situací, kdy hráč vyhraje souboj jeden na jednoho se soupeřem, ať už na zemi nebo ve vzduchu.
+  The total number of times a player successfully wins a one-on-one duel with an opponent, whether on the ground or in the air.
   """
   DUELS_WON
   """
-  Default (EN) Name: Entries into final third
-  
-  Default (EN) Description: The total number of passes initiated outside of the final third of the pitch that reach the final (attacking) third, from the perspective of the team making the pass
-  
-  CZ Name: Přihrávky do útočné třetiny celkem
-  
-  CZ Description: Celkový počet přihrávek zahájených mimo útočnou třetinu třetinu hřiště, které však v útočné třetině skončily.
+  The total number of passes initiated outside of the final third of the pitch that reach the final (attacking) third, from the perspective of the team making the pass
   """
   ENTRIES_FINAL_THIRD_TOTAL
   """
-  Default (EN) Name: Entries into penalty box
-  
-  Default (EN) Description: The total number of passes initiated from outside the opponent's penalty area that move the ball into the penalty area, from the perspective of the team making the pass
-  
-  CZ Name: Úpsěšné přihrávky do útočné třetiny
-  
-  CZ Description: Celkový počet přihrávek zahájených mimo pokutové území soupeře, které však v pokutovém území soupěře skončily
+  The total number of passes initiated from outside the opponent's penalty area that move the ball into the penalty area, from the perspective of the team making the pass
   """
   ENTRIES_PENALTY_BOX_TOTAL
   """
-  Default (EN) Name: Errors leading to goal
-  
-  Default (EN) Description: A player's mistake usually during the open play allows the opposing team to score a goal
-  
-  CZ Name: Chyby vedoucí ke gólu
-  
-  CZ Description: Chyba hráče během nepřerušené hry, kterou hráči soupeřova týmu využili ke vstřelení gólu
+  A player's mistake usually during the open play allows the opposing team to score a goal
   """
   ERRORS_LEAD_TO_GOAL
   """
-  Default (EN) Name: Errors leading to shot
-  
-  Default (EN) Description: A player's mistake usually during the open play allows the opposing team to take a shot no matter if the shot was on or off the target
-  
-  CZ Name: Chyby vedoucí ke střele
-  
-  CZ Description: Chyba hráče během nepřerušené hry, kterou hráči soupeřova týmu využili k provedení střely, bez ohledu na to, zda střela šla na bránu nebo ne
+  A player's mistake usually during the open play allows the opposing team to take a shot no matter if the shot was on or off the target
   """
   ERRORS_LEAD_TO_SHOT
   """
-  Default (EN) Name: Expected Assist (xA)
-  
-  Default (EN) Description: Expected Assist (xA) represents the likelihood that a pass will lead to an assist for a goal. It evaluates the quality of a pass based on factors such as its placement, trajectory, and the context of the attacking play, as well as the probability that the resulting shot will be converted into a goal.
-  
-  CZ Name: Očekávané asistence (xA)
-  
-  CZ Description: Očekávané asistence (xA) vyjadřují s jakou pravděpodobností se konkrétní přihrávka stane přihrávkou na gól. Vyjadřuje kvalitu nahrávky na základě faktorů jako je umístění nahrávky, trajektorie a kontextu útočné akce. Dále zohledňuje pravděpodobnost, že následná střela skončí gólem.
+  Expected Assist (xA) represents the likelihood that a pass will lead to an assist for a goal.
+  It evaluates the quality of a pass based on factors such as its placement, trajectory, and the context of the attacking play, as well as the probability that the resulting shot will be converted into a goal.
   """
   EXPECTED_ASSISTS
   """
-  Default (EN) Name: xG
-  
-  Default (EN) Description: Expected Goals (xG) represents how likely a specific shot is to result in a goal. The value is calculated based on various factors such as the shooter’s position, distance from the goal, shot angle, and other pre-shot attributes.
-  
-  CZ Name: Očekávané góly (xG)
-  
-  CZ Description: Očekávané góly (xG) vyjadřují s jakou pravděpodobností skončí konkrétní střela gólem. Hodnota je spočtena na základě různých faktorů známých v okamžiku provedení střely jako je pozice střelce, vzdálenost od brány, úhel a další.
+  Expected Goals (xG) represents how likely a specific shot is to result in a goal.
+  The value is calculated based on various factors such as the shooter’s position, distance from the goal, shot angle, and other pre-shot attributes.
   """
   EXPECTED_GOALS
   """
-  Default (EN) Name: xGOT
-  
-  Default (EN) Description: Expected Goals On Target (xGOT) reflects the quality of a shot after it has been taken, considering placement of the shot to evaluate its effectiveness. From the goalkeeper's perspective, it represents how difficult it is to prevent the shot from resulting in a goal.
-  
-  CZ Name: Míra ohrožení brankáře (xGOT)
-  
-  CZ Description: Míra ohrožení brány vyjadřuje, jaký má střela potenciál skončit gólem na základě faktorů jako je kvalita šance (xG) a umístění střely. Z pohledu brankáře popisuje, jak náročné je zabránit tomu, aby tato střela skončila gólem.
+  Expected Goals On Target (xGOT) reflects the quality of a shot after it has been taken, considering placement of the shot to evaluate its effectiveness.
+  From the goalkeeper's perspective, it represents how difficult it is to prevent the shot from resulting in a goal.
   """
   EXPECTED_GOALS_ON_TARGET
   """
-  Default (EN) Name: xGOT Faced
-  
-  Default (EN) Description: xGOT faced reflects (from the goalkeeper's perpective) how difficult it is to prevent shots on target from resulting in goals. It considers the xG of given shot and also taking into account placement of the shot to evaluate their likelihood of ending in a goal.
-  
-  CZ Name: Náročnost zákroku (xGOT proti)
-  
-  CZ Description: Náročnost zákroku vyjadřuje, jak obtížné je z pohledu brankáře zabránit střelám na branku, aby skončily gólem. Zohledňuje Kvalitu šance (xG) a umístění střely.
+  xGOT faced reflects (from the goalkeeper's perpective) how difficult it is to prevent shots on target from resulting in goals.
+  It considers the xG of given shot and also taking into account placement of the shot to evaluate their likelihood of ending in a goal.
   """
   EXPECTED_GOALS_ON_TARGET_FACED
   """
-  Default (EN) Name: Expected Goals (No Penalties)
-  
-  Default (EN) Description: Expected Goals (xG) excluding penalty kicks, representing the likelihood of shots resulting in goals based on various factors such as position, distance, and angle, but without considering penalties.
-  
-  CZ Name: Očekávané góly (bez penalt)
-  
-  CZ Description: Očekávané góly (xG) bez započtení pokutových kopů, vyjadřující pravděpodobnost, že střely skončí gólem na základě různých faktorů jako je pozice, vzdálenost a úhel, ale bez uvažování penalt.
+  Expected Goals (xG) excluding penalty kicks, representing the likelihood of shots resulting in goals based on various factors such as position, distance, and angle, but without considering penalties.
   """
   EXPECTED_GOALS_NO_PENALTIES
   """
-  Default (EN) Name: Expected Goals Faced
-  
-  Default (EN) Description: The total xG value of all shots faced by a goalkeeper, representing the cumulative goal-scoring threat posed by opponents.
-  
-  CZ Name: Očekávané góly proti
-  
-  CZ Description: Celková hodnota xG všech střel, kterým brankář čelil, představující kumulovanou hrozbu vstřelení gólu ze strany soupeře.
+  The total xG value of all shots faced by a goalkeeper, representing the cumulative goal-scoring threat posed by opponents.
   """
   EXPECTED_GOALS_FACED
   """
-  Default (EN) Name: Expected Goals (No Penalties) Faced
-  
-  Default (EN) Description: The total xG value of all shots faced by a goalkeeper excluding penalties, representing the cumulative goal-scoring threat from open play and set pieces.
-  
-  CZ Name: Očekávané góly proti (bez penalt)
-  
-  CZ Description: Celková hodnota xG všech střel, kterým brankář čelil s výjimkou penalt, představující kumulovanou hrozbu vstřelení gólu z otevřené hry a standardních situací.
+  The total xG value of all shots faced by a goalkeeper excluding penalties, representing the cumulative goal-scoring threat from open play and set pieces.
   """
   EXPECTED_GOALS_NO_PENALTIES_FACED
   """
-  Default (EN) Name: Expected Goals On Target (No Penalties) Faced
-  
-  Default (EN) Description: The total xGOT value of all shots on target faced by a goalkeeper excluding penalties, reflecting the quality and placement of shots the goalkeeper must deal with.
-  
-  CZ Name: Míra ohrožení brankáře (bez penalt)
-  
-  CZ Description: Celková hodnota xGOT všech střel na bránu, kterým brankář čelil s výjimkou penalt, odrážející kvalitu a umístění střel, se kterými se musel brankář vypořádat.
+  The total xGOT value of all shots on target faced by a goalkeeper excluding penalties, reflecting the quality and placement of shots the goalkeeper must deal with.
   """
   EXPECTED_GOALS_ON_TARGET_NO_PENALTIES_FACED
   """
-  Default (EN) Name: Expected Goals On Target (No Penalties)
-  
-  Default (EN) Description: Expected Goals On Target (xGOT) excluding penalty kicks, reflecting the quality of shots after execution based on placement and other factors, without considering penalties.
-  
-  CZ Name: Míra ohrožení brány (bez penalt)
-  
-  CZ Description: Míra ohrožení brány (xGOT) bez započtení pokutových kopů, odrážející kvalitu střel po jejich provedení na základě umístění a dalších faktorů, bez uvažování penalt.
+  Expected Goals On Target (xGOT) excluding penalty kicks, reflecting the quality of shots after execution based on placement and other factors, without considering penalties.
   """
   EXPECTED_GOALS_ON_TARGET_NO_PENALTIES
   """
-  Default (EN) Name: Quality of finishing
-  
-  Default (EN) Description: Finishing quality measures how effectively a player converts a given chance into a goal threat. Each chance is assigned a quality value based on the expected goals (xG) metric. However, not all shots on target pose the same level of threat to the goalkeeper. The expected goals on target (xGOT) account for the shot's placement and execution, reflecting its true difficulty for the goalkeeper. The greater the difference between xGOT and xG, the higher the quality of the player's finishing. Conversely, if the shot generates less threat than the original chance quality, it indicates a poorly executed finish.
-  
-  CZ Name: Kvalita zakončení
-  
-  CZ Description: Kvalita zakončení vyjadřuje, jak efektivně dokázal hráč využít nabídnutou šanci k ohrožení brány. Každá šance má přiřazenou svoji kvalitu (metrika 'xG'). Následná střela na bránu představuje pro brankáře různou úroveň ohrožení (metrika 'xGOT'). Čím vyšší je rozdíl mezi mírou ohrožení brankáře (xGOT) a kvalitou šance (xG), tím vyšší kvalitu mělo zakončení. Naopak, pokud bude míra ohrožení menší než kvalita šance, hráč předvedl nekvalitní zakončení.
+  Finishing quality measures how effectively a player converts a given chance into a goal threat.
+  Each chance is assigned a quality value based on the expected goals (xG) metric.
+  However, not all shots on target pose the same level of threat to the goalkeeper.
+  The expected goals on target (xGOT) account for the shot's placement and execution, reflecting its true difficulty for the goalkeeper.
+  The greater the difference between xGOT and xG, the higher the quality of the player's finishing.
+  Conversely, if the shot generates less threat than the original chance quality, it indicates a poorly executed finish.
   """
   FINISHING_QUALITY
   """
-  Default (EN) Name: Finishing Quality (No Penalties)
-  
-  Default (EN) Description: Finishing quality excluding penalties, measuring how effectively a player converts chances into goal threats from open play and set pieces.
-  
-  CZ Name: Kvalita zakončení (bez penalt)
-  
-  CZ Description: Kvalita zakončení bez započtení penalt, měřící jak efektivně hráč proměňuje šance v ohrožení brány z otevřené hry a standardních situací.
+  Finishing quality excluding penalties, measuring how effectively a player converts chances into goal threats from open play and set pieces.
   """
   FINISHING_QUALITY_NO_PENALTIES
   """
-  Default (EN) Name: Foul committed
-  
-  Default (EN) Description: A player breaks the rules, usually through illegal contact with an opponent (a foul) or by playing the ball with their hand.
-  
-  CZ Name: Provedené fauly
-  
-  CZ Description: Hráč porušil pravidla, obvykle nepovoleným kontaktem s protihráčem nebo zahrál míč rukou
+  A player breaks the rules, usually through illegal contact with an opponent (a foul) or by playing the ball with their hand.
   """
   FOULS_COMMITTED
-  """
-  Default (EN) Name: Foul suffered
-  
-  Default (EN) Description: A player is fouled by an opponent, usually through illegal contact
-  
-  CZ Name: Získané faul
-  
-  CZ Description: Hráč byl nedovoleně atakován protihráčem
-  """
+  """A player is fouled by an opponent, usually through illegal contact"""
   FOULS_SUFFERED
   """
-  Default (EN) Name: Goals
-  
-  Default (EN) Description: A player scores by getting the ball into the opposing team's goal and changing the match score, no matter if it was from open play, a penalty kick, a direct free kick, or any other situation.
-  
-  CZ Name: Góly
-  
-  CZ Description: Hráč dopravil regulérním způsobem míč do brány soupeře, což vedlo ke změně skóre zápasu, bez rozlišení toho, zda bylo gólu dosaženo z nepřerušené hry, pokutového kopu, volného přímého kopu nebo jiné situace
+  A player scores by getting the ball into the opposing team's goal and changing the match score, no matter if it was from open play, a penalty kick, a direct free kick, or any other situation.
   """
   GOALS
   """
-  Default (EN) Name: Goals scored inside the box
-  
-  Default (EN) Description: A player scores by shooting the ball into the opposing team's goal from inside the penalty box, changing the match score.
-  
-  CZ Name: Góly ze střel uvnitř vápna
-  
-  CZ Description: Hráč dopravil regulérním způsobem míč do brány soupeře střelou provedenou uvnitř pokutového území a změnil skóre utkání
+  A player scores by shooting the ball into the opposing team's goal from inside the penalty box, changing the match score.
   """
   GOALS_BOX_IN
   """
-  Default (EN) Name: Goals scored outside the box
-  
-  Default (EN) Description: A player scores by shooting the ball into the opposing team's goal from outside the penalty box, changing the match score.
-  
-  CZ Name: Góly ze střel mimo vápno
-  
-  CZ Description: Hráč dopravil regulérním způsobem míč do brány soupeře střelou provedenou mimo pokutové území a změnil skóre utkání
+  A player scores by shooting the ball into the opposing team's goal from outside the penalty box, changing the match score.
   """
   GOALS_BOX_OUT
   """
-  Default (EN) Name: Goals conceded
-  
-  Default (EN) Description: The total number of goals a team allows the opposing team to score during a match, including both goals scored by the opposing team and own goals
-  
-  CZ Name: Obdržené góly
-  
-  CZ Description: Celkový počet gólů, které tým obdržel během zápasu. Započteny jsou jak góly soupeře, tak vlastní góly
+  The total number of goals a team allows the opposing team to score during a match, including both goals scored by the opposing team and own goals
   """
   GOALS_CONCEDED
   """
-  Default (EN) Name: Goals conceded from penalty
-  
-  Default (EN) Description: The total number of goals a team concedes from penalty kicks during a match.
-  
-  CZ Name: Obdržené góly z penalt
-  
-  CZ Description: Celkový počet gólů, které tým obdržel během zápasu z pokutovýh kopů soupeře
+  The total number of goals a team concedes from penalty kicks during a match.
   """
   GOALS_CONCEDED_PENALTY
-  """
-  Default (EN) Name: Goals from free kick
-  
-  Default (EN) Description: A player scores directly from a free kick and changing the match score
-  
-  CZ Name: Góly z přímých kopů
-  
-  CZ Description: Hráč dopravil regulérním způsobem míč do brány soupeře z volného přímého kopu a změnil skóre utkání
-  """
+  """A player scores directly from a free kick and changing the match score"""
   GOALS_FREE_KICK
   """
-  Default (EN) Name: Goals scored with head
-  
-  Default (EN) Description: A player scores by heading the ball into the opposing team's goal,changing the match score.
-  
-  CZ Name: Góly hlavou
-  
-  CZ Description: Hráč dopravil regulérním způsobem míč do brány soupeře střelou hlavou a změnil skóre utkání
+  A player scores by heading the ball into the opposing team's goal,changing the match score.
   """
   GOALS_HEAD
   """
-  Default (EN) Name: Goals (No Penalties)
-  
-  Default (EN) Description: The total number of goals scored by a player excluding penalty kicks, reflecting their scoring ability from open play and set pieces.
-  
-  CZ Name: Góly (bez penalt)
-  
-  CZ Description: Celkový počet gólů vstřelených hráčem bez započtení pokutových kopů, odrážející jeho střeleckou schopnost z otevřené hry a standardních situací.
+  The total number of goals scored by a player excluding penalty kicks, reflecting their scoring ability from open play and set pieces.
   """
   GOALS_NO_PENALTIES
   """
-  Default (EN) Name: Goals scored from open play
-  
-  Default (EN) Description: A player scores by shooting the ball into the opposing team's goal during the regular flow of the game, changing the match score.
-  
-  CZ Name: Góly ze hry
-  
-  CZ Description: Hráč dopravil regulérním způsobem míč do brány soupeře během nepřerušené hry a změnil skóre utkání
+  A player scores by shooting the ball into the opposing team's goal during the regular flow of the game, changing the match score.
   """
   GOALS_OPEN_PLAY
   """
-  Default (EN) Name: Own goals
-  
-  Default (EN) Description: A player accidentally scores by getting the ball into their own team's goal, usually due to a mistake during open play, changing the match score and adding a goal to the opponent's team.
-  
-  CZ Name: Vlastní góly
-  
-  CZ Description: Hráč zahrál míč tak, že skončil v jeho vlastní bráně a změnil tak skóre zápasu v neprospěch svého týmu
+  A player accidentally scores by getting the ball into their own team's goal, usually due to a mistake during open play, changing the match score and adding a goal to the opponent's team.
   """
   GOALS_OWN
   """
-  Default (EN) Name: Goals from penalty kick
-  
-  Default (EN) Description: A player scores by getting the ball into the opposing team's goal directly from the penalty kick
-  
-  CZ Name: Góly z penalt
-  
-  CZ Description: Hráč dopravil regulérním způsobem míč do brány soupeře z pokutového kopu a změnil skóre utkání
+  A player scores by getting the ball into the opposing team's goal directly from the penalty kick
   """
   GOALS_PENALTY
   """
-  Default (EN) Name: Goals Prevented
-  
-  Default (EN) Description: The difference between xGOT faced and actual goals conceded (excluding own goals), reflecting the goalkeeper's effectiveness in stopping high-quality shots on target. A negative value indicates the goalkeeper is maybe conceding easy goals, while a positive value shows they are preventing goals from high-quality shots.
-  
-  CZ Name: Zabráněné góly
-  
-  CZ Description: Určuje rozdíl mezi počtem gólů, které měl brankář dostat podle statistického výpočtu (Náročnost zákroku), a skutečně obdrženými góly (s výjimkou vlastních gólů). Vyjadřuje tak efektivitu brankáře při zákrocích. Záporná hodnota může znamenat, že brankář dostává góly ze snadno chytatelných střel, zatímco kladná hodnota naznačuje, že dokázal zabránit gólu u střel s vysokou kvalitou zakončení.
+  The difference between xGOT faced and actual goals conceded (excluding own goals), reflecting the goalkeeper's effectiveness in stopping high-quality shots on target.
+  A negative value indicates the goalkeeper is maybe conceding easy goals, while a positive value shows they are preventing goals from high-quality shots.
   """
   GOALS_PREVENTED
   """
-  Default (EN) Name: Goals Prevented (No Penalties)
-  
-  Default (EN) Description: The difference between xGOT faced (excluding penalties) and actual goals conceded (excluding own goals and penalties), reflecting the goalkeeper's effectiveness in stopping high-quality shots from open play and set pieces.
-  
-  CZ Name: Zabráněné góly (bez penalt)
-  
-  CZ Description: Rozdíl mezi xGOT proti (bez penalt) a skutečně obdrženými góly (bez vlastních gólů a penalt), odrážející efektivitu brankáře při zastavování kvalitních střel z otevřené hry a standardních situací.
+  The difference between xGOT faced (excluding penalties) and actual goals conceded (excluding own goals and penalties), reflecting the goalkeeper's effectiveness in stopping high-quality shots from open play and set pieces.
   """
   GOALS_PREVENTED_NO_PENALTIES
   """
-  Default (EN) Name: Goals scored from set piece
-  
-  Default (EN) Description: A player scores by shooting the ball into the opposing team's goal from a set-piece situation (such as a penalty, free kick, or corner), changing the match score.
-  
-  CZ Name: Góly ze standardních situací
-  
-  CZ Description: Hráč dopravil regulérním způsobem míč do brány soupeře ze standardní situace (z pokutového kopu, volného přímého nebo rohového kopu) a změnil skóre utkání
+  A player scores by shooting the ball into the opposing team's goal from a set-piece situation (such as a penalty, free kick, or corner), changing the match score.
   """
   GOALS_SET_PIECE
   """
-  Default (EN) Name: Goals scored from set piece directly
-  
-  Default (EN) Description: A player scores by shooting the ball into the opposing team's goal directly from a set-piece situation (such as a penalty, free kick, or corner), changing the match score.
-  
-  CZ Name: Góly přímo ze standardních situací
-  
-  CZ Description: Hráč vstřelí gól přímou střelou ze standardní situace (např. z pokutového kopu, volného kopu nebo rohového kopu) do brány soupeře, čímž změní skóre utkání.
+  A player scores by shooting the ball into the opposing team's goal directly from a set-piece situation (such as a penalty, free kick, or corner), changing the match score.
   """
   GOALS_SET_PIECE_DIRECT
   """
-  Default (EN) Name: Winning goals
-  
-  Default (EN) Description: The player scoring the winning goal is the one who scores the goal that ultimately gives their team the lead that they do not relinquish. For example, in a 3-0 victory, it would be the goal that made the score 1-0. In a 5-3 victory, it would be the fourth goal scored by the winning team.
-  
-  CZ Name: Vítězné góly
-  
-  CZ Description: Vítězný gól je ten, který jeho týmu zajistí vedení, které už tým neztratí. Například při vítězství 3:0 by to byl gól, který stanovil skóre na 1:0. Při vítězství 5:3 by to byl čtvrtý gól vstřelený vítězným týmem.
+  The player scoring the winning goal is the one who scores the goal that ultimately gives their team the lead that they do not relinquish.
+  For example, in a 3-0 victory, it would be the goal that made the score 1-0.
+  In a 5-3 victory, it would be the fourth goal scored by the winning team.
   """
   GOALS_WINNING
   """
-  Default (EN) Name: Goal Kicks Accuracy
-  
-  Default (EN) Description: The percentage of successful goal kicks, where the goalkeeper restarts play and the ball reaches a teammate, out of the total number of goal kicks taken.
-  
-  CZ Name: Úspěšnost odkopů od brány
-  
-  CZ Description: Celkový počet situací, kdy hráč provedl zahájení přerušení hry odkopem od vlastní brány, s tím, že po provední odkopu zůstal jeho tým v držení míče
+  The percentage of successful goal kicks, where the goalkeeper restarts play and the ball reaches a teammate, out of the total number of goal kicks taken.
   """
   GOAL_KICKS_ACCURACY
   """
-  Default (EN) Name: Goal Kicks Accurate
-  
-  Default (EN) Description: The total number of times the goalkeeper restarts play with a goal kick that successfully reaches a teammate
-  
-  CZ Name: Přesné odkopy od brány
-  
-  CZ Description: Celkový počet situací, kdy hráč provedl zahájení přerušení hry odkopem od vlastní brány, bez ohledu na to, zda po odkopu zůstal jeho tým v držení míče
+  The total number of times the goalkeeper restarts play with a goal kick that successfully reaches a teammate
   """
   GOAL_KICKS_ACCURATE
   """
-  Default (EN) Name: Goal Kicks Total
-  
-  Default (EN) Description: The total number of times the goalkeeper restarts play with a goal kick, regardless of whether the ball successfully reaches a teammate or not.
-  
-  CZ Name: Odkopy od brány celkem
-  
-  CZ Description: Celkový počet situací, kdy hráč provedl zahájení přerušení hry odkopem od vlastní brány, bez ohledu na to, zda po odkopu zůstal jeho tým v držení míče
+  The total number of times the goalkeeper restarts play with a goal kick, regardless of whether the ball successfully reaches a teammate or not.
   """
   GOAL_KICKS_TOTAL
   """
-  Default (EN) Name: Handballs
-  
-  Default (EN) Description: The total number of times a player illegally handles the ball with their hand or arm, resulting in a free kick or penalty.
-  
-  CZ Name: Ruka
-  
-  CZ Description: Celkový počet situací, kdy hráč nelegálně zahrál míč rukou nebo paží, což vedlo k nařízení volného nebo pokutového kopu.
+  The total number of times a player illegally handles the ball with their hand or arm, resulting in a free kick or penalty.
   """
   HANDBALLS
   """
-  Default (EN) Name: Corners into box Accuracy
-  
-  Default (EN) Description: The percentage of accurate corner kicks into the opponent's penalty area and successfully find a teammate, including both direct deliveries and long passes from a corner.
-  
-  CZ Name: Úspěšnost rohových kopů do vápna
-  
-  CZ Description: Procentuální úspěšnost rohových kopů, které úspěšně dosáhnou pokutového území soupeře a najdou spoluhráče
+  The percentage of accurate corner kicks into the opponent's penalty area and successfully find a teammate, including both direct deliveries and long passes from a corner.
   """
   INTOBOX_CORNERS_ACCURACY
   """
-  Default (EN) Name: Corners into box Accurate
-  
-  Default (EN) Description: The total number of corner kicks that successfully find a teammate in the opponent's penalty area, including both direct deliveries and long passes from a corner.
-  
-  CZ Name: Přesné rohové kopy do vápna
-  
-  CZ Description: Počet přesných rohových kopů, které úspěšně dosáhnou pokutového území soupeře a najdou spoluhráče
+  The total number of corner kicks that successfully find a teammate in the opponent's penalty area, including both direct deliveries and long passes from a corner.
   """
   INTOBOX_CORNERS_ACCURATE
   """
-  Default (EN) Name: Corners into box Total
-  
-  Default (EN) Description: The total number of corner kicks that reach the opponent's penalty area, regardless of whether they successfully find a teammate, including both direct deliveries and long passes from a corner.
-  
-  CZ Name: Celkový počet rohových kopů do vápna
-  
-  CZ Description: Celkový počet rohových kopů zaměřených na pokutové území soupeře
+  The total number of corner kicks that reach the opponent's penalty area, regardless of whether they successfully find a teammate, including both direct deliveries and long passes from a corner.
   """
   INTOBOX_CORNERS_TOTAL
   """
-  Default (EN) Name: Freekicks into box Accuracy
-  
-  Default (EN) Description: The percentage of accurate free kicks into the opponent's penalty area in relation to the total number of free kicks attempted.
-  
-  CZ Name: Úspěšnost přímých kopů do vápna
-  
-  CZ Description: Procentuální úspěšnost přímých kopů, které úspěšně dosáhnou pokutového území soupeře a najdou spoluhráče
+  The percentage of accurate free kicks into the opponent's penalty area in relation to the total number of free kicks attempted.
   """
   INTOBOX_FREEKICKS_ACCURACY
   """
-  Default (EN) Name: Freekicks into box Accurate
-  
-  Default (EN) Description: The total number of balls played directly into the opponent's penalty area from a free kick that successfully find a teammate.
-  
-  CZ Name: Přesné přímé kopy do vápna
-  
-  CZ Description: Počet přesných přímých kopů, které úspěšně dosáhnou pokutového území soupeře a najdou spoluhráče
+  The total number of balls played directly into the opponent's penalty area from a free kick that successfully find a teammate.
   """
   INTOBOX_FREEKICKS_ACCURATE
   """
-  Default (EN) Name: Freekicks into box Total
-  
-  Default (EN) Description: The total number of balls played directly into the opponent's penalty area from a free kick, regardless of whether they successfully find a teammate.
-  
-  CZ Name: Celkový počet přímých kopů do vápna
-  
-  CZ Description: Celkový počet přímých kopů zaměřených na pokutové území soupeře
+  The total number of balls played directly into the opponent's penalty area from a free kick, regardless of whether they successfully find a teammate.
   """
   INTOBOX_FREEKICKS_TOTAL
   """
-  Default (EN) Name: Interceptions box own
-  
-  Default (EN) Description: A defending player stops a pass between opposing players anywhere on the pitch
-  
-  CZ Name: Přerušené přihrávky
-  
-  CZ Description: Hráč přerušil kdekoli na hřišti přihrávku soupeře
+  A defending player stops a pass between opposing players anywhere on the pitch
   """
   INTERCEPTIONS
   """
-  Default (EN) Name: Interceptions in own box
-  
-  Default (EN) Description: A defending player stops a pass between opposing players in the penalty box of their team
-  
-  CZ Name: Přerušené přihrávky soupeře ve vlastním vápně
-  
-  CZ Description: Hráč přerušil přihrávku soupeře ve vlastním pokutovém území
+  A defending player stops a pass between opposing players in the penalty box of their team
   """
   INTERCEPTIONS_BOX_OWN
   """
-  Default (EN) Name: Acting as Sweeper Accuracy
-  
-  Default (EN) Description: The percentage of successful sweeper actions completed by the goalkeeper out of the total number of sweeper action attempts, reflecting their effectiveness in winning the ball and retaining possession.
-  
-  CZ Name: Úspěšnost aktivit mimo vápno
-  
-  CZ Description: Procentní úspěšnost vyběhnutí brankáře nebo jiných aktivit mimo vlastní pokutové území vyjadřující podíl situací, kdy po vyběhnutí a odehrání míče zůstal tým v držení míče ke všem takovým aktivitám
+  The percentage of successful sweeper actions completed by the goalkeeper out of the total number of sweeper action attempts, reflecting their effectiveness in winning the ball and retaining possession.
   """
   KEEPER_SWEEPER_ACCURACY
   """
-  Default (EN) Name: Acting as Sweeper Accurate
-  
-  Default (EN) Description: The total number of successful sweeper actions where the goalkeeper wins the ball and maintains possession for their team.
-  
-  CZ Name: Úspěšná aktivita mimo vápno
-  
-  CZ Description: Celkový počet akcí brankáře, kdy svým vyběhnutím nebo jinou aktivitou mimo vlastní pokutové území zabrání ohrožení vlastní brány a navíc jeho tým po skončení celé akce zůstal v držení míče.
+  The total number of successful sweeper actions where the goalkeeper wins the ball and maintains possession for their team.
   """
   KEEPER_SWEEPER_ACCURATE
   """
-  Default (EN) Name: Acting as Sweeper Total
-  
-  Default (EN) Description: The total number of actions performed by the goalkeeper to intercept passes, clear the ball, or prevent attacking plays, demonstrating proactive involvement in defensive situations regardless of whether the team retained possession of the ball afterward
-  
-  CZ Name: Aktivita mimo vápno celkem
-  
-  CZ Description: Celkový počet akcí brankáře, kdy svým vyběhnutím nebo jinou aktivitou mimo vlastní pokutové území zabrání ohrožení vlastní brány, bez ohledu na to, zda jeho tým po této akci stále kontroloval míč
+  The total number of actions performed by the goalkeeper to intercept passes, clear the ball, or prevent attacking plays, demonstrating proactive involvement in defensive situations regardless of whether the team retained possession of the ball afterward
   """
   KEEPER_SWEEPER_TOTAL
   """
-  Default (EN) Name: Keeper Throws Accuracy
-  
-  Default (EN) Description: The percentage of successful actions where the goalkeeper distributes the ball by throwing it to a teammate, out of the total number of such attempts
-  
-  CZ Name: Úspěšnost výhozů
-  
-  CZ Description: Procentní úspěšnost výhozů míče vyjadřující podíl úspěšných výhozů (tým zůstal v držení míče) k celkovému počtu výhozů
+  The percentage of successful actions where the goalkeeper distributes the ball by throwing it to a teammate, out of the total number of such attempts
   """
   KEEPER_THROWS_ACCURACY
   """
-  Default (EN) Name: Keeper Throws Accurate
-  
-  Default (EN) Description: The total number of times the goalkeeper successfully distributes the ball by throwing it to a teammate, ensuring possession is maintained.
-  
-  CZ Name: Přesné výhozy
-  
-  CZ Description: Celkový počet situací, kdy brankář v nepřerušené hře provedl pokus o přihrávku na spoluhráče vyhozením míče rukou, s tím, že po provedení akce zůstal jeho tým v držení míče
+  The total number of times the goalkeeper successfully distributes the ball by throwing it to a teammate, ensuring possession is maintained.
   """
   KEEPER_THROWS_ACCURATE
   """
-  Default (EN) Name: Keeper Throws Total
-  
-  Default (EN) Description: The total number of times the goalkeeper distributes the ball by throwing it to restart play, regardless of whether it successfully reaches a teammate or not.
-  
-  CZ Name: Výhozy celkem
-  
-  CZ Description: Celkový počet situací, kdy brankář v nepřerušené hře provedl pokus o přihrávku na spoluhráče vyhozením míče rukou, bez ohledu na to, zda po provedení akce jeho tým zůstal v držení míče
+  The total number of times the goalkeeper distributes the ball by throwing it to restart play, regardless of whether it successfully reaches a teammate or not.
   """
   KEEPER_THROWS_TOTAL
   """
-  Default (EN) Name: Layoffs Total
-  
-  Default (EN) Description: The total number of backward passes played by a player who has received the ball with their back to goal and immediately lays it off to a teammate, allowing the teammate to continue the play forward.
-  
-  CZ Name: Celkový počet nahrávek
-  
-  CZ Description: Celkový počet pokusů hráče o nahrávku, kdy obdrží míč a okamžitě se ho pokusí přihrát spoluhráči
+  The total number of backward passes played by a player who has received the ball with their back to goal and immediately lays it off to a teammate, allowing the teammate to continue the play forward.
   """
   LAYOFFS_TOTAL
   """
-  Default (EN) Name: Layoffs Accurate
-  
-  Default (EN) Description: The total number of backward passes by a player received with their back to goal that successfully reach a teammate, enabling the teammate to progress the attack.
-  
-  CZ Name: Úspěšné nahrávky
-  
-  CZ Description: Počet úspěšných nahrávek, kdy hráč obdrží míč a okamžitě ho přihraje spoluhráči, čímž udrží držení míče
+  The total number of backward passes by a player received with their back to goal that successfully reach a teammate, enabling the teammate to progress the attack.
   """
   LAYOFFS_ACCURATE
   """
-  Default (EN) Name: Layoffs Accuracy
-  
-  Default (EN) Description: The percentage of accurate backward layoff passes by a player in relation to the total number of layoff attempts, reflecting effectiveness in setting up attacking play.
-  
-  CZ Name: Úspěšnost nahrávek
-  
-  CZ Description: Procentuální úspěšnost nahrávek, kdy hráč obdrží míč a okamžitě ho přihraje spoluhráči z celkového počtu pokusov o nahrávku
+  The percentage of accurate backward layoff passes by a player in relation to the total number of layoff attempts, reflecting effectiveness in setting up attacking play.
   """
   LAYOFFS_ACCURACY
   """
-  Default (EN) Name: Long Balls Accuracy
-  
-  Default (EN) Description: The percentage of successful long balls (32 meters or longer) completed out of the total number of long ball attempts. This excludes throw-ins, crosses, and goalkeeper throws. Successful long balls are those received by a teammate.
-  
-  CZ Name: Úspěšnost dlouhých přihrávek
-  
-  CZ Description: Procentní úspěšnost dlouhých přihrávek vyjadřující podíl úspěšně dokončených dlouhých přihrávek k celkovému počtu dlouhých přihrávek. Vhazování, výhozy brankářů a centry nejsou v této metrice započteny
+  The percentage of successful long balls (32 meters or longer) completed out of the total number of long ball attempts.
+  This excludes throw-ins, crosses, and goalkeeper throws. Successful long balls are those received by a teammate.
   """
   LONG_BALLS_ACCURACY
   """
-  Default (EN) Name: Long balls accurate
-  
-  Default (EN) Description: The total number of passes, excluding throw-ins, crosses, and goalkeeper throws, that were 32 meters or longer and successfully completed (the pass was received by a teammate).
-  
-  CZ Name: Úspěšné dlouhé přihrávky
-  
-  CZ Description: Celkový počet úspěšných (přihrávka byla přijata spoluhráčem) dlouhých přihrávek (delších než 32 metrů). Vhazování, výhozy brankáře a centry nejsou v této metrice započteny
+  The total number of passes, excluding throw-ins, crosses, and goalkeeper throws, that were 32 meters or longer and successfully completed (the pass was received by a teammate).
   """
   LONG_BALLS_ACCURATE
   """
-  Default (EN) Name: Long balls total
-  
-  Default (EN) Description: The total number of passes , excluding throw-ins, crosses, and goalkeeper throws, that were 32 meters or longer.
-  
-  CZ Name: Dlouhé přihrávky
-  
-  CZ Description: Celkový počet dlouhých přihrávek (delších než 32 metrů). Vhazování, výhozy brankáře a centry nejsou v této metrice započteny
+  The total number of passes , excluding throw-ins, crosses, and goalkeeper throws, that were 32 meters or longer.
   """
   LONG_BALLS_TOTAL
   """
-  Default (EN) Name: Starting Lineup
-  
-  Default (EN) Description: The player was selected as part of the team's starting lineup and began the match on the field, regardless of how many minutes he played in the match.
-  
-  CZ Name: Základní sestava
-  
-  CZ Description: Hráč byl trenérem určen jako člen základní sestavy a je během úvodního výkopu přítomen na hřišti, bez ohledu na to kolik minut v utkání nakonec odehrál
+  The player was selected as part of the team's starting lineup and began the match on the field, regardless of how many minutes he played in the match.
   """
   MATCH_LINEUP_STARTING
   """
-  Default (EN) Name: Match drawing team
-  
-  Default (EN) Description: Indicates whether the player played for the team that drew the match (1 if yes, 0 if no)
-  
-  CZ Name: Remízový tým
-  
-  CZ Description: Indikuje, zda hráč hrál za tým, který remizoval zápas (1 pokud ano, 0 pokud ne)
+  Indicates whether the player played for the team that drew the match (1 if yes, 0 if no)
   """
   MATCH_DRAWING_TEAM
   """
-  Default (EN) Name: Match losing team
-  
-  Default (EN) Description: Indicates whether the player played for the team that lost the match (1 if yes, 0 if no)
-  
-  CZ Name: Prohrávající tým
-  
-  CZ Description: Indikuje, zda hráč hrál za tým, který prohrál zápas (1 pokud ano, 0 pokud ne)
+  Indicates whether the player played for the team that lost the match (1 if yes, 0 if no)
   """
   MATCH_LOSING_TEAM
   """
-  Default (EN) Name: Minutes played
-  
-  Default (EN) Description: The total number of minutes a player actively spends on the field as part of the team. If he plays the full match without any extra time, 90 minutes are recorded. Added time is not included, but any extra time is counted.
-  
-  CZ Name: Odehrané minuty
-  
-  CZ Description: Celkový počet minut, které strávil hráč na hřišti. Nastavení nad řádný hrací čas všech částí hry není započteno, čas strávený na hřišti v prodloužení naopak započten je
+  The total number of minutes a player actively spends on the field as part of the team.
+  If he plays the full match without any extra time, 90 minutes are recorded.
+  Added time is not included, but any extra time is counted.
   """
   MATCH_MINUTES_PLAYED
   """
-  Default (EN) Name: Minutes played live
-  
-  Default (EN) Description: The total number of minutes a player actively spends on the field as part of the team, calculated live. If he plays the full match without any extra time, 90 minutes are recorded. Added time is not included, but any extra time is counted.
-  
-  CZ Name: Odehrané minuty průběžné
-  
-  CZ Description: Celkový počet minut, které strávil hráč na hřišti. Počítáno během zápasu. Nastavení nad řádný hrací čas všech částí hry není započteno, čas strávený na hřišti v prodloužení naopak započten je
+  The total number of minutes a player actively spends on the field as part of the team, calculated live.
+  If he plays the full match without any extra time, 90 minutes are recorded.
+  Added time is not included, but any extra time is counted.
   """
   MATCH_MINUTES_PLAYED_LIVE
   """
-  Default (EN) Name: Minutes played live (on pitch)
-  
-  Default (EN) Description: The total number of minutes a player actively spends on the field as part of the team, calculated live. Added time is included.
-  
-  CZ Name: Odehrané minuty průběžné (na hřišti)
-  
-  CZ Description: Celkový počet minut, které strávil hráč na hřišti. Počítáno během zápasu. Nastavení nad řádný hrací čas všech částí hry je započteno.
+  The total number of minutes a player actively spends on the field as part of the team, calculated live.
+  Added time is included.
   """
   MATCH_MINUTES_PLAYED_LIVE_ONPITCH
   """
-  Default (EN) Name: Minutes played live (in play)
-  
-  Default (EN) Description: The total number of minutes a player actively spends on the field as part of the team, calculated live. Added time is included. We extract significant stoppages in play (e.g., injuries, VAR reviews) to provide a more accurate representation of actual playing time.
-  
-  CZ Name: Odehrané mínuty průběžné (ve hře)
-  
-  CZ Description: Celkový počet minut, které strávil hráč na hřišti. Počítáno během zápasu. Nastavení nad řádný hrací čas všech částí hry je započteno. Odečteme významná přerušení hry (např. zranění, přezkumy VAR) pro přesnější vyjádření skutečného hracího času.
+  The total number of minutes a player actively spends on the field as part of the team, calculated live.
+  Added time is included. We extract significant stoppages in play (e.g., injuries, VAR reviews) to provide a more accurate representation of actual playing time.
   """
   MATCH_MINUTES_PLAYED_LIVE_INPLAY
   """
-  Default (EN) Name: Match winning team
-  
-  Default (EN) Description: Indicates whether the player played for the team that won the match (1 if yes, 0 if no)
-  
-  CZ Name: Vítězný tým
-  
-  CZ Description: Indikuje, zda hráč hrál za tým, který vyhrál zápas (1 pokud ano, 0 pokud ne)
+  Indicates whether the player played for the team that won the match (1 if yes, 0 if no)
   """
   MATCH_WINNING_TEAM
   """
-  Default (EN) Name: Offsides
-  
-  Default (EN) Description: The number of times a player is penalized for being in an offside position when the ball is passed to them by a teammate, resulting in a free-kick being awarded to the opposing team.
-  
-  CZ Name: Ofsajdy
-  
-  CZ Description: Celkový počet situací, kdy je hráč v okamžiku přihrávky od spoluhráče v postavení mimo hru, za což soupeřův tým získal volný kop.
+  The number of times a player is penalized for being in an offside position when the ball is passed to them by a teammate, resulting in a free-kick being awarded to the opposing team.
   """
   OFFSIDES
   """The total number of goals a goalkeeper concedes from own goals."""
   GOALS_OWN_CONCEDED
   """
-  Default (EN) Name: Passes Accuracy
-  
-  Default (EN) Description: The percentage of successful passes completed out of the total number of passes attempted. Successful passes are those received by a teammate. This metric excludes throw-ins, goalkeeper throws, and crosses.
-  
-  CZ Name: Úspěšnost přihrávek
-  
-  CZ Description: Procentní úspěšnost přihrávek vyjadřující podíl úspěšně dokončených přihrávek k celkovému počtu přihrávek
+  The percentage of successful passes completed out of the total number of passes attempted.
+  Successful passes are those received by a teammate. This metric excludes throw-ins, goalkeeper throws, and crosses.
   """
   PASSES_ACCURACY
   """
-  Default (EN) Name: Passes accurate
-  
-  Default (EN) Description: The total number of successful passes completed (the pass was received by a teammate). The throws-in, goalkeeper throws and crosses are not included
-  
-  CZ Name: Přesné přihrávky
-  
-  CZ Description: Celkový počet úspěšných přihrávek (přihrávka byla přijata spoluhráčem). Vhazování, výhozy brankáře a centry nejsou v této metrice započteny
+  The total number of successful passes completed (the pass was received by a teammate).
+  The throws-in, goalkeeper throws and crosses are not included
   """
   PASSES_ACCURATE
   """
-  Default (EN) Name: Backward Passes Total
-  
-  Default (EN) Description: The total number of backward passes made by a player that move the ball towards their own goal.
-  
-  CZ Name: Celkový počet přihrávek dozadu
-  
-  CZ Description: Celkový počet pokusů hráče o přihrávku dozadu, směrem k vlastní bráně
+  The total number of backward passes made by a player that move the ball towards their own goal.
   """
   PASSES_BACKWARD_TOTAL
   """
-  Default (EN) Name: Passes into final third accuracy
-  
-  Default (EN) Description: The percentage of successful passes completed into the final (attacking) third out of the total number of passes attempted into this area. Successful passes are those received by a teammate and initiated from anywhere on the pitch
-  
-  CZ Name: Úspěšnost přihrávek do útočné třetiny
-  
-  CZ Description: Procentní úspěšnost přihrávek do útočné třetiny hřiště vyjadřující podíl úspěšně dokončených přihrávek k celkovému počtu přihrávek, přihrávka musí být převzata spoluhráčem v útočné třetině, ale provedena může být odkudkoli
+  The percentage of successful passes completed into the final (attacking) third out of the total number of passes attempted into this area.
+  Successful passes are those received by a teammate and initiated from anywhere on the pitch
   """
   PASSES_FINAL_THIRD_ACCURACY
   """
-  Default (EN) Name: Passes final third accurate
-  
-  Default (EN) Description: The total number of successful passes completed (the pass was received by a teammate) initiated from anywhere on the pitch that ends in the final (attacking) third, from the perspective of the team making the pass
-  
-  CZ Name: Úpsěšné přihrávky v útočné třetině
-  
-  CZ Description: Celkový počet úspěšných přihrávek (přihrávka byla přijata spoluhráčem), bez ohledu na to, odkud byly zahájeny, které však skončily v útočné třetině hřiště.
+  The total number of successful passes completed (the pass was received by a teammate) initiated from anywhere on the pitch that ends in the final (attacking) third, from the perspective of the team making the pass
   """
   PASSES_FINAL_THIRD_ACCURATE
   """
-  Default (EN) Name: Passes final third total
-  
-  Default (EN) Description: The total number of passes initiated from anywhere on the pitch that ends in the final (attacking) third, from the perspective of the team making the pass
-  
-  CZ Name: Přihrávky v útočné třetině celkem
-  
-  CZ Description: Celkový počet přihrávek, bez ohledu na to, odkud byly zahájeny, které však skončily v útočné třetině hřiště.
+  The total number of passes initiated from anywhere on the pitch that ends in the final (attacking) third, from the perspective of the team making the pass
   """
   PASSES_FINAL_THIRD_TOTAL
   """
-  Default (EN) Name: Forward Passes Total
-  
-  Default (EN) Description: The total number of forward passes made by a player that move the ball towards the opponent's goal.
-  
-  CZ Name: Celkový počet přihrávek dopředu
-  
-  CZ Description: Celkový počet pokusů hráče o přihrávku dopředu, směrem k soupeřově bráně
+  The total number of forward passes made by a player that move the ball towards the opponent's goal.
   """
   PASSES_FORWARD_TOTAL
   """
-  Default (EN) Name: Openplay Passes Accurate
-  
-  Default (EN) Description: The total number of accurate passes completed by a player during open play, excluding set pieces.
-  
-  CZ Name: Úspěšné přihrávky z otevřené hry
-  
-  CZ Description: Počet úspěšných přihrávek dokončených během otevřené hry, vyjma standardních situací, vhazování a výhozů brankáře
+  The total number of accurate passes completed by a player during open play, excluding set pieces.
   """
   PASSES_OPEN_PLAY_ACCURATE
   """
-  Default (EN) Name: Openplay Passes Accuracy
-  
-  Default (EN) Description: The percentage of accurate passes completed by a player during open play in relation to the total number of open play passes attempted.
-  
-  CZ Name: Úspěšnost přihrávek z otevřené hry
-  
-  CZ Description: Procentuální úspěšnost přihrávek dokončených během otevřené hry z celkového počtu pokusů o přihrávku během otevřené hry
+  The percentage of accurate passes completed by a player during open play in relation to the total number of open play passes attempted.
   """
   PASSES_OPEN_PLAY_ACCURACY
   """
-  Default (EN) Name: Openplay Passes Total
-  
-  Default (EN) Description: The total number of passes attempted by a player during open play, excluding set pieces.
-  
-  CZ Name: Celkový počet přihrávek z otevřené hry
-  
-  CZ Description: Celkový počet pokusů o přihrávku během otevřené hry, vyjma standardních situací, vhazování a výhozů brankáře
+  The total number of passes attempted by a player during open play, excluding set pieces.
   """
   PASSES_OPEN_PLAY_TOTAL
   """
-  Default (EN) Name: Passes Through Accuracy
-  
-  Default (EN) Description: The percentage of successful through-ball passes that accurately penetrate the opposition's defensive line to set up a teammate one-on-one with the opposing goalkeeper, out of the total number of through-ball attempts. This excludes throw-ins, goalkeeper throws, and crosses.
-  
-  CZ Name: Úspěšnost průnikových přihrávek
-  
-  CZ Description: Procentní úspěšnost průnikových přihrávek vyjadřující podíl úspěšně dokončených přihrávek skrze obranou linii soupeře k celkovému počtu takových přihrávek. Vhazování, výhozy brankářů a centry nejsou v této metrice započteny
+  The percentage of successful through-ball passes that accurately penetrate the opposition's defensive line to set up a teammate one-on-one with the opposing goalkeeper, out of the total number of through-ball attempts.
+  This excludes throw-ins, goalkeeper throws, and crosses.
   """
   PASSES_THROUGH_ACCURACY
   """
-  Default (EN) Name: Passes through accurate
-  
-  Default (EN) Description: The total number of successful through-ball passes that accurately penetrate the opposition's defensive line to set up a teammate one-on-one with the opposing goalkeeper. No throw-ins, keeper throws, and crosses are counted.
-  
-  CZ Name: Přesné průnikové přihrávky
-  
-  CZ Description: Celkový počet situací, kdy se hráč překonal obrannou linii soupeře přesnou přihrávkou na spoluhráče, který následně šel do situace jeden na jednoho se soupeřovým brankářem. Vhazování, výhozy brankáře a centry nejsou do této metriky započteny
+  The total number of successful through-ball passes that accurately penetrate the opposition's defensive line to set up a teammate one-on-one with the opposing goalkeeper.
+  No throw-ins, keeper throws, and crosses are counted.
   """
   PASSES_THROUGH_ACCURATE
   """
-  Default (EN) Name: Passes through total
-  
-  Default (EN) Description: The total number of attempts at through-balls, defined as passes that penetrate the opposition's defensive line to set up a teammate one-on-one with the opposing goalkeeper. No throw-ins, keeper throws, and crosses are counted.
-  
-  CZ Name: Průnikové přihrávky celkem
-  
-  CZ Description: Celkový počet úspěšných i neúspěšných situací, kdy se hráč pokusil překonat obrannou linii soupeře přihrávkou na spoluhráče, který mohl jít do situace jeden na jednoho se soupeřovým brankářem. Vhazování, výhozy brankáře a centry nejsou do této metriky započteny
+  The total number of attempts at through-balls, defined as passes that penetrate the opposition's defensive line to set up a teammate one-on-one with the opposing goalkeeper.
+  No throw-ins, keeper throws, and crosses are counted.
   """
   PASSES_THROUGH_TOTAL
   """
-  Default (EN) Name: Passes total
-  
-  Default (EN) Description: The total number of pass attempts made regardless of their success. The throws-in, goalkeeper throws and crosses are not included
-  
-  CZ Name: Přihrávky celkem
-  
-  CZ Description: Celkový počet přihrávek bez ohledu na to, zda byly úspěšné nebo ne. Vhazování, výhozy brankáře a centry nejsou v této metrice započteny
+  The total number of pass attempts made regardless of their success.
+  The throws-in, goalkeeper throws and crosses are not included
   """
   PASSES_TOTAL
   """
-  Default (EN) Name: Forward Pass Tendency
-  
-  Default (EN) Description: The ratio or percentage of forward passes made by a player compared to all passes, indicating their playing style and tendency to advance the ball.
-  
-  CZ Name: Tendence přihrávek dopředu
-  
-  CZ Description: Poměr nebo procento přihrávek dopředu provedených hráčem ve srovnání se všemi přihrávkami, indikující jeho herní styl a tendenci posouvat míč dopředu.
+  The ratio or percentage of forward passes made by a player compared to all passes, indicating their playing style and tendency to advance the ball.
   """
   PASSES_FORWARD_TENDENCY
   """
-  Default (EN) Name: Points plus minus
-  
-  Default (EN) Description: Plus/minus statistic - positive value when the player's team scores a goal while the player is on the field, negative value when the player's team concedes a goal while the player is on the field
-  
-  CZ Name: Plus/minus body
-  
-  CZ Description: Plus/minus statistika - kladná hodnota když tým hráče vstřelí gól, zatímco hráč je na hřišti, záporná hodnota když tým hráče obdrží gól, zatímco hráč je na hřišti
+  Plus/minus statistic - positive value when the player's team scores a goal while the player is on the field, negative value when the player's team concedes a goal while the player is on the field
   """
   POINTS_PLUS_MINUS
   """
-  Default (EN) Name: Penalties committed
-  
-  Default (EN) Description: The number of fouls (or handballs) a player commits inside their own penalty area, resulting in a penalty kick being awarded to the opposing team
-  
-  CZ Name: Zaviněné penalty
-  
-  CZ Description: Celkový počet situací, kdy hráč faulem nebo hraním rukou zapříčinil nařízení pokutového kopu proti svému týmu
+  The number of fouls (or handballs) a player commits inside their own penalty area, resulting in a penalty kick being awarded to the opposing team
   """
   PENALTIES_COMMITTED
   """
-  Default (EN) Name: Penalties faced
-  
-  Default (EN) Description: The number of times a goalkeeper faced a penalty kick during regular play time. The penalties faced during the shootout are not included
-  
-  CZ Name: Penalty proti
-  
-  CZ Description: Celkový počet situací, kdy je prováděn pokutový kop soupeřem
+  The number of times a goalkeeper faced a penalty kick during regular play time.
+  The penalties faced during the shootout are not included
   """
   PENALTIES_FACED
   """
-  Default (EN) Name: Penalties missed
-  
-  Default (EN) Description: The number of penalty kick attempts that a player fails to convert into a goal, either due to a save by the goalkeeper or missing the target altogether. The penalties missed during the shootout are not included
-  
-  CZ Name: Neproměněné penalty
-  
-  CZ Description: Celkový počet pokutových kopů, které nebyly proměněné v gól vlastního týmu, ať už díky zákroku brankáře nebo střele mimo bránu. Neproměněné pokutové kopy během penaltových rozstřelů nejsou započteny
+  The number of penalty kick attempts that a player fails to convert into a goal, either due to a save by the goalkeeper or missing the target altogether.
+  The penalties missed during the shootout are not included
   """
   PENALTIES_MISSED
   """
-  Default (EN) Name: Penalties saved
-  
-  Default (EN) Description: The count of times a goalkeeper prevents the ball from entering the goal by stopping or deflecting a shot from a penalty kick. The penalties saved during the shootout are not included
-  
-  CZ Name: Chycené penalty
-  
-  CZ Description: Celkový počet situací, kdy brankář zabrání střele z pokutového kopu, aby se stala gólem. Zabránění gólům z pokutových kopů během penaltových rozstřelů nejsou započtena
+  The count of times a goalkeeper prevents the ball from entering the goal by stopping or deflecting a shot from a penalty kick.
+  The penalties saved during the shootout are not included
   """
   PENALTIES_SAVED
   """
-  Default (EN) Name: Penalties won
-  
-  Default (EN) Description: The count of times a player is fouled in the opponent's penalty area, resulting in a penalty kick being awarded to their team
-  
-  CZ Name: Získané penalty
-  
-  CZ Description: Celkový počet situací, kdy byl hráč faulovaný v soupeřově pokutovém území a rozhodčí nařídil ve prospěch jeho týmu pokutový kop
+  The count of times a player is fouled in the opponent's penalty area, resulting in a penalty kick being awarded to their team
   """
   PENALTIES_WON
   """
-  Default (EN) Name: Player Rating
-  
-  Default (EN) Description: Describes the performance of each player who participated in the match for at least a minimum number of minutes, rated on a scale from 1 (very poor performance) to 10 (excellent performance).
-  
-  CZ Name: Hodnocení hráče
-  
-  CZ Description: Popisuje výkon každého hráče, který se účastnil zápasu alespoň minimální počet minut, hodnocený na stupnici od 1 (velmi špatný výkon) do 10 (vynikající výkon).
+  Describes the performance of each player who participated in the match for at least a minimum number of minutes, rated on a scale from 1 (very poor performance) to 10 (excellent performance).
   """
   RATING_PLAYER
   """
-  Default (EN) Name: Player Rating Raw
-  
-  Default (EN) Description: Describes the uncapped performance value of each player who participated in the match for at least the minimum required number of minutes. This value is used internally for Player of the Match voting. The real public value for Player's rating is in RATING_PLAYER metric.
-  
-  CZ Name: Neořezané hodnocení hráče
-  
-  CZ Description: Popisuje neořezanou hodnotu výkonu každého hráče, který se zápasu zúčastnil alespoň minimální požadovaný počet minut. Tato hodnota se používá interně pro vyhodnocení Hráče zápasu. Skutečná veřejně dostupná hodnota hodnocení hráče je metrika RATING_PLAYER.
+  Describes the uncapped performance value of each player who participated in the match for at least the minimum required number of minutes.
+  This value is used internally for Player of the Match voting.
+  The real public value for Player's rating is in RATING_PLAYER metric.
   """
   RATING_PLAYER_RAW
   """
-  Default (EN) Name: Penalties Missed (Post)
-  
-  Default (EN) Description: The number of penalty kicks that hit the goalpost or crossbar and did not result in a goal.
-  
-  CZ Name: Neproměněné penalty (tyč)
-  
-  CZ Description: Počet pokutových kopů, které zasáhly tyč nebo břevno a neskončily gólem.
+  The number of penalty kicks that hit the goalpost or crossbar and did not result in a goal.
   """
   PENALTIES_MISSED_POST
   """
-  Default (EN) Name: Penalties Missed (Saved)
-  
-  Default (EN) Description: The number of penalty kicks that were saved by the goalkeeper and did not result in a goal.
-  
-  CZ Name: Neproměněné penalty (chycené)
-  
-  CZ Description: Počet pokutových kopů, které byly chyceny brankářem a neskončily gólem.
+  The number of penalty kicks that were saved by the goalkeeper and did not result in a goal.
   """
   PENALTIES_MISSED_SAVE
   """
-  Default (EN) Name: Penalties Not Converted
-  
-  Default (EN) Description: The total number of penalty kicks that were not converted into goals, including both saved penalties and those that missed the target.
-  
-  CZ Name: Neproměněné penalty celkem
-  
-  CZ Description: Celkový počet pokutových kopů, které neskončily gólem, včetně chycených penalt a těch, které minuly bránu.
+  The total number of penalty kicks that were not converted into goals, including both saved penalties and those that missed the target.
   """
   PENALTIES_NOT_CONVERTED
   """
-  Default (EN) Name: Possession lost
-  
-  Default (EN) Description: The total number of times (turnovers) a player loses possession of the ball, including unsuccessful passes, unsuccessful dribbles or touches, blocked passes and losses due to pressure from opponents (dispossession), regardless of the specific action that led to the loss.
-  
-  CZ Name: Ztracené míče
-  
-  CZ Description: Celkový počet všech situací, kdy hráč ztratil kontrolu nad míčem, včetně nepřesných přihrávek, neúspěšných pokusů o průnik přes bránícího hráče (driblink), ztrát míče v důsledku tlaku soupeře
+  The total number of times (turnovers) a player loses possession of the ball, including unsuccessful passes, unsuccessful dribbles or touches, blocked passes and losses due to pressure from opponents (dispossession), regardless of the specific action that led to the loss.
   """
   POSSESSION_LOST
   """
-  Default (EN) Name: Possession won
-  
-  Default (EN) Description: The total number of times a player successfully gains control of the ball from an opponent or loose ball, whether through a tackle, interception, or recovery, while ensuring the team retains possession.
-  
-  CZ Name: Získané míče
-  
-  CZ Description: Celkový počet situací, kdy hráč získal jakýmkoli dovoleným způsobem kontrolu nad míčem s tím, že zajistí udržení míče pro svůj tým
+  The total number of times a player successfully gains control of the ball from an opponent or loose ball, whether through a tackle, interception, or recovery, while ensuring the team retains possession.
   """
   POSSESSION_WON
   """
-  Default (EN) Name: Punches Total
-  
-  Default (EN) Description: The total number of defensive actions where the goalkeeper uses a clenched fist to clear a high ball, aiming to remove the danger rather than catching the ball, regardless of whether possession is retained or not.
-  
-  CZ Name: Vyboxované centry celkem
-  
-  CZ Description: Celkový počet situací, kdy brankář použije pěsti k vyboxování centru a zabrání tak ohrožení vlastní brány
+  The total number of defensive actions where the goalkeeper uses a clenched fist to clear a high ball, aiming to remove the danger rather than catching the ball, regardless of whether possession is retained or not.
   """
   PUNCHES_TOTAL
   """
-  Default (EN) Name: Saves shots inside the box
-  
-  Default (EN) Description: The count of times a goalkeeper prevents the ball from entering the goal by stopping or deflecting a shot made from inside of the penalty box
-  
-  CZ Name: Zákroky proti střelám uvnitř vápna
-  
-  CZ Description: Celkový počet situací, kdy brankář svým zákrokem jakkoli zabrání gólu, pokud se jednalo o střelu provedenou uvnitř pokutového území
+  The count of times a goalkeeper prevents the ball from entering the goal by stopping or deflecting a shot made from inside of the penalty box
   """
   SAVES_BOX_IN
   """
-  Default (EN) Name: Saves shots outside the box
-  
-  Default (EN) Description: The count of times a goalkeeper prevents the ball from entering the goal by stopping or deflecting a shot made from outside of the penalty box
-  
-  CZ Name: Zákroky proti střelám mimo vápno
-  
-  CZ Description: Celkový počet situací, kdy brankář svým zákrokem jakkoli zabrání gólu, pokud se jednalo o střelu provedenou mimo pokutové území
+  The count of times a goalkeeper prevents the ball from entering the goal by stopping or deflecting a shot made from outside of the penalty box
   """
   SAVES_BOX_OUT
   """
-  Default (EN) Name: Saves Efficiency
-  
-  Default (EN) Description: The percentage of successful saves made by the goalkeeper out of the total number of shots faced, reflecting the goalkeeper's overall effectiveness in preventing goals.
-  
-  CZ Name: Úspěšnost zákroků
-  
-  CZ Description: Úspěšnost zásahů brankáře proti střelám soupeře vyjadřující podíl střel, které brankář zneškodnil k celkovému počtu střel, kterým brankář čelil
+  The percentage of successful saves made by the goalkeeper out of the total number of shots faced, reflecting the goalkeeper's overall effectiveness in preventing goals.
   """
   SAVES_EFFICIENCY
   """
-  Default (EN) Name: Saves from open play
-  
-  Default (EN) Description: The count of times a goalkeeper prevents the ball from entering the goal by stopping or deflecting a shot made from any shot made during regular flow of the match
-  
-  CZ Name: Zákroky proti střelám ze hry
-  
-  CZ Description: Celkový počet situací, kdy brankář svým zákrokem jakkoli zabrání gólu, pokud se jednalo o střelu v nepřerušené hře
+  The count of times a goalkeeper prevents the ball from entering the goal by stopping or deflecting a shot made from any shot made during regular flow of the match
   """
   SAVES_OPEN_PLAY
   """
-  Default (EN) Name: Saves shots from set piece
-  
-  Default (EN) Description: The count of times a goalkeeper prevents the ball from entering the goal by stopping or deflecting a shot made from any type of set piece situation
-  
-  CZ Name: Zákroky proti střelám ze standardních situací
-  
-  CZ Description: Celkový počet situací, kdy brankář svým zákrokem jakkoli zabrání gólu, pokud se jednalo o střelu z jakékoli standardní situace
+  The count of times a goalkeeper prevents the ball from entering the goal by stopping or deflecting a shot made from any type of set piece situation
   """
   SAVES_SET_PIECE
   """
-  Default (EN) Name: Saves total
-  
-  Default (EN) Description: The count of times a goalkeeper prevents the ball from entering the goal by stopping or deflecting a shot on target regardless of whether the shot occurs during open play or from a set piece
-  
-  CZ Name: Zákroky celkem
-  
-  CZ Description: Celkový počet situací, kdy brankář svým zákrokem jakkoli zabrání gólu bez ohledu na to, zda se jednalo o střelu v nepřerušené hře nebo ze standardní situace
+  The count of times a goalkeeper prevents the ball from entering the goal by stopping or deflecting a shot on target regardless of whether the shot occurs during open play or from a set piece
   """
   SAVES_TOTAL
   """
-  Default (EN) Name: Shots Accuracy
-  
-  Default (EN) Description: The percentage of shots on target out of the total number of shot attempts. Shots on target are those that either result in a goal or require the goalkeeper to make a save to prevent a goal.
-  
-  CZ Name: Úspěšnost střelby
-  
-  CZ Description: Procentní úspěšnost střeleckých pokusů vyjadřující podíl všech střel, které směřovaly na bránu k celkovému počtu všech střel
+  The percentage of shots on target out of the total number of shot attempts.
+  Shots on target are those that either result in a goal or require the goalkeeper to make a save to prevent a goal.
   """
   SHOTS_ACCURACY
   """
-  Default (EN) Name: Shots Blocked
-  
-  Default (EN) Description: Total count of the shot attempts that were stopping before reach the goal.
-  
-  CZ Name: Zblokované střely
-  
-  CZ Description: Celkový počet střel, které byly zastaveny dřžíve, než dosáhly prostor brány
+  Total count of the shot attempts that were stopping before reach the goal.
   """
   SHOTS_BLOCKED
   """
-  Default (EN) Name: Shots inside the box
-  
-  Default (EN) Description: Total count of shots made inside the box, no matter where the shot was targeting
-  
-  CZ Name: Střely uvnitř vápna
-  
-  CZ Description: Celkový počet střel, které byly provedeny z prostoru uvnitř pokutového území, bez ohledu na to, kam směřovaly
+  Total count of shots made inside the box, no matter where the shot was targeting
   """
   SHOTS_BOX_IN
   """
-  Default (EN) Name: Shots outside the box
-  
-  Default (EN) Description: Total count of shots made outside the box, no matter where the shot was targeting
-  
-  CZ Name: Střely mimo vápno
-  
-  CZ Description: Celkový počet střel, které byly provedeny z prostoru mimo pokutové území, bez ohledu na to, kam směřovaly
+  Total count of shots made outside the box, no matter where the shot was targeting
   """
   SHOTS_BOX_OUT
   """
-  Default (EN) Name: Shots Faced
-  
-  Default (EN) Description: The total number of shots that were either on target and required the goalkeeper's intervention to prevent a goal or resulted in a goal
-  
-  CZ Name: Střel celkem proti
-  
-  CZ Description: Celkový počet střel na bránu, kterým brankář čelil (střely, které chytil a střely, ze kterých dostal gól)
+  The total number of shots that were either on target and required the goalkeeper's intervention to prevent a goal or resulted in a goal
   """
   SHOTS_FACED
   """
-  Default (EN) Name: Shots with head
-  
-  Default (EN) Description: Total count of the shot  attempts that goes wide of or over the goal, or hits the goalposrt or crossbar
-  
-  CZ Name: Střely hlavou
-  
-  CZ Description: Střely, které byly provedeny hlavou
+  Total count of the shot  attempts that goes wide of or over the goal, or hits the goalposrt or crossbar
   """
   SHOTS_HEAD
   """
-  Default (EN) Name: Shots off Target
-  
-  Default (EN) Description: The total number of shot attempts made using the head, regardless of whether the attempt is directed towards the goal or not
-  
-  CZ Name: Střely mimo bránu
-  
-  CZ Description: Celkový počet střel, které šly mimo bránu nebo zasáhly tyč/břevno
+  The total number of shot attempts made using the head, regardless of whether the attempt is directed towards the goal or not
   """
   SHOTS_OFF_TARGET
   """
-  Default (EN) Name: Shots on Target
-  
-  Default (EN) Description: Total count of shot attempts forcing the goalkeeper to make a save to prevent a opponent to score a goal and all opponent's goal shots
-  
-  CZ Name: Střely na bránu
-  
-  CZ Description: Celkový počet střel proti kterým musel brankř, zasáhnout, aby zabránil gólu a všechny střely soupeře, které skončily gólem
+  Total count of shot attempts forcing the goalkeeper to make a save to prevent a opponent to score a goal and all opponent's goal shots
   """
   SHOTS_ON_TARGET
   """
-  Default (EN) Name: Shots to post
-  
-  Default (EN) Description: Total count of the shot attempts that hit the goalpost or crossbar. This value is also included in the "shotsOffTarget" metric.
-  
-  CZ Name: Střely do tyče/břevna
-  
-  CZ Description: Celkový počet střel, které zasáhly tyč/břevno. Tato hodnota je zároveň započtena v metrice "Střely mimo bránu"
+  Total count of the shot attempts that hit the goalpost or crossbar. This value is also included in the "shotsOffTarget" metric.
   """
   SHOTS_POST
   """
-  Default (EN) Name: Shots Total
-  
-  Default (EN) Description: Total count of shot attempts made including shots on target, shots off target and blocked shots
-  
-  CZ Name: Střely celkem
-  
-  CZ Description: Celkový počet střel včetně střel na bránu, mimo bránu a zblokovaných střel
+  Total count of shot attempts made including shots on target, shots off target and blocked shots
   """
   SHOTS_TOTAL
   """
-  Default (EN) Name: Smothers
-  
-  Default (EN) Description: The total number of times a goalkeeper successfully takes possession by diving down to collect a loose ball during a ground duel against an opponent player, similar to a tackle.
-  
-  CZ Name: Přikryté míče
-  
-  CZ Description: Celkový počet situací, kdy brankář úspěšně získá kontrolu nad míčem skokem na volný míč během pozemního souboje proti soupeři, podobně jako obránce při obranném zákroku
+  The total number of times a goalkeeper successfully takes possession by diving down to collect a loose ball during a ground duel against an opponent player, similar to a tackle.
   """
   SMOTHERS
   """
-  Default (EN) Name: Tackles efficiency
-  
-  Default (EN) Description: The percentage of legal challenges successfully won by a player at ground level to take the ball away from an opponent in control of the ball, in relation to the total number of such challenges attempted. A higher efficiency indicates greater effectiveness in winning tackles.
-  
-  CZ Name: Úspěšnost obranných zákroků
-  
-  CZ Description: Úspěšnost obranných zákroků vyjadřuje podíl obranných zákroků s protihráčem, které hráč vyhrál vůči všem čistým obranným zákrokům, kterých se hráč účastnil. Vyšší úspěšnost obranných zákroků indikuje vyšší schopnost hráče vyhrát čistým způsobem souboj o míč s protihráčem během pozemního souboje
+  The percentage of legal challenges successfully won by a player at ground level to take the ball away from an opponent in control of the ball, in relation to the total number of such challenges attempted.
+  A higher efficiency indicates greater effectiveness in winning tackles.
   """
   TACKLES_EFFICIENCY
   """
-  Default (EN) Name: Tackles lost
-  
-  Default (EN) Description: The total number of times a player attempts to win the ball from an opponent at ground level during a legal challenge but fails, allowing the opponent to retain control of the ball.
-  
-  CZ Name: Neúspěšné obranné zákroky
-  
-  CZ Description: Celkový počet situací, kdy obránce čelil pokusu o kličku soupeře, ale nepodařilo se mu čistým způsobem získat míč, a soupeř si udržel držení míče.
+  The total number of times a player attempts to win the ball from an opponent at ground level during a legal challenge but fails, allowing the opponent to retain control of the ball.
   """
   TACKLES_LOST
   """
-  Default (EN) Name: Tackles total
-  
-  Default (EN) Description: The total number of times a player legally challenges an opponent at ground level to take the ball away while the opponent is in control of the ball
-  
-  CZ Name: Obranné zákroky celkem
-  
-  CZ Description: Celkový počet situací, kdy obránce čelil pokusu o kličku soupeře a snažil se ho čistým způsobem připravit o držení míče bez ohledu na to, jak takový souboj dopadl
+  The total number of times a player legally challenges an opponent at ground level to take the ball away while the opponent is in control of the ball
   """
   TACKLES_TOTAL
   """
-  Default (EN) Name: Tackles won
-  
-  Default (EN) Description: The total number of times a player successfully wins the ball from an opponent at ground level during a legal challenge while the opponent is in control of the ball.
-  
-  CZ Name: Úspěšné obranné zákroky
-  
-  CZ Description: Celkový počet situací, kdy obránce čelil pokusu o kličku soupeře a čistým způsobem jej zbavil držení míče
+  The total number of times a player successfully wins the ball from an opponent at ground level during a legal challenge while the opponent is in control of the ball.
   """
   TACKLES_WON
   """
-  Default (EN) Name: Last Man Tackles
-  
-  Default (EN) Description: The total number of tackles made by the last defender preventing a clear goal-scoring opportunity when they are the final line of defense.
-  
-  CZ Name: Zákroky posledního muže
-  
-  CZ Description: Celkový počet obranných zákroků provedených posledním obráncem, který zabránil jasné gólové příležitosti, když byl poslední linií obrany.
+  The total number of tackles made by the last defender preventing a clear goal-scoring opportunity when they are the final line of defense.
   """
   TACKLE_LAST_MAN
   """
-  Default (EN) Name: Touches in opp. box
-  
-  Default (EN) Description: The total number of times a player makes contact with the ball within the opponent's penalty area during a regular play.
-  
-  CZ Name: Doteky v soupeřově vápně
-  
-  CZ Description: Celkový počet situací, kdy měl hráč kontakt s míčem v soupeřově pokutovém území v nepřerušeném průběhu zápasu
+  The total number of times a player makes contact with the ball within the opponent's penalty area during a regular play.
   """
   TOUCHES_BOX_OPPOSITE
   """
-  Default (EN) Name: Touches total
-  
-  Default (EN) Description: The total number of times a player makes contact with the ball anywhere on the pitch during a regular play
-  
-  CZ Name: Doteky celkem
-  
-  CZ Description: Celkový počet situací, kdy měl hráč kontakt s míčem v nepřerušené hře
+  The total number of times a player makes contact with the ball anywhere on the pitch during a regular play
   """
   TOUCHES_TOTAL
   """
-  Default (EN) Name: Touches Unsuccessful
-  
-  Default (EN) Description: The total number of times a player fails to control the ball with a poor touch, resulting in a loss of possession. This also includes mishit shots that travel backwards towards the player’s own goal.
-  
-  CZ Name: Neúspěšné doteky s míčem
-  
-  CZ Description: Celkový počet případů, kdy hráč nedokáže zpracovat míč kvůli špatnému doteku, což vede ke ztrátě držení míče. To zahrnuje také nepovedené střely, které směřují zpět směrem k vlastní brance hráče.
+  The total number of times a player fails to control the ball with a poor touch, resulting in a loss of possession.
+  This also includes mishit shots that travel backwards towards the player’s own goal.
   """
   TOUCHES_UNSUCCESSFUL
   """
-  Default (EN) Name: Turnovers
-  
-  Default (EN) Description: The total number of times a player loses possession of the ball through errors, poor touches, or pressure from opponents, resulting in a change of possession.
-  
-  CZ Name: Ztráty míče
-  
-  CZ Description: Celkový počet situací, kdy hráč ztratí držení míče chybami, špatnými doteky nebo tlakem soupeřů, což vede ke změně držení míče.
+  The total number of times a player loses possession of the ball through errors, poor touches, or pressure from opponents, resulting in a change of possession.
   """
   TURNOVERS
 }
@@ -2872,11 +1930,171 @@ enum TeamLevel {
 }
 
 enum TeamMatchMetric {
+  ASSISTS_GOAL
+  ASSISTS_GOAL_SECOND
+  ASSISTS_SHOT
+  ASSISTS_SHOT_OFF_TARGET
+  ASSISTS_SHOT_ON_TARGET
+  ASSISTS_SHOT_OPEN_PLAY
+  ASSISTS_SHOT_SET_PIECE
+  BALL_RECOVERIES
+  BIG_CHANCES_CREATED
+  BIG_CHANCES_MISSED
+  BIG_CHANCES_SAVED
+  BIG_CHANCES_SCORED
+  BIG_CHANCES_TOTAL
+  BLOCKED_SHOTS
+  CARDS_RED
+  CARDS_YELLOW
+  CHALLENGE_LOST
+  CLAIM_HIGH_EFFICIENCY
+  CLAIM_HIGH_SAVED
+  CLAIM_HIGH_TOTAL
+  CLEAN_SHEETS
+  CLEARANCES
+  CLEARANCES_OFF_LINE
+  CORNER_KICKS
+  CROSSES_ACCURACY
+  CROSSES_ACCURATE
+  CROSSES_TOTAL
+  DRIBBLES_EFFICIENCY
+  DRIBBLES_LOST
+  DRIBBLES_TOTAL
+  DRIBBLES_WON
+  DUELS_AERIAL_EFFICIENCY
+  DUELS_AERIAL_LOST
+  DUELS_AERIAL_TOTAL
+  DUELS_AERIAL_WON
+  DUELS_EFFICIENCY
+  DUELS_GROUND_EFFICIENCY
+  DUELS_GROUND_LOST
+  DUELS_GROUND_TOTAL
+  DUELS_GROUND_WON
+  DUELS_LOST
+  DUELS_TOTAL
+  DUELS_WON
+  ENTRIES_FINAL_THIRD_TOTAL
+  ENTRIES_PENALTY_BOX_TOTAL
+  ERRORS_LEAD_TO_GOAL
+  ERRORS_LEAD_TO_SHOT
+  EXPECTED_ASSISTS
+  EXPECTED_GOALS
+  EXPECTED_GOALS_FACED
+  EXPECTED_GOALS_NO_PENALTIES
+  EXPECTED_GOALS_NO_PENALTIES_FACED
+  EXPECTED_GOALS_ON_TARGET
+  EXPECTED_GOALS_ON_TARGET_FACED
+  EXPECTED_GOALS_ON_TARGET_NO_PENALTIES
+  EXPECTED_GOALS_ON_TARGET_NO_PENALTIES_FACED
+  FINISHING_QUALITY
+  FINISHING_QUALITY_NO_PENALTIES
+  FOULS_COMMITTED
+  FOULS_SUFFERED
+  GOAL_KICKS_ACCURACY
+  GOAL_KICKS_ACCURATE
+  GOAL_KICKS_TOTAL
   GOALS
+  GOALS_ATTACKERS
+  GOALS_BOX_IN
+  GOALS_BOX_OUT
+  GOALS_CONCEDED
+  GOALS_CONCEDED_PENALTY
+  GOALS_DEFENDERS
+  GOALS_FREE_KICK
+  GOALS_GOALKEEPERS
+  GOALS_HEAD
+  GOALS_MIDFIELDERS
+  GOALS_NO_PENALTIES
+  GOALS_OPEN_PLAY
+  GOALS_OWN
+  GOALS_OWN_CONCEDED
+  GOALS_PENALTY
+  GOALS_PREVENTED
+  GOALS_PREVENTED_NO_PENALTIES
+  GOALS_SCORED
+  GOALS_SET_PIECE
+  GOALS_SUBSTITUTES
+  GOALS_WINNING
+  HANDBALLS
+  HIT_WOODWORK
+  INTERCEPTIONS
+  INTERCEPTIONS_BOX_OWN
+  INTOBOX_CORNERS_ACCURACY
+  INTOBOX_CORNERS_ACCURATE
+  INTOBOX_CORNERS_TOTAL
+  INTOBOX_FREEKICKS_ACCURACY
+  INTOBOX_FREEKICKS_ACCURATE
+  INTOBOX_FREEKICKS_TOTAL
+  KEEPER_SWEEPER_ACCURACY
+  KEEPER_SWEEPER_ACCURATE
+  KEEPER_SWEEPER_TOTAL
+  KEEPER_THROWS_ACCURACY
+  KEEPER_THROWS_ACCURATE
+  KEEPER_THROWS_TOTAL
+  LAYOFFS_ACCURACY
+  LAYOFFS_ACCURATE
+  LAYOFFS_TOTAL
+  LONG_BALLS_ACCURACY
+  LONG_BALLS_ACCURATE
+  LONG_BALLS_TOTAL
+  MATCH_LINEUP_STARTING
+  MATCH_MINUTES_PLAYED
+  OFFSIDES
+  PASSES_ACCURACY
   PASSES_ACCURATE
+  PASSES_BACKWARD_TOTAL
+  PASSES_FINAL_THIRD_ACCURACY
+  PASSES_FINAL_THIRD_ACCURATE
+  PASSES_FINAL_THIRD_TOTAL
+  PASSES_FORWARD_TENDENCY
+  PASSES_FORWARD_TOTAL
+  PASSES_OPEN_PLAY_ACCURACY
+  PASSES_OPEN_PLAY_ACCURATE
+  PASSES_OPEN_PLAY_TOTAL
+  PASSES_THROUGH_ACCURACY
+  PASSES_THROUGH_ACCURATE
+  PASSES_THROUGH_TOTAL
   PASSES_TOTAL
+  PENALTIES_COMMITTED
+  PENALTIES_FACED
+  PENALTIES_MISSED
+  PENALTIES_MISSED_POST
+  PENALTIES_MISSED_SAVE
+  PENALTIES_NOT_CONVERTED
+  PENALTIES_SAVED
+  PENALTIES_WON
+  POSSESSION_LOST
+  POSSESSION_PERCENTAGE
+  POSSESSION_WON
+  PUNCHES_TOTAL
+  SAVES_BOX_IN
+  SAVES_BOX_OUT
+  SAVES_EFFICIENCY
+  SAVES_OPEN_PLAY
+  SAVES_SET_PIECE
+  SAVES_TOTAL
+  SET_PIECE_FREE
+  SHOTS_ACCURACY
+  SHOTS_BLOCKED
+  SHOTS_BOX_IN
+  SHOTS_BOX_OUT
+  SHOTS_FACED
+  SHOTS_HEAD
+  SHOTS_OFF_TARGET
   SHOTS_ON_TARGET
+  SHOTS_POST
   SHOTS_TOTAL
+  SMOTHERS
+  TACKLE_LAST_MAN
+  TACKLES_EFFICIENCY
+  TACKLES_LOST
+  TACKLES_TOTAL
+  TACKLES_WON
+  THROWS_IN
+  TOUCHES_BOX_OPPOSITE
+  TOUCHES_TOTAL
+  TOUCHES_UNSUCCESSFUL
+  TURNOVERS
 }
 
 enum TeamStaffContractType {
@@ -2955,6 +2173,7 @@ type AggregatedTeamStatsPageInfo {
 
 type AggregatedTeamStatsItem {
   team: Team!
+  matchesPlayed: Int!
   fields: [AggregatedTeamStatsField]!
 }
 
@@ -2990,27 +2209,32 @@ type Country {
   code: CountryCode!
 }
 
+"""
+LineupPlayer represents a single player entry within a specific match lineup.
+It links the base Player entity to match-specific details.
+"""
 type LineupPlayer {
-  "The player in the lineup"
+  "The player in the lineup."
   player: Player!
-  "The position of the player in the lineup"
+  "The position of the player in the lineup (if the player is in the starting lineup, null otherwise)."
   lineupPosition: LineupPosition
-  "Whether the player is in the starting lineup"
+  "Indicates if the player is designated as a starter (true) or a substitute (false)."
   inStartingLineup: Boolean!
-  "Whether the player is the captain"
+  "Indicates if this player holds the captain's armband for this match. Valid only at the moment of the match kick-off, the changes during the match are not reflected."
   isCaptain: Boolean!
-  "The shirt number of the player"
+  "The jersey number of the player."
   shirtNumber: Int
 }
 
-type Lineup @goExtraField(name: "MatchID", type: "string", description: "The ID of the match") @goExtraField(name: "TeamID", type: "string", description: "The ID of the team") {
-  "Team the lineup belongs to"
+"""
+Represents the complete squad configuration for one team in a single match.
+"""
+type Lineup @goExtraField(name: "MatchID", type: "string", description: "The ID of the match.") @goExtraField(name: "TeamID", type: "string", description: "The ID of the team.") {
+  "Team the lineup belongs to."
   team: Team!
-  "Formation of the lineup (e.g., 4-4-2, 4-3-3)"
+  "Formation of the lineup (e.g., 4-4-2, 4-3-3)."
   formation: LineupFormation
-  "Players in the lineup"
-  players: [Player!]! @deprecated(reason: "Use lineupPlayers instead") @goField(forceResolver: true)
-  "List of all players in the lineup with their positions"
+  "List of all players in the lineup with their positions and other details."
   lineupPlayers: [LineupPlayer!]! @goField(forceResolver: true)
 }
 
@@ -3059,8 +2283,8 @@ type Match {
   teamStats(filter: MatchTimeFrameFilter): [TeamMatchStats!]! @goField(forceResolver: true)
   "The matchEvents object contains the list of all events which happened during the match as the result of player's or referee's activity, such as goal scored, foul committed or card given (see MatchEventTypeEnum for list of all supported events)."
   matchEvents(filter: MatchEventFilter, sort: MatchEventSort, first: Int!, after: String): MatchEventsResult! @goField(forceResolver: true)
-  "Get match time frame at specific date time. If 'at' is not provided, current time is used."
-  timeFrameAt(at: DateTime): MatchTimeFrame! @goField(forceResolver: true)
+  "Get match clock (time frame) at specific date time. If 'at' is not provided, current time is used."
+  clock(at: DateTime): MatchTimeFrame! @goField(forceResolver: true)
 }
 
 """
@@ -5022,7 +4246,8 @@ type PlayerRatingBonuses {
 }
 
 """
-List of all bonuses that contributed to the rating value including including their
+List of all bonuses that contributed to the rating value including their
+type (indicating the specific activity generating the bonus) and subtype (indicating performance level: excellent, normal, or poor)."
 type (indicating the specific activity generating the bonus) and subtype (indicating performance level: excellent, normal, or poor)."
 """
 type PlayerRatingBonus {

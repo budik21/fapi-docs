@@ -11,4 +11,5 @@ import JsonExportButton from '@site/src/components/JsonExportButton';
 | Field | Type | Description |
 |---|---|---|
 | `team` | [Team!](../interfaces/Team) |  |
+| `matchesPlayed` | `Int!` |  |
 | `fields` | [[AggregatedTeamStatsField]!](../objects/AggregatedTeamStatsField) |  |

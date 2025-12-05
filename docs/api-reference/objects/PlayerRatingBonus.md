@@ -7,7 +7,7 @@ sidebar_label: "Player Rating Bonus"
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
 :::info[no-header]
-List of all bonuses that contributed to the rating value including including their type (indicating the specific activity generating the bonus) and subtype (indicating performance level: excellent, normal, or poor)."
+List of all bonuses that contributed to the rating value including their type (indicating the specific activity generating the bonus) and subtype (indicating performance level: excellent, normal, or poor)." type (indicating the specific activity generating the bonus) and subtype (indicating performance level: excellent, normal, or poor)."
 :::
 
 ---

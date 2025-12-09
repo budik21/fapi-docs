@@ -34,13 +34,22 @@ Calculations do not stop at the end of the match; they continue as long as playe
 Although post-match data changes that affect a player’s final rating may be inconvenient, they also allow the most accurate rating calculation possible. Most ratings can be considered final 24 hours after the match ends, and after 72 hours, only a very small percentage of ratings undergo any further changes.
 :::
 
+### Rating Calculation Precision
+All rating values are calculated with a precision of **six decimal places**. Any rounding for display purposes is the responsibility of the consuming application.
+
+### Capped vs. Uncapped Rating Values
+Two distinct rating values are provided for each player:
+
+* **Capped Value** (`value`): The rating normalized to a scale of 1 to 10. This is the standard value used for display.
+* **Uncapped Value** (`valueUncapped`): The raw calculated rating, which can fall below 1 or exceed 10. Its primary purpose is **tie-breaking**. For example, if multiple players achieve the maximum capped rating of 10 (or minimum of 1), the uncapped value allows you to differentiate between them and determine the better/the worse performance.
+
 ### Player of the Match
 
-The final rating is used to determine the **Player of the Match**. This title is awarded to the participating player with the highest calculated final rating. The award is assigned automatically after the match finishes.
+The final rating is used to determine the **Player of the Match**. This title is awarded to the player with the highest calculated final rating.
 
-The player with the highest uncapped rating will have the `isPlayerOfTheMatch` attribute set to `true`, while all other players will have `false`.
+The player with the highest uncapped rating is identified by the `isPlayerOfTheMatch` attribute being set to `true`, while all others are set to `false`. This status is available in real-time throughout the game, although the official title is typically awarded only after the match finishes.
 
-In the event of a tie (when two or more players have the same rating), the uncapped rating value with a precision of six decimal places is used to resolve the situation.
+In the event of a tie (when two or more players have the same rating), the uncapped rating value with a precision of six decimal places is used to break the tie.
 
 :::tip[Alternative way to retrieve PotM]
 While the rating is part of the Player Match Stats (see the `RATING_PLAYER` metric), you can also identify the Player of the Match using the `ranking` or `rankingComplex` attributes. Refer to the [Player Match stats Ranking chapter](./../stats/stats-player-match#ranking) for more details.

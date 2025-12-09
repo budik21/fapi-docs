@@ -18,6 +18,7 @@ type Query {
   "Find localized texts by IDs"
   localizedTexts(ids: [String!]!): [LocalizedText]!
   seasonStageTeamStats(seasonStageID: ID!, fields: [TeamMatchMetric!]!, filter: AggregatedTeamStatsFilter, sort: [AggregatedTeamStatsSortItem!], pagination: AggregatedTeamStatsPagination): AggregatedTeamStatsResponse!
+  seasonStagePlayerStats(seasonStageID: ID!, fields: [PlayerMatchMetric!]!, filter: AggregatedPlayerStatsFilter, sort: [AggregatedPlayerStatsSortItem!], pagination: AggregatedPlayerStatsPagination): AggregatedPlayerStatsResponse!
 }
 
 """Represents the competition’s age restriction category."""
@@ -2146,6 +2147,21 @@ input PlayerMatchStatsChangedFilter {
   playerID: IDFilter
 }
 
+input AggregatedPlayerStatsFilter {
+  playerIDs: [ID!]
+  side: TeamHomeAway
+}
+
+input AggregatedPlayerStatsSortItem {
+  metric: PlayerMatchMetric!
+  direction: SortDirection!
+}
+
+input AggregatedPlayerStatsPagination {
+  limit: Int!
+  offset: Int
+}
+
 input AggregatedTeamStatsFilter {
   teamIDs: [ID!]
   side: TeamHomeAway
@@ -2160,6 +2176,26 @@ input AggregatedTeamStatsSortItem {
 input AggregatedTeamStatsPagination {
   limit: Int!
   offset: Int
+}
+
+type AggregatedPlayerStatsResponse {
+  items: [AggregatedPlayerStatsItem]!
+  pageInfo: AggregatedPlayerStatsPageInfo!
+}
+
+type AggregatedPlayerStatsPageInfo {
+  hasNextPage: Boolean!
+}
+
+type AggregatedPlayerStatsItem {
+  player: Player!
+  matchesPlayed: Int!
+  fields: [AggregatedPlayerStatsField]!
+}
+
+type AggregatedPlayerStatsField {
+  metric: PlayerMatchMetric!
+  value: Float
 }
 
 type AggregatedTeamStatsResponse {
@@ -4233,6 +4269,8 @@ type PlayerRating @goExtraField(name: "MatchID", type: "string", description: "T
   updatedAt: DateTime!
   "Historical rating data for player throughout the match, sorted by minute in ascending order."
   ratingHistory: [PlayerRatingHistory!]! @goField(forceResolver: true)
+  "Indicates if the player was awarded 'Player of the Match' for this match."
+  isPlayerOfTheMatch: Boolean! @goField(forceResolver: true)
 }
 
 """

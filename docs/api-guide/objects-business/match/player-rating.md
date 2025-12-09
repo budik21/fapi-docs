@@ -34,6 +34,18 @@ Calculations do not stop at the end of the match; they continue as long as playe
 Although post-match data changes that affect a player’s final rating may be inconvenient, they also allow the most accurate rating calculation possible. Most ratings can be considered final 24 hours after the match ends, and after 72 hours, only a very small percentage of ratings undergo any further changes.
 :::
 
+### Player of the Match
+
+The final rating is used to determine the **Player of the Match**. This title is awarded to the participating player with the highest calculated final rating. The award is assigned automatically after the match finishes.
+
+The player with the highest uncapped rating will have the `isPlayerOfTheMatch` attribute set to `true`, while all other players will have `false`.
+
+In the event of a tie (when two or more players have the same rating), the uncapped rating value with a precision of six decimal places is used to resolve the situation.
+
+:::tip[Alternative way to retrieve PotM]
+While the rating is part of the Player Match Stats (see the `RATING_PLAYER` metric), you can also identify the Player of the Match using the `ranking` or `rankingComplex` attributes. Refer to the [Player Match stats Ranking chapter](./../stats/stats-player-match#ranking) for more details.
+:::
+
 ### Live, Final and Historical rating values
 The centerpiece of the rating data is the `value` attribute within the `playerRating` object. Its meaning evolves depending on the match phase.
 

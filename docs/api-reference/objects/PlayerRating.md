@@ -24,3 +24,4 @@ Provides performance evaluations (ratings) for players who participated in the m
 | `createdAt` | [DateTime!](../scalars/DateTime) | The timestamp of when the rating was created. ISO 8601 (RFC 3339). |
 | `updatedAt` | [DateTime!](../scalars/DateTime) | The timestamp of when the rating was last updated. ISO 8601 (RFC 3339). |
 | `ratingHistory` | [[PlayerRatingHistory!]!](../objects/PlayerRatingHistory) | Historical rating data for player throughout the match, sorted by minute in ascending order. |
+| `isPlayerOfTheMatch` | `Boolean!` | Indicates if the player was awarded 'Player of the Match' for this match. |

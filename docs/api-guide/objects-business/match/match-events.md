@@ -41,7 +41,7 @@ However, certain events involve multiple participants. In these instances, the p
 The same principle applies to **team-related attributes**, where multiple teams may be referenced depending on the event context.
 
 :::tip[Using Specific Player Attributes]
-When multiple roles are present in a event type, we recommend using these **specific player attributes** instead of the common `player` or `team` attribute to ensure data precision and avoid ambiguity.
+When multiple roles are present in an event type, we recommend using these **specific player attributes** instead of the common `player` or `team` attribute to ensure data precision and avoid ambiguity.
 :::
 
 
@@ -97,7 +97,7 @@ The `matchEvents` field accepts the following arguments to customize your query:
         ```
     </TabItem>
     <TabItem value="responseCARD" label="Response" default>
-        ```json showLineNumbers title="Response: Match Event data, common attibutes"
+        ```json showLineNumbers title="Response: Match Event data, common attributes"
         {
           "data": {
             "match": {

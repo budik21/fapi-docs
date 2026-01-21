@@ -117,7 +117,29 @@ To track the **player's rating progression** minute-by-minute, read the `playerR
 A player's rating is calculated at least once during each minute the player spends on the pitch (the responsible metric is `MATCH_MINUTES_PLAYED_LIVE_ONPITCH` which is being changed during additional time, while `MATCH_MINUTES_PLAYED_LIVE` is not). In some cases, the rating is recalculated immediately after an event occurs.
 
 The system triggers a rating recalculation for the affected player whenever a change is detected in the following metrics:
- `ASSISTS_GOAL` | `BIG_CHANCES_CREATED` | `BIG_CHANCES_SAVED` | `CARDS_RED` | `CLEARANCES_OFF_LINE` |`ERRORS_LEAD_TO_GOAL` | `GOALS_NO_PENALTIES` | `GOALS_PENALTY` |`GOALS_OWN` | `PENALTIES_NOT_CONVERTED` |`PENALTIES_SAVED`.
+ `ASSISTS_GOAL` | `BIG_CHANCES_CREATED` | `BIG_CHANCES_SAVED` | `BIG_CHANCES_MISSED` | `CARDS_RED` | `CLEARANCES_OFF_LINE` |`ERRORS_LEAD_TO_GOAL` | `GOALS_NO_PENALTIES` | `MATCH_MINUTES_PLAYED_LIVE` | `MATCH_MINUTES_PLAYED_LIVE_ONPITCH` | `GOALS_PENALTY` |`GOALS_OWN` | `PENALTIES_NOT_CONVERTED` |`PENALTIES_SAVED`.
+
+### Rating position
+For rating calculation purposes, each player is assigned a rating position based on their lineup role and formation used.
+
+There is a slight distinction between lineup positions and rating positions: lineup positions are more granular, whereas rating positions are broader categories and do not distinguish between left, center, or right roles.
+
+All players who are not in the starting lineup are assigned the `SUBSTITUTE` rating position, regardless of their actual role when they enter the pitch (as this role is unpredictable).
+
+:::tip[How to handle the SUBSTITUTE rating position]
+If you use the rating position for display purposes (e.g., in a tooltip), we recommend replacing the `SUBSTITUTE` value with the player's common position (see the `position` attribute in the [Player object](./../../../api-reference/objects/Player)) or the specific lineup position (see the `lineupPosition` attribute in the [LineupPlayer](./../../../api-reference/objects/LineupPlayer) object).
+:::
+
+Possible values for the `ratingPosition` attribute are:
+* `ATTACKING_MIDFIELDER`
+* `CENTRE_BACK`
+* `FULL_BACK`
+* `GOALKEEPER`
+* `MIDFIELDER`
+* `STRIKER`
+* `SUBSTITUTE`
+* `WING_BACK`
+* `WINGER`
 
 
 ## How to get the rating data
@@ -228,6 +250,7 @@ Please note that the base rating value is also available via the `RATING_PLAYER`
           }
           value
           valueUncapped
+          ratingPosition
           ratingConfigID
           createdAt
           updatedAt
@@ -263,6 +286,7 @@ Please note that the base rating value is also available via the `RATING_PLAYER`
         },
         "value": 6.20866,
         "valueUncapped": 6.20866,
+        "ratingPosition": "CENTRE_BACK",
         "ratingConfigID": "1991831638732181504",
         "createdAt": "2025-11-23T16:39:34Z",
         "updatedAt": "2025-11-24T14:21:54Z",

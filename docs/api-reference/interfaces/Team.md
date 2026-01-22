@@ -15,3 +15,6 @@ import JsonExportButton from '@site/src/components/JsonExportButton';
 | `gender` | [Gender!](../enums/Gender) | Gender of the team |
 | `level` | [TeamLevel!](../enums/TeamLevel) | Level of the team (e.g. A, B, C) |
 | `localizedName` | [LocalizedText!](../objects/LocalizedText) | Localized name of the team |
+| `pastMatches` | [[Match!]!](../objects/Match) | Last matches for the team |
+| `upcomingMatches` | [[Match!]!](../objects/Match) | Upcoming matches for the team |
+| `pastHeadToHeadMatches` | [[Match!]!](../objects/Match) | Past head-to-head matches between this team and an opponent team |

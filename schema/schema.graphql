@@ -63,6 +63,48 @@ enum AgeGroup {
   U15
 }
 
+"""Describes all possible body parts used by a player during the game"""
+enum BodyPart {
+  "Represents a NULL or UNKNOWN value."
+  UNSPECIFIED
+  "Player used a foot for the action, but we don't know which one."
+  FOOT
+  "Player used the left foot for the action."
+  LEFT_FOOT
+  "Player used the right foot for the action."
+  RIGHT_FOOT
+  "Player used the body for the action (chest, hip, shoulder), but we don't know which one."
+  BODY
+  "Player used the chest for the action."
+  CHEST
+  "Player used the shoulder for the action."
+  SHOULDER
+  "Player used the hip (CZ: bok) for the action."
+  HIP
+  "Player used the back (CZ: záda) for the action."
+  BACK
+  "Player used the backside (CZ: zadek) for the action."
+  BACKSIDE
+  "Player used the abdomen (CZ: břicho) for the action."
+  ABDOMEN
+  "Player used a hand for the action, but we don't know which one."
+  HAND
+  "Player used the left hand for the action."
+  LEFT_HAND
+  "Player used the right hand for the action."
+  RIGHT_HAND
+  "Player used both hands for the action."
+  HANDS
+  "Player used feet for the action."
+  FEET
+  "Player used an unknown part of the body."
+  UNKNOWN
+  "Player used the head for the action."
+  HEAD
+  "Player used another body part than feet or head for the action."
+  OTHER
+}
+
 """
 Represents the location on the pitch where the match event occurred, described in relation to the penalty areas of both teams.
 """
@@ -143,6 +185,24 @@ enum CardType {
   RED_CARD_DIRECT
   "Represents a dismissal from the match due to a second yellow card. The player is sent-off and must leave both the pitch and bench area."
   RED_CARD_INDIRECT
+}
+
+"""
+Describes all possibilities how many players, regardless of the team, were standing between the shooter and the goal
+"""
+enum ClarityType {
+  "Represents a NULL or UNKNOWN value."
+  UNSPECIFIED
+  "The shot was taken at an empty goal with no goalkeeper or other players blocking it."
+  EMPTY_GOAL
+  "The shot was taken facing only the goalkeeper, with no other players blocking."
+  FACING_GOALKEEPER_ONLY
+  "The shot was taken facing only the goalkeeper, with at least one other blocking players"
+  ONE_AT_LEAST
+  "The shot was taken facing only the goalkeeper, with at least two other blocking players"
+  TWO_AT_LEAST
+  "The shot was taken facing only the goalkeeper, with more than two other blocking players"
+  MORE_THAN_TWO
 }
 
 """
@@ -710,6 +770,20 @@ enum CountryCode {
   ZAIRE
 }
 
+"""Represents the status of an event, indicating its validation state."""
+enum EventStatus {
+  "Represents a NULL or UNKNOWN value"
+  UNSPECIFIED
+  "An event has occurred but requires further confirmation or review before it can be confirmed. If a goal is in this state, no score change is made until the event is fully confirmed."
+  TEMPORARILY_VALID
+  "It is likely the event will be definitively confirmed based on a qualified estimation (such as the behavior of on-pitch actors), but it may still be subject to further review or challenges."
+  PROVISIONALLY_CONFIRMED
+  "The event has been definitively confirmed and cannot be undone"
+  CONFIRMED
+  "The event has been revoked after review and is no longer valid. If the score was altered based on previous (provisionaly confirmed) state, the change must be reverted."
+  CANCELED
+}
+
 """
 Classifies a foul based on whether it was committed during a defensive or offensive action by the player.
 """
@@ -784,6 +858,20 @@ enum Gender {
   MEN
   """Women's category."""
   WOMEN
+}
+
+"""Indicates the reason why a goal was disallowed by the referee."""
+enum GoalDisallowedReason {
+  "Represents a NULL or UNKNOWN value"
+  UNSPECIFIED
+  "The goal was scored using a hand/arm (intentional or unintentional)"
+  HANDBALL
+  "The goal was scored following an offside position"
+  OFFSIDE
+  "The goal was scored after a foul committred by an opponent"
+  FOUL
+  "The ball had crossed the goal line or touchline before the goal was scored"
+  BALL_OUT_OF_PLAY
 }
 
 """
@@ -1131,6 +1219,34 @@ enum MatchPhase {
   AFTER_MATCH
 }
 
+"""
+Describes all possible situations that can occur during the game, each of which can start an event.
+"""
+enum MatchSituation {
+  "Represents a NULL or UNKNOWN value."
+  UNSPECIFIED
+  "The game is in regular motion, outside of set-piece situations"
+  OPEN_PLAY
+  "A stationary ball due to a foul or other rule infringement"
+  FREE_KICK
+  "A stationary ball in a corner area because the ball crosses the goal line, last touched by a defending player"
+  CORNER_KICK
+  "A stationary ball in a goal area after the opposing team has played the ball over the goal line."
+  GOAL_KICK
+  "Throwing the ball in from the touchline after it has left the field."
+  THROW_IN
+  "A stationary ball in the center circle to start or restart the game after a goal."
+  KICK_OFF
+  "A stationary ball placed 11 meters from the goal line, awarded as a result of a foul by the opposing team within their own penalty box. In this context, if related to a pass, it means that the penalty did not result in a typical shot but rather a pass to a teammate attempting to score"
+  PENALTY_KICK
+  "The referee restarts play by dropping the ball between players after a stoppage due to a neutral reason, such as an injury or external interference. The ball is dropped at the spot where play was stopped, allowing both teams an equal chance to regain possession"
+  DROP_BALL
+  "A shot was taken or the goal was scored directly from a corner kick"
+  CORNER_KICK_SHOT
+  "Pass events after the goalkeeper collects the ball with their hands and then puts it on the ground"
+  GOALKEEPER_START
+}
+
 """Represents the current status of a football match."""
 enum MatchStatus {
   "Match is scheduled but has not started."
@@ -1143,6 +1259,139 @@ enum MatchStatus {
   FINISHED
   "Match has been cancelled."
   CANCELLED
+}
+
+"""Categorization of the directional movement of a pass made."""
+enum PassDirection {
+  "Represents a NULL or UNKNOWN value."
+  UNSPECIFIED
+  "Pass aimed forward to advance play toward the opponent's goal."
+  FORWARD
+  "Pass made backward to maintain possession or reset play."
+  BACK
+  "Pass directed to the left side of the player."
+  LEFT
+  "Pass directed to the right side of the player."
+  RIGHT
+  LEFT_FORWARD
+  RIGHT_FORWARD
+  LEFT_BACK
+  RIGHT_BACK
+}
+
+"""Describes all lengths of the pass attempt."""
+enum PassDistance {
+  "Represents a NULL or UNKNOWN value."
+  UNSPECIFIED
+  "The pass attempt was made on the medium distance (<10 m)"
+  SHORT
+  "The pass attempt was made on the short medium (10+ m; <35 m)"
+  MEDIUM
+  "The pass attempt was made on the long distance (35+ m)"
+  LONG
+}
+
+"""Describes the order of the assist, if the pass was a goal assist."""
+enum PassGoalAssistOrder {
+  "Represents a NULL or UNKNOWN value."
+  UNSPECIFIED
+  "The pass was the first assist to the goal"
+  ASSIST_FIRST
+  "The pass was the second assist to the goal"
+  ASSIST_SECOND
+}
+
+"""Describes all possible outcomes of a pass attempt."""
+enum PassOutcome {
+  "Represents a NULL or UNKNOWN value."
+  UNSPECIFIED
+  "The pass reaches its intended target (receiver) without interception, allowing the team to maintain possession."
+  SUCCESS
+  "The pass is intercepted by an opponent, disrupting the play and resulting in a loss of possession."
+  INTERCEPTED
+  "The pass goes out of bounds, leading to a throw-in, corner kick, or goal kick, depending on where it left the field."
+  OUT_OF_BOUND
+  "The pass does not reach its intended target (receiver) from any reason"
+  NOT_COMPLETED
+}
+
+"""
+Categorization of passes by their tactical intent, highlighting their role in creating opportunities, advancing play, or maintaining possession.
+"""
+enum PassPurpose {
+  "Represents a NULL or UNKNOWN value."
+  UNSPECIFIED
+  "A standard pass aimed at maintaining possession or connecting teammates."
+  COMMON
+  "A pass that cuts through the defense, intended for a teammate running into space."
+  THROUGH
+  "A pass that creates a significant scoring opportunity, setting up a potential shot."
+  KEY
+  "A pass where player passed the ball into the path of a teammate's run (Czech: Přihrávka do běhu)."
+  LAY_OFF
+  "A pass that advances the play significantly towards the opponent's goal."
+  PROGRESSIVE
+  "A pass that moves the play across the field, usually from one wing to the other."
+  SWITCH
+  "A pass made to a teammate breaking into open space, initiating a rapid counterattack."
+  FAST_BREAK
+  "A pass that advances into a new zone of the field, not directed at a specific player."
+  ZONE_GAIN
+  "A headed pass redirecting the ball backward, typically intended for a teammate behind."
+  FLICK_ON
+  "A pass directed out from the attacking penalty area."
+  BOX_OUT
+  "A deliberate pass into touch to stop play and allow treatment for an injured player."
+  FAIR_PLAY
+}
+
+"""Describes all possible types of the pass."""
+enum PassType {
+  "Represents a NULL or UNKNOWN value."
+  UNSPECIFIED
+  "The common pass attempt was made"
+  COMMON
+  "The pass attempt was played through the air and the target was opponent's box"
+  CROSS
+  "A short touch or quick pass over a small distance, often used in the setup of a free kick."
+  TAP
+  "A corner kick played with a curve towards the goal."
+  CORNER_IN_SWINGER
+  "A corner kick played with a curve away from the goal."
+  CORNER_OUT_SWINGER
+  "A corner kick played with little or no spin, resulting in a straight trajectory."
+  CORNER_STRAIGHT
+  "A cross that is hit too hard or too far, overshooting the intended target area."
+  CROSS_OVERHIT
+  "A pass made by the goalkeeper by throwing the ball by hand to a teammate."
+  KEEPER_THROW
+  "A first time pass (played with head or foot) when a player has their back to the opposition goal, intended to help the ball on to a team mate"
+  FLICK_ON
+}
+
+enum PeriodSuspensionReason {
+  "The reason for the suspension is not known"
+  UNSPECIFIED
+  "The period was suspended due to adverse weather conditions in general"
+  WEATHER
+  "The period was suspended due to heavy rain"
+  WEATHER_HEAVY_RAIN
+  "The period was suspended due to a storm"
+  WEATHER_STORM
+  "The period was suspended due to heavy snowfall"
+  WEATHER_HEAVY_SNOW
+  "The period was suspended due to fog"
+  WEATHER_FOG
+  "The period was suspended due to crowd disturbances or spectator incidents"
+  CROWD_TROUBLES
+  "The period was suspended due to a floodlight or stadium lighting failure"
+  FLOODLIGHT_FAILURE
+  "The period was suspended due to an unplayable pitch (e.g. waterlogged, frozen, or damaged)"
+  PITCH_CONDITION
+  "The period was suspended due to a security-related incident (e.g. object thrown, pitch invasion, safety alert)"
+  SECURITY_ISSUE
+  "The period was suspended due to a serious medical emergency on the field or in the stands"
+  MEDICAL_EMERGENCY
 }
 
 """
@@ -1162,6 +1411,47 @@ enum PitchZone {
   ATTACKING_HALF_LEFT
   "The event occured on the right part of the attacking half"
   ATTACKING_HALF_RIGHT
+}
+
+"""
+Provides a detailed specification of the pitch location where a shot was taken,
+breaking down the area around the goal into precise zones for granular analysis.
+"""
+enum PitchZoneDetail {
+  "Represents a NULL or UNKNOWN value."
+  UNSPECIFIED
+  "The action was taken in the right side of the six-yard box."
+  BOX_SMALL_RIGHT
+  "The action was taken in the center of the six-yard box."
+  BOX_SMALL_CENTER
+  "The action was taken in the left side of the six-yard box."
+  BOX_SMALL_LEFT
+  "The action was taken in the right side of the penalty area."
+  BOX_RIGHT
+  "The action was taken in the center of the penalty area."
+  BOX_CENTER
+  "The action was taken in the left side of the penalty area."
+  BOX_LEFT
+  "The action was taken deep in the right side of the penalty area."
+  BOX_DEEP_RIGHT
+  "The action was taken deep in the left side of the penalty area."
+  BOX_DEEP_LEFT
+  "The action was taken outside the penalty area on the right side."
+  BOX_OUT_RIGHT
+  "The action was taken outside the penalty area in a central position."
+  BOX_OUT_CENTER
+  "The action was taken outside the penalty area on the left side."
+  BOX_OUT_LEFT
+  "The action was taken far outside the penalty area on the right side."
+  BOX_OUT_DEEP_RIGHT
+  "The action was taken far outside the penalty area on the left side."
+  BOX_OUT_DEEP_LEFT
+  "The action was taken more than 35 meters from goal on the right side."
+  PLUS_35M_RIGHT
+  "The action was taken more than 35 meters from goal in a central position."
+  PLUS_35M_CENTER
+  "The action was taken more than 35 meters from goal on the left side."
+  PLUS_35M_LEFT
 }
 
 """
@@ -1237,6 +1527,10 @@ enum PlayerMatchMetric {
   The count of times a player receives a cautionary penalty (yellow card) from the referee for unsporting behavior, repeated infringements, delaying the restart of play, or other minor offenses.
   """
   CARDS_YELLOW
+  """
+  The count of times a player receives a second yellow card in the same match, which results in a red card and sending off.
+  """
+  CARDS_YELLOW_SECOND
   """
   The total number of times a player receives the ball and carries (drives) it forward towards the opposition's goal before making a pass, taking a shot, or losing possession.
   A carry must result in the ball being moved at least 5 meters closer to the opposition's goal to be counted as progressive.
@@ -1519,6 +1813,8 @@ enum PlayerMatchMetric {
   The total number of times a player illegally handles the ball with their hand or arm, resulting in a free kick or penalty.
   """
   HANDBALLS
+  """Number of times the player hit the woodwork (post or crossbar)"""
+  HIT_WOODWORK
   """
   The percentage of accurate corner kicks into the opponent's penalty area and successfully find a teammate, including both direct deliveries and long passes from a corner.
   """
@@ -1601,6 +1897,10 @@ enum PlayerMatchMetric {
   """
   LONG_BALLS_TOTAL
   """
+  Indicates if the player was on the pitch at the moment the match ended, regardless of how many minutes he played in the match.
+  """
+  MATCH_LINEUP_FINISHING
+  """
   The player was selected as part of the team's starting lineup and began the match on the field, regardless of how many minutes he played in the match.
   """
   MATCH_LINEUP_STARTING
@@ -1634,6 +1934,10 @@ enum PlayerMatchMetric {
   Added time is included. We extract significant stoppages in play (e.g., injuries, VAR reviews) to provide a more accurate representation of actual playing time.
   """
   MATCH_MINUTES_PLAYED_LIVE_INPLAY
+  """
+  Indicates whether a player is on the pitch during the live phase of the match.
+  """
+  MATCH_ON_PITCH_LIVE
   """
   Indicates whether the player played for the team that won the match (1 if yes, 0 if no)
   """
@@ -1748,6 +2052,18 @@ enum PlayerMatchMetric {
   The real public value for Player's rating is in RATING_PLAYER metric.
   """
   RATING_PLAYER_RAW
+  """
+  [INTERNAL ONLY] An adjustment value applied to the final calculated rating. Used only in exceptional cases of major miscalculation to manually override the system's output.
+  """
+  RATING_PLAYER_MANUAL_CORRECTION
+  """
+  [INTERNAL ONLY] Defines the higher limit for manual rating adjustments. When set, a manually entered rating cannot go over this value. If left undefined, no higher bound restriction is enforced during manual corrections.
+  """
+  RATING_PLAYER_MANUAL_MAX
+  """
+  [INTERNAL ONLY] Defines the lower limit for manual rating adjustments. When set, a manually entered rating cannot fall below this value. If left undefined, no lower bound restriction is enforced during manual corrections.
+  """
+  RATING_PLAYER_MANUAL_MIN
   """
   The number of penalty kicks that hit the goalpost or crossbar and did not result in a goal.
   """
@@ -1882,6 +2198,37 @@ enum PlayerMatchMetric {
 }
 
 """
+PlayerPosition represents the general playing position category of a football player.
+This is a high-level classification that describes the player's typical role on the field.
+"""
+enum PlayerPosition {
+  "The goalkeeper, the only player allowed to handle the ball within their own penalty area."
+  GOALKEEPER
+  "A defensive player who primarily focuses on preventing the opposing team from scoring."
+  DEFENDER
+  "A player who operates in the middle of the field, balancing defensive and attacking responsibilities."
+  MIDFIELDER
+  "An attacking player who primarily focuses on creating scoring opportunities and scoring goals."
+  ATTACKER
+}
+
+"""
+Describes all possible types of pressure applied by opposing players on the shooter.
+"""
+enum PressureType {
+  "Represents a NULL or UNKNOWN value."
+  UNSPECIFIED
+  "The shot was made without any pressure from opposing players."
+  NO_PRESSURE
+  "The shot was made under low pressure from opposing players."
+  LOW_PRESSURE
+  "The shot was made under medium pressure from opposing players."
+  MEDIUM_PRESSURE
+  "The shot was made under high pressure from opposing players."
+  HIGH_PRESSURE
+}
+
+"""
 Defines the different types of restart kicks or set-pieces awarded by the referee as a consequence of a foul or infringement committed by a player.
 """
 enum PunishmentKickType {
@@ -1905,11 +2252,107 @@ enum RefereeAction {
   PERIOD_START
   "The referee ends the period"
   PERIOD_END
+  "The referee stops the period due to extraordinary circumstances. The match is suspended from this moment."
+  PERIOD_SUSPENSION_START
+  "The referee restarts the period after it was stopped due to extraordinary circumstances. The match is resumed from this moment."
+  PERIOD_SUSPENSION_END
+}
+
+"""
+Specifies the geographic region for international or continental competitions.
+Used to categorize competitions like UEFA (Europe), CONMEBOL (South America), etc.
+"""
+enum Region {
+  """Africa"""
+  AFRICA
+  """America (general category)"""
+  AMERICA
+  """Antarctica"""
+  ANTARCTICA
+  """Asia"""
+  ASIA
+  """Central America"""
+  CENTRAL_AMERICA
+  """Europe"""
+  EUROPE
+  """North America"""
+  NORTH_AMERICA
+  """North and Central America"""
+  NORTH_AND_CENTRAL_AMERICA
+  """Oceania"""
+  OCEANIA
+  """South America"""
+  SOUTH_AMERICA
+  """World (global competitions like FIFA World Cup)"""
+  WORLD
+}
+
+"""Describes all possible outcomes of a shot attempt."""
+enum ShotOutcome {
+  "Represents a NULL or UNKNOWN value."
+  UNSPECIFIED
+  "A shot that is directed toward the goal and would result in a goal if not stopped by the goalkeeper or blocked by a defender"
+  ON_TARGET
+  "A shot that is directed toward the goal but misses, either going wide or over the crossbar"
+  OFF_TARGET
+  "A shot that is intercepted by a defender before it reaches the goal, preventing it from being on target or off target."
+  BLOCKED
+  "The shot is redirected by a player (teammate or opponent), altering its original path, which can still lead to any of the outcomes above (goal, save, miss, etc.)."
+  DEFLECTED
+}
+
+"""Description of the zones of the goal and in the vicinity of the goal"""
+enum ShotTarget {
+  "Represents a NULL or UNKNOWN value."
+  UNSPECIFIED
+  "A shot placed low into the bottom-left corner of the goal."
+  GOAL_LOW_LEFT
+  "A shot placed low and centrally into the goal."
+  GOAL_LOW_CENTER
+  "A shot placed low into the bottom-right corner of the goal."
+  GOAL_LOW_RIGHT
+  "A shot placed high into the top-left corner of the goal."
+  GOAL_HIGH_LEFT
+  "A shot placed high and centrally into the goal."
+  GOAL_HIGH_CENTER
+  "A shot placed high into the top-right corner of the goal."
+  GOAL_HIGH_RIGHT
+  "A shot that narrowly misses the goal to the left."
+  WIDE_CLOSE_LEFT
+  "A shot that clearly misses the goal to the left."
+  WIDE_LEFT
+  "A shot that narrowly misses the goal to the right."
+  WIDE_CLOSE_RIGHT
+  "A shot that clearly misses the goal to the right."
+  WIDE_RIGHT
+  "A shot that narrowly goes over the crossbar."
+  WIDE_CLOSE_HIGH
+  "A shot that clearly goes high over the crossbar."
+  WIDE_HIGH
+  "A shot that narrowly misses high and to the left."
+  WIDE_CLOSE_HIGH_LEFT
+  "A shot that narrowly misses high and to the right."
+  WIDE_CLOSE_HIGH_RIGHT
+  "A shot that goes high and wide to the left."
+  WIDE_HIGH_LEFT
+  "A shot that goes high and wide to the right."
+  WIDE_HIGH_RIGHT
 }
 
 enum SortDirection {
   ASC
   DESC
+}
+
+enum SubstitutionReason {
+  "The substitution reason is not known"
+  UNSPECIFIED
+  "The substitution was made due to a common injury of a player on the pitch"
+  INJURY_COMMON
+  "The substitution was made for tactical reasons"
+  TACTICAL
+  "The substitution was made due to a suspected concussion. When made, it does not count towards the team's substitution quota"
+  INJURY_CONCUSSION
 }
 
 enum TeamHomeAway {
@@ -2014,6 +2457,7 @@ enum TeamMatchMetric {
   GOALS_PREVENTED_NO_PENALTIES
   GOALS_SCORED
   GOALS_SET_PIECE
+  GOALS_SET_PIECE_DIRECT
   GOALS_SUBSTITUTES
   GOALS_WINNING
   HANDBALLS
@@ -2040,6 +2484,9 @@ enum TeamMatchMetric {
   LONG_BALLS_TOTAL
   MATCH_LINEUP_STARTING
   MATCH_MINUTES_PLAYED
+  MATCH_DRAWING_TEAM
+  MATCH_LOSING_TEAM
+  MATCH_WINNING_TEAM
   OFFSIDES
   PASSES_ACCURACY
   PASSES_ACCURATE
@@ -2128,6 +2575,21 @@ input MatchPeriodFilter {
   limit: Int
 }
 
+input MatchPlayerStatsFilter {
+  playerIDs: [ID!]
+  side: TeamHomeAway
+}
+
+input MatchPlayerStatsSortItem {
+  metric: PlayerMatchMetric!
+  direction: SortDirection!
+}
+
+input MatchTeamStatsFilter {
+  side: TeamHomeAway
+  timeFrame: MatchTimeFrameFilter
+}
+
 input MatchTimeFrameFilter {
   "Filter by match phase"
   phase: PhaseFilter
@@ -2150,6 +2612,8 @@ input PlayerMatchStatsChangedFilter {
 input AggregatedPlayerStatsFilter {
   playerIDs: [ID!]
   side: TeamHomeAway
+  nationalities: [CountryCode!]
+  positions: [PlayerPosition!]
 }
 
 input AggregatedPlayerStatsSortItem {
@@ -2238,6 +2702,30 @@ type ClubTeam implements Team {
   club: Club! @goField(forceResolver: true)
   "Localized name of the team"
   localizedName: LocalizedText! @goField(forceResolver: true)
+  "Last matches for the team"
+  pastMatches(first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
+  "Upcoming matches for the team"
+  upcomingMatches(first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
+  "Past head-to-head matches between this team and an opponent team"
+  pastHeadToHeadMatches(opponentTeamID: ID!, first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
+}
+
+"""
+The Competition represents a football competition or league
+(e.g., Premier League, Champions League, World Cup).
+"""
+type Competition {
+  id: ID!
+  "The localized name of the competition (e.g., 'Premier League', 'Chance liga')"
+  localizedName: LocalizedText! @goField(forceResolver: true)
+  "The country code for domestic competitions (e.g., CZECH_REPUBLIC, ENGLAND)"
+  country: CountryCode @goField(forceResolver: true)
+  "The region for international/continental competitions (e.g., 'Europe', 'World')"
+  region: Region @goField(forceResolver: true)
+  "The age group category"
+  ageGroup: AgeGroup @goField(forceResolver: true)
+  "The gender category"
+  gender: Gender @goField(forceResolver: true)
 }
 
 type Country {
@@ -2290,6 +2778,8 @@ type Match {
   id: ID!
   "The current status of the match."
   status: MatchStatus! @goField(forceResolver: true)
+  "The start time of the match."
+  startTime: DateTime @goField(forceResolver: true)
   "The homeTeam object provides metadata for the team designated as the home side, including its name, age category, gender, and hierarchical level (main team, reserve team) within the club structure."
   homeTeam: Team! @goField(forceResolver: true)
   "The awayTeam object provides metadata for the team designated as the away side, including its name, age category, gender, and hierarchical level (main team, reserve team) within the club structure."
@@ -2317,10 +2807,16 @@ type Match {
   playerRatings(playerIDs: [ID!]): [PlayerRating!]! @goField(forceResolver: true)
   "The teamStats object contains overall match statistics for each team and period-based splits, allowing consumers to analyse team performance across the full match and within specific periods."
   teamStats(filter: MatchTimeFrameFilter): [TeamMatchStats!]! @goField(forceResolver: true)
+  "The teamStatsV2 object provides team statistics for a match with field-based selection and filtering support."
+  teamStatsV2(fields: [TeamMatchMetric!]!, filter: MatchTeamStatsFilter): MatchTeamStatsResponse! @goField(forceResolver: true)
+  "The playerStatsV2 object provides player statistics for a match with field-based selection, filtering, sorting, and pagination support."
+  playerStatsV2(fields: [PlayerMatchMetric!]!, filter: MatchPlayerStatsFilter, sort: [MatchPlayerStatsSortItem!]): MatchPlayerStatsResponse! @goField(forceResolver: true)
   "The matchEvents object contains the list of all events which happened during the match as the result of player's or referee's activity, such as goal scored, foul committed or card given (see MatchEventTypeEnum for list of all supported events)."
   matchEvents(filter: MatchEventFilter, sort: MatchEventSort, first: Int!, after: String): MatchEventsResult! @goField(forceResolver: true)
   "Get match clock (time frame) at specific date time. If 'at' is not provided, current time is used."
   clock(at: DateTime): MatchTimeFrame! @goField(forceResolver: true)
+  "The season stage this match belongs to (e.g., Regular Season, Playoffs)"
+  seasonStage: SeasonStage @goField(forceResolver: true)
 }
 
 """
@@ -2481,6 +2977,86 @@ type FoulEvent implements MatchEvent {
   hasStoppedScoringOpportunity: Boolean @goField(forceResolver: true)
 }
 
+type GoalEvent implements MatchEvent {
+  id: ID!
+  type: MatchEventType! @goField(forceResolver: true)
+  timestamp: DateTime! @goField(forceResolver: true)
+  timeFrame: MatchTimeFrame! @goField(forceResolver: true)
+  homeOrAway: TeamHomeAway @goField(forceResolver: true)
+  team: Team @goField(forceResolver: true)
+  player: Player @goField(forceResolver: true)
+  "The status of the goal event"
+  status: EventStatus @goField(forceResolver: true)
+  "Player who scored the goal"
+  scorerPlayer: Player @goField(forceResolver: true)
+  "Team of the player who scored the goal"
+  scorerTeam: Team @goField(forceResolver: true)
+  "Whether the goal was an own goal"
+  isOwnGoal: Boolean @goField(forceResolver: true)
+  "The shot event that resulted in the goal"
+  shotEvent: ShotEvent @goField(forceResolver: true)
+  "The first assist for the goal"
+  assist1Event: PassEvent @goField(forceResolver: true)
+  "The second assist for the goal"
+  assist2Event: PassEvent @goField(forceResolver: true)
+  "The reason why the goal was disallowed (if applicable)"
+  goalDisallowedReason: GoalDisallowedReason @goField(forceResolver: true)
+}
+
+type PassEvent implements MatchEvent {
+  id: ID!
+  type: MatchEventType! @goField(forceResolver: true)
+  timestamp: DateTime! @goField(forceResolver: true)
+  timeFrame: MatchTimeFrame! @goField(forceResolver: true)
+  homeOrAway: TeamHomeAway @goField(forceResolver: true)
+  team: Team @goField(forceResolver: true)
+  player: Player @goField(forceResolver: true)
+  "Player who attempted the pass"
+  attempterPlayer: Player @goField(forceResolver: true)
+  "Team of the player who attempted the pass"
+  attempterTeam: Team @goField(forceResolver: true)
+  "Player who was intended to receive the pass"
+  receiverPlayer: Player @goField(forceResolver: true)
+  "Team of the player who was intended to receive the pass"
+  receiverTeam: Team @goField(forceResolver: true)
+  "The outcome of the pass attempt"
+  passOutcome: PassOutcome @goField(forceResolver: true)
+  "The type of pass attempt"
+  passType: PassType @goField(forceResolver: true)
+  "The distance category of the pass attempt"
+  distance: PassDistance @goField(forceResolver: true)
+  "The length of the pass in meters"
+  length: Float @goField(forceResolver: true)
+  "The match situation in which the pass was made"
+  matchSituation: MatchSituation @goField(forceResolver: true)
+  "The body part used to make the pass"
+  bodyPart: BodyPart @goField(forceResolver: true)
+  "The zone of the pitch where the pass was made"
+  pitchZone: PitchZone @goField(forceResolver: true)
+  "The directional movement of the pass"
+  direction: PassDirection @goField(forceResolver: true)
+  "The tactical intent of the pass"
+  purpose: PassPurpose @goField(forceResolver: true)
+  "Whether the pass was a goal assist"
+  goalAssist: Boolean @goField(forceResolver: true)
+  "The horizontal coordinate on the pitch indicating the start location of the pass, measured along the X-axis running parallel to the goal line"
+  startCoordX: Float @goField(forceResolver: true)
+  "The vertical coordinate on the pitch indicating the start location of the pass, measured along the Y-axis running parallel to the touchline"
+  startCoordY: Float @goField(forceResolver: true)
+  "The horizontal coordinate on the pitch indicating the end location of the pass, measured along the X-axis running parallel to the goal line"
+  endCoordX: Float @goField(forceResolver: true)
+  "The vertical coordinate on the pitch indicating the end location of the pass, measured along the Y-axis running parallel to the touchline"
+  endCoordY: Float @goField(forceResolver: true)
+  "Whether the pass created a big chance"
+  createdBigChance: Boolean @goField(forceResolver: true)
+  "The order of the assist, if the pass was a goal assist"
+  goalAssistOrder: PassGoalAssistOrder @goField(forceResolver: true)
+  "Expected Assist - probability that the pass will result in a goal"
+  expectedAssist: Float @goField(forceResolver: true)
+  "The detailed zone of the pitch where the pass was made"
+  pitchZoneDetail: PitchZoneDetail @goField(forceResolver: true)
+}
+
 type PeriodStartEndEvent implements MatchEvent {
   id: ID!
   type: MatchEventType! @goField(forceResolver: true)
@@ -2491,8 +3067,88 @@ type PeriodStartEndEvent implements MatchEvent {
   player: Player @goField(forceResolver: true)
   "Type of the referee's action"
   refereeAction: RefereeAction @goField(forceResolver: true)
+  "Reason for the period suspension"
+  suspensionReason: PeriodSuspensionReason @goField(forceResolver: true)
   "Length of the period"
   periodLength: MatchPeriodLength @goField(forceResolver: true)
+}
+
+type ShotEvent implements MatchEvent {
+  id: ID!
+  type: MatchEventType! @goField(forceResolver: true)
+  timestamp: DateTime! @goField(forceResolver: true)
+  timeFrame: MatchTimeFrame! @goField(forceResolver: true)
+  homeOrAway: TeamHomeAway @goField(forceResolver: true)
+  team: Team @goField(forceResolver: true)
+  player: Player @goField(forceResolver: true)
+  "Player who took the shot"
+  shooterPlayer: Player @goField(forceResolver: true)
+  "Team of the player who took the shot"
+  shooterTeam: Team @goField(forceResolver: true)
+  "The outcome of the shot attempt"
+  shotOutcome: ShotOutcome @goField(forceResolver: true)
+  "The zone of the goal or vicinity where the shot was directed"
+  target: ShotTarget @goField(forceResolver: true)
+  "Expected Goals - probability that the shot will result in a goal"
+  xG: Float @goField(forceResolver: true)
+  "Expected Goals On Target - xG value adjusted for shots on target"
+  xGOT: Float @goField(forceResolver: true)
+  "Whether the shot resulted in a goal"
+  isGoalShot: Boolean @goField(forceResolver: true)
+  "Whether the shot was taken with the first touch"
+  isFirstTouchShot: Boolean @goField(forceResolver: true)
+  "Whether the shot hit the woodwork (post or crossbar)"
+  isWoodworkShot: Boolean @goField(forceResolver: true)
+  "Whether the shot was a volley"
+  isVolleyShot: Boolean @goField(forceResolver: true)
+  "The match situation in which the shot was taken"
+  matchSituation: MatchSituation @goField(forceResolver: true)
+  "The body part used to take the shot"
+  bodyPart: BodyPart @goField(forceResolver: true)
+  "The horizontal coordinate on the pitch indicating the location from which the shot was taken, measured along the X-axis running parallel to the goal line"
+  coordX: Float @goField(forceResolver: true)
+  "The vertical coordinate on the pitch indicating the location from which the shot was taken, measured along the Y-axis running parallel to the touchline"
+  coordY: Float @goField(forceResolver: true)
+  "The distance of the shot in meters"
+  length: Float @goField(forceResolver: true)
+  "The area where the shot was taken regarding to the boxes"
+  boxArea: BoxArea @goField(forceResolver: true)
+  "The level of pressure from opposing players on the shooter"
+  pressureOnShooter: PressureType @goField(forceResolver: true)
+  "The number of players between the shooter and the goal"
+  clarity: ClarityType @goField(forceResolver: true)
+  "The zone of the pitch where the shot was taken"
+  pitchZone: PitchZone @goField(forceResolver: true)
+  "The detailed zone of the pitch where the shot was taken"
+  pitchZoneDetail: PitchZoneDetail @goField(forceResolver: true)
+  "Whether the shot was a big chance"
+  isBigChance: Boolean @goField(forceResolver: true)
+  "The Y-coordinate (0-100) of where the shot/ball crossed/was projected to cross the goal line"
+  goalmouthCoordY: Float @goField(forceResolver: true)
+  "The Z-coordinate (0-100) of where the shot/ball crossed/was projected to cross the goal line"
+  goalmouthCoordZ: Float @goField(forceResolver: true)
+}
+
+type SubstitutionEvent implements MatchEvent {
+  id: ID!
+  type: MatchEventType! @goField(forceResolver: true)
+  timestamp: DateTime! @goField(forceResolver: true)
+  timeFrame: MatchTimeFrame! @goField(forceResolver: true)
+  homeOrAway: TeamHomeAway @goField(forceResolver: true)
+  team: Team @goField(forceResolver: true)
+  player: Player @goField(forceResolver: true)
+  "Player who was substituted in"
+  subsInPlayer: Player @goField(forceResolver: true)
+  "Team of the player who was substituted in"
+  subsInTeam: Team @goField(forceResolver: true)
+  "Player who was substituted out"
+  subsOutPlayer: Player @goField(forceResolver: true)
+  "Team of the player who was substituted out"
+  subsOutTeam: Team @goField(forceResolver: true)
+  "The length of the period when the substitution occurred"
+  periodLength: MatchPeriodLength @goField(forceResolver: true)
+  "The reason for the substitution"
+  substitutionReason: SubstitutionReason @goField(forceResolver: true)
 }
 
 type MatchMomentum {
@@ -2510,6 +3166,40 @@ type MatchMomentumEntry {
   awayValue: Float!
   "The momentum value calculated as the difference between the home and away momentum values. Represented as a decimal between -1 and 1 (inclusive), it indicates which team has a higher probability of scoring in a specific time frame. A value above 0 favors the home team, a value below 0 favors the away team, and a value of 0 means both teams have an equal probability of scoring—regardless of the actual value."
   combinedValue: Float!
+}
+
+type MatchPlayerStatsResponse {
+  items: [MatchPlayerStatsItem]!
+}
+
+type MatchPlayerStatsItem {
+  player: Player!
+  fields: [MatchPlayerStatsField!]!
+}
+
+type MatchPlayerStatsField {
+  metric: PlayerMatchMetric!
+  value: Float
+  rankOverall: Int
+  rankOverallComposite: Int
+  rankInTeam: Int
+  rankInTeamComposite: Int
+}
+
+type MatchTeamStatsResponse {
+  items: [MatchTeamStatsItem]!
+}
+
+type MatchTeamStatsItem {
+  team: Team!
+  side: TeamHomeAway!
+  period: MatchPeriod!
+  fields: [MatchTeamStatsField!]!
+}
+
+type MatchTeamStatsField {
+  metric: TeamMatchMetric!
+  value: Float
 }
 
 type MatchTimeFrame {
@@ -2547,6 +3237,12 @@ type NationalTeam implements Team {
   nationalAssociation: NationalAssociation! @goField(forceResolver: true)
   "Localized name of the team"
   localizedName: LocalizedText! @goField(forceResolver: true)
+  "Last matches for the team"
+  pastMatches(first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
+  "Upcoming matches for the team"
+  upcomingMatches(first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
+  "Past head-to-head matches between this team and an opponent team"
+  pastHeadToHeadMatches(opponentTeamID: ID!, first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
 }
 
 """
@@ -2569,8 +3265,10 @@ type Player {
   localizedNickname: LocalizedText @goField(forceResolver: true)
   "Birth date of the player"
   birthDate: Date @goField(forceResolver: true)
-  "The player’s usual playing position. Note that this can vary from the position the player takes up in a particular match."
-  position: String @goField(forceResolver: true)
+  "The player's usual playing position. Note that this can vary from the position the player takes up in a particular match (see Lineup object). Possible values: GOALKEEPER, DEFENDER, MIDFIELDER, ATTACKER."
+  position: PlayerPosition @goField(forceResolver: true)
+  "Nationality of the player"
+  nationality: CountryCode @goField(forceResolver: true)
 }
 
 type PlayerMatchStatsV2 {
@@ -2728,6 +3426,16 @@ type PlayerMatchStatsV2 {
   CZ Description: Celkový počet situací, kdy byl hráč napomenutý rozhodčím za nesportovní chování nebo jiné porušení pravidel hry
   """
   cardsYellow: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Second yellow cards
+  
+  Default (EN) Description: The count of times a player receives a second yellow card in the same match, which results in a red card and sending off.
+  
+  CZ Name: Druhé žluté karty
+  
+  CZ Description: Celkový počet situací, kdy byl hráč napomenutý druhou žlutou kartou v tomtéž zápase, což vede k vyloučení
+  """
+  cardsYellowSecond: PlayerMatchMetricInt!
   """
   Default (EN) Name: Progressive carries
   
@@ -3479,6 +4187,16 @@ type PlayerMatchStatsV2 {
   """
   longBallsTotal: PlayerMatchMetricInt!
   """
+  Default (EN) Name: Finishing Lineup
+  
+  Default (EN) Description: Indicates if the player was on the pitch at the moment the match ended, regardless of how many minutes he played in the match.
+  
+  CZ Name: Finální sestava
+  
+  CZ Description: Indikuje, zda byl hráč na hřišti v okamžiku ukončení zápasu, bez ohledu na to, kolik minut v zápase odehrál
+  """
+  matchLineupFinishing: PlayerMatchMetricInt!
+  """
   Default (EN) Name: Starting Lineup
   
   Default (EN) Description: The player was selected as part of the team's starting lineup and began the match on the field, regardless of how many minutes he played in the match.
@@ -3548,6 +4266,16 @@ type PlayerMatchStatsV2 {
   CZ Description: Celkový počet minut, které strávil hráč na hřišti. Počítáno během zápasu. Nastavení nad řádný hrací čas všech částí hry je započteno. Odečteme významná přerušení hry (např. zranění, přezkumy VAR) pro přesnější vyjádření skutečného hracího času.
   """
   matchMinutesPlayedLiveInplay: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Player is on pitch (live)
+  
+  Default (EN) Description: Indicates whether a player is on the pitch during the live phase of the match.
+  
+  CZ Name: Hráč je na hřišti (průběžně)
+  
+  CZ Description: Indikuje, zda je hráč na hřišti během živé fáze zápasu.
+  """
+  matchOnPitchLive: PlayerMatchMetricInt!
   """
   Default (EN) Name: Match winning team
   
@@ -3780,6 +4508,36 @@ type PlayerMatchStatsV2 {
   CZ Description: Popisuje neořezanou hodnotu výkonu každého hráče, který se zápasu zúčastnil alespoň minimální požadovaný počet minut. Tato hodnota se používá interně pro vyhodnocení Hráče zápasu. Skutečná veřejně dostupná hodnota hodnocení hráče je metrika RATING_PLAYER.
   """
   ratingPlayerRaw: PlayerMatchMetricFloat!
+  """
+  Default (EN) Name: Manual rating correction
+  
+  Default (EN) Description: [INTERNAL ONLY] An adjustment value applied to the final calculated rating. Used only in exceptional cases of major miscalculation to manually override the system's output.
+  
+  CZ Name: Manuální korekce hodnocení
+  
+  CZ Description: [POUZE INTERNÍ] Hodnota úpravy aplikovaná na finální vypočítané hodnocení. Používá se pouze ve výjimečných případech závažného nesprávného výpočtu pro ruční přepsání výstupu systému.
+  """
+  ratingPlayerManualCorrection: PlayerMatchMetricFloat!
+  """
+  Default (EN) Name: Manual rating correction (maximal value)
+  
+  Default (EN) Description: [INTERNAL ONLY] Defines the higher limit for manual rating adjustments. When set, a manually entered rating cannot go over this value. If left undefined, no higher bound restriction is enforced during manual corrections.
+  
+  CZ Name: Manuální korekce hodnocení (maximální hodnota)
+  
+  CZ Description: [POUZE INTERNÍ] Definuje horní limit pro manuální úpravy hodnocení. Pokud je nastaveno, ručně zadané hodnocení nemůže překročit tuto hodnotu. Pokud není definováno, není během manuálních korekcí vynuceno žádné horní omezení.
+  """
+  ratingPlayerManualMax: PlayerMatchMetricFloat!
+  """
+  Default (EN) Name: Manual rating correction (minimal value)
+  
+  Default (EN) Description: [INTERNAL ONLY] Defines the lower limit for manual rating adjustments. When set, a manually entered rating cannot fall below this value. If left undefined, no lower bound restriction is enforced during manual corrections.
+  
+  CZ Name: Manuální korekce hodnocení (minimální hodnota)
+  
+  CZ Description: [POUZE INTERNÍ] Definuje dolní limit pro manuální úpravy hodnocení. Pokud je nastaveno, ručně zadané hodnocení nemůže klesnout pod tuto hodnotu. Pokud není definováno, není během manuálních korekcí vynuceno žádné dolní omezení.
+  """
+  ratingPlayerManualMin: PlayerMatchMetricFloat!
   """
   Default (EN) Name: Possession lost
   
@@ -4161,6 +4919,14 @@ type PlayerMatchStatsV2 {
   """
   handballs: PlayerMatchMetricInt!
   """
+  Default (EN) Name: Hit woodwork
+  
+  EN Description: Number of times the player hit the woodwork (post or crossbar)
+  
+  CZ Description: Počet střel hráče na tyč nebo břevno
+  """
+  hitWoodwork: PlayerMatchMetricInt!
+  """
   Default (EN) Name: Quality of finishing (no penalties)
   
   Default (EN) Description: Finishing quality measures how effectively a player converts a given chance (exclude penalties shots) into a goal threat. Each chance is assigned a quality value based on the expected goals (xG non-penalty) metric. However, not all shots on target pose the same level of threat to the goalkeeper. The expected goals on target (xGOT non-penalty) account for the shot's placement and execution, reflecting its true difficulty for the goalkeeper. The greater the difference between non-penalty xGOT and xG, the higher the quality of the player's finishing. Conversely, if the shot generates less threat than the original chance quality, it indicates a poorly executed finish.
@@ -4271,6 +5037,8 @@ type PlayerRating @goExtraField(name: "MatchID", type: "string", description: "T
   ratingHistory: [PlayerRatingHistory!]! @goField(forceResolver: true)
   "Indicates if the player was awarded 'Player of the Match' for this match."
   isPlayerOfTheMatch: Boolean! @goField(forceResolver: true)
+  "Normalised (brief) position of the player declared in a moment of match start, possible values: ATTACKING_MIDFIELDER, CENTRE_BACK, FULL_BACK, GOALKEEPER, MIDFIELDER, STRIKER, SUBSTITUTE, WING_BACK, WINGER."
+  ratingPosition: String!
 }
 
 """
@@ -4316,6 +5084,36 @@ scalar Date
 "DateTime in RFC 3339 format standard - see for details https://ijmacd.github.io/rfc3339-iso8601/"
 scalar DateTime
 
+"""
+The Season represents a specific season of a competition,
+typically spanning one year (e.g., 2024/2025).
+"""
+type Season {
+  id: ID!
+  "The localized name of the season (e.g., '2024/2025')"
+  localizedName: LocalizedText! @goField(forceResolver: true)
+  "Start date of the season"
+  startDate: Date @goField(forceResolver: true)
+  "End date of the season"
+  endDate: Date @goField(forceResolver: true)
+  "The competition this season belongs to"
+  competition: Competition! @goField(forceResolver: true)
+}
+
+"""
+The SeasonStage represents a specific stage or phase within a season,
+such as Regular Season, Playoffs, or Group Stage.
+"""
+type SeasonStage {
+  id: ID!
+  "Start date of the season stage"
+  startDate: Date @goField(forceResolver: true)
+  "End date of the season stage"
+  endDate: Date @goField(forceResolver: true)
+  "The season this stage belongs to"
+  season: Season! @goField(forceResolver: true)
+}
+
 interface Team {
   id: ID!
   "Age group of the team (e.g. adults, U-21, U-19)"
@@ -4326,6 +5124,12 @@ interface Team {
   level: TeamLevel! @goField(forceResolver: true)
   "Localized name of the team"
   localizedName: LocalizedText! @goField(forceResolver: true)
+  "Last matches for the team"
+  pastMatches(first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
+  "Upcoming matches for the team"
+  upcomingMatches(first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
+  "Past head-to-head matches between this team and an opponent team"
+  pastHeadToHeadMatches(opponentTeamID: ID!, first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
 }
 
 type TeamMatchStats @goExtraField(name: "matchID", type: "string", description: "The ID of the match") @goExtraField(name: "isHomeTeam", type: "bool", description: "Whether the team is the home team") {
@@ -4417,6 +5221,7 @@ type TeamMatchStatsWrapper {
   goalsPreventedNoPenalties: TeamMatchStatHeadToHeadFloat!
   goalsScored: TeamMatchStatHeadToHeadInt!
   goalsSetPiece: TeamMatchStatHeadToHeadInt!
+  goalsSetPieceDirect: TeamMatchStatHeadToHeadInt!
   goalsSubstitutes: TeamMatchStatHeadToHeadInt!
   goalsWinning: TeamMatchStatHeadToHeadInt!
   handballs: TeamMatchStatHeadToHeadInt!
@@ -4443,6 +5248,9 @@ type TeamMatchStatsWrapper {
   longBallsTotal: TeamMatchStatHeadToHeadInt!
   matchLineupStarting: TeamMatchStatHeadToHeadInt!
   matchMinutesPlayed: TeamMatchStatHeadToHeadInt!
+  matchDrawingTeam: TeamMatchStatHeadToHeadInt!
+  matchLosingTeam: TeamMatchStatHeadToHeadInt!
+  matchWinningTeam: TeamMatchStatHeadToHeadInt!
   offsides: TeamMatchStatHeadToHeadInt!
   passesAccuracy: TeamMatchStatHeadToHeadFloat!
   passesAccurate: TeamMatchStatHeadToHeadInt!

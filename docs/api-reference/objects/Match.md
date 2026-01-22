@@ -18,6 +18,7 @@ The Match object represents a single football match and provides structured acce
 |---|---|---|
 | `id` | `ID!` |  |
 | `status` | [MatchStatus!](../enums/MatchStatus) | The current status of the match. |
+| `startTime` | [DateTime](../scalars/DateTime) | The start time of the match. |
 | `homeTeam` | [Team!](../interfaces/Team) | The homeTeam object provides metadata for the team designated as the home side, including its name, age category, gender, and hierarchical level (main team, reserve team) within the club structure. |
 | `awayTeam` | [Team!](../interfaces/Team) | The awayTeam object provides metadata for the team designated as the away side, including its name, age category, gender, and hierarchical level (main team, reserve team) within the club structure. |
 | `playerStats` | [[PlayerMatchStatsV2!]!](../objects/PlayerMatchStatsV2) | Individual statistics of players in a match. |
@@ -27,5 +28,8 @@ The Match object represents a single football match and provides structured acce
 | `winProbability` | [WinProbability](../objects/WinProbability) | The winProbability object contains probability metrics estimating each team's chance of winning, calculated using the current match phase, time played, and the live score. |
 | `playerRatings` | [[PlayerRating!]!](../objects/PlayerRating) | The playerRatings object provides performance evaluations (ratings) for players who participated in the match. If no playerIds are specified, the response returns ratings for all players who took part and met the criteria for rating calculation. |
 | `teamStats` | [[TeamMatchStats!]!](../objects/TeamMatchStats) | The teamStats object contains overall match statistics for each team and period-based splits, allowing consumers to analyse team performance across the full match and within specific periods. |
+| `teamStatsV2` | [MatchTeamStatsResponse!](../objects/MatchTeamStatsResponse) | The teamStatsV2 object provides team statistics for a match with field-based selection and filtering support. |
+| `playerStatsV2` | [MatchPlayerStatsResponse!](../objects/MatchPlayerStatsResponse) | The playerStatsV2 object provides player statistics for a match with field-based selection, filtering, sorting, and pagination support. |
 | `matchEvents` | [MatchEventsResult!](../objects/MatchEventsResult) | The matchEvents object contains the list of all events which happened during the match as the result of player's or referee's activity, such as goal scored, foul committed or card given (see MatchEventTypeEnum for list of all supported events). |
 | `clock` | [MatchTimeFrame!](../objects/MatchTimeFrame) | Get match clock (time frame) at specific date time. If 'at' is not provided, current time is used. |
+| `seasonStage` | [SeasonStage](../objects/SeasonStage) | The season stage this match belongs to (e.g., Regular Season, Playoffs) |

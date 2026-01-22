@@ -45,14 +45,15 @@ Two distinct rating values are provided for each player:
 
 ### Player of the Match
 
-The final rating is used to determine the **Player of the Match**. This title is awarded to the player with the highest calculated final rating.
+The final rating is used to determine the **Player of the Match**. This title is awarded to the player with the **highest calculated final rating.**
 
-The player with the highest uncapped rating is identified by the `isPlayerOfTheMatch` attribute being set to `true`, while all others are set to `false`. This status is available in real-time throughout the game, although the official title is typically awarded only after the match finishes.
+The player with the highest (uncapped) rating is identified by the `isPlayerOfTheMatch` attribute being set to `true`, while all others are set to `false`. This status is available in real-time throughout the game, although the official title is typically awarded only after the match finishes.
 
-In the event of a tie (when two or more players have the same rating), the uncapped rating value with a precision of six decimal places is used to break the tie.
+In the event of a tie (when two or more players have the same rating), the **uncapped rating value with a precision of six decimal places** is used to break the tie. If a tie persists even after considering the uncapped values, the Player of the Match is determined based on the following criteria, evaluated in order:
+* Member of a winning team
 
 :::tip[Alternative way to retrieve PotM]
-While the rating is part of the Player Match Stats (see the `RATING_PLAYER` metric), you can also identify the Player of the Match using the `ranking` or `rankingComplex` attributes. Refer to the [Player Match stats Ranking chapter](./../stats/stats-player-match#ranking) for more details.
+While the rating is part of the Player Match Stats (see the `RATING_PLAYER` metric), you can also identify the Player of the Match using the `ranking` or `rankingOverallComposite`, `rankingTeamomposite` attributes. Refer to the [Player Match stats Ranking chapter](./../stats/stats-player-match#ranking) for more details.
 :::
 
 ### Live, Final and Historical rating values

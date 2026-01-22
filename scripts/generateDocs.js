@@ -5,6 +5,7 @@ import path from "path";
 import pkg from "graphql";
 // Allows to deep inspect of the object
 import util from "util";
+import { globSync } from 'glob';
 
 // Destructure necessary functions from the imported package.
 const {
@@ -539,11 +540,57 @@ function postProcessMatchEventLinks() {
     console.log("✅ Post-processing complete!");
 }
 
+/**
+ * Replaces '<' and '>' ONLY when they are not part of an HTML/React tag.
+ */
+function postProcessDangerousCharacters() {
+    console.log(`  🔄 Replacing dangerous characters in api-reference folder...`);
+
+    const files = globSync('./../docs/api-reference/**/*.md');
+    let processedCount = 0;
+
+    files.forEach(file => {
+        try {
+            //Skip the files starting with "MatchEvent" as they were already processed
+            if (path.basename(file).startsWith('MatchEvent')) {
+                console.log(`      |--- 🚫 Skipping protected file: ${file}`);
+                return;
+            }
+
+
+            const originalContent = fs.readFileSync(file, 'utf8');
+
+            // 1. Replace '<' ONLY if NOT followed by a letter (a-z, A-Z),
+            //    a forward slash '/', or an exclamation mark '!'
+            //    This protects <Tabs>, </TabItem>, and
+            let content = originalContent.replace(/<(?![a-zA-Z/!])/g, '&lt;');
+
+            // 2. Replace '>' ONLY if it is preceded by a space or a digit
+            //    This is safer than replacing all '>' which would break tags.
+            content = content.replace(/(?<=\d|\s)>(?!\s*?\d)/g, '&gt;');
+
+            if (content !== originalContent) {
+                fs.writeFileSync(file, content);
+                console.log(`      |--- 🔥 Fixed: ${file}`);
+                processedCount++;
+            }
+            else {
+                console.log(`      |--- ⏭️ No changes needed: ${file}`);
+            }
+        } catch (err) {
+            console.error(`      |--- ❌ Error processing ${file}:`, err.message);
+        }
+    });
+
+    console.log(`✅ Dangerous characters replaced in api-reference folder. Modified ${processedCount} files.`);
+}
+
 
 // --- RUN SCRIPT ---
 
 // Run the main generation
 main();
 
-// Run the post-processing step
+// Run the post-processing steps
 postProcessMatchEventLinks();
+postProcessDangerousCharacters();

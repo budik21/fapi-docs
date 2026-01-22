@@ -25,3 +25,4 @@ Provides performance evaluations (ratings) for players who participated in the m
 | `updatedAt` | [DateTime!](../scalars/DateTime) | The timestamp of when the rating was last updated. ISO 8601 (RFC 3339). |
 | `ratingHistory` | [[PlayerRatingHistory!]!](../objects/PlayerRatingHistory) | Historical rating data for player throughout the match, sorted by minute in ascending order. |
 | `isPlayerOfTheMatch` | `Boolean!` | Indicates if the player was awarded 'Player of the Match' for this match. |
+| `ratingPosition` | `String!` | Normalised (brief) position of the player declared in a moment of match start, possible values: ATTACKING_MIDFIELDER, CENTRE_BACK, FULL_BACK, GOALKEEPER, MIDFIELDER, STRIKER, SUBSTITUTE, WING_BACK, WINGER. |

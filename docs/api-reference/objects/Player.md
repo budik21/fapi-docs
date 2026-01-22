@@ -24,4 +24,5 @@ The Player object provides core identity and descriptive information about an in
 | `localizedShortName` | [LocalizedText](../objects/LocalizedText) | Localized short name of the player |
 | `localizedNickname` | [LocalizedText](../objects/LocalizedText) | Localized nickname of the player |
 | `birthDate` | [Date](../scalars/Date) | Birth date of the player |
-| `position` | `String` | The player’s usual playing position. Note that this can vary from the position the player takes up in a particular match. |
+| `position` | [PlayerPosition](../enums/PlayerPosition) | The player's usual playing position. Note that this can vary from the position the player takes up in a particular match (see Lineup object). Possible values: GOALKEEPER, DEFENDER, MIDFIELDER, ATTACKER. |
+| `nationality` | [CountryCode](../enums/CountryCode) | Nationality of the player |

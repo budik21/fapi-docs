@@ -12,3 +12,5 @@ import JsonExportButton from '@site/src/components/JsonExportButton';
 |---|---|---|
 | `playerIDs` | `[ID!]` |  |
 | `side` | [TeamHomeAway](../enums/TeamHomeAway) |  |
+| `nationalities` | [[CountryCode!]](../enums/CountryCode) |  |
+| `positions` | [[PlayerPosition!]](../enums/PlayerPosition) |  |

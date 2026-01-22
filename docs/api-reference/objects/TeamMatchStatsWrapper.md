@@ -93,6 +93,7 @@ import JsonExportButton from '@site/src/components/JsonExportButton';
 | `goalsPreventedNoPenalties` | [TeamMatchStatHeadToHeadFloat!](../objects/TeamMatchStatHeadToHeadFloat) |  |
 | `goalsScored` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `goalsSetPiece` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
+| `goalsSetPieceDirect` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `goalsSubstitutes` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `goalsWinning` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `handballs` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
@@ -119,6 +120,9 @@ import JsonExportButton from '@site/src/components/JsonExportButton';
 | `longBallsTotal` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `matchLineupStarting` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `matchMinutesPlayed` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
+| `matchDrawingTeam` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
+| `matchLosingTeam` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
+| `matchWinningTeam` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `offsides` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `passesAccuracy` | [TeamMatchStatHeadToHeadFloat!](../objects/TeamMatchStatHeadToHeadFloat) |  |
 | `passesAccurate` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |

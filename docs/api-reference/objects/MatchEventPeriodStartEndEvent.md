@@ -18,4 +18,5 @@ import JsonExportButton from '@site/src/components/JsonExportButton';
 | `team` | [Team](../interfaces/Team) |  |
 | `player` | [Player](../objects/Player) |  |
 | `refereeAction` | [RefereeAction](../enums/RefereeAction) | Type of the referee's action |
+| `suspensionReason` | [PeriodSuspensionReason](../enums/PeriodSuspensionReason) | Reason for the period suspension |
 | `periodLength` | [MatchPeriodLength](../enums/MatchPeriodLength) | Length of the period |

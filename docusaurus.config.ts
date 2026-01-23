@@ -14,6 +14,9 @@ const config: Config = {
         v4: true, // Improve compatibility with the upcoming Docusaurus v4
     },
 
+    //Remove the trailing slash from all URLs, so the URL looks like /path/file instead of /path/file/
+    trailingSlash: true,
+
     // Set the production url of your site here
     url: 'https://opta.lsoffice.cz',
 

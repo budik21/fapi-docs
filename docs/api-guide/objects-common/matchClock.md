@@ -10,10 +10,16 @@ The `Clock` object is used inside the `Match` object.
 
 ## Business purpose
 :::info[no-header]
-The `Clock` object returns **the current play time** relative to a specific timestamp provided as an input parameter (`at`). If `at` is not specified (or is `null`), it defaults to the time when the request is processed.
+The `Clock` object returns **the current play time** and **the current period** relative to a specific timestamp provided as an input parameter (`at`). If `at` is not specified (or is `null`), it defaults to the time when the request is processed.
 
 Note that `Clock` attributes are populated only during the `IN_MATCH` phase; otherwise, they return `null`. The only exception is the `phase` attribute, which always returns the current match state (`BEFORE_MATCH`, `IN_MATCH`, or `AFTER_MATCH`).
 :::
+
+
+The `Clock` object tracks not just the active "playing" periods (like `halfFirst` or `halfSecond`), but **also special periods when the game is paused.**
+
+This means it explicitly tells you when the match is in the **half-time break** (`HALF_TIME`), the **break before extra time** (`BEFORE_EXTRA_TIME`), the **extra-time half-time** (`HALF_TIME_EXTRA_TIME`), or the **break before a penalty shootout** (`BEFORE_PENALTY_SHOOTOUT`).
+
 
 :::tip[Mind the clock and timeFrame difference]
 The `clock` object is similar to [timeFrame object](time-frame), but there is a fundamental difference between them.
@@ -23,9 +29,7 @@ While `clock` represents the **dynamic running clock** of the match, [timeFrame]
 
 ## How to get the match clock data
 ### Live Match Clock Value
-:::tip[Omitting the at parameter]
-If you omit the `at` parameter, the returned match clock value corresponds to the moment of request processing. 
-:::
+If you omit the `at` parameter, the returned match clock value corresponds to the moment of request processing.
 <Tabs>
     <TabItem value="query" label="Query" default>
     ```graphql showLineNumbers title="Query: Using a clock object to get current valid match time" 

@@ -49,6 +49,7 @@ const sidebars: SidebarsConfig = {
                                   items: [
                                       'api-guide/objects-business/match/match',
                                       'api-guide/objects-business/match/lineup',
+                                      'api-guide/objects-business/match/score',
                                       'api-guide/objects-business/match/match-events',
                                       'api-guide/objects-business/match/match-momentum',
                                       'api-guide/objects-business/match/player-rating'

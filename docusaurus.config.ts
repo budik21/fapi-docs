@@ -15,7 +15,7 @@ const config: Config = {
     },
 
     //Remove the trailing slash from all URLs, so the URL looks like /path/file instead of /path/file/
-    trailingSlash: true,
+    trailingSlash: false,
 
     // Set the production url of your site here
     url: 'https://opta.lsoffice.cz',

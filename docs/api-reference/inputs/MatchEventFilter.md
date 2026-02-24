@@ -20,4 +20,4 @@ Input object used to filter a list of match events. All fields are optional and 
 | `homeOrAway` | [TeamHomeAway](../enums/TeamHomeAway) | Filter events associated with either the home or away team. |
 | `playerIDs` | `[String!]` | Filter events associated with specific player IDs. |
 | `periods` | [[MatchPeriod!]](../enums/MatchPeriod) | Filter events that occurred during specific match periods (e.g., 1st half, 2nd half, Extra time). |
-| `providerID` | `String` | Filter events by a specific data provider ID. |
+| `provider` | [Provider](../enums/Provider) | Filter events by a specific data provider. |

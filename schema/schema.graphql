@@ -17,8 +17,12 @@ type Query {
   team(id: ID!): Team
   "Find localized texts by IDs"
   localizedTexts(ids: [String!]!): [LocalizedText]!
-  seasonStageTeamStats(seasonStageID: ID!, fields: [TeamMatchMetric!]!, filter: AggregatedTeamStatsFilter, sort: [AggregatedTeamStatsSortItem!], pagination: AggregatedTeamStatsPagination): AggregatedTeamStatsResponse!
-  seasonStagePlayerStats(seasonStageID: ID!, fields: [PlayerMatchMetric!]!, filter: AggregatedPlayerStatsFilter, sort: [AggregatedPlayerStatsSortItem!], pagination: AggregatedPlayerStatsPagination): AggregatedPlayerStatsResponse!
+  seasonStageTeamStats(seasonStageIDs: [ID!]!, fields: [TeamMatchMetric!]!, filter: AggregatedTeamStatsFilter, sort: [AggregatedTeamStatsSortItem!], pagination: AggregatedTeamStatsPagination): AggregatedTeamStatsResponse!
+  seasonStagePlayerStats(seasonStageIDs: [ID!]!, fields: [PlayerMatchMetric!]!, filter: AggregatedPlayerStatsFilter, sort: [AggregatedPlayerStatsSortItem!], pagination: AggregatedPlayerStatsPagination): AggregatedPlayerStatsResponse!
+  "Find teams with filter and cursor-based pagination"
+  teams(filter: TeamsFilter!, pagination: Pagination!): TeamsResult!
+  "Find competitions with filter and cursor-based pagination"
+  competitions(filter: CompetitionsFilter!, pagination: Pagination!): CompetitionsResult!
 }
 
 """Represents the competition’s age restriction category."""
@@ -203,6 +207,20 @@ enum ClarityType {
   TWO_AT_LEAST
   "The shot was taken facing only the goalkeeper, with more than two other blocking players"
   MORE_THAN_TWO
+}
+
+"""
+Types of competitions based on the types of teams participating and geographical location.
+"""
+enum CompetitionType {
+  """Domestic club competition (e.g., Premier League, FA Cup, La Liga)"""
+  CLUB_DOMESTIC
+  """
+  International club competition (e.g., UEFA Champions League, Copa Libertadores)
+  """
+  CLUB_INTERNATIONAL
+  """National team competition (e.g., FIFA World Cup, UEFA Euro)"""
+  NATIONAL_TEAM
 }
 
 """
@@ -1464,9 +1482,21 @@ enum PlayerMatchMetric {
   """
   ASSISTS_GOAL
   """
+  Assists for goals scored from open play situations (not from set pieces)
+  """
+  ASSISTS_GOAL_OPEN_PLAY
+  """
   A player contributes to a goal by making the pass or play that sets up the teammate who provides the final pass or play directly leading to a goal
   """
   ASSISTS_GOAL_SECOND
+  """
+  Assists for goals scored directly from set pieces (free kicks, corners taken directly)
+  """
+  ASSISTS_GOAL_SET_PLAY_DIRECT
+  """
+  Assists for goals scored indirectly from set pieces (free kicks, corners that are played short or to another player first)
+  """
+  ASSISTS_GOAL_SET_PLAY_INDIRECT
   """
   The total number of times a player successfully passes the ball to a teammate who then takes a shot on goal, regardless of the shot's outcome.
   This includes all intentional passes leading directly to a shooting opportunity, reflecting the player's contribution to creating scoring chances
@@ -1488,6 +1518,32 @@ enum PlayerMatchMetric {
   The total number of passes from set pieces that directly create a shot attempt by a teammate.
   """
   ASSISTS_SHOT_SET_PIECE
+  """
+  Indirect assists where the goal was scored after a blocked shot (rebound goal)
+  """
+  ASSISTS_INDIRECT_AFTER_BLOCKED_SHOT
+  """Indirect assists where the goal was scored after a shot hit the post"""
+  ASSISTS_INDIRECT_AFTER_POST_SHOT
+  """
+  Indirect assists where the goal was scored after a goalkeeper save (rebound goal)
+  """
+  ASSISTS_INDIRECT_AFTER_SAVE
+  """
+  Indirect assists where a goal was scored from a free kick that the player won
+  """
+  ASSISTS_INDIRECT_FREE_KICK_WON
+  """
+  Indirect assists where a goal was scored from a handball that the player won (penalty or free kick)
+  """
+  ASSISTS_INDIRECT_HANDBALL_WON
+  """
+  Indirect assists where the goal was an own goal caused by the player's action
+  """
+  ASSISTS_INDIRECT_OWN_GOAL
+  """
+  Indirect assists where a goal was scored from a penalty that the player won
+  """
+  ASSISTS_INDIRECT_PENALTY_WON
   """
   The total number of clear scoring opportunities set up by a player for his teammates.
   """
@@ -1759,6 +1815,14 @@ enum PlayerMatchMetric {
   """
   GOALS_HEAD
   """
+  Goals, left foot. A goal scored with the left foot, regardless of whether it was from open play, a penalty kick, a direct free kick, or any other situation.
+  """
+  GOALS_LEFT_FOOT
+  """
+  Goals, right foot. A goal scored with the right foot, regardless of whether it was from open play, a penalty kick, a direct free kick, or any other situation.
+  """
+  GOALS_RIGHT_FOOT
+  """
   The total number of goals scored by a player excluding penalty kicks, reflecting their scoring ability from open play and set pieces.
   """
   GOALS_NO_PENALTIES
@@ -2016,6 +2080,16 @@ enum PlayerMatchMetric {
   """
   PASSES_FORWARD_TENDENCY
   """
+  Points - Sum of goals scored and direct assists to a goal.
+  Formula: GOALS + ASSISTS_GOAL
+  """
+  POINTS
+  """
+  Points, inc. 2nd Assists - Sum of goals scored and direct assists to a goal and second assists to a goal.
+  Formula: GOALS + ASSISTS_GOAL + ASSISTS_GOAL_SECOND
+  """
+  POINTS_INCLUDING_ASSISTS_SECOND
+  """
   Plus/minus statistic - positive value when the player's team scores a goal while the player is on the field, negative value when the player's team concedes a goal while the player is on the field
   """
   POINTS_PLUS_MINUS
@@ -2042,6 +2116,41 @@ enum PlayerMatchMetric {
   The count of times a player is fouled in the opponent's penalty area, resulting in a penalty kick being awarded to their team
   """
   PENALTIES_WON
+  """
+  Celkový počet penalt, kterým brankář čelil během penaltového rozstřelu
+  Total number of penalties faced by a goalkeeper during penalty shootout
+  """
+  PENALTY_SHOOTOUT_ATTEMPTS_FACED
+  """
+  Počet penalt v rozstřelu, které střelec minul (brankář chytil)
+  Number of penalty shootout attempts missed by the shooter (saved by goalkeeper)
+  """
+  PENALTY_SHOOTOUT_ATTEMPTS_MISSED_SAVE
+  """
+  Počet penalt v rozstřelu, které střelec minul vedle branky
+  Number of penalty shootout attempts missed wide by the shooter
+  """
+  PENALTY_SHOOTOUT_ATTEMPTS_MISSED_WIDE
+  """
+  Počet penalt v rozstřelu, které střelec neproměnil (missed nebo saved)
+  Number of penalty shootout attempts not converted by the shooter (missed or saved)
+  """
+  PENALTY_SHOOTOUT_ATTEMPTS_NOT_CONVERTED
+  """
+  Počet penalt v rozstřelu, které brankář chytil
+  Number of penalty shootout attempts saved by the goalkeeper
+  """
+  PENALTY_SHOOTOUT_ATTEMPTS_SAVES
+  """
+  Počet penalt v rozstřelu, které střelec proměnil
+  Number of penalty shootout attempts scored by the shooter
+  """
+  PENALTY_SHOOTOUT_ATTEMPTS_SCORED
+  """
+  Celkový počet pokusů o penaltu v rozstřelu pro střelce
+  Total number of penalty shootout attempts for the shooter
+  """
+  PENALTY_SHOOTOUT_ATTEMPTS_TOTAL
   """
   Describes the performance of each player who participated in the match for at least a minimum number of minutes, rated on a scale from 1 (very poor performance) to 10 (excellent performance).
   """
@@ -2146,6 +2255,18 @@ enum PlayerMatchMetric {
   """
   SHOTS_ON_TARGET
   """
+  Shots on Target, head. The total number of head-shot attempts that either result in a goal or would have gone into the net if not for a goalkeeper save.
+  """
+  SHOTS_ON_TARGET_HEAD
+  """
+  Shots on Target, left foot. The total number of shot attempts with the left foot that either result in a goal or would have gone into the net if not for a goalkeeper save.
+  """
+  SHOTS_ON_TARGET_LEFT_FOOT
+  """
+  Shots on Target, right foot. The total number of shot attempts with the right foot that either result in a goal or would have gone into the net if not for a goalkeeper save.
+  """
+  SHOTS_ON_TARGET_RIGHT_FOOT
+  """
   Total count of the shot attempts that hit the goalpost or crossbar. This value is also included in the "shotsOffTarget" metric.
   """
   SHOTS_POST
@@ -2153,6 +2274,14 @@ enum PlayerMatchMetric {
   Total count of shot attempts made including shots on target, shots off target and blocked shots
   """
   SHOTS_TOTAL
+  """
+  Shots Total, left foot. The total number of shot attempts made with the left foot, including shots on target, shots off target, and blocked shots.
+  """
+  SHOTS_TOTAL_LEFT_FOOT
+  """
+  Shots Total, right foot. The total number of shot attempts made with the right foot, including shots on target, shots off target, and blocked shots.
+  """
+  SHOTS_TOTAL_RIGHT_FOOT
   """
   The total number of times a goalkeeper successfully takes possession by diving down to collect a loose ball during a ground duel against an opponent player, similar to a tackle.
   """
@@ -2226,6 +2355,12 @@ enum PressureType {
   MEDIUM_PRESSURE
   "The shot was made under high pressure from opposing players."
   HIGH_PRESSURE
+}
+
+"""Represents the data provider identifier."""
+enum Provider {
+  "Stats Perform provider (SDAPI + SDDP)."
+  STATSPERFORM
 }
 
 """
@@ -2556,8 +2691,43 @@ enum TeamStaffContractType {
   MEDICAL_STAFF
 }
 
+"""Specifies whether a team is a club team or a national team."""
+enum TeamType {
+  """Club team."""
+  CLUB
+  """National team."""
+  NATIONAL
+}
+
+input CompetitionNameFilter {
+  "Filter by prefix match (starts with)"
+  startsWith: String
+}
+
+input CompetitionsFilter {
+  "Filter by competition IDs"
+  ids: [ID!]
+  "Filter by competition name"
+  name: CompetitionNameFilter
+  "Filter by country codes"
+  country: [CountryCode!]
+  "Filter by regions"
+  region: [Region!]
+  "Filter by genders (men/women)"
+  gender: [Gender!]
+  "Filter by age categories"
+  ageCategory: [AgeGroup!]
+  "Filter by competition types"
+  type: [CompetitionType!]
+}
+
 input IDFilter {
   in: [ID!]
+}
+
+input StringFilter {
+  "Filter by prefix match (starts with)"
+  startsWith: String
 }
 
 input PhaseFilter {
@@ -2597,6 +2767,13 @@ input MatchTimeFrameFilter {
   period: PeriodFilter
 }
 
+input Pagination {
+  "Number of items to return"
+  first: Int!
+  "Cursor for pagination (from previous page)"
+  after: String
+}
+
 "Input param object for ordering players in a table of a match for a specific individual metric."
 input MatchPlayersTableOrder {
   metric: PlayerMatchMetric!
@@ -2626,6 +2803,11 @@ input AggregatedPlayerStatsPagination {
   offset: Int
 }
 
+input PlayerMatchesFilter {
+  side: TeamHomeAway
+  seasonStageIDs: [ID!]
+}
+
 input AggregatedTeamStatsFilter {
   teamIDs: [ID!]
   side: TeamHomeAway
@@ -2640,6 +2822,31 @@ input AggregatedTeamStatsSortItem {
 input AggregatedTeamStatsPagination {
   limit: Int!
   offset: Int
+}
+
+input TeamMatchesFilter {
+  side: TeamHomeAway
+  seasonStageIDs: [ID!]
+}
+
+input TeamNameFilter {
+  "Filter by prefix match (starts with)"
+  startsWith: String
+}
+
+input TeamsFilter {
+  "Filter by team IDs"
+  ids: [ID!]
+  "Filter by team name"
+  name: TeamNameFilter
+  "Filter by country codes"
+  country: [CountryCode!]
+  "Filter by age categories"
+  ageCategory: [AgeGroup!]
+  "Filter by genders (men/women)"
+  gender: [Gender!]
+  "Filter by team types (club/national team)"
+  teamType: [TeamType!]
 }
 
 type AggregatedPlayerStatsResponse {
@@ -2703,11 +2910,13 @@ type ClubTeam implements Team {
   "Localized name of the team"
   localizedName: LocalizedText! @goField(forceResolver: true)
   "Last matches for the team"
-  pastMatches(first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
+  pastMatches(filter: TeamMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
+  "Aggregated team stats for recent N past matches"
+  pastMatchesStats(fields: [TeamMatchMetric!]!, matchPeriod: MatchPeriod, filter: TeamMatchesFilter, first: Int!): AggregatedTeamStatsResponse! @goField(forceResolver: true)
   "Upcoming matches for the team"
-  upcomingMatches(first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
+  upcomingMatches(filter: TeamMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
   "Past head-to-head matches between this team and an opponent team"
-  pastHeadToHeadMatches(opponentTeamID: ID!, first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
+  pastHeadToHeadMatches(opponentTeamID: ID!, filter: TeamMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
 }
 
 """
@@ -2726,6 +2935,14 @@ type Competition {
   ageGroup: AgeGroup @goField(forceResolver: true)
   "The gender category"
   gender: Gender @goField(forceResolver: true)
+}
+
+"""Represents a paginated result set of competitions."""
+type CompetitionsResult {
+  "The list of competitions on the current page."
+  items: [Competition!]!
+  "Information about the current page and cursors."
+  pageInfo: PageInfo!
 }
 
 type Country {
@@ -2817,6 +3034,11 @@ type Match {
   clock(at: DateTime): MatchTimeFrame! @goField(forceResolver: true)
   "The season stage this match belongs to (e.g., Regular Season, Playoffs)"
   seasonStage: SeasonStage @goField(forceResolver: true)
+  "All score information for the match in one place."
+  score(
+    "Filter score by a specific data provider."
+    provider: Provider
+  ): MatchScore @goField(forceResolver: true)
 }
 
 """
@@ -2854,8 +3076,8 @@ input MatchEventFilter {
   playerIDs: [String!]
   "Filter events that occurred during specific match periods (e.g., 1st half, 2nd half, Extra time)."
   periods: [MatchPeriod!]
-  "Filter events by a specific data provider ID."
-  providerID: String
+  "Filter events by a specific data provider."
+  provider: Provider
 }
 
 """Specifies the fields available for sorting match events."""
@@ -3186,6 +3408,116 @@ type MatchPlayerStatsField {
   rankInTeamComposite: Int
 }
 
+"""
+All score information for a match, including overall score, aggregate score for multi-leg matches,
+and detailed breakdown by period (halftime, fulltime, extra time, penalties).
+"""
+type MatchScore {
+  """
+  The overall match score (regular time + extra time if played).
+  Does NOT include penalty shootout goals.
+  
+  - null: Match has not started yet
+  - Live score: During match (updates in real-time)
+  - Final score: After match ends
+  
+  Returns Score directly.
+  """
+  overall: Score
+  """
+  Aggregate score across multiple legs (for two-leg or multi-leg matches).
+  
+  - null: Not a multi-leg match, or aggregate not applicable
+  - Aggregate score: Sum of scores across all legs
+  
+  Example: Champions League knockout round
+  - Leg 1: Team A 2-1 Team B
+  - Leg 2: Team B 1-0 Team A
+  - Aggregate: Team A 2-2 Team B (Team B advances on away goals)
+  """
+  aggregate: Score
+  """
+  Score during or at the end of the first half.
+  
+  - null: First half has not started yet
+  - Live score: Available DURING first half (shows current score)
+  - Halftime score: Available AFTER first half ends (shows score at halftime break)
+  
+  'score' = aggregated score (cumulative up to end of first half)
+  'periodScore' = goals scored in first half only
+  """
+  halftime: PeriodScore
+  """
+  Score at the end of 90 minutes (fulltime).
+  
+  - null: Second half has not completed yet
+  - Fulltime score: Available AFTER second half ends
+  
+  'score' = aggregated score (cumulative up to end of second half = fulltime)
+  'periodScore' = goals scored in second half only
+  """
+  fulltime: PeriodScore
+  """
+  Score after the first extra time period.
+  
+  - null: First extra time period has not completed yet
+  - After ET1 score: Available AFTER first extra time period ends
+  
+  'score' = aggregated score (cumulative up to end of first ET)
+  'periodScore' = goals scored in first ET period only
+  """
+  afterExtraTimeFirst: PeriodScore
+  """
+  Score after the second extra time period (end of extra time).
+  
+  - null: Second extra time period has not completed yet
+  - After ET2 score: Available AFTER second extra time period ends
+  
+  'score' = aggregated score (cumulative up to end of second ET)
+  'periodScore' = goals scored in second ET period only
+  """
+  afterExtraTimeSecond: PeriodScore
+  """
+  Penalty shootout score.
+  
+  - null: No penalty shootout occurred
+  - Penalty score: Available AFTER penalty shootout completes
+  
+  'score' = penalty shootout score (goals in shootout only)
+  'periodScore' = same as score (penalties are not aggregated with match goals)
+  """
+  penalties: PeriodScore
+}
+
+"""
+Represents score information for a specific period, including both
+period-specific goals and cumulative aggregated score.
+"""
+type PeriodScore {
+  """
+  Goals scored in this specific period only.
+  For example, if first half ended 1-0 and second half added 1 more goal,
+  halftime.periodScore = 1-0, fulltime.periodScore = 1-0 (second half only).
+  """
+  periodScore: Score!
+  """
+  Cumulative score at the end of this period (aggregated up to this point).
+  For example, if first half ended 1-0 and second half added 1 more goal,
+  halftime.score = 1-0, fulltime.score = 2-0.
+  """
+  score: Score!
+}
+
+"""
+Represents the score of a football match showing goals for home and away teams.
+"""
+type Score {
+  "The number of goals scored by the home team."
+  home: Int!
+  "The number of goals scored by the away team."
+  away: Int!
+}
+
 type MatchTeamStatsResponse {
   items: [MatchTeamStatsItem]!
 }
@@ -3238,11 +3570,13 @@ type NationalTeam implements Team {
   "Localized name of the team"
   localizedName: LocalizedText! @goField(forceResolver: true)
   "Last matches for the team"
-  pastMatches(first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
+  pastMatches(filter: TeamMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
+  "Aggregated team stats for recent N past matches"
+  pastMatchesStats(fields: [TeamMatchMetric!]!, matchPeriod: MatchPeriod, filter: TeamMatchesFilter, first: Int!): AggregatedTeamStatsResponse! @goField(forceResolver: true)
   "Upcoming matches for the team"
-  upcomingMatches(first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
+  upcomingMatches(filter: TeamMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
   "Past head-to-head matches between this team and an opponent team"
-  pastHeadToHeadMatches(opponentTeamID: ID!, first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
+  pastHeadToHeadMatches(opponentTeamID: ID!, filter: TeamMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
 }
 
 """
@@ -3269,6 +3603,10 @@ type Player {
   position: PlayerPosition @goField(forceResolver: true)
   "Nationality of the player"
   nationality: CountryCode @goField(forceResolver: true)
+  "Last matches for the player"
+  pastMatches(filter: PlayerMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
+  "Aggregated player stats for recent N past matches"
+  pastMatchesStats(fields: [PlayerMatchMetric!]!, filter: PlayerMatchesFilter, first: Int!): AggregatedPlayerStatsResponse! @goField(forceResolver: true)
 }
 
 type PlayerMatchStatsV2 {
@@ -3287,6 +3625,16 @@ type PlayerMatchStatsV2 {
   """
   assistsGoal: PlayerMatchMetricInt!
   """
+  Default (EN) Name: Assists to goal from open play
+  
+  Default (EN) Description: Assists for goals scored from open play situations (not from set pieces)
+  
+  CZ Name: Asistence na gól z otevřené hry
+  
+  CZ Description: Asistence na góly vstřelené z otevřené hry (ne ze standardních situací)
+  """
+  assistsGoalOpenPlay: PlayerMatchMetricInt!
+  """
   Default (EN) Name: Assists to goal (second)
   
   Default (EN) Description: A player contributes to a goal by making the pass or play that sets up the teammate who provides the final pass or play directly leading to a goal
@@ -3296,6 +3644,26 @@ type PlayerMatchStatsV2 {
   CZ Description: Hráč se podílí na vstřeleném gólu tak, že nahraje hráči, který následně nahraje přímo na gól svého týmu
   """
   assistsGoalSecond: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Assists to goal from direct set play
+  
+  Default (EN) Description: Assists for goals scored directly from set pieces (free kicks, corners taken directly)
+  
+  CZ Name: Asistence na gól z přímé standardní situace
+  
+  CZ Description: Asistence na góly vstřelené přímo ze standardních situací (přímé volné kopy, rohy)
+  """
+  assistsGoalSetPlayDirect: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Assists to goal from indirect set play
+  
+  Default (EN) Description: Assists for goals scored indirectly from set pieces (free kicks, corners that are played short or to another player first)
+  
+  CZ Name: Asistence na gól z nepřímé standardní situace
+  
+  CZ Description: Asistence na góly vstřelené nepřímo ze standardních situací (volné kopy, rohy hrané krátce nebo na jiného hráče)
+  """
+  assistsGoalSetPlayIndirect: PlayerMatchMetricInt!
   """
   Default (EN) Name: Assists to shot
   
@@ -3346,6 +3714,76 @@ type PlayerMatchStatsV2 {
   CZ Description: Celkový počet přihrávek ze standardních situací, které přímo vytvořily pokus o střelu spoluhráčem
   """
   assistsShotSetPiece: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Indirect assists after blocked shot
+  
+  Default (EN) Description: Indirect assists where the goal was scored after a blocked shot (rebound goal)
+  
+  CZ Name: Nepřímé asistence po vyražené střele
+  
+  CZ Description: Nepřímé asistence, kde byl gól vstřelen po vyražené střele (gól z dorážky)
+  """
+  assistsIndirectAfterBlockedShot: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Indirect assists after post shot
+  
+  Default (EN) Description: Indirect assists where the goal was scored after a shot hit the post
+  
+  CZ Name: Nepřímé asistence po střele na tyč
+  
+  CZ Description: Nepřímé asistence, kde byl gól vstřelen po střele na tyč
+  """
+  assistsIndirectAfterPostShot: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Indirect assists after save
+  
+  Default (EN) Description: Indirect assists where the goal was scored after a goalkeeper save (rebound goal)
+  
+  CZ Name: Nepřímé asistence po zákroku brankáře
+  
+  CZ Description: Nepřímé asistence, kde byl gól vstřelen po zákroku brankáře (gól z dorážky)
+  """
+  assistsIndirectAfterSave: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Indirect assists from free kick won
+  
+  Default (EN) Description: Indirect assists where a goal was scored from a free kick that the player won
+  
+  CZ Name: Nepřímé asistence z vyhraného volného kopu
+  
+  CZ Description: Nepřímé asistence, kde byl gól vstřelen z volného kopu, který hráč vyhrál
+  """
+  assistsIndirectFreeKickWon: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Indirect assists from handball won
+  
+  Default (EN) Description: Indirect assists where a goal was scored from a handball that the player won (penalty or free kick)
+  
+  CZ Name: Nepřímé asistence z vyhraného handballu
+  
+  CZ Description: Nepřímé asistence, kde byl gól vstřelen z handballu, který hráč vyhrál (penalta nebo volný kop)
+  """
+  assistsIndirectHandballWon: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Indirect assists from own goal
+  
+  Default (EN) Description: Indirect assists where the goal was an own goal caused by the player's action
+  
+  CZ Name: Nepřímé asistence z vlastního gólu
+  
+  CZ Description: Nepřímé asistence, kde byl gól vlastní gól způsobený akcí hráče
+  """
+  assistsIndirectOwnGoal: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Indirect assists from penalty won
+  
+  Default (EN) Description: Indirect assists where a goal was scored from a penalty that the player won
+  
+  CZ Name: Nepřímé asistence z vyhrané penalty
+  
+  CZ Description: Nepřímé asistence, kde byl gól vstřelen z penalty, kterou hráč vyhrál
+  """
+  assistsIndirectPenaltyWon: PlayerMatchMetricInt!
   """
   Default (EN) Name: Big chances created
   
@@ -3916,6 +4354,26 @@ type PlayerMatchStatsV2 {
   CZ Description: Hráč dopravil regulérním způsobem míč do brány soupeře střelou hlavou a změnil skóre utkání
   """
   goalsHead: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Goals, left foot
+  
+  Default (EN) Description: A goal scored with the left foot, regardless of whether it was from open play, a penalty kick, a direct free kick, or any other situation.
+  
+  CZ Name: Góly levou nohou
+  
+  CZ Description: Gól vstřelený levou nohou, bez ohledu na to, zda byl ze hry, z penalty, z přímého volného kopu nebo z jakékoli jiné situace.
+  """
+  goalsLeftFoot: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Goals, right foot
+  
+  Default (EN) Description: A goal scored with the right foot, regardless of whether it was from open play, a penalty kick, a direct free kick, or any other situation.
+  
+  CZ Name: Góly pravou nohou
+  
+  CZ Description: Gól vstřelený pravou nohou, bez ohledu na to, zda byl ze hry, z penalty, z přímého volného kopu nebo z jakékoli jiné situace.
+  """
+  goalsRightFoot: PlayerMatchMetricInt!
   """
   Default (EN) Name: Goals scored from open play
   
@@ -4489,6 +4947,76 @@ type PlayerMatchStatsV2 {
   """
   penaltiesWon: PlayerMatchMetricInt!
   """
+  Default (EN) Name: Penalty shootout attempts faced
+  
+  Default (EN) Description: Total number of penalties faced by a goalkeeper during penalty shootout
+  
+  CZ Name: Penaltové rozstřely čelil
+  
+  CZ Description: Celkový počet penalt, kterým brankář čelil během penaltového rozstřelu
+  """
+  penaltyShootoutAttemptsFaced: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Penalty shootout attempts missed save
+  
+  Default (EN) Description: Number of penalty shootout attempts missed by the shooter (saved by goalkeeper)
+  
+  CZ Name: Penaltové rozstřely minul (chyceno)
+  
+  CZ Description: Počet penalt v rozstřelu, které střelec minul (brankář chytil)
+  """
+  penaltyShootoutAttemptsMissedSave: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Penalty shootout attempts missed wide
+  
+  Default (EN) Description: Number of penalty shootout attempts missed wide by the shooter
+  
+  CZ Name: Penaltové rozstřely minul vedle
+  
+  CZ Description: Počet penalt v rozstřelu, které střelec minul vedle branky
+  """
+  penaltyShootoutAttemptsMissedWide: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Penalty shootout attempts not converted
+  
+  Default (EN) Description: Number of penalty shootout attempts not converted by the shooter (missed or saved)
+  
+  CZ Name: Penaltové rozstřely neproměnil
+  
+  CZ Description: Počet penalt v rozstřelu, které střelec neproměnil (missed nebo saved)
+  """
+  penaltyShootoutAttemptsNotConverted: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Penalty shootout attempts saves
+  
+  Default (EN) Description: Number of penalty shootout attempts saved by the goalkeeper
+  
+  CZ Name: Penaltové rozstřely chytil
+  
+  CZ Description: Počet penalt v rozstřelu, které brankář chytil
+  """
+  penaltyShootoutAttemptsSaves: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Penalty shootout attempts scored
+  
+  Default (EN) Description: Number of penalty shootout attempts scored by the shooter
+  
+  CZ Name: Penaltové rozstřely proměnil
+  
+  CZ Description: Počet penalt v rozstřelu, které střelec proměnil
+  """
+  penaltyShootoutAttemptsScored: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Penalty shootout attempts total
+  
+  Default (EN) Description: Total number of penalty shootout attempts for the shooter
+  
+  CZ Name: Penaltové rozstřely celkem
+  
+  CZ Description: Celkový počet pokusů o penaltu v rozstřelu pro střelce
+  """
+  penaltyShootoutAttemptsTotal: PlayerMatchMetricInt!
+  """
   Default (EN) Name: Player Rating
   
   Default (EN) Description: Describes the performance of each player who participated in the match for at least a minimum number of minutes, rated on a scale from 1 (very poor performance) to 10 (excellent performance).
@@ -4709,6 +5237,36 @@ type PlayerMatchStatsV2 {
   """
   shotsOnTarget: PlayerMatchMetricInt!
   """
+  Default (EN) Name: Shots on Target, head
+  
+  Default (EN) Description: The total number of head-shot attempts that either result in a goal or would have gone into the net if not for a goalkeeper save.
+  
+  CZ Name: Střely na bránu hlavou
+  
+  CZ Description: Celkový počet pokusů o střelu hlavou, které buď skončily gólem, nebo by skončily v síti, pokud by brankář nezachytil.
+  """
+  shotsOnTargetHead: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Shots on Target, left foot
+  
+  Default (EN) Description: The total number of shot attempts with the left foot that either result in a goal or would have gone into the net if not for a goalkeeper save.
+  
+  CZ Name: Střely na bránu levou nohou
+  
+  CZ Description: Celkový počet pokusů o střelu levou nohou, které buď skončily gólem, nebo by skončily v síti, pokud by brankář nezachytil.
+  """
+  shotsOnTargetLeftFoot: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Shots on Target, right foot
+  
+  Default (EN) Description: The total number of shot attempts with the right foot that either result in a goal or would have gone into the net if not for a goalkeeper save.
+  
+  CZ Name: Střely na bránu pravou nohou
+  
+  CZ Description: Celkový počet pokusů o střelu pravou nohou, které buď skončily gólem, nebo by skončily v síti, pokud by brankář nezachytil.
+  """
+  shotsOnTargetRightFoot: PlayerMatchMetricInt!
+  """
   Default (EN) Name: Shots to post
   
   Default (EN) Description: Total count of the shot attempts that hit the goalpost or crossbar. This value is also included in the "shotsOffTarget" metric.
@@ -4728,6 +5286,26 @@ type PlayerMatchStatsV2 {
   CZ Description: Celkový počet střel včetně střel na bránu, mimo bránu a zblokovaných střel
   """
   shotsTotal: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Shots Total, left foot
+  
+  Default (EN) Description: The total number of shot attempts made with the left foot, including shots on target, shots off target, and blocked shots.
+  
+  CZ Name: Střely celkem levou nohou
+  
+  CZ Description: Celkový počet pokusů o střelu levou nohou, včetně střel na bránu, mimo bránu a zblokovaných střel.
+  """
+  shotsTotalLeftFoot: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Shots Total, right foot
+  
+  Default (EN) Description: The total number of shot attempts made with the right foot, including shots on target, shots off target, and blocked shots.
+  
+  CZ Name: Střely celkem pravou nohou
+  
+  CZ Description: Celkový počet pokusů o střelu pravou nohou, včetně střel na bránu, mimo bránu a zblokovaných střel.
+  """
+  shotsTotalRightFoot: PlayerMatchMetricInt!
   """
   Default (EN) Name: Smothers
   
@@ -4957,6 +5535,26 @@ type PlayerMatchStatsV2 {
   """
   passesForwardTendency: PlayerMatchMetricFloat!
   """
+  Default (EN) Name: Points
+  
+  Default (EN) Description: Sum of goals scored and direct assists to a goal. Formula: GOALS + ASSISTS_GOAL
+  
+  CZ Name: Body
+  
+  CZ Description: Součet vstřelených gólů a přímých asistencí na gól. Vzorec: GOALS + ASSISTS_GOAL
+  """
+  points: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Points, inc. 2nd Assists
+  
+  Default (EN) Description: Sum of goals scored and direct assists to a goal and second assists to a goal. Formula: GOALS + ASSISTS_GOAL + ASSISTS_GOAL_SECOND
+  
+  CZ Name: Body včetně druhých asistencí
+  
+  CZ Description: Součet vstřelených gólů, přímých asistencí na gól a druhých asistencí na gól. Vzorec: GOALS + ASSISTS_GOAL + ASSISTS_GOAL_SECOND
+  """
+  pointsIncludingAssistsSecond: PlayerMatchMetricInt!
+  """
   Default (EN) Name: Points plus minus
   
   Default (EN) Description: Plus/minus statistic - positive value when the player's team scores a goal while the player is on the field, negative value when the player's team concedes a goal while the player is on the field
@@ -5125,11 +5723,21 @@ interface Team {
   "Localized name of the team"
   localizedName: LocalizedText! @goField(forceResolver: true)
   "Last matches for the team"
-  pastMatches(first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
+  pastMatches(filter: TeamMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
+  "Aggregated team stats for recent N past matches"
+  pastMatchesStats(fields: [TeamMatchMetric!]!, matchPeriod: MatchPeriod, filter: TeamMatchesFilter, first: Int!): AggregatedTeamStatsResponse! @goField(forceResolver: true)
   "Upcoming matches for the team"
-  upcomingMatches(first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
+  upcomingMatches(filter: TeamMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
   "Past head-to-head matches between this team and an opponent team"
-  pastHeadToHeadMatches(opponentTeamID: ID!, first: Int!, seasonStageID: ID, teamHomeAway: TeamHomeAway): [Match!]! @goField(forceResolver: true)
+  pastHeadToHeadMatches(opponentTeamID: ID!, filter: TeamMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
+}
+
+"""Represents a paginated result set of teams."""
+type TeamsResult {
+  "The list of teams on the current page."
+  items: [Team!]!
+  "Information about the current page and cursors."
+  pageInfo: PageInfo!
 }
 
 type TeamMatchStats @goExtraField(name: "matchID", type: "string", description: "The ID of the match") @goExtraField(name: "isHomeTeam", type: "bool", description: "Whether the team is the home team") {

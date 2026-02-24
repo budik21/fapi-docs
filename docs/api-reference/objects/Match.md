@@ -33,3 +33,4 @@ The Match object represents a single football match and provides structured acce
 | `matchEvents` | [MatchEventsResult!](../objects/MatchEventsResult) | The matchEvents object contains the list of all events which happened during the match as the result of player's or referee's activity, such as goal scored, foul committed or card given (see MatchEventTypeEnum for list of all supported events). |
 | `clock` | [MatchTimeFrame!](../objects/MatchTimeFrame) | Get match clock (time frame) at specific date time. If 'at' is not provided, current time is used. |
 | `seasonStage` | [SeasonStage](../objects/SeasonStage) | The season stage this match belongs to (e.g., Regular Season, Playoffs) |
+| `score` | [MatchScore](../objects/MatchScore) | All score information for the match in one place. |

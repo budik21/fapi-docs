@@ -17,5 +17,6 @@ import JsonExportButton from '@site/src/components/JsonExportButton';
 | `club` | [Club!](../objects/Club) | Team belongs to a club. |
 | `localizedName` | [LocalizedText!](../objects/LocalizedText) | Localized name of the team |
 | `pastMatches` | [[Match!]!](../objects/Match) | Last matches for the team |
+| `pastMatchesStats` | [AggregatedTeamStatsResponse!](../objects/AggregatedTeamStatsResponse) | Aggregated team stats for recent N past matches |
 | `upcomingMatches` | [[Match!]!](../objects/Match) | Upcoming matches for the team |
 | `pastHeadToHeadMatches` | [[Match!]!](../objects/Match) | Past head-to-head matches between this team and an opponent team |

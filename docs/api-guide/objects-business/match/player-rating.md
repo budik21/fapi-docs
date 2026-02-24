@@ -13,7 +13,7 @@ See [PlayerRating object](./../../../api-reference/objects/PlayerRating) chapter
 
 ## Business purpose
 :::info[no-header]
-The `playerRating` object provides a set of data points used to evaluate a player's performance in a specific match using a standardised scale **from 1** (worst performance) **to 10** (best performance).
+The `score` object provides a structured breakdown of a match's score progression. It is used to track goals across individual periods, overall match results, and multi-leg aggregates, using `null` values to clearly indicate periods or matches that have not yet started.
 :::
 
 ### Prerequisites
@@ -22,7 +22,7 @@ Player ratings are calculated based on individual [player's match stats](../../o
 **The minimum time** a player must spend on the pitch to receive a rating **is 10 minutes**. This calculation excludes additional time. For example, if a substitute enters the pitch in the 88th minute, they will not receive a rating even if there are 12 minutes of additional time. In this scenario, only 2 minutes of valid playing time are counted and the condition for minimum play time is not met.
 
 ### Rating calculation
-The calculation takes the player's lineup position into account and evaluates their performance based on **how well they fulfill the common tasks associated with that specific role**. 
+The calculation takes the player's lineup position into account and evaluates their performance based on **how well they fulfill the common tasks associated with that specific role**.
 
 Additionally, players receive **bonuses or penalties** based on special events. Bonuses are awarded for positive actions, such as scoring a goal or preventing a clear scoring opportunity. Conversely, penalties are applied for negative actions, such as an error leading to a goal or being sent off. See [Bonuses chapter](#bonuses-and-penalties) for more details.
 
@@ -53,7 +53,7 @@ In the event of a tie (when two or more players have the same rating), the **unc
 * Member of a winning team
 
 :::tip[Alternative way to retrieve PotM]
-While the rating is part of the Player Match Stats (see the `RATING_PLAYER` metric), you can also identify the Player of the Match using the `ranking` or `rankingOverallComposite`, `rankingTeamomposite` attributes. Refer to the [Player Match stats Ranking chapter](./../stats/stats-player-match#ranking) for more details.
+While the rating is part of the Player Match Stats (see the `RATING_PLAYER` metric), you can also identify the Player of the Match using the `ranking` or `rankingOverallComposite`, `rankingTeamComposite` attributes. Refer to the [Player Match stats Ranking chapter](./../stats/stats-player-match#ranking) for more details.
 :::
 
 ### Live, Final and Historical rating values
@@ -69,43 +69,50 @@ Once the game is finished, this value represents the player's **Final Rating**. 
 Bonuses or penalties are applied to the rating calculation based on specific events. These calculations rely on player match statistics, taking the values of one or more metrics into account.
 
 #### Bonus type and subtype
- * **Bonus type** (`bonuses.type`) identifies the specific bonus. While it often corresponds to the metric involved, this abstraction allows for bonuses calculated from multiple metrics. The type is a static string acting as a stable ID (guaranteed to remain unchanged once released).
+* **Bonus type** (`bonuses.type`) identifies the specific bonus. While it often corresponds to the metric involved, this abstraction allows for bonuses calculated from multiple metrics. The type is a static string acting as a stable ID (guaranteed to remain unchanged once released).
 
- * **Bonus subtype** (`bonuses.subtype`) represents the "performance level" or tier. This field is populated only for specific bonuses that produce tiered outputs.
+* **Bonus subtype** (`bonuses.subtype`) represents the "performance level" or tier. This field is populated only for specific bonuses that produce tiered outputs.
 
 For example, a passing bonus might have three tiers based on accuracy (>90%, >93%, or >96%), resulting in subtypes of `good`, `very_good`, or `excellent`. You can display this information to help users better understand the quality of the player's performance.
 
 If the calculated result is positive, it is considered a **bonus**; if negative, it is considered a **penalty**. Refer to the table below for details.
 
-| Bonus Type| Bonus Subtype                                                                                                                                      | Metrics Involved| Output range                |
-|:--|:---------------------------------------------------------------------------------------------------------------------------------------------------|:---|:----------------------------|
-| `goals_scored_non_penalty` | N/A                                                                                                                                                | `GOALS_NO_PENALTIES`                                                 | Non-negative value          |
-| `goals_scored_penalty`     | N/A                                                                                                                                                | `GOALS_PENALTY`                                                      | Non-negative value          |
-| `assists_to_goal`          | N/A                                                                                                                                                | `ASSISTS_GOAL`                                                       | Non-negative value          |
-| `penalties_won`            | N/A                                                                                                                                                | `PENALTIES_WON`                                                      | Non-negative value          |
-| `big_chance_created`       | N/A                                                                                                                                                | `BIG_CHANCES_CREATED`                                                | Non-negative value          |
-| `last_man_tackle`          | N/A                                                                                                                                                | `TACKLE_LAST_MAN`                                                    | Non-negative value          |
-| `saved_penalties`          | N/A                                                                                                                                                | `PENALTIES_SAVED`                                                    | Non-negative value          |
-| `big_chances_saved`        | N/A                                                                                                                                                | `BIG_CHANCES_SAVED`                                                  | Non-negative value          |
-| `clearances_off_line`      | N/A                                                                                                                                                | `CLEARANCES_OFF_LINE`                                                | Non-negative value          |
-| `clean_sheet`              | N/A                                                                                                                                                | `MATCH_MINUTES_PLAYED_LIVE`<br/>`GOALS_CONCEDED`                     | Non-negative value          |
-| `won_contest_bonuses`      | N/A                                                                                                                                                | `DRIBBLES_WON`                                                       | Non-negative value          |
-| `big_chances_missed`       | N/A                                                                                                                                                | `BIG_CHANCES_MISSED`                                                 | Non-positive value          |
-| `penalties_conceded`       | N/A                                                                                                                                                | `PENALTIES_COMMITTED`                                                | Non-positive value          |
-| `penalties_missed`         | N/A                                                                                                                                                | `PENALTIES_NOT_CONVERTED`                                            | Non-positive value          |
-| `goals_scored_own`         | N/A                                                                                                                                                | `GOALS_OWN`                                                          | Non-positive value          |
-| `errors_lead_to_shot`      | N/A                                                                                                                                                | `ERRORS_LEAD_TO_SHOT`                                                | Non-positive value          |
-| `errors_lead_to_goal`      | N/A                                                                                                                                                | `ERRORS_LEAD_TO_GOAL`                                                | Non-positive value          |
-| `red_cards`                | N/A                                                                                                                                                | `CARDS_RED`                                                          | Non-positive value          |
-| `challenge_lost`           | N/A                                                                                                                                                | `CHALLENGE_LOST`                                                     | Non-positive value          |
-| `goals_conceded`           | N/A                                                                                                                                                | `GOALS_CONCEDED`                                                     | Non-positive value          |
-| `open_play_pass_accuracy`  | `excellent`<br/>`very good`<br/>`good`| `PASSES_OPEN_PLAY_TOTAL`<br/>`PASSES_OPEN_PLAY_ACCURACY`| Non-negative value          |
-| `turnovers`                | `severe`<br/>`moderate`<br/>`mild`| `TURNOVERS`| Non-positive value          |
-| `finishing_quality_nonpen`| `excellent`<br/>`very_good`<br/>`good`<br/>`decent`<br/>`ok`<br/>`neutral`<br/>`poor`<br/>`very_poor`<br/>`bad`<br/>`very_bad`<br/>`very_terrible` | `FINISHING_QUALITY_NO_PENALTIES`| No limitation|
-| `dueling`| `outstanding`<br/>`excellent`<br/>`very_good`<br/>`good`<br/>`decent`<br/>`ok`<br/>`terrible`<br/>`bad`<br/>`poor`<br/>`weak`| `DUELS_TOTAL`<br/>`DUELS_EFFICIENCY`| No limitation|
-| `xg_faced_nonpen`| `excellent`<br/>`good`<br/>`normal`<br/>`poor`<br/>`bad`| `EXPECTED_GOALS_NO_PENALTIES_FACED`<br/>`MATCH_MINUTES_PLAYED_LIVE`  | No limitation               |
-| `match_result`| `win`<br/>`lose`| `MATCH_WINNING_TEAM`<br/>`MATCH_LOSING_TEAM`  | No limitation|
-| `goal_prevented_non_penalty`| `excellent`<br/>`very_good`<br/>`good`<br/>`very_poor`<br/>`poor`<br/>`weak`| `GOALS_PREVENTED_NO_PENALTIES`  | Zero (0) value in all cases |
+| Bonus Type                               | Bonus Subtype                                                                | Metrics Involved| Output range                |
+|:-----------------------------------------|:-----------------------------------------------------------------------------|:---|:----------------------------|
+| `goals_scored_non_penalty`               | N/A                                                                          | `GOALS_NO_PENALTIES`                                                 | Non-negative value          |
+| `goals_scored_penalty`                   | N/A                                                                          | `GOALS_PENALTY`                                                      | Non-negative value          |
+| `goals_all`                             | N/A                                                                          | `GOALS`                                                      | Zero (0) value in all cases          |
+| `goals_scored_winning`                   | N/A                                                                          | `MATCH_WINNING_TEAM`<br/>`MATCH_DRAWING_TEAM`<br/>`MATCH_LOSING_TEAM`<br/>`GOALS_WINNING`                                                 | Non-negative value          |
+| `assists_to_goal`                        | N/A                                                                          | `ASSISTS_GOAL`                                                       | Non-negative value          |
+| `penalties_won`                          | N/A                                                                          | `PENALTIES_WON`                                                      | Non-negative value          |
+| `big_chance_created`                     | N/A                                                                          | `BIG_CHANCES_CREATED`                                                | Non-negative value          |
+| `last_man_tackle`                        | N/A                                                                          | `TACKLE_LAST_MAN`                                                    | Non-negative value          |
+| `saved_penalties`                        | N/A                                                                          | `PENALTIES_SAVED`                                                    | Non-negative value          |
+| `big_chances_saved`                      | N/A                                                                          | `BIG_CHANCES_SAVED`                                                  | Non-negative value          |
+| `clearances_off_line`                    | N/A                                                                          | `CLEARANCES_OFF_LINE`                                                | Non-negative value          |
+| `clean_sheet`                            | N/A                                                                          | `GOALS_CONCEDED`                     | Non-negative value          |
+| `won_contest_bonuses`                    | N/A                                                                          | `DRIBBLES_WON`                                                       | Non-negative value          |
+| `big_chances_missed`                     | N/A                                                                          | `BIG_CHANCES_MISSED`                                                 | Non-positive value          |
+| `penalties_conceded`                     | N/A                                                                          | `PENALTIES_COMMITTED`                                                | Non-positive value          |
+| `penalties_missed`                       | N/A                                                                          | `PENALTIES_NOT_CONVERTED`                                            | Non-positive value          |
+| `goals_scored_own`                       | N/A                                                                          | `GOALS_OWN`                                                          | Non-positive value          |
+| `errors_lead_to_shot`                    | N/A                                                                          | `ERRORS_LEAD_TO_SHOT`                                                | Non-positive value          |
+| `errors_lead_to_goal`                    | N/A                                                                          | `ERRORS_LEAD_TO_GOAL`                                                | Non-positive value          |
+| `red_cards`                              | N/A                                                                          | `CARDS_RED`                                                          | Non-positive value          |
+| `1v1_defending`                          | N/A                                                                          | `CHALLENGE_LOST`                                                     | Non-positive value          |
+| `goals_conceded`                         | N/A                                                                          | `GOALS_CONCEDED`                                                     | Non-positive value          |
+| `open_play_pass_accuracy`                | `excellent`<br/>`very good`                                                  | `PASSES_OPEN_PLAY_TOTAL`<br/>`PASSES_OPEN_PLAY_ACCURACY`| Non-negative value          |
+| `turnovers`                              | `severe`<br/>`moderate`                                                      | `TURNOVERS`| Non-positive value          |
+| `finishing_quality_nonpen`               | `excellent`<br/>`very_good`<br/>`very_bad`<br/>`terrible`                    | `FINISHING_QUALITY_NO_PENALTIES`| No limitation               |
+| `dueling`                                | `excellent`<br/>`very_good`<br/>`terrible`<br/>`bad`                         | `DUELS_TOTAL`<br/>`DUELS_EFFICIENCY`| No limitation               |
+| `dueling_lower`                          | `good`<br/>`decent`<br/>`poor`<br/>`weak`                                    | `DUELS_TOTAL`<br/>`DUELS_EFFICIENCY`| No limitation               |
+| `xg_faced_nonpen`                        | `excellent`<br/>`good`<br/>`normal`<br/>`poor`<br/>`bad`                     | `EXPECTED_GOALS_NO_PENALTIES_FACED`  | No limitation               |
+| `goal_prevented_non_penalty`             | `excellent`<br/>`very_good`<br/>`good`<br/>`very_poor`<br/>`poor`<br/>`weak` | `GOALS_PREVENTED_NO_PENALTIES`  | Zero (0) value in all cases |
+| `hit_woodwork`                           | N/A                                                                          | `SHOTS_POST`| Zero (0) value in all cases |
+| `match_result`                           | `win`<br/>`lose`                                                             | `MATCH_WINNING_TEAM`<br/>`MATCH_LOSING_TEAM`  | No limitation               |
+| `penalty_shootout_attempt_saves`         | N/A                                                                          | `PENALTY_SHOOTOUT_ATTEMPTS_SAVES`  | Non-negative                |
+| `penalty_shootout_attempt_not_converted` | N/A                                                                          | `PENALTY_SHOOTOUT_ATTEMPTS_NOT_CONVERTED`  | Non-positive                |
+| `penalty_shootout_attempt_scored`        | N/A                                                                          | `PENALTY_SHOOTOUT_ATTEMPTS_SCORED`  | Non-negative                |
 
 ### Historical rating values
 Once a rating is calculated, the rating value and all applicable bonuses are provided in `playerRating.value` and `playerRating.bonuses`. Any previous rating and bonus values are moved to the `ratingHistory` object upon recalculation.
@@ -118,7 +125,7 @@ To track the **player's rating progression** minute-by-minute, read the `playerR
 A player's rating is calculated at least once during each minute the player spends on the pitch (the responsible metric is `MATCH_MINUTES_PLAYED_LIVE_ONPITCH` which is being changed during additional time, while `MATCH_MINUTES_PLAYED_LIVE` is not). In some cases, the rating is recalculated immediately after an event occurs.
 
 The system triggers a rating recalculation for the affected player whenever a change is detected in the following metrics:
- `ASSISTS_GOAL` | `BIG_CHANCES_CREATED` | `BIG_CHANCES_SAVED` | `BIG_CHANCES_MISSED` | `CARDS_RED` | `CLEARANCES_OFF_LINE` |`ERRORS_LEAD_TO_GOAL` | `GOALS_NO_PENALTIES` | `MATCH_MINUTES_PLAYED_LIVE` | `MATCH_MINUTES_PLAYED_LIVE_ONPITCH` | `GOALS_PENALTY` |`GOALS_OWN` | `PENALTIES_NOT_CONVERTED` |`PENALTIES_SAVED`.
+`ASSISTS_GOAL` | `BIG_CHANCES_CREATED` | `BIG_CHANCES_SAVED` | `BIG_CHANCES_MISSED` | `CARDS_RED` | `CLEARANCES_OFF_LINE` |`ERRORS_LEAD_TO_GOAL` | `GOALS_NO_PENALTIES` | `MATCH_MINUTES_PLAYED_LIVE` | `MATCH_MINUTES_PLAYED_LIVE_ONPITCH` | `GOALS_PENALTY` |`GOALS_OWN` | `PENALTIES_NOT_CONVERTED` |`PENALTIES_SAVED`.
 
 ### Rating position
 For rating calculation purposes, each player is assigned a rating position based on their lineup role and formation used.
@@ -238,83 +245,83 @@ The following query is an example of how to retrieve all the rating values inclu
 Please note that the base rating value is also available via the `RATING_PLAYER` metric and uncapped value via `RATING_PLAYER_RAW` metric in the [PlayerMatchStat](../stats/stats-player-match.md) object.
 :::
 <Tabs>
-    <TabItem value="query1" label="Query" default>
-    ```graphql showLineNumbers title="Query: Live rating with bonuses" 
-    query Match($matchId: ID!) {
-      match(id: $matchId) {    
-        playerRatings {
-          player {
-            id
-            localizedName {
-              text
-            }
-          }
+<TabItem value="query1" label="Query" default>
+```graphql showLineNumbers title="Query: Live rating with bonuses" 
+query Match($matchId: ID!) {
+  match(id: $matchId) {    
+    playerRatings {
+      player {
+        id
+        localizedName {
+          text
+        }
+      }
+      value
+      valueUncapped
+      ratingPosition
+      ratingConfigID
+      createdAt
+      updatedAt
+      bonuses {
+        total
+        entries {
+          type
+          subtype
           value
-          valueUncapped
-          ratingPosition
-          ratingConfigID
-          createdAt
-          updatedAt
-          bonuses {
-            total
-            entries {
-              type
-              subtype
-              value
-            }
+        }
+      }
+    }   
+  }
+}
+```
+</TabItem>
+<TabItem value="variables1" label="Variables" default>
+```json showLineNumbers title="Variables: ID of desired match"
+{
+    //Premier League, Arsenal - Tottenham 4:1, 23.11.2025
+    "matchId": "1935259478450778112"
+}
+```
+</TabItem>
+<TabItem value="response1" label="Response" default>
+```json showLineNumbers title="Response: Live rating  with bonuses"
+{
+    "player": {
+        "id": "1897697037663862785",
+        "localizedName": {
+          "text": "Saliba William"
+        }
+    },
+    "value": 6.20866,
+    "valueUncapped": 6.20866,
+    "ratingPosition": "CENTRE_BACK",
+    "ratingConfigID": "1991831638732181504",
+    "createdAt": "2025-11-23T16:39:34Z",
+    "updatedAt": "2025-11-24T14:21:54Z",
+    "bonuses": {
+        "total": 0.2,
+        "entries": [
+          {
+            "type": "dueling",
+            "subtype": "weak",
+            "value": -0.2
+          },
+          {
+            "type": "finishing_quality_nonpen",
+            "subtype": "neutral",
+            "value": 0
+          },
+          {
+            "type": "open_play_pass_accuracy",
+            "subtype": "very_good",
+            "value": 0.4
           }
-        }   
+        ]
       }
     }
-    ```
-    </TabItem>
-    <TabItem value="variables1" label="Variables" default>
-    ```json showLineNumbers title="Variables: ID of desired match"
-    {
-        //Premier League, Arsenal - Tottenham 4:1, 23.11.2025
-        "matchId": "1935259478450778112"
-    }
-    ```
-    </TabItem>
-    <TabItem value="response1" label="Response" default>
-    ```json showLineNumbers title="Response: Live rating  with bonuses"
-    {
-        "player": {
-            "id": "1897697037663862785",
-            "localizedName": {
-              "text": "Saliba William"
-            }
-        },
-        "value": 6.20866,
-        "valueUncapped": 6.20866,
-        "ratingPosition": "CENTRE_BACK",
-        "ratingConfigID": "1991831638732181504",
-        "createdAt": "2025-11-23T16:39:34Z",
-        "updatedAt": "2025-11-24T14:21:54Z",
-        "bonuses": {
-            "total": 0.2,
-            "entries": [
-              {
-                "type": "dueling",
-                "subtype": "weak",
-                "value": -0.2
-              },
-              {
-                "type": "finishing_quality_nonpen",
-                "subtype": "neutral",
-                "value": 0
-              },
-              {
-                "type": "open_play_pass_accuracy",
-                "subtype": "very_good",
-                "value": 0.4
-              }
-            ]
-          }
-        }
-    }
-    ```
-    </TabItem>
+}
+```
+</TabItem>
 </Tabs>
 
 ### Rating history
@@ -327,97 +334,97 @@ During the `IN_MATCH` phase, it returns data calculated from the match start up 
 Each historical value contains the [timeFrame](./../../objects-common/time-frame) object specifying the play time for which the rating was calculated.
 :::
 <Tabs>
-    <TabItem value="query2" label="Query" default>
-    ```graphql showLineNumbers title="Query: Rating history in a specific match" 
-    query Match($matchId: ID!) {
-      match(id: $matchId) {    
+<TabItem value="query2" label="Query" default>
+```graphql showLineNumbers title="Query: Rating history in a specific match" 
+query Match($matchId: ID!) {
+    match(id: $matchId) {
         playerRatings {
-          player {
-            id
-            localizedName {
-              text
+            player {
+                id
+                localizedName {
+                    text
+                }
             }
-          }
-          ratingHistory {
-            timeFrame {
-              phase
-              period
-              elapsedMinute
-              elapsedSecond
+            ratingHistory {
+                timeFrame {
+                    phase
+                    period
+                    elapsedMinute
+                    elapsedSecond
+                }
+                value
             }
-            value
-          }
-        }   
-      }
+        }
     }
-    ```
-    </TabItem>
-    <TabItem value="variables2" label="Variables" default>
-    ```json showLineNumbers title="Variables: ID of desired match"
-    {
-        //Premier League, Arsenal - Tottenham 4:1, 23.11.2025
-        "matchId": "1935259478450778112"
-    }
-    ```
-    </TabItem>
-    <TabItem value="response2" label="Response" default>
-    ```json showLineNumbers title="Response: Minute-by-minute rating history of B. Saka in ARSvTOT PL match"
-    {
-      "data": {
-        "match": {
-          "playerRatings": [
+}
+```
+</TabItem>
+<TabItem value="variables2" label="Variables" default>
+```json showLineNumbers title="Variables: ID of desired match"
+{
+    //Premier League, Arsenal - Tottenham 4:1, 23.11.2025
+    "matchId": "1935259478450778112"
+}
+```
+</TabItem>
+<TabItem value="response2" label="Response" default>
+```json showLineNumbers title="Response: Minute-by-minute rating history of B. Saka in ARSvTOT PL match"
+{
+  "data": {
+    "match": {
+      "playerRatings": [
+        {
+          "player": {
+            "id": "1897696843341758464",
+            "localizedName": {
+              "text": "Saka Bukayo"
+            }
+          },
+          "ratingHistory": [
             {
-              "player": {
-                "id": "1897696843341758464",
-                "localizedName": {
-                  "text": "Saka Bukayo"
-                }
+              "timeFrame": {
+                "phase": "IN_MATCH",
+                "period": "HALF_FIRST",
+                "elapsedMinute": 10,
+                "elapsedSecond": 0
               },
-              "ratingHistory": [
-                {
-                  "timeFrame": {
-                    "phase": "IN_MATCH",
-                    "period": "HALF_FIRST",
-                    "elapsedMinute": 10,
-                    "elapsedSecond": 0
-                  },
-                  "value": 6.907343
-                },
-                {
-                  "timeFrame": {
-                    "phase": "IN_MATCH",
-                    "period": "HALF_FIRST",
-                    "elapsedMinute": 11,
-                    "elapsedSecond": 0
-                  },
-                  "value": 6.886458
-                },
-                ...
-                ...
-                {
-                  "timeFrame": {
-                    "phase": "IN_MATCH",
-                    "period": "HALF_SECOND",
-                    "elapsedMinute": 89,
-                    "elapsedSecond": 0
-                  },
-                  "value": 7.127196
-                },
-                {
-                  "timeFrame": {
-                    "phase": "IN_MATCH",
-                    "period": "HALF_SECOND",
-                    "elapsedMinute": 90,
-                    "elapsedSecond": 0
-                  },
-                  "value": 6.993207
-                }
-              ]
+              "value": 6.907343
+            },
+            {
+              "timeFrame": {
+                "phase": "IN_MATCH",
+                "period": "HALF_FIRST",
+                "elapsedMinute": 11,
+                "elapsedSecond": 0
+              },
+              "value": 6.886458
+            },
+            ...
+            ...
+            {
+              "timeFrame": {
+                "phase": "IN_MATCH",
+                "period": "HALF_SECOND",
+                "elapsedMinute": 89,
+                "elapsedSecond": 0
+              },
+              "value": 7.127196
+            },
+            {
+              "timeFrame": {
+                "phase": "IN_MATCH",
+                "period": "HALF_SECOND",
+                "elapsedMinute": 90,
+                "elapsedSecond": 0
+              },
+              "value": 6.993207
             }
           ]
         }
-      }
+      ]
     }
-    ```
-    </TabItem>
+  }
+}
+```
+</TabItem>
 </Tabs>

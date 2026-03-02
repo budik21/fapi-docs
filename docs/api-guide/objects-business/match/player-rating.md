@@ -13,7 +13,7 @@ See [PlayerRating object](./../../../api-reference/objects/PlayerRating) chapter
 
 ## Business purpose
 :::info[no-header]
-The `score` object provides a structured breakdown of a match's score progression. It is used to track goals across individual periods, overall match results, and multi-leg aggregates, using `null` values to clearly indicate periods or matches that have not yet started.
+The `playerRating` object provides a set of data points used to evaluate a player's performance in a specific match using a standardised scale **from 1** (worst performance) **to 10** (best performance).
 :::
 
 ### Prerequisites

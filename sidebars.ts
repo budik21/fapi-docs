@@ -28,6 +28,11 @@ const sidebars: SidebarsConfig = {
                   id:       'api-guide/api-guide-intro'
               },
               {
+                  type:     'doc',
+                  label:    'Search Queries',
+                  id:       'api-guide/search-queries'
+              },
+              {
                   type:     'category',
                   label:    'Common objects',
                   items: [
@@ -71,6 +76,19 @@ const sidebars: SidebarsConfig = {
                               },
 
                   ],
+              },
+          ],
+      },
+  ],
+  mappingServiceSidebar: [
+      {
+          type: 'category',
+          label: 'Mapping Service',
+          items: [
+              {
+                  type:  'doc',
+                  label: 'Intro',
+                  id:    'mapping-service/mapping-service-intro'
               },
           ],
       },

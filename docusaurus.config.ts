@@ -92,6 +92,12 @@ const config: Config = {
                     position:   'left',
                     label:      'API Reference',
                 },
+                {
+                    type:       'docSidebar',
+                    sidebarId:  'mappingServiceSidebar',
+                    position:   'left',
+                    label:      'Mapping Service',
+                },
                 /*{
                     type:       'docSidebar',
                     sidebarId:  'objectSidebar',

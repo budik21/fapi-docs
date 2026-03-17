@@ -26,7 +26,7 @@ Aggregation can be performed on [any metric defined](./../../../api-reference/en
 
 While **SUM** is the most common aggregation method for counting total outputs (such as goals or passes), the system applies the most statistically appropriate method for each specific metric. For instance, aggregating the [Rating](./../match/player-rating.md) metric as a simple sum is illogical; instead, it is calculated as a **Weighted Average** based on minutes played to ensure a fair representation of a player's performance.
 
-See [how the multiple aggregations work](#example-multiple-aggreations).
+See [how the multiple aggregations work](#example-multiple-aggregations).
 
 ### Supported Aggregations
 There are several ways to aggregate player statistics. However, **not all aggregation methods are available for every metric**, as the calculation must make sense within a sporting context.
@@ -455,7 +455,7 @@ The only difference from the previous example is the `seasonStageIDs` field—in
     ```
     </TabItem>
     <TabItem value="response-multiple-stages" label="Response" default>
-    ```json showLineNumbers title="Response: Live rating"
+    ```json showLineNumbers title="Response: Aggregated Player Data - Multiple Stages"
     {
       "data": {
         "seasonStagePlayerStats": {
@@ -599,7 +599,7 @@ Note that we use **the same query** as in the previous example, but **with the `
         "seasonStages": ["1943251377560240128","1942584739643002880","1943251377291788288"],
         //Metrics definition 
         "fields": ["POINTS","GOALS","ASSISTS_GOAL"],
-        //Key to success: Set of sorting metrics with defined direction makes the ranking possible (leaderboard). MATCH_MINUTES_PLAYED is used as sorting criterion, but is not available in filed list 
+        //Key to success: Set of sorting metrics with defined direction makes the ranking possible (leaderboard). MATCH_MINUTES_PLAYED is used as sorting criterion, but is not available in field list 
         "sort": [
           {"metric": "POINTS",                  "direction": "DESC"},
           {"metric": "GOALS",                   "direction": "DESC"},
@@ -641,7 +641,7 @@ Note that we use **the same query** as in the previous example, but **with the `
                 },
                 {
                   "metric": "MATCH_MINUTES_PLAYED",
-                  "value": 464
+                  "sum": 464
                 }
               ]
             },
@@ -686,7 +686,7 @@ Note that we use **the same query** as in the previous example, but **with the `
 The output data demonstrates a tie-break scenario between two players. The first three metrics (POINTS, GOALS, ASSISTS_GOAL) result in a draw as both players share identical values. The tie is ultimately broken by the fourth metric, MATCH_MINUTES_PLAYED, which ranks the player with fewer minutes higher. In this case, **Rashford is ranked above Fermín** due to the ASC (ascending) sorting parameter.
 :::
 
-### Multiple aggregation functions {#example-multiple-aggreations}
+### Multiple aggregation functions {#example-multiple-aggregations}
 :::info[no-icon]
 The following example demonstrates how to use multiple aggregation function in one query. In this case we build a leaderboard based on the **Weighted average rating** in combination with **total count of shots** and **minutes played** and **per90 average for shots total** as the primary tie-breaker in multiple season stages.
 :::

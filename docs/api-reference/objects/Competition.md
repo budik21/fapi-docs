@@ -22,3 +22,5 @@ The Competition represents a football competition or league (e.g., Premier Leagu
 | `region` | [Region](../enums/Region) | The region for international/continental competitions (e.g., 'Europe', 'World') |
 | `ageGroup` | [AgeGroup](../enums/AgeGroup) | The age group category |
 | `gender` | [Gender](../enums/Gender) | The gender category |
+| `seasons` | [SeasonsResult!](../objects/SeasonsResult) | Seasons of this competition with filter and pagination |
+| `currentSeason` | [Season](../objects/Season) | Current season (startDate &lt;= now and endDate &gt;= now) |

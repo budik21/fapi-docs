@@ -25,3 +25,5 @@ import JsonExportButton from '@site/src/components/JsonExportButton';
 | `assist1Event` | [PassEvent](../objects/MatchEventPassEvent) | The first assist for the goal |
 | `assist2Event` | [PassEvent](../objects/MatchEventPassEvent) | The second assist for the goal |
 | `goalDisallowedReason` | [GoalDisallowedReason](../enums/GoalDisallowedReason) | The reason why the goal was disallowed (if applicable) |
+| `scoreHome` | `Int` | Total valid goals scored by the home team. For disallowed goals, reverts to the previously valid score. |
+| `scoreAway` | `Int` | Total valid goals scored by the away team. For disallowed goals, reverts to the previously valid score. |

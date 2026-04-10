@@ -13,16 +13,24 @@ type Query {
   player(id: ID!): Player
   "Find match by ID"
   match(id: ID!): Match
+  "Find matches with filter and cursor-based pagination"
+  matches(filter: MatchesFilter!, pagination: Pagination!, sort: MatchSort): MatchesResult!
   "Find team by ID"
   team(id: ID!): Team
   "Find localized texts by IDs"
   localizedTexts(ids: [String!]!): [LocalizedText]!
-  seasonStageTeamStats(seasonStageIDs: [ID!]!, fields: [TeamMatchMetric!]!, filter: AggregatedTeamStatsFilter, sort: [AggregatedTeamStatsSortItem!], pagination: AggregatedTeamStatsPagination): AggregatedTeamStatsResponse!
-  seasonStagePlayerStats(seasonStageIDs: [ID!]!, fields: [PlayerMatchMetric!]!, filter: AggregatedPlayerStatsFilter, sort: [AggregatedPlayerStatsSortItem!], pagination: AggregatedPlayerStatsPagination): AggregatedPlayerStatsResponse!
+  seasonStageTeamStats(seasonStageIDs: [ID!]!, fields: [TeamMatchMetric!]!, filter: AggregatedTeamStatsFilter, sort: [AggregatedTeamStatsSortItem!], pagination: AggregatedTeamStatsPagination, having: AggregatedTeamStatsHavingInput): AggregatedTeamStatsResponse!
+  seasonStageTeamStatsCh(seasonStageIDs: [ID!]!, fields: [TeamMatchMetric!]!, filter: AggregatedTeamStatsFilter, sort: [AggregatedTeamStatsSortItem!], pagination: AggregatedTeamStatsPagination, having: AggregatedTeamStatsHavingInput): AggregatedTeamStatsResponse!
+  seasonStagePlayerStats(seasonStageIDs: [ID!]!, fields: [PlayerMatchMetric!]!, filter: AggregatedPlayerStatsFilter, sort: [AggregatedPlayerStatsSortItem!], pagination: AggregatedPlayerStatsPagination, having: AggregatedPlayerStatsHavingInput): AggregatedPlayerStatsResponse!
+  seasonStagePlayerStatsCh(seasonStageIDs: [ID!]!, fields: [PlayerMatchMetric!]!, filter: AggregatedPlayerStatsFilter, sort: [AggregatedPlayerStatsSortItem!], pagination: AggregatedPlayerStatsPagination, having: AggregatedPlayerStatsHavingInput): AggregatedPlayerStatsResponse!
   "Find teams with filter and cursor-based pagination"
   teams(filter: TeamsFilter!, pagination: Pagination!): TeamsResult!
-  "Find competitions with filter and cursor-based pagination"
-  competitions(filter: CompetitionsFilter!, pagination: Pagination!): CompetitionsResult!
+  "Find competitions with optional filter and cursor-based pagination"
+  competitions(filter: CompetitionsFilter, pagination: Pagination!, sort: CompetitionSort): CompetitionsResult!
+  "Find seasons with filter and cursor-based pagination"
+  seasons(filter: SeasonsFilter!, pagination: Pagination!, sort: SeasonSort): SeasonsResult!
+  "Find season stages with filter and cursor-based pagination"
+  seasonStages(filter: SeasonStagesFilter!, pagination: Pagination!, sort: SeasonStageSort): SeasonStagesResult!
 }
 
 """Represents the competition’s age restriction category."""
@@ -65,6 +73,15 @@ enum AgeGroup {
   Under 15 years category. Allows a player who is 15 years old or younger to play for the team.
   """
   U15
+}
+
+"Describes how a metric value was aggregated."
+enum AggregationType {
+  SUM
+  COUNT
+  AVG
+  PER90_AVG
+  WEIGHTED_AVG
 }
 
 """Describes all possible body parts used by a player during the game"""
@@ -207,6 +224,10 @@ enum ClarityType {
   TWO_AT_LEAST
   "The shot was taken facing only the goalkeeper, with more than two other blocking players"
   MORE_THAN_TWO
+}
+
+enum CompetitionSortField {
+  NAME
 }
 
 """
@@ -1265,6 +1286,10 @@ enum MatchSituation {
   GOALKEEPER_START
 }
 
+enum MatchSortField {
+  START_TIME
+}
+
 """Represents the current status of a football match."""
 enum MatchStatus {
   "Match is scheduled but has not started."
@@ -1588,6 +1613,10 @@ enum PlayerMatchMetric {
   """
   CARDS_YELLOW_SECOND
   """
+  Cummulated Yellow Cards. The absolute total of yellow cards shown to a player during a match. This metric counts every individual yellow card issued, meaning a player who receives a second yellow card (and a subsequent red card) will register a value of 2.
+  """
+  CARDS_YELLOW_CUMMULATED
+  """
   The total number of times a player receives the ball and carries (drives) it forward towards the opposition's goal before making a pass, taking a shot, or losing possession.
   A carry must result in the ball being moved at least 5 meters closer to the opposition's goal to be counted as progressive.
   """
@@ -1714,9 +1743,33 @@ enum PlayerMatchMetric {
   """
   DUELS_WON
   """
+  The percentage of successful entries into the final third out of the total number of entry attempts
+  """
+  ENTRIES_FINAL_THIRD_EFFICIENCY
+  """
+  The total number of successful passes initiated outside of the final third of the pitch that reach the final (attacking) third, from the perspective of the team making the pass
+  """
+  ENTRIES_FINAL_THIRD_SUCCESSFUL
+  """
+  The total number of successful passes from open play initiated outside the final third that reach the final (attacking) third, from the perspective of the team making the pass
+  """
+  ENTRIES_FINAL_THIRD_SUCCESSFUL_OPEN_PLAY
+  """
   The total number of passes initiated outside of the final third of the pitch that reach the final (attacking) third, from the perspective of the team making the pass
   """
   ENTRIES_FINAL_THIRD_TOTAL
+  """
+  The percentage of successful entries into the penalty box out of the total number of entry attempts
+  """
+  ENTRIES_PENALTY_BOX_EFFICIENCY
+  """
+  The total number of successful passes initiated from outside the opponent's penalty area that move the ball into the penalty area, from the perspective of the team making the pass
+  """
+  ENTRIES_PENALTY_BOX_SUCCESSFUL
+  """
+  The total number of successful passes from open play initiated from outside the opponent's penalty area that move the ball into the penalty area, from the perspective of the team making the pass
+  """
+  ENTRIES_PENALTY_BOX_SUCCESSFUL_OPEN_PLAY
   """
   The total number of passes initiated from outside the opponent's penalty area that move the ball into the penalty area, from the perspective of the team making the pass
   """
@@ -1965,6 +2018,16 @@ enum PlayerMatchMetric {
   """
   MATCH_LINEUP_FINISHING
   """
+  Appearance in match. Indicates whether the player actively participated on the pitch during the match, either by being part of the starting lineup or by entering the field as a substitute.
+  CZ: Nastoupení v zápase. Určuje, zda hráč aktivně nastoupil v zápase (základní sestava nebo střídání).
+  """
+  MATCH_LINEUP_APPEARANCE
+  """
+  Available to play. The player was selected as part of the team's matchday squad, whether as a member of the starting lineup or as a substitute.
+  CZ: K dispozici v sestavě. Hráč byl v zápase v sestavě týmu (základ nebo náhradník).
+  """
+  MATCH_LINEUP_AVAILABLE
+  """
   The player was selected as part of the team's starting lineup and began the match on the field, regardless of how many minutes he played in the match.
   """
   MATCH_LINEUP_STARTING
@@ -1999,6 +2062,11 @@ enum PlayerMatchMetric {
   """
   MATCH_MINUTES_PLAYED_LIVE_INPLAY
   """
+  Match workload. The proportion of total match time that a player spent on the pitch. Calculated as the player's total minutes played divided by the given match duration (90 or 120 minutes). Expressed as a decimal value between 0 and 1.
+  CZ: Vytížení v zápase. Podíl celkové doby zápasu, kterou hráč strávil na hřišti (0–1).
+  """
+  MATCH_MINUTES_PLAYED_RATIO
+  """
   Indicates whether a player is on the pitch during the live phase of the match.
   """
   MATCH_ON_PITCH_LIVE
@@ -2026,6 +2094,22 @@ enum PlayerMatchMetric {
   The total number of backward passes made by a player that move the ball towards their own goal.
   """
   PASSES_BACKWARD_TOTAL
+  """
+  Key passes into the box from open play: the total number of pass attempts made from open play into the opponent's penalty area intended to set up a shot or a chance, regardless of whether the shot or chance was converted.
+  """
+  PASSES_BOX_IN_OPEN_PLAY_KEY_TOTAL
+  """
+  Key passes into the box from set piece: the total number of pass attempts made from a set piece (e.g. corners, free kicks) into the opponent's penalty area intended to set up a shot or a chance, regardless of whether the shot or chance was converted.
+  """
+  PASSES_BOX_IN_SET_PIECE_KEY_TOTAL
+  """
+  Common Scoring Position (EN). All positions of a player resulted in a shot with xG 0.1+, no matter of the result of the shot. CZ: Běžná střelecká pozice.
+  """
+  SCORING_POSITIONS_COMMON
+  """
+  Significant Scoring Positions (EN). All positions of a player resulted in a shot with xG 0.2+, no matter of the result of the shot. CZ: Významná střelecká pozice.
+  """
+  SCORING_POSITIONS_SIGNIFICANT
   """
   The percentage of successful passes completed into the final (attacking) third out of the total number of passes attempted into this area.
   Successful passes are those received by a teammate and initiated from anywhere on the pitch
@@ -2117,39 +2201,24 @@ enum PlayerMatchMetric {
   """
   PENALTIES_WON
   """
-  Celkový počet penalt, kterým brankář čelil během penaltového rozstřelu
   Total number of penalties faced by a goalkeeper during penalty shootout
   """
   PENALTY_SHOOTOUT_ATTEMPTS_FACED
   """
-  Počet penalt v rozstřelu, které střelec minul (brankář chytil)
   Number of penalty shootout attempts missed by the shooter (saved by goalkeeper)
   """
   PENALTY_SHOOTOUT_ATTEMPTS_MISSED_SAVE
-  """
-  Počet penalt v rozstřelu, které střelec minul vedle branky
-  Number of penalty shootout attempts missed wide by the shooter
-  """
+  """Number of penalty shootout attempts missed wide by the shooter"""
   PENALTY_SHOOTOUT_ATTEMPTS_MISSED_WIDE
   """
-  Počet penalt v rozstřelu, které střelec neproměnil (missed nebo saved)
   Number of penalty shootout attempts not converted by the shooter (missed or saved)
   """
   PENALTY_SHOOTOUT_ATTEMPTS_NOT_CONVERTED
-  """
-  Počet penalt v rozstřelu, které brankář chytil
-  Number of penalty shootout attempts saved by the goalkeeper
-  """
+  """Number of penalty shootout attempts saved by the goalkeeper"""
   PENALTY_SHOOTOUT_ATTEMPTS_SAVES
-  """
-  Počet penalt v rozstřelu, které střelec proměnil
-  Number of penalty shootout attempts scored by the shooter
-  """
+  """Number of penalty shootout attempts scored by the shooter"""
   PENALTY_SHOOTOUT_ATTEMPTS_SCORED
-  """
-  Celkový počet pokusů o penaltu v rozstřelu pro střelce
-  Total number of penalty shootout attempts for the shooter
-  """
+  """Total number of penalty shootout attempts for the shooter"""
   PENALTY_SHOOTOUT_ATTEMPTS_TOTAL
   """
   Describes the performance of each player who participated in the match for at least a minimum number of minutes, rated on a scale from 1 (very poor performance) to 10 (excellent performance).
@@ -2422,6 +2491,41 @@ enum Region {
   WORLD
 }
 
+enum SeasonSortField {
+  NAME
+  START_DATE
+  END_DATE
+}
+
+enum SeasonStageSortField {
+  START_DATE
+  END_DATE
+}
+
+"""
+Normalized type of a season stage in the pipeline (e.g. main league, relegation, play-off).
+"""
+enum SeasonStageType {
+  "Unknown or unspecified stage type."
+  UNSPECIFIED
+  "Main league/group stage."
+  MAIN
+  "Relegation stage."
+  RELEGATION
+  "Promotion stage."
+  PROMOTION
+  "Promotion play-off."
+  PROMOTION_PLAY_OFF
+  "Relegation play-off."
+  RELEGATION_PLAY_OFF
+  "Qualification stage."
+  QUALIFICATION
+  "Play-out stage."
+  PLAY_OUT
+  "Championship group stage."
+  CHAMPIONSHIP_GROUP
+}
+
 """Describes all possible outcomes of a shot attempt."""
 enum ShotOutcome {
   "Represents a NULL or UNKNOWN value."
@@ -2552,7 +2656,13 @@ enum TeamMatchMetric {
   DUELS_LOST
   DUELS_TOTAL
   DUELS_WON
+  ENTRIES_FINAL_THIRD_EFFICIENCY
+  ENTRIES_FINAL_THIRD_SUCCESSFUL
+  ENTRIES_FINAL_THIRD_SUCCESSFUL_OPEN_PLAY
   ENTRIES_FINAL_THIRD_TOTAL
+  ENTRIES_PENALTY_BOX_EFFICIENCY
+  ENTRIES_PENALTY_BOX_SUCCESSFUL
+  ENTRIES_PENALTY_BOX_SUCCESSFUL_OPEN_PLAY
   ENTRIES_PENALTY_BOX_TOTAL
   ERRORS_LEAD_TO_GOAL
   ERRORS_LEAD_TO_SHOT
@@ -2699,6 +2809,36 @@ enum TeamType {
   NATIONAL
 }
 
+enum VARDecisionType {
+  "The VAR decision type is not specified"
+  UNSPECIFIED
+  "The referee's decision made on the pitch has been confirmed after VAR review"
+  DECISION_CONFIRMED
+  "The referee's decision made on the pitch has been canceled after VAR review"
+  DECISION_CANCELED
+}
+
+enum VARSituationType {
+  "The VAR situation type is not specified"
+  UNSPECIFIED
+  "A goal was awarded by an on-pitch decision. VAR is reviewing whether the goal was scored in accordance with the rules (Decision confirmed: Goal stands; Decision cancelled: Goal disallowed)."
+  GOAL_UNDER_REVIEW
+  "A goal was scored but disallowed by an on-pitch decision. VAR is reviewing the referee's decision to disallow the goal (Decision confirmed: Goal remains disallowed; Decision cancelled: Goal is awarded)."
+  CHECKING_DISALLOWED_GOAL
+  "A penalty kick was awarded by an on-pitch decision. VAR is reviewing the referee's decision to award the penalty kick (Decision confirmed: Penalty stands; Decision cancelled: No penalty)."
+  PENALTY_UNDER_REVIEW
+  "No penalty was awarded by an on-pitch decision. VAR is investigating the suspicious situation to determine if it should result in a penalty kick (Decision confirmed: No penalty; Decision cancelled: Penalty awarded)."
+  POSSIBLE_PENALTY
+  "No red card was issued by an on-pitch decision. VAR is investigating the suspicious situation to determine if it should result in a red card (Decision confirmed: No red card; Decision cancelled: Red card awarded)."
+  POSSIBLE_RED_CARD
+  "A red card was issued by an on-pitch decision. VAR is reviewing the referee's decision to send off a player (Decision confirmed: Red card stands; Decision cancelled: Red card reverted)."
+  RED_CARD_UNDER_REVIEW
+  "VAR is investigating the suspicious situation of a possible mistaken identity in the sending-off of a player (Decision confirmed: No mistaken; Decision cancelled: Identity was mistaken)."
+  POSSIBLE_MISTAKEN_IDENTITY
+  "VAR is being used for other reason"
+  OTHER_REASON
+}
+
 input CompetitionNameFilter {
   "Filter by prefix match (starts with)"
   startsWith: String
@@ -2706,7 +2846,7 @@ input CompetitionNameFilter {
 
 input CompetitionsFilter {
   "Filter by competition IDs"
-  ids: [ID!]
+  id: [ID!]
   "Filter by competition name"
   name: CompetitionNameFilter
   "Filter by country codes"
@@ -2721,6 +2861,23 @@ input CompetitionsFilter {
   type: [CompetitionType!]
 }
 
+"Filter for seasons field on Competition (competitionId is implicit from parent)."
+input CompetitionSeasonsFilter {
+  "Filter by genders (men/women)"
+  gender: [Gender!]
+  "Filter by age categories"
+  ageCategory: [AgeGroup!]
+  "Filter by season start date range"
+  startDate: DateFilter
+  "Filter by season end date range"
+  endDate: DateFilter
+}
+
+input CompetitionSort {
+  field: CompetitionSortField!
+  direction: SortDirection!
+}
+
 input IDFilter {
   in: [ID!]
 }
@@ -2728,6 +2885,45 @@ input IDFilter {
 input StringFilter {
   "Filter by prefix match (starts with)"
   startsWith: String
+}
+
+input DateTimeFilter {
+  "Filter by time from (inclusive)"
+  from: DateTime
+  "Filter by time to (inclusive)"
+  to: DateTime
+}
+
+input DateFilter {
+  "From date (inclusive)"
+  from: Date
+  "To date (inclusive)"
+  to: Date
+}
+
+"Comparison operators for a numeric value (e.g. HAVING clause). At least one of gte, gt, lte, lt, eq, neq must be set."
+input FloatOperatorsFilter {
+  gte: Float
+  gt: Float
+  lte: Float
+  lt: Float
+  eq: Float
+  neq: Float
+}
+
+input MatchesFilter {
+  "Filter by match IDs"
+  ids: [ID!]
+  "Filter by season stage IDs"
+  seasonStageIDs: [ID!]
+  "Filter by team ID"
+  teamID: ID
+  "Filter by opponent team ID"
+  opponentTeamID: ID
+  "Filter by team side (home/away) relative to teamID. Use side only together with teamID."
+  side: TeamHomeAway
+  "Filter by match start time range"
+  startTime: DateTimeFilter
 }
 
 input PhaseFilter {
@@ -2752,6 +2948,11 @@ input MatchPlayerStatsFilter {
 
 input MatchPlayerStatsSortItem {
   metric: PlayerMatchMetric!
+  direction: SortDirection!
+}
+
+input MatchSort {
+  field: MatchSortField!
   direction: SortDirection!
 }
 
@@ -2786,6 +2987,67 @@ input PlayerMatchStatsChangedFilter {
   playerID: IDFilter
 }
 
+input SeasonsFilter {
+  "Filter by season IDs"
+  id: [ID!]
+  "Filter by competition IDs"
+  competitionID: [ID!]
+  "Filter by genders (men/women)"
+  gender: [Gender!]
+  "Filter by age categories"
+  ageCategory: [AgeGroup!]
+  "Filter by season start date range"
+  startDate: DateFilter
+  "Filter by season end date range"
+  endDate: DateFilter
+}
+
+"Filter for seasonStages field on Season (seasonID is implicit from parent)."
+input SeasonSeasonStagesFilter {
+  "Filter by start date range"
+  startDate: DateFilter
+  "Filter by end date range"
+  endDate: DateFilter
+}
+
+input SeasonSort {
+  field: SeasonSortField!
+  direction: SortDirection!
+}
+
+input SeasonStagesFilter {
+  "Filter by season stage IDs"
+  id: [ID!]
+  "Filter by season IDs"
+  seasonID: [ID!]
+  "Filter by start date range"
+  startDate: DateFilter
+  "Filter by end date range"
+  endDate: DateFilter
+}
+
+"Filter for matches/pastMatches/upcomingMatches on SeasonStage (seasonStageID is implicit from parent). For pastMatches/upcomingMatches, startTime is set implicitly."
+input SeasonStageMatchesFilter {
+  "Filter by team ID"
+  teamID: ID
+  "Filter by opponent team ID"
+  opponentTeamID: ID
+  "Filter by team side (home/away) relative to teamID. Use side only together with teamID."
+  side: TeamHomeAway
+  "Filter by match start time range (used only for matches; ignored for pastMatches/upcomingMatches)"
+  startTime: DateTimeFilter
+}
+
+input AggregatedPlayerStatsHavingInput {
+  metrics: [AggregatedPlayerStatsMetricCondition!]!
+}
+
+"Condition on aggregated metric value (HAVING). Uses shared FloatOperatorsFilter for the value comparison."
+input AggregatedPlayerStatsMetricCondition {
+  metric: PlayerMatchMetric!
+  value: FloatOperatorsFilter!
+}
+
 input AggregatedPlayerStatsFilter {
   playerIDs: [ID!]
   side: TeamHomeAway
@@ -2795,6 +3057,7 @@ input AggregatedPlayerStatsFilter {
 
 input AggregatedPlayerStatsSortItem {
   metric: PlayerMatchMetric!
+  type: AggregationType
   direction: SortDirection!
 }
 
@@ -2808,6 +3071,20 @@ input PlayerMatchesFilter {
   seasonStageIDs: [ID!]
 }
 
+input SeasonStageSort {
+  field: SeasonStageSortField!
+  direction: SortDirection!
+}
+
+input AggregatedTeamStatsHavingInput {
+  metrics: [AggregatedTeamStatsMetricCondition!]!
+}
+
+input AggregatedTeamStatsMetricCondition {
+  metric: TeamMatchMetric!
+  value: FloatOperatorsFilter!
+}
+
 input AggregatedTeamStatsFilter {
   teamIDs: [ID!]
   side: TeamHomeAway
@@ -2816,6 +3093,7 @@ input AggregatedTeamStatsFilter {
 
 input AggregatedTeamStatsSortItem {
   metric: TeamMatchMetric!
+  type: AggregationType
   direction: SortDirection!
 }
 
@@ -2836,7 +3114,7 @@ input TeamNameFilter {
 
 input TeamsFilter {
   "Filter by team IDs"
-  ids: [ID!]
+  id: [ID!]
   "Filter by team name"
   name: TeamNameFilter
   "Filter by country codes"
@@ -2864,9 +3142,19 @@ type AggregatedPlayerStatsItem {
   fields: [AggregatedPlayerStatsField]!
 }
 
+"Aggregated metric values exposed as direct fields. Only types supported by the metric are non-null."
 type AggregatedPlayerStatsField {
   metric: PlayerMatchMetric!
-  value: Float
+  "Sum of the metric across matches."
+  sum: Float
+  "Average of the metric per match."
+  avg: Float
+  "Count (e.g. matches played for this metric)."
+  count: Int
+  "Per-90 average."
+  per90Avg: Float
+  "Weighted average."
+  weightedAvg: Float
 }
 
 type AggregatedTeamStatsResponse {
@@ -2884,9 +3172,19 @@ type AggregatedTeamStatsItem {
   fields: [AggregatedTeamStatsField]!
 }
 
+"Aggregated metric values exposed as direct fields. Only types supported by the metric are non-null."
 type AggregatedTeamStatsField {
   metric: TeamMatchMetric!
-  value: Float
+  "Sum of the metric across matches."
+  sum: Float
+  "Average of the metric per match."
+  avg: Float
+  "Count (e.g. matches played for this metric)."
+  count: Int
+  "Per-90 average."
+  per90Avg: Float
+  "Weighted average."
+  weightedAvg: Float
 }
 
 type Club {
@@ -2909,10 +3207,16 @@ type ClubTeam implements Team {
   club: Club! @goField(forceResolver: true)
   "Localized name of the team"
   localizedName: LocalizedText! @goField(forceResolver: true)
+  "Full official name from team_names (localized text), if present"
+  fullName: LocalizedText @goField(forceResolver: true)
+  "Shortcut name from team_names (localized text), if present"
+  shortcutName: LocalizedText @goField(forceResolver: true)
   "Last matches for the team"
   pastMatches(filter: TeamMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
   "Aggregated team stats for recent N past matches"
   pastMatchesStats(fields: [TeamMatchMetric!]!, matchPeriod: MatchPeriod, filter: TeamMatchesFilter, first: Int!): AggregatedTeamStatsResponse! @goField(forceResolver: true)
+  "Aggregated team stats for recent N past matches (ClickHouse)"
+  pastMatchesStatsCh(fields: [TeamMatchMetric!]!, matchPeriod: MatchPeriod, filter: TeamMatchesFilter, first: Int!): AggregatedTeamStatsResponse! @goField(forceResolver: true)
   "Upcoming matches for the team"
   upcomingMatches(filter: TeamMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
   "Past head-to-head matches between this team and an opponent team"
@@ -2935,6 +3239,10 @@ type Competition {
   ageGroup: AgeGroup @goField(forceResolver: true)
   "The gender category"
   gender: Gender @goField(forceResolver: true)
+  "Seasons of this competition with filter and pagination"
+  seasons(filter: CompetitionSeasonsFilter!, pagination: Pagination!, sort: SeasonSort): SeasonsResult! @goField(forceResolver: true)
+  "Current season (startDate <= now and endDate >= now)"
+  currentSeason: Season @goField(forceResolver: true)
 }
 
 """Represents a paginated result set of competitions."""
@@ -3041,6 +3349,14 @@ type Match {
   ): MatchScore @goField(forceResolver: true)
 }
 
+"""Represents a paginated result set of matches."""
+type MatchesResult {
+  "The list of matches on the current page."
+  items: [Match!]!
+  "Information about the current page and cursors."
+  pageInfo: PageInfo!
+}
+
 """
 Enumeration of all possible types of events that can occur during a match.
 """
@@ -3061,6 +3377,8 @@ enum MatchEventType {
   SHOT
   "An event in which one player is replaced by another on the field."
   SUBSTITUTION
+  "Video Assistant Referee (VAR) review event for critical game-changing decisions."
+  VAR
 }
 
 """
@@ -3223,6 +3541,10 @@ type GoalEvent implements MatchEvent {
   assist2Event: PassEvent @goField(forceResolver: true)
   "The reason why the goal was disallowed (if applicable)"
   goalDisallowedReason: GoalDisallowedReason @goField(forceResolver: true)
+  "Total valid goals scored by the home team. For disallowed goals, reverts to the previously valid score."
+  scoreHome: Int @goField(forceResolver: true)
+  "Total valid goals scored by the away team. For disallowed goals, reverts to the previously valid score."
+  scoreAway: Int @goField(forceResolver: true)
 }
 
 type PassEvent implements MatchEvent {
@@ -3373,6 +3695,28 @@ type SubstitutionEvent implements MatchEvent {
   substitutionReason: SubstitutionReason @goField(forceResolver: true)
 }
 
+type VAREvent implements MatchEvent {
+  id: ID!
+  type: MatchEventType! @goField(forceResolver: true)
+  timestamp: DateTime! @goField(forceResolver: true)
+  timeFrame: MatchTimeFrame! @goField(forceResolver: true)
+  homeOrAway: TeamHomeAway @goField(forceResolver: true)
+  team: Team @goField(forceResolver: true)
+  player: Player @goField(forceResolver: true)
+  "Which type of situation is under review"
+  situationType: VARSituationType @goField(forceResolver: true)
+  "Decision made by VAR"
+  decisionType: VARDecisionType @goField(forceResolver: true)
+  "The relation to the goal event which is under review (if any)"
+  goalEvent: GoalEvent @goField(forceResolver: true)
+  "The relation to the foul event which is under review (if any)"
+  foulEvent: FoulEvent @goField(forceResolver: true)
+  "The relation to the card event which is under review (if any). Not all card given must be related to a foul"
+  cardEvent: CardEvent @goField(forceResolver: true)
+  "The relation to the pass event which is under review (if any). An offside pass is related when the on-pitch decision is goal not awarded because of previous offside"
+  passEvent: PassEvent @goField(forceResolver: true)
+}
+
 type MatchMomentum {
   "The main container holding all momentum minute-by-minutes entries for a match."
   entries: [MatchMomentumEntry!]!
@@ -3410,7 +3754,10 @@ type MatchPlayerStatsField {
 
 """
 All score information for a match, including overall score, aggregate score for multi-leg matches,
-and detailed breakdown by period (halftime, fulltime, extra time, penalties).
+and detailed breakdown by period (halfFirst, halfSecond, extraTimeFirst, extraTimeSecond, penaltyShootout).
+
+All scores are live: they are available and update in real time during the relevant period,
+not only after the period ends.
 """
 type MatchScore {
   """
@@ -3418,98 +3765,75 @@ type MatchScore {
   Does NOT include penalty shootout goals.
   
   - null: Match has not started yet
-  - Live score: During match (updates in real-time)
-  - Final score: After match ends
-  
-  Returns Score directly.
+  - Live: Updates in real time during the match
   """
   overall: Score
   """
   Aggregate score across multiple legs (for two-leg or multi-leg matches).
   
   - null: Not a multi-leg match, or aggregate not applicable
-  - Aggregate score: Sum of scores across all legs
+  - Sum of overall scores across all legs
   
-  Example: Champions League knockout round
+  Example: Champions League knockout
   - Leg 1: Team A 2-1 Team B
   - Leg 2: Team B 1-0 Team A
   - Aggregate: Team A 2-2 Team B (Team B advances on away goals)
   """
   aggregate: Score
   """
-  Score during or at the end of the first half.
+  First half score. Updates in real time as the half is played.
   
   - null: First half has not started yet
-  - Live score: Available DURING first half (shows current score)
-  - Halftime score: Available AFTER first half ends (shows score at halftime break)
-  
-  'score' = aggregated score (cumulative up to end of first half)
-  'periodScore' = goals scored in first half only
+  - home/away = goals in first half only; cumulative = running total at current point in the half
   """
-  halftime: PeriodScore
+  halfFirst: PeriodScore
   """
-  Score at the end of 90 minutes (fulltime).
+  Second half / fulltime score. Updates in real time as the half is played.
   
-  - null: Second half has not completed yet
-  - Fulltime score: Available AFTER second half ends
-  
-  'score' = aggregated score (cumulative up to end of second half = fulltime)
-  'periodScore' = goals scored in second half only
+  - null: Second half has not started yet
+  - home/away = goals in second half only; cumulative = running total (fulltime when second half ends)
   """
-  fulltime: PeriodScore
+  halfSecond: PeriodScore
   """
-  Score after the first extra time period.
+  First extra time period score. Updates in real time as the period is played.
   
-  - null: First extra time period has not completed yet
-  - After ET1 score: Available AFTER first extra time period ends
-  
-  'score' = aggregated score (cumulative up to end of first ET)
-  'periodScore' = goals scored in first ET period only
+  - null: First extra time period has not started yet
+  - home/away = goals in first ET only; cumulative = running total at current point
   """
-  afterExtraTimeFirst: PeriodScore
+  extraTimeFirst: PeriodScore
   """
-  Score after the second extra time period (end of extra time).
+  Second extra time period score. Updates in real time as the period is played.
   
-  - null: Second extra time period has not completed yet
-  - After ET2 score: Available AFTER second extra time period ends
-  
-  'score' = aggregated score (cumulative up to end of second ET)
-  'periodScore' = goals scored in second ET period only
+  - null: Second extra time period has not started yet
+  - home/away = goals in second ET only; cumulative = running total at end of extra time
   """
-  afterExtraTimeSecond: PeriodScore
+  extraTimeSecond: PeriodScore
   """
-  Penalty shootout score.
+  Penalty shootout score (goals in the shootout only). Updates in real time as the shootout is played.
   
-  - null: No penalty shootout occurred
-  - Penalty score: Available AFTER penalty shootout completes
-  
-  'score' = penalty shootout score (goals in shootout only)
-  'periodScore' = same as score (penalties are not aggregated with match goals)
+  - null: No penalty shootout (yet or at all)
   """
-  penalties: PeriodScore
+  penaltyShootout: Score
 }
 
 """
-Represents score information for a specific period, including both
-period-specific goals and cumulative aggregated score.
+Score for a specific period: goals in that period (home/away) and optional cumulative score.
+All values are live and update during the period.
 """
 type PeriodScore {
+  """Goals scored by the home team in this period only."""
+  home: Int!
+  """Goals scored by the away team in this period only."""
+  away: Int!
   """
-  Goals scored in this specific period only.
-  For example, if first half ended 1-0 and second half added 1 more goal,
-  halftime.periodScore = 1-0, fulltime.periodScore = 1-0 (second half only).
+  Cumulative score (running total) at the current point in the match.
+  For first half, typically equals home/away; for later periods, sum of all goals up to that point.
   """
-  periodScore: Score!
-  """
-  Cumulative score at the end of this period (aggregated up to this point).
-  For example, if first half ended 1-0 and second half added 1 more goal,
-  halftime.score = 1-0, fulltime.score = 2-0.
-  """
-  score: Score!
+  cumulative: Score
 }
 
 """
-Represents the score of a football match showing goals for home and away teams.
+Goals for home and away teams (e.g. overall, aggregate, or penalty shootout).
 """
 type Score {
   "The number of goals scored by the home team."
@@ -3569,10 +3893,16 @@ type NationalTeam implements Team {
   nationalAssociation: NationalAssociation! @goField(forceResolver: true)
   "Localized name of the team"
   localizedName: LocalizedText! @goField(forceResolver: true)
+  "Full official name from team_names (localized text), if present"
+  fullName: LocalizedText @goField(forceResolver: true)
+  "Shortcut name from team_names (localized text), if present"
+  shortcutName: LocalizedText @goField(forceResolver: true)
   "Last matches for the team"
   pastMatches(filter: TeamMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
   "Aggregated team stats for recent N past matches"
   pastMatchesStats(fields: [TeamMatchMetric!]!, matchPeriod: MatchPeriod, filter: TeamMatchesFilter, first: Int!): AggregatedTeamStatsResponse! @goField(forceResolver: true)
+  "Aggregated team stats for recent N past matches (ClickHouse)"
+  pastMatchesStatsCh(fields: [TeamMatchMetric!]!, matchPeriod: MatchPeriod, filter: TeamMatchesFilter, first: Int!): AggregatedTeamStatsResponse! @goField(forceResolver: true)
   "Upcoming matches for the team"
   upcomingMatches(filter: TeamMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
   "Past head-to-head matches between this team and an opponent team"
@@ -3607,6 +3937,8 @@ type Player {
   pastMatches(filter: PlayerMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
   "Aggregated player stats for recent N past matches"
   pastMatchesStats(fields: [PlayerMatchMetric!]!, filter: PlayerMatchesFilter, first: Int!): AggregatedPlayerStatsResponse! @goField(forceResolver: true)
+  "Aggregated player stats for recent N past matches (ClickHouse)"
+  pastMatchesStatsCh(fields: [PlayerMatchMetric!]!, filter: PlayerMatchesFilter, first: Int!): AggregatedPlayerStatsResponse! @goField(forceResolver: true)
 }
 
 type PlayerMatchStatsV2 {
@@ -3874,6 +4206,13 @@ type PlayerMatchStatsV2 {
   CZ Description: Celkový počet situací, kdy byl hráč napomenutý druhou žlutou kartou v tomtéž zápase, což vede k vyloučení
   """
   cardsYellowSecond: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Cummulated yellow cards
+  Default (EN) Description: The absolute total of yellow cards shown to a player during a match. A player who receives a second yellow card (and a subsequent red card) will register a value of 2.
+  CZ Name: Kumulované žluté karty
+  CZ Description: Celkový počet žlutých karet udělených hráči v zápase. Druhá žlutá karta se započítá jako 2.
+  """
+  cardsYellowCummulated: PlayerMatchMetricInt!
   """
   Default (EN) Name: Progressive carries
   
@@ -4145,6 +4484,36 @@ type PlayerMatchStatsV2 {
   """
   duelsWon: PlayerMatchMetricInt!
   """
+  Default (EN) Name: Final third entries efficiency
+  
+  Default (EN) Description: The percentage of successful entries into the final third out of the total number of entry attempts
+  
+  CZ Name: Úspěšnost vstupů do útočné třetiny
+  
+  CZ Description: Procento úspěšných vstupů do útočné třetiny z celkového počtu pokusů o vstup
+  """
+  entriesFinalThirdEfficiency: PlayerMatchMetricFloat!
+  """
+  Default (EN) Name: Successful entries into final third
+  
+  Default (EN) Description: The total number of successful passes initiated outside of the final third of the pitch that reach the final (attacking) third, from the perspective of the team making the pass
+  
+  CZ Name: Úspěšné vstupy do útočné třetiny
+  
+  CZ Description: Celkový počet úspěšných přihrávek zahájených mimo útočnou třetinu, které dosáhly útočné třetiny
+  """
+  entriesFinalThirdSuccessful: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Successful entries into final third from open play
+  
+  Default (EN) Description: The total number of successful passes from open play initiated outside the final third that reach the final (attacking) third, from the perspective of the team making the pass
+  
+  CZ Name: Úspěšné vstupy do útočné třetiny z otevřené hry
+  
+  CZ Description: Celkový počet úspěšných přihrávek z otevřené hry zahájených mimo útočnou třetinu, které dosáhly útočné třetiny
+  """
+  entriesFinalThirdSuccessfulOpenPlay: PlayerMatchMetricInt!
+  """
   Default (EN) Name: Entries into final third
   
   Default (EN) Description: The total number of passes initiated outside of the final third of the pitch that reach the final (attacking) third, from the perspective of the team making the pass
@@ -4154,6 +4523,36 @@ type PlayerMatchStatsV2 {
   CZ Description: Celkový počet přihrávek zahájených mimo útočnou třetinu třetinu hřiště, které však v útočné třetině skončily.
   """
   entriesFinalThirdTotal: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Penalty box entries efficiency
+  
+  Default (EN) Description: The percentage of successful entries into the penalty box out of the total number of entry attempts
+  
+  CZ Name: Úspěšnost vstupů do pokutového území
+  
+  CZ Description: Procento úspěšných vstupů do pokutového území z celkového počtu pokusů o vstup
+  """
+  entriesPenaltyBoxEfficiency: PlayerMatchMetricFloat!
+  """
+  Default (EN) Name: Successful entries into penalty box
+  
+  Default (EN) Description: The total number of successful passes initiated from outside the opponent's penalty area that move the ball into the penalty area, from the perspective of the team making the pass
+  
+  CZ Name: Úspěšné vstupy do pokutového území
+  
+  CZ Description: Celkový počet úspěšných přihrávek zahájených mimo pokutové území soupeře, které míč do pokutového území dopravily
+  """
+  entriesPenaltyBoxSuccessful: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Successful entries into penalty box from open play
+  
+  Default (EN) Description: The total number of successful passes from open play initiated from outside the opponent's penalty area that move the ball into the penalty area, from the perspective of the team making the pass
+  
+  CZ Name: Úspěšné vstupy do pokutového území z otevřené hry
+  
+  CZ Description: Celkový počet úspěšných přihrávek z otevřené hry zahájených mimo pokutové území, které míč do pokutového území dopravily
+  """
+  entriesPenaltyBoxSuccessfulOpenPlay: PlayerMatchMetricInt!
   """
   Default (EN) Name: Entries into penalty box
   
@@ -4655,6 +5054,20 @@ type PlayerMatchStatsV2 {
   """
   matchLineupFinishing: PlayerMatchMetricInt!
   """
+  Default (EN) Name: Appearance in match
+  Default (EN) Description: Indicates whether the player actively participated on the pitch during the match, either by being part of the starting lineup or by entering the field as a substitute.
+  CZ Name: Nastoupení v zápase
+  CZ Description: Určuje, zda hráč aktivně nastoupil v zápase (základní sestava nebo střídání).
+  """
+  matchLineupAppearance: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Available to play
+  Default (EN) Description: The player was selected as part of the team's matchday squad, whether as a member of the starting lineup or as a substitute.
+  CZ Name: K dispozici v sestavě
+  CZ Description: Hráč byl v zápase v sestavě týmu (základ nebo náhradník).
+  """
+  matchLineupAvailable: PlayerMatchMetricInt!
+  """
   Default (EN) Name: Starting Lineup
   
   Default (EN) Description: The player was selected as part of the team's starting lineup and began the match on the field, regardless of how many minutes he played in the match.
@@ -4725,6 +5138,13 @@ type PlayerMatchStatsV2 {
   """
   matchMinutesPlayedLiveInplay: PlayerMatchMetricInt!
   """
+  Default (EN) Name: Match workload
+  Default (EN) Description: The proportion of total match time that a player spent on the pitch (0–1). Calculated as minutes played divided by match duration (90 or 120 minutes).
+  CZ Name: Vytížení v zápase
+  CZ Description: Podíl celkové doby zápasu, kterou hráč strávil na hřišti (0–1).
+  """
+  matchMinutesPlayedRatio: PlayerMatchMetricFloat!
+  """
   Default (EN) Name: Player is on pitch (live)
   
   Default (EN) Description: Indicates whether a player is on the pitch during the live phase of the match.
@@ -4786,6 +5206,26 @@ type PlayerMatchStatsV2 {
   CZ Description: Celkový počet pokusů hráče o přihrávku dozadu, směrem k vlastní bráně
   """
   passesBackwardTotal: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Key passes into box in open play total
+  
+  Default (EN) Description: The total number of key passes (assist to shot or into a chance) into the box from open play.
+  
+  CZ Name: Klíčové přihrávky do vápna z otevřené hry celkem
+  
+  CZ Description: Celkový počet klíčových přihrávek (asistence na střelu nebo na šanci) do vápna z otevřené hry
+  """
+  passesBoxInOpenPlayKeyTotal: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Key passes into box from set piece total
+  
+  Default (EN) Description: The total number of key passes (assist to shot or into a chance) into the box from set piece.
+  
+  CZ Name: Klíčové přihrávky do vápna ze standardní situace celkem
+  
+  CZ Description: Celkový počet klíčových přihrávek (asistence na střelu nebo na šanci) do vápna ze standardní situace
+  """
+  passesBoxInSetPieceKeyTotal: PlayerMatchMetricInt!
   """
   Default (EN) Name: Passes final third accurate
   
@@ -5156,6 +5596,26 @@ type PlayerMatchStatsV2 {
   CZ Description: Celkový počet situací, kdy brankář svým zákrokem jakkoli zabrání gólu bez ohledu na to, zda se jednalo o střelu v nepřerušené hře nebo ze standardní situace
   """
   savesTotal: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Common Scoring Position
+  
+  Default (EN) Description: All positions of a player resulted in a shot with xG 0.1+, no matter of the result of the shot
+  
+  CZ Name: Běžná střelecká pozice
+  
+  CZ Description: Všechny pozice hráče, které vyústily ve střelu s xG 0,1+, bez ohledu na výsledek střely
+  """
+  scoringPositionsCommon: PlayerMatchMetricInt!
+  """
+  Default (EN) Name: Significant Scoring Positions
+  
+  Default (EN) Description: All positions of a player resulted in a shot with xG 0.2+, no matter of the result of the shot
+  
+  CZ Name: Významná střelecká pozice
+  
+  CZ Description: Všechny pozice hráče, které vyústily ve střelu s xG 0,2+, bez ohledu na výsledek střely
+  """
+  scoringPositionsSignificant: PlayerMatchMetricInt!
   """
   Default (EN) Name: Shots Accuracy
   
@@ -5696,6 +6156,18 @@ type Season {
   endDate: Date @goField(forceResolver: true)
   "The competition this season belongs to"
   competition: Competition! @goField(forceResolver: true)
+  "Season stages of this season with filter and pagination"
+  seasonStages(filter: SeasonSeasonStagesFilter!, pagination: Pagination!, sort: SeasonStageSort): SeasonStagesResult! @goField(forceResolver: true)
+  "Current season stage (startDate <= now and endDate >= now)"
+  currentSeasonStage: SeasonStage @goField(forceResolver: true)
+}
+
+"""Represents a paginated result set of seasons."""
+type SeasonsResult {
+  "The list of seasons on the current page."
+  items: [Season!]!
+  "Information about the current page and cursors."
+  pageInfo: PageInfo!
 }
 
 """
@@ -5704,12 +6176,25 @@ such as Regular Season, Playoffs, or Group Stage.
 """
 type SeasonStage {
   id: ID!
+  "Normalized type of the season stage (e.g. main, relegation, play-off)."
+  stageType: SeasonStageType! @goField(forceResolver: true)
   "Start date of the season stage"
   startDate: Date @goField(forceResolver: true)
   "End date of the season stage"
   endDate: Date @goField(forceResolver: true)
   "The season this stage belongs to"
   season: Season! @goField(forceResolver: true)
+  "Matches of this season stage with filter and pagination"
+  matches(filter: SeasonStageMatchesFilter!, pagination: Pagination!, sort: MatchSort): MatchesResult! @goField(forceResolver: true)
+  "Past matches (startTime < now)"
+  pastMatches(filter: SeasonStageMatchesFilter, pagination: Pagination!): MatchesResult! @goField(forceResolver: true)
+  "Upcoming matches (startTime > now)"
+  upcomingMatches(filter: SeasonStageMatchesFilter, pagination: Pagination!): MatchesResult! @goField(forceResolver: true)
+}
+
+type SeasonStagesResult {
+  items: [SeasonStage!]!
+  pageInfo: PageInfo!
 }
 
 interface Team {
@@ -5722,10 +6207,16 @@ interface Team {
   level: TeamLevel! @goField(forceResolver: true)
   "Localized name of the team"
   localizedName: LocalizedText! @goField(forceResolver: true)
+  "Full official name from team_names (localized text), if present"
+  fullName: LocalizedText @goField(forceResolver: true)
+  "Shortcut name from team_names (localized text), if present"
+  shortcutName: LocalizedText @goField(forceResolver: true)
   "Last matches for the team"
   pastMatches(filter: TeamMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
   "Aggregated team stats for recent N past matches"
   pastMatchesStats(fields: [TeamMatchMetric!]!, matchPeriod: MatchPeriod, filter: TeamMatchesFilter, first: Int!): AggregatedTeamStatsResponse! @goField(forceResolver: true)
+  "Aggregated team stats for recent N past matches (ClickHouse)"
+  pastMatchesStatsCh(fields: [TeamMatchMetric!]!, matchPeriod: MatchPeriod, filter: TeamMatchesFilter, first: Int!): AggregatedTeamStatsResponse! @goField(forceResolver: true)
   "Upcoming matches for the team"
   upcomingMatches(filter: TeamMatchesFilter, first: Int!): [Match!]! @goField(forceResolver: true)
   "Past head-to-head matches between this team and an opponent team"
@@ -5789,7 +6280,13 @@ type TeamMatchStatsWrapper {
   duelsLost: TeamMatchStatHeadToHeadInt!
   duelsTotal: TeamMatchStatHeadToHeadInt!
   duelsWon: TeamMatchStatHeadToHeadInt!
+  entriesFinalThirdEfficiency: TeamMatchStatHeadToHeadFloat!
+  entriesFinalThirdSuccessful: TeamMatchStatHeadToHeadInt!
+  entriesFinalThirdSuccessfulOpenPlay: TeamMatchStatHeadToHeadInt!
   entriesFinalThirdTotal: TeamMatchStatHeadToHeadInt!
+  entriesPenaltyBoxEfficiency: TeamMatchStatHeadToHeadFloat!
+  entriesPenaltyBoxSuccessful: TeamMatchStatHeadToHeadInt!
+  entriesPenaltyBoxSuccessfulOpenPlay: TeamMatchStatHeadToHeadInt!
   entriesPenaltyBoxTotal: TeamMatchStatHeadToHeadInt!
   errorsLeadToGoal: TeamMatchStatHeadToHeadInt!
   errorsLeadToShot: TeamMatchStatHeadToHeadInt!

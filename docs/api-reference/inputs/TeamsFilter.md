@@ -10,7 +10,7 @@ import JsonExportButton from '@site/src/components/JsonExportButton';
 
 | Field | Type | Description |
 |---|---|---|
-| `ids` | `[ID!]` | Filter by team IDs |
+| `id` | `[ID!]` | Filter by team IDs |
 | `name` | [TeamNameFilter](../inputs/TeamNameFilter) | Filter by team name |
 | `country` | [[CountryCode!]](../enums/CountryCode) | Filter by country codes |
 | `ageCategory` | [[AgeGroup!]](../enums/AgeGroup) | Filter by age categories |

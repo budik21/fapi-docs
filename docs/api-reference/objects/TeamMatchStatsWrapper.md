@@ -53,7 +53,13 @@ import JsonExportButton from '@site/src/components/JsonExportButton';
 | `duelsLost` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `duelsTotal` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `duelsWon` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
+| `entriesFinalThirdEfficiency` | [TeamMatchStatHeadToHeadFloat!](../objects/TeamMatchStatHeadToHeadFloat) |  |
+| `entriesFinalThirdSuccessful` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
+| `entriesFinalThirdSuccessfulOpenPlay` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `entriesFinalThirdTotal` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
+| `entriesPenaltyBoxEfficiency` | [TeamMatchStatHeadToHeadFloat!](../objects/TeamMatchStatHeadToHeadFloat) |  |
+| `entriesPenaltyBoxSuccessful` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
+| `entriesPenaltyBoxSuccessfulOpenPlay` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `entriesPenaltyBoxTotal` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `errorsLeadToGoal` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |
 | `errorsLeadToShot` | [TeamMatchStatHeadToHeadInt!](../objects/TeamMatchStatHeadToHeadInt) |  |

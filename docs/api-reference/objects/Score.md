@@ -7,7 +7,7 @@ sidebar_label: "Score"
 import JsonExportButton from '@site/src/components/JsonExportButton';
 
 :::info[no-header]
-Represents the score of a football match showing goals for home and away teams.
+Goals for home and away teams (e.g. overall, aggregate, or penalty shootout).
 :::
 
 ---

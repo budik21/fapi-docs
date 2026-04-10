@@ -10,7 +10,7 @@ import JsonExportButton from '@site/src/components/JsonExportButton';
 
 | Field | Type | Description |
 |---|---|---|
-| `ids` | `[ID!]` | Filter by competition IDs |
+| `id` | `[ID!]` | Filter by competition IDs |
 | `name` | [CompetitionNameFilter](../inputs/CompetitionNameFilter) | Filter by competition name |
 | `country` | [[CountryCode!]](../enums/CountryCode) | Filter by country codes |
 | `region` | [[Region!]](../enums/Region) | Filter by regions |

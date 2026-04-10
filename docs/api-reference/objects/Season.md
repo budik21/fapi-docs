@@ -21,3 +21,5 @@ The Season represents a specific season of a competition, typically spanning one
 | `startDate` | [Date](../scalars/Date) | Start date of the season |
 | `endDate` | [Date](../scalars/Date) | End date of the season |
 | `competition` | [Competition!](../objects/Competition) | The competition this season belongs to |
+| `seasonStages` | [SeasonStagesResult!](../objects/SeasonStagesResult) | Season stages of this season with filter and pagination |
+| `currentSeasonStage` | [SeasonStage](../objects/SeasonStage) | Current season stage (startDate &lt;= now and endDate &gt;= now) |

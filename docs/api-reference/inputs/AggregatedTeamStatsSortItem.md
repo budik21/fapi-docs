@@ -11,4 +11,5 @@ import JsonExportButton from '@site/src/components/JsonExportButton';
 | Field | Type | Description |
 |---|---|---|
 | `metric` | [TeamMatchMetric!](../enums/TeamMatchMetric) |  |
+| `type` | [AggregationType](../enums/AggregationType) |  |
 | `direction` | [SortDirection!](../enums/SortDirection) |  |

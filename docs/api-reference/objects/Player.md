@@ -28,3 +28,4 @@ The Player object provides core identity and descriptive information about an in
 | `nationality` | [CountryCode](../enums/CountryCode) | Nationality of the player |
 | `pastMatches` | [[Match!]!](../objects/Match) | Last matches for the player |
 | `pastMatchesStats` | [AggregatedPlayerStatsResponse!](../objects/AggregatedPlayerStatsResponse) | Aggregated player stats for recent N past matches |
+| `pastMatchesStatsCh` | [AggregatedPlayerStatsResponse!](../objects/AggregatedPlayerStatsResponse) | Aggregated player stats for recent N past matches (ClickHouse) |

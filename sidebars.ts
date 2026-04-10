@@ -87,7 +87,7 @@ const sidebars: SidebarsConfig = {
           items: [
               {
                   type:  'doc',
-                  label: 'Intro',
+                  label: 'Mapping Service REST API',
                   id:    'mapping-service/mapping-service-intro'
               },
           ],

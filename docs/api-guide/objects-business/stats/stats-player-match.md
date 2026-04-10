@@ -112,7 +112,7 @@ If the primary sorting criterion results in a tie, the subsequent criteria in th
     }
     ```
     </TabItem>
-    <TabItem value="variables" label="Variables" default>
+    <TabItem value="variables" label="Variables">
     ```json showLineNumbers title="Variables: ID of desired match"
     {
         //Premier League, Chelsea - Arsenal 1:1, 30.11.2025
@@ -120,7 +120,7 @@ If the primary sorting criterion results in a tie, the subsequent criteria in th
     }
     ```
     </TabItem>
-    <TabItem value="response" label="Response" default>
+    <TabItem value="response" label="Response">
     ```json showLineNumbers title="Response: Ordered players by their stats"
     {
       "data": {
@@ -241,7 +241,7 @@ However, `rankComposite` resolves ties by incorporating a secondary metric: `LON
         }    
     ```
     </TabItem>
-    <TabItem value="variables1" label="Variables" default>
+    <TabItem value="variables1" label="Variables">
     ```json showLineNumbers title="Variables: ID of desired match"
     {
         //Premier League, Chelsea - Arsenal 1:1, 30.11.2025
@@ -249,8 +249,8 @@ However, `rankComposite` resolves ties by incorporating a secondary metric: `LON
     }
     ```
     </TabItem>
-    <TabItem value="response1" label="Response" default>
-    ```json showLineNumbers title="Response: Diffeerence between rankOverall and rankOverallComposite"
+    <TabItem value="response1" label="Response">
+    ```json showLineNumbers title="Response: Difference between rankOverall and rankOverallComposite"
     {
         "data": {
             "match": {

@@ -99,7 +99,7 @@ The `period` filter accepts an array of [MatchPeriod](../../../api-reference/enu
     }
     ```
     </TabItem>
-    <TabItem value="variables" label="Variables" default>
+    <TabItem value="variables" label="Variables">
     ```json showLineNumbers title="Variables: ID of desired match"
     {
         //Premier League, Liverpool - Tottenham 1:1, 15.3.2026
@@ -107,7 +107,7 @@ The `period` filter accepts an array of [MatchPeriod](../../../api-reference/enu
     }
     ```
     </TabItem>
-    <TabItem value="response" label="Response" default>
+    <TabItem value="response" label="Response">
     ```json showLineNumbers title="Response: Team match metrics filtered by 1st, 2nd period (excluding MATCH_OVERALL)"
     {
       "data": {

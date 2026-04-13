@@ -70,16 +70,17 @@ Normalizes the metric to a standard 90-minute football match duration. This allo
 ### Data Slicing (Filters)
 Aggregated statistics can be **sliced to refine the input data used for calculation**. Slicing acts as a filter applied before aggregation, ensuring that only data matching specific criteria is processed.
 
-Currently, there are four fundamental dimensions available for slicing:
+Currently, there are five fundamental dimensions available for slicing:
 
 * **Nationalities:** Filters players based on their nationality. This enables the creation of an ordered list of the best players in a competition from one (or more) countries. See the [full list of country codes used for nationalities](./../../../api-reference/enums/CountryCode.md).
 * **PlayerIDs:** Restricts the aggregation to a specific list of players (or a single player).
 * **Positions:** Filters data based on **common player positions**. As of February 2026, **only the four common positions** are supported: `GOALKEEPER`, `DEFENDER`, `MIDFIELDER`, and `ATTACKER` (specific lineup positions are not supported yet). This allows for ranking the best players in a competition by specific position.
 * **Side:** Distinguishes between matches played at **Home** versus **Away**. This enables the generation of rankings based on performance in (only) home or (only) away matches.
+* **TeamIDs:** Restricts the aggregation to players belonging to one or more specific teams. This is particularly useful for building team-scoped leaderboards — for example, ranking the top scorers within a single club, or comparing the best players across two teams in a head-to-head analysis.
 
 By default, all filters are empty, meaning no slicing is applied.
 
-See the query [example using data slicing](#example-slicing).
+See the query [example using data slicing](#example-slicing) or the [head-to-head team filter example](#example-team-filter).
 
 ### Sorting & Ranking
 To facilitate the **creation of player rankings and leaderboards**, the API supports a flexible, multi-level sorting strategy. This logic is based on an ordered list of criteria, where each item combines a specific **metric** (e.g., Shots Total), an **aggregation type** (e.g., per90 Average), and a **sort direction** (Ascending or Descending).
@@ -256,7 +257,7 @@ While the system allows queries with no fields defined, **we strongly discourage
 Please note that the order of players in the response is not guaranteed, as no specific sorting logic is applied in this basic example. If you require a specific order (e.g., ranking by goals scored), you should implement the appropriate sorting logic as described in the [Sorted Query Example](#example-sorting) section.
 :::
 
-### Filtered Query (Slicing) {#example-slicing}
+### Using filters - multiple filters in one query {#example-slicing}
 :::info[no-icon]
 The following example demonstrates how to retrieve aggregated data filtered by specific criteria (slicing). In this request, we filter for players participating in the **English Premier League 2025/2026** who are of **Brazilian or Argentinian nationality** and play as **Midfielders**. The query returns the **SUM** of `POINTS`, `GOALS`, `ASSISTS_GOAL`, and `MATCH_MINUTES_PLAYED` for each player.
 :::
@@ -408,9 +409,220 @@ The following example demonstrates how to retrieve aggregated data filtered by s
     </TabItem>
 </Tabs>
 
-### Multiple season stages {#example-multiple-stages}
+### Using filters - one or more teams {#example-team-filter}
 :::info[no-icon]
-The following example demonstrates how to retrieve aggregated data for more than one season stage (in this case, all stages of the **UEFA Champions League 2025/2026: Qualification, League Stage, and Play-offs**). The query returns the **SUM** of `POINTS`, `GOALS`, `ASSISTS_GOAL`, and `MATCH_MINUTES_PLAYED` for each player across all selected stages.
+The following example demonstrates how to use the `teamIDs` filter to retrieve a **top scorer ranking restricted to players from two specific teams**. This is a typical head-to-head use case: given a season stage, you want to compare the best attackers (by goals) from two rival clubs side by side.
+
+The query returns the **SUM** of `GOALS` for each player, sorted descending — giving you an immediately usable leaderboard of top scorers from both squads.
+:::
+
+<Tabs>
+    <TabItem value="query-team-filter" label="Query" default>
+    ```graphql showLineNumbers title="Query: Aggregated Player Data - Team Filter (Head-to-Head Top Scorers)"
+        query SeasonStagePlayerStats(
+          $seasonStageIDs: [ID!]!
+          $fields: [PlayerMatchMetric!]!
+          $sort: [AggregatedPlayerStatsSortItem!]
+          $filter: AggregatedPlayerStatsFilter
+        ) {
+          seasonStagePlayerStats(
+            seasonStageIDs: $seasonStageIDs
+            fields: $fields
+            sort: $sort
+            filter: $filter
+          ) {
+            items {
+              player {
+                localizedFullName {
+                  text
+                }
+              }
+              fields {
+                metric
+                sum
+              }
+            }
+          }
+        }
+    ```
+    </TabItem>
+    <TabItem value="variables-team-filter" label="Variables" default>
+    ```json showLineNumbers title="Variables: Season stage, goals metric, descending sort, two-team filter"
+    {
+        //Czech 1st League Chance Liga 2025/2026 Main Stage
+        "seasonStageIDs": ["1943251371973427200"],
+        "fields": ["GOALS"],
+        "sort": [
+          {
+            "metric": "GOALS",
+            "type": "SUM",
+            "direction": "DESC"
+          }
+        ],
+        "filter": {
+          "teamIDs": [
+            //Sparta Prague
+            "1897619607137812481",
+            //Slavia Prague
+            "1897619604105330689" 
+          ]
+        }
+    }
+    ```
+    </TabItem>
+    <TabItem value="response-team-filter" label="Response" default>
+    ```json showLineNumbers title="Response: Top scorers from the two selected teams (Slavia Prague, Sparta Prague), ordered by goals"
+    {
+    "data": {
+      "seasonStagePlayerStats": {
+        "items": [
+          {
+            "player": {
+              "localizedFullName": {
+                "text": "Chory Tomas"
+              }
+            },
+            "fields": [
+              {
+                "metric": "GOALS",
+                "sum": 17
+              }
+            ]
+          },
+          {
+            "player": {
+              "localizedFullName": {
+                "text": "Haraslin Lukas"
+              }
+            },
+            "fields": [
+              {
+                "metric": "GOALS",
+                "sum": 10
+              }
+            ]
+          },
+          {
+            "player": {
+              "localizedFullName": {
+                "text": "Chytil Mojmir"
+              }
+            },
+            "fields": [
+              {
+                "metric": "GOALS",
+                "sum": 10
+              }
+            ]
+          },
+          {
+            "player": {
+              "localizedFullName": {
+                "text": "Rrahmani Albion"
+              }
+            },
+            "fields": [
+              {
+                "metric": "GOALS",
+                "sum": 9
+              }
+            ]
+          },
+          {
+            "player": {
+              "localizedFullName": {
+                "text": "Kuchta Jan"
+              }
+            },
+            "fields": [
+              {
+                "metric": "GOALS",
+                "sum": 8
+              }
+            ]
+          },
+          {
+            "player": {
+              "localizedFullName": {
+                "text": "Provod Lukas"
+              }
+            },
+            "fields": [
+              {
+                "metric": "GOALS",
+                "sum": 7
+              }
+            ]
+          },
+          {
+            "player": {
+              "localizedFullName": {
+                "text": "Birmancevic Veljko"
+              }
+            },
+            "fields": [
+              {
+                "metric": "GOALS",
+                "sum": 5
+              }
+            ]
+          },
+          {
+            "player": {
+              "localizedFullName": {
+                "text": "Kusej Vasil"
+              }
+            },
+            "fields": [
+              {
+                "metric": "GOALS",
+                "sum": 5
+              }
+            ]
+          },
+          {
+            "player": {
+              "localizedFullName": {
+                "text": "John Anthony Mercado Cuero"
+              }
+            },
+            "fields": [
+              {
+                "metric": "GOALS",
+                "sum": 5
+              }
+            ]
+          },
+          {
+            "player": {
+              "localizedFullName": {
+                "text": "Chaloupek Stepan"
+              }
+            },
+            "fields": [
+              {
+                "metric": "GOALS",
+                "sum": 4
+              }
+            ]
+          },
+          ...
+          ...
+          ...
+        ]
+      }
+    }
+  }
+    ```
+    </TabItem>
+</Tabs>
+:::tip
+The `teamIDs` filter can be combined with other slicing dimensions such as `positions` or `nationalities`. For example, you can narrow the leaderboard to **attackers only from two specific teams** by adding `"positions": ["ATTACKER"]` alongside `teamIDs` in the `filter` object.
+:::
+
+### Using filters - one or more season stages {#example-multiple-stages}
+:::info[no-icon]
+The following example demonstrates how to retrieve aggregated data for more than one season stage (in this case, all stages of the **UEFA Champions League 2025/2026: Qualification, League Stage, and Play-offs**). The query returns the **SUM** of `POINTS`, `GOALS`, `ASSISTS_GOAL`, and `MATCH_MINUTES_PLAYED` for each player across all desired stages.
 
 The only difference from the previous example is the `seasonStageIDs` field—instead of a single ID, we provide a list of three stage IDs. The response contains the aggregated total for all three stages combined, effectively providing season-level statistics.
 :::

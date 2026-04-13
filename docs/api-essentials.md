@@ -430,6 +430,151 @@ A successful API response is a JSON object with a `data` key containing the requ
 
 Always check for the presence of the `errors` key in the response, even when the HTTP status code is `200`. GraphQL errors are returned with a `200 OK` status.
 
+### Pagination
+
+To prevent individual queries from returning excessive volumes of data, the Football API enforces per-query result limits. When the number of matching records exceeds the limit, results are split into pages that must be retrieved sequentially.
+
+The API uses **cursor-based pagination**: instead of numeric page offsets, each response carries an opaque cursor that points to the last returned record. Pass this cursor in the next request to continue from where the previous one left off.
+
+Each paginated response includes a `pageInfo` object:
+
+| Field   | Type     | Description                                                                                 |
+|---------|----------|---------------------------------------------------------------------------------------------|
+| `fisrt` | `Int`    | The count of desired items.                                                                 |
+| `after` | `String` | Cursor pointing to the last record on the current page; pass as `after` in the next request |
+
+Pass `null` as `after` for the first page. For each subsequent page, pass the `cursor` value from the previous response. Repeat until the response returns no `cursor` (end of results).
+
+<Tabs>
+    <TabItem value="paginationQuery" label="Query" default>
+        ```graphql showLineNumbers title="Cursor-based pagination"
+        query getCompetitions($pagination: Pagination!) {
+          competitions(pagination: $pagination) {
+            pageInfo {
+              cursor
+              timestamp
+            }
+            items {
+              id
+              localizedName {
+                text
+              }
+            }
+          }
+        }
+        ```
+    </TabItem>
+    <TabItem value="paginationVariables" label="Variables">
+        ```json showLineNumbers title="Pagination: First 10 items"
+        {
+          "pagination": {
+            "first": 10,
+            "after": null
+          }
+        }
+        ```
+        ```json showLineNumbers title="Pagination: Next page — use cursor from previous response"
+        {
+          "pagination": {
+            "after": "cursor_value_from_previous_response",
+            "first": 10
+          }
+        }
+        ```
+    </TabItem>
+    <TabItem value="paginationResult" label="Result">
+        ```json showLineNumbers title="Response contains the next cursor and the items"
+        {
+          "data": {
+            "competitions": {
+              "pageInfo": {
+                "cursor": "eyJpZCI6IjE4OTc2NDc0OTk0MjI5OTAzMzYiLCJuYW1lIjoiIn0=",
+                "timestamp": "2026-04-13T10:18:36Z"
+              },
+              "items": [
+                {
+                  "id": "1897647499292966912",
+                  "localizedName": {
+                    "text": "Uhren Cup"
+                  }
+                },
+                {
+                  "id": "1897647499301355520",
+                  "localizedName": {
+                    "text": "Premier League"
+                  }
+                },
+                {
+                  "id": "1897647499313938432",
+                  "localizedName": {
+                    "text": "CAF Champions League"
+                  }
+                },
+                {
+                  "id": "1897647499318132736",
+                  "localizedName": {
+                    "text": "HNL"
+                  }
+                },
+                {
+                  "id": "1897647499322327040",
+                  "localizedName": {
+                    "text": "Super Cup"
+                  }
+                },
+                {
+                  "id": "1897647499343298560",
+                  "localizedName": {
+                    "text": "Champions League"
+                  }
+                },
+                {
+                  "id": "1897647499381047296",
+                  "localizedName": {
+                    "text": "Asian Cup"
+                  }
+                },
+                {
+                  "id": "1897647499381047297",
+                  "localizedName": {
+                    "text": "Premier League"
+                  }
+                },
+                {
+                  "id": "1897647499385241600",
+                  "localizedName": {
+                    "text": "Serie B Superbet"
+                  }
+                },
+                {
+                  "id": "1897647499422990336",
+                  "localizedName": {
+                    "text": "Super Cup"
+                  }
+                }
+              ]
+            }
+          }
+        }
+        ```
+    </TabItem>
+</Tabs>
+
+
+### Query Complexity
+
+The Football API evaluates the complexity of every incoming query before processing it. If a query exceeds the complexity threshold, it is **rejected** — no data is returned and an error is reported.
+
+Complexity is determined by the combination of:
+- **The number of entity types requested** — querying a top-level object (e.g., `Competition`) together with its subordinate objects (e.g., `Seasons`, `Season Stages`, `Matches`) multiplies the potential result set significantly.
+- **The depth of the object graph** — the deeper the nesting, the higher the complexity score.
+- **The page size** — larger `first` values contribute to the score.
+
+If your query is rejected due to complexity, reduce the scope by one or more of the following:
+- Request fewer subordinate object types in a single query.
+- Reduce the page size (`first` argument).
+- Break the query into multiple smaller queries, each targeting one level of the hierarchy.
+
 ## Environments
 
 The Football API provides three independent environments:

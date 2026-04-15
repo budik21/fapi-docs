@@ -11,6 +11,7 @@ Object `Competition` is the top-level object.
 :::info[no-header]
 The `Competition` object provides fundamental information about the tournament, including its name, format (cup vs. league), team type (club vs. national), gender, and age category.
 :::
+
 :::tip[Competition > Season > Season Stage]
 Understanding the distinction between `Competition`, `Season`, and `Season Stage` objects is crucial.
 
@@ -20,4 +21,8 @@ Another example is the **UEFA Champions League (UCL)**. Like the Premier League,
 1.  **Qualifying** (play-off system)
 2.  **League Phase** (special league system)
 3.  **Play-offs** (knockout system)
-    :::
+:::
+
+The `Competition` object is available by default as a nested object within the [Match](./api-guide/objects-business/match/match) hierarchy: **Match > Season Stage > Season > Competition** — with all attributes described in the [Competition](/api-reference/objects/Competition) object definition.
+
+To search for a specific competition by name or other parameters, use the [Search Queries](./../search-queries#competitions) for competitions.

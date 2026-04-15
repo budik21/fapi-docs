@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 Object `homeTeamLineup` and `awayTeamLineup` is a child of `Match` object.
 
 ## Object description
-See [Lineup object](./../../../api-reference/objects/Lineup) chapter.
+See [Lineup object](/api-reference/objects/Lineup) chapter.
 
 ## Business purpose
 :::info[no-header]
@@ -28,7 +28,7 @@ The exact lineup position is provided only for players in the starting lineup vi
 For display purposes, you can use the `player.position` attribute for substitutes, which indicates the player's typical position.
 
 It is important to note that these attributes contain different types of values:
-* `lineupPosition` specifies the **exact tactical position** of the player within the specific lineup formation (see [LineupPositionEnum](./../../../api-reference/enums/LineupPosition)).
+* `lineupPosition` specifies the **exact tactical position** of the player within the specific lineup formation (see [LineupPositionEnum](/api-reference/enums/LineupPosition)).
 * `player.position` indicates the **general role** of the player and is limited to one of the following broad categories: `GOALKEEPER`, `DEFENDER`, `MIDFIELDER`, or `ATTACKER`. This role may differ from the `lineupPosition` depending on the coach's tactical decisions.
 :::
 

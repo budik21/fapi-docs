@@ -27,8 +27,8 @@ Another example is the *UEFA Champions League (UCL)*. Like the Premier League, t
 ### Match Status and Live Timing
 To understand the current situation of a match, the `Match` object provides **two key information**:
 
-* **`status`:** This attribute defines **the exact state of the match at a specific moment** (for example, whether it is yet to start, running, or already over). For a complete list of allowed values, please see the [MatchStatusEnum](./../../../api-reference/enums/MatchStatus.md). This attribute answers questions like: *"What is the current status of the match? Has it started, or is it currently playing? Is the match already over?"*
-* **`clock`:** During the live phase of a match, the `clock` object becomes available. It shows **the exact played time and identifies which period is currently being played**. See details in the [Clock object](./../../objects-common/matchClock.md). This object answers questions like: *"What is the current play time of the match? Which period is currently being played?"*
+* **`status`:** This attribute defines **the exact state of the match at a specific moment** (for example, whether it is yet to start, running, or already over). For a complete list of allowed values, please see the [MatchStatusEnum](/api-reference/enums/MatchStatus). This attribute answers questions like: *"What is the current status of the match? Has it started, or is it currently playing? Is the match already over?"*
+* **`clock`:** During the live phase of a match, the `clock` object becomes available. It shows **the exact played time and identifies which period is currently being played**. See details in the [Clock object](/api-guide/objects-common/match-clock). This object answers questions like: *"What is the current play time of the match? Which period is currently being played?"*
 
 ## How to get Match ID?
 There are two basic scenarios:

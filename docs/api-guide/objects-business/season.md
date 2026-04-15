@@ -3,7 +3,7 @@ id:         season
 title:      Season
 ---
 ## Depenndecies
-Object `Season` is a child object of the `Competition` season. A specific season is in all cases related to just one [competition](competition).
+Object `Season` is a child object of the `Competition` season. A specific season is in all cases related to just one [competition](/api-guide/objects-business/competition).
 
 ## Business purpose
 :::info[no-header]

@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 Object `playerRating` is a child of `Match` object.
 
 ## Object description
-See [PlayerRating object](./../../../api-reference/objects/PlayerRating) chapter.
+See [PlayerRating object](/api-reference/objects/PlayerRating) chapter.
 
 ## Business purpose
 :::info[no-header]
@@ -17,7 +17,7 @@ The `playerRating` object provides a set of data points used to evaluate a playe
 :::
 
 ### Prerequisites
-Player ratings are calculated based on individual [player's match stats](../../objects-business/stats/stats-player-match). This data is available for selected competitions only (approximately 300). Consequently, if match statistics are unavailable, the player rating cannot be generated. In such cases, the `playerRating` object will return `NULL`.
+Player ratings are calculated based on individual [player's match stats](/api-guide/objects-business/stats/stats-player-match). This data is available for selected competitions only (approximately 300). Consequently, if match statistics are unavailable, the player rating cannot be generated. In such cases, the `playerRating` object will return `NULL`.
 
 **The minimum time** a player must spend on the pitch to receive a rating **is 10 minutes**. This calculation excludes additional time. For example, if a substitute enters the pitch in the 88th minute, they will not receive a rating even if there are 12 minutes of additional time. In this scenario, only 2 minutes of valid playing time are counted and the condition for minimum play time is not met.
 
@@ -53,7 +53,7 @@ In the event of a tie (when two or more players have the same rating), the **unc
 * Member of a winning team
 
 :::tip[Alternative way to retrieve PotM]
-While the rating is part of the Player Match Stats (see the `RATING_PLAYER` metric), you can also identify the Player of the Match using the `ranking` or `rankingOverallComposite`, `rankingTeamComposite` attributes. Refer to the [Player Match stats Ranking chapter](./../stats/stats-player-match#ranking) for more details.
+While the rating is part of the Player Match Stats (see the `RATING_PLAYER` metric), you can also identify the Player of the Match using the `ranking` or `rankingOverallComposite`, `rankingTeamComposite` attributes. Refer to the [Player Match stats Ranking chapter](/api-guide/objects-business/stats/stats-player-match#ranking) for more details.
 :::
 
 ### Live, Final and Historical rating values
@@ -119,7 +119,7 @@ Once a rating is calculated, the rating value and all applicable bonuses are pro
 
 To retrieve the **current rating**, read the attributes directly within the `playerRating` object. See the [query example](#live-and-final-rating) for this approach.
 
-To track the **player's rating progression** minute-by-minute, read the `playerRating.ratingHistory` object. In addition to the rating and bonus values, this object includes a [timeFrame](../../objects-common/time-frame) object to identify the specific match minute associated with the data. See the [query example](#rating-history) for this approach.
+To track the **player's rating progression** minute-by-minute, read the `playerRating.ratingHistory` object. In addition to the rating and bonus values, this object includes a [timeFrame](/api-guide/objects-common/time-frame) object to identify the specific match minute associated with the data. See the [query example](#rating-history) for this approach.
 
 ### Events triggering rating recalculation
 A player's rating is calculated at least once during each minute the player spends on the pitch (the responsible metric is `MATCH_MINUTES_PLAYED_LIVE_ONPITCH` which is being changed during additional time, while `MATCH_MINUTES_PLAYED_LIVE` is not). In some cases, the rating is recalculated immediately after an event occurs.
@@ -135,7 +135,7 @@ There is a slight distinction between lineup positions and rating positions: lin
 All players who are not in the starting lineup are assigned the `SUBSTITUTE` rating position, regardless of their actual role when they enter the pitch (as this role is unpredictable).
 
 :::tip[How to handle the SUBSTITUTE rating position]
-If you use the rating position for display purposes (e.g., in a tooltip), we recommend replacing the `SUBSTITUTE` value with the player's common position (see the `position` attribute in the [Player object](./../../../api-reference/objects/Player)) or the specific lineup position (see the `lineupPosition` attribute in the [LineupPlayer](./../../../api-reference/objects/LineupPlayer) object).
+If you use the rating position for display purposes (e.g., in a tooltip), we recommend replacing the `SUBSTITUTE` value with the player's common position (see the `position` attribute in the [Player object](/api-reference/objects/Player)) or the specific lineup position (see the `lineupPosition` attribute in the [LineupPlayer](/api-reference/objects/LineupPlayer) object).
 :::
 
 Possible values for the `ratingPosition` attribute are:
@@ -156,7 +156,7 @@ Possible values for the `ratingPosition` attribute are:
 The following query is an example of how to retrieve the base rating value. The query is valid for both `IN_MATCH` (live data) and `AFTER_MATCH` (final data) phases.
 :::
 :::tip[no-icon]
-Please note that the same base rating value is also available via the `RATING_PLAYER` metric in the [PlayerMatchStat](../stats/stats-player-match.md) object.
+Please note that the same base rating value is also available via the `RATING_PLAYER` metric in the [PlayerMatchStat](/api-guide/objects-business/stats/stats-player-match) object.
 :::
 
 <Tabs>
@@ -242,7 +242,7 @@ Please note that the same base rating value is also available via the `RATING_PL
 The following query is an example of how to retrieve all the rating values including all information about bonuses. The query is valid for both `IN_MATCH` (live data) and `AFTER_MATCH` (final data) phases.
 :::
 :::tip[no-icon]
-Please note that the base rating value is also available via the `RATING_PLAYER` metric and uncapped value via `RATING_PLAYER_RAW` metric in the [PlayerMatchStat](../stats/stats-player-match.md) object.
+Please note that the base rating value is also available via the `RATING_PLAYER` metric and uncapped value via `RATING_PLAYER_RAW` metric in the [PlayerMatchStat](/api-guide/objects-business/stats/stats-player-match) object.
 :::
 <Tabs>
 <TabItem value="query1" label="Query" default>
@@ -331,7 +331,7 @@ The following query demonstrates how to retrieve historical rating values. It is
 During the `IN_MATCH` phase, it returns data calculated from the match start up to the minute preceding the current one. In the `AFTER_MATCH` phase, it returns rating values for every minute the player spent on the pitch.
 :::
 :::tip[no-icon]
-Each historical value contains the [timeFrame](./../../objects-common/time-frame) object specifying the play time for which the rating was calculated.
+Each historical value contains the [timeFrame](/api-guide/objects-common/time-frame) object specifying the play time for which the rating was calculated.
 :::
 <Tabs>
 <TabItem value="query2" label="Query" default>

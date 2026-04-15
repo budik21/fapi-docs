@@ -440,8 +440,8 @@ Each paginated response includes a `pageInfo` object:
 
 | Field   | Type     | Description                                                                                 |
 |---------|----------|---------------------------------------------------------------------------------------------|
-| `fisrt` | `Int`    | The count of desired items.                                                                 |
-| `after` | `String` | Cursor pointing to the last record on the current page; pass as `after` in the next request |
+| `cursor`    | `String` | Cursor pointing to the last returned record; pass as `after` in the next request. `null` when there are no more pages. |
+| `timestamp` | `String` | ISO 8601 UTC timestamp of when this page of results was generated. |
 
 Pass `null` as `after` for the first page. For each subsequent page, pass the `cursor` value from the previous response. Repeat until the response returns no `cursor` (end of results).
 

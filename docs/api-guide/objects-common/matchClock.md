@@ -22,9 +22,9 @@ This means it explicitly tells you when the match is in the **half-time break** 
 
 
 :::tip[Mind the clock and timeFrame difference]
-The `clock` object is similar to [timeFrame object](time-frame), but there is a fundamental difference between them.
+The `clock` object is similar to [timeFrame object](/api-guide/objects-common/time-frame), but there is a fundamental difference between them.
 
-While `clock` represents the **dynamic running clock** of the match, [timeFrame](./time-frame) represents the **static moment** an event occurred (like a snapshot). You typically use `clock` to display a live timer, whereas `timeFrame` is used to identify exactly when an event took place, particularly when querying data after the match has finished.
+While `clock` represents the **dynamic running clock** of the match, [timeFrame](/api-guide/objects-common/time-frame) represents the **static moment** an event occurred (like a snapshot). You typically use `clock` to display a live timer, whereas `timeFrame` is used to identify exactly when an event took place, particularly when querying data after the match has finished.
 :::
 
 ## How to get the match clock data

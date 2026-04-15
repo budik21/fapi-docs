@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 Object `score` is a child of `Match` object.
 
 ## Object description
-See [Score object](./../../../api-reference/objects/Score) chapter.
+See [Score object](/api-reference/objects/Score) chapter.
 
 ## Business purpose
 :::info[no-header]
@@ -40,7 +40,7 @@ Although you can check `null` and not-null values to guess which period is curre
 
 **Why?** For example, during the half-time break, `halfFirst` is no longer `null`, but `halfSecond` is still `null`. If you rely on the `score` object, your application might incorrectly assume the first half is still running.
 
-Instead, we highly recommend using the [`Clock`](./../../objects-common/matchClock.md) object. It is primarily responsible for providing accurate, real-time information about the currently playing period and the elapsed match time. For instance, during the half-time break, the [`Clock`](./../../objects-common/matchClock.md) object explicitly states that the period in progress is `HALFTIME`.
+Instead, we highly recommend using the [`Clock`](/api-guide/objects-common/match-clock) object. It is primarily responsible for providing accurate, real-time information about the currently playing period and the elapsed match time. For instance, during the half-time break, the [`Clock`](/api-guide/objects-common/match-clock) object explicitly states that the period in progress is `HALFTIME`.
 :::
 
 ## How to get the score data

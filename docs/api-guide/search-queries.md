@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 Search Queries are a set of Football API queries that allow you to find entities in the Livesport Football Database **by name or other attributes**, or to filter entities when you already know a specific ID.
 
-They are the recommended starting point for integrations where the consuming system has no direct mapping to Football API internal IDs and cannot use the [Mapping Service](../mapping-service/mapping-service-intro) to resolve them.
+They are the recommended starting point for integrations where the consuming system has no direct mapping to Football API internal IDs and cannot use the [Mapping Service](/mapping-service/mapping-service-intro) to resolve them.
 
 ## Available Search Queries
 
@@ -21,7 +21,7 @@ Search Queries are available for the following entity types:
  - **Matches**
 
 ## Competitions
-The [Competition](objects-business/competition) is the top-level entity in the football data hierarchy — the foundation on which **Seasons** and **Season Stages** are built. Note that no match is directly linked to a competition. Every match belongs to a **Season Stage**, which belongs to a **Season**, which belongs to a **Competition**.
+The [Competition](./objects-business/competition) is the top-level entity in the football data hierarchy — the foundation on which **Seasons** and **Season Stages** are built. Note that no match is directly linked to a competition. Every match belongs to a **Season Stage**, which belongs to a **Season**, which belongs to a **Competition**.
 
 Querying competitions is therefore typically the first step when navigating the data pyramid.
 
@@ -46,11 +46,11 @@ Competition Search Queries cover two primary use cases:
 This approach is straightforward and requires no input parameters. It returns a list of all competitions available under your subscription, which you can then filter on the client side based on your needs.
 
 :::danger[Pagination required]
-To prevent queries from returning excessive data volumes, a maximum of **1,000 competitions** can be returned per request. If your subscription covers more competitions, you must paginate through the results using [cursor-based pagination](../api-essentials#pagination).
+To prevent queries from returning excessive data volumes, a maximum of **1,000 competitions** can be returned per request. If your subscription covers more competitions, you must paginate through the results using [cursor-based pagination](/api-essentials#pagination).
 :::
 
 :::warning[Query complexity limit]
-Because `Competition` is a top-level object, the query can also request subordinate objects — such as **Seasons**, **Season Stages**, or **Matches**. However, the system evaluates the overall complexity of each request. If a query is deemed too complex, it will be rejected and not processed. Reduce the depth or breadth of the requested data to stay within the complexity limit. See [Query Complexity](../api-essentials#query-complexity) for details.
+Because `Competition` is a top-level object, the query can also request subordinate objects — such as **Seasons**, **Season Stages**, or **Matches**. However, the system evaluates the overall complexity of each request. If a query is deemed too complex, it will be rejected and not processed. Reduce the depth or breadth of the requested data to stay within the complexity limit. See [Query Complexity](/api-essentials#query-complexity) for details.
 :::
 
 <Tabs>

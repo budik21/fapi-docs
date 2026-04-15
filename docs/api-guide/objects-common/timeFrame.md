@@ -14,12 +14,12 @@ The `timeFrame` object defines the exact moment in the match when an event occur
 :::
 
 :::tip[Mind the timeFrame and clock difference]
-The `timeFrame` object is similar to [clock object](match-clock), but there is a fundamental difference between them.
+The `timeFrame` object is similar to [clock object](/api-guide/objects-common/match-clock), but there is a fundamental difference between them.
 
-While `timeFrame` represents the **static moment** an event occurred (like a snapshot), [clock](./match-clock) represents the **dynamic running clock** of the match. You typically use `clock` to display a live timer, whereas `timeFrame` is used to identify exactly when an event took place, particularly when querying data after the match has finished.`
+While `timeFrame` represents the **static moment** an event occurred (like a snapshot), [clock](/api-guide/objects-common/match-clock) represents the **dynamic running clock** of the match. You typically use `clock` to display a live timer, whereas `timeFrame` is used to identify exactly when an event took place, particularly when querying data after the match has finished.
 :::
 
-The [match phase](../../api-reference/enums/MatchPhase) and [match period](../../api-reference/enums/MatchPeriod) are represented by enum values.
+The [match phase](/api-reference/enums/MatchPhase) and [match period](/api-reference/enums/MatchPeriod) are represented by enum values.
 
 Match time can be expressed in two ways:
 * **Elapsed time** – provides the most precise match time in the `mm:ss` format. For example, if a goal is scored at `46:58` of the `PERIOD_FIRST`, this format captures the exact moment. You can read this from the `elapsedMinute` and `elapsedSeconds` attributes.

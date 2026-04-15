@@ -3,7 +3,7 @@ id:         season-stage
 title:      Season stage
 ---
 ## Dependecies
-Object `SeasonSatge` is a child object of the `Season` object. A specific season stage is in all cases related to just one [Season](season).
+Object `SeasonSatge` is a child object of the `Season` object. A specific season stage is in all cases related to just one [Season](/api-guide/objects-business/season).
 
 ## Business purpose
 :::info[no-header]

@@ -63,8 +63,8 @@ The algorithm calculates a weighted average by multiplying each match stat by th
 Normalizes the metric to a standard 90-minute football match duration. This allows for a fair comparison of efficiency between players, regardless of how many matches they appeared in or how many minutes they played.
 
 * **Example:** Consider two players who both appeared in 4 matches:
-    * **Player A:** Scored **3 goals** in **150 minutes**. Their `Per90Avg` is **1.8** ($3 / 150 \times 90$).
-    * **Player B:** Scored **4 goals** but needed **300 minutes**. Their `Per90Avg` is **1.2** ($4 / 300 \times 90$).
+  * **Player A:** Scored **3 goals** in **150 minutes**. Their `Per90Avg` is **1.8** ($3 / 150 \times 90$).
+  * **Player B:** Scored **4 goals** but needed **300 minutes**. Their `Per90Avg` is **1.2** ($4 / 300 \times 90$).
 * Even though Player B has a higher `Sum` of goals (and a higher arithmetic average per match), Player A ranks higher in `Per90Avg` because they are statistically more efficient per minute played.
 
 ### Data Slicing (Filters)
@@ -97,7 +97,7 @@ Consider a scenario where you want to get **Top Scorers Leaderboard**. The sorti
 3.  **Goals per90 (Type: `per90Avg`, Direction: `DESC`):** Tertiary tie-breaker. If two players have the same number of goals and assists, the player with higher **Goals per90 minutes average** is ranked higher. This prioritizes players who score more frequently relative to their time on the pitch.
 4.  **Minutes Played (Type: `sum`, Direction: `ASC`):** Final tie-breaker. If all previous metrics are identical, the player who achieved these stats in the least amount of total playing time takes precedence.
 
-This is just one possible configuration. You can define any combination (or their order) of metrics and aggregation types to suit your specific use case. 
+This is just one possible configuration. You can define any combination (or their order) of metrics and aggregation types to suit your specific use case.
 
 :::tip
 Keep in mind that the `sort` parameter is independent of the `fields` requested in the query; you can sort by any available metric and aggregation type, even if it is not included in the response payload.

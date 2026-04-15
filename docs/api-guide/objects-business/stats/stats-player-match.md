@@ -9,13 +9,13 @@ import TabItem from '@theme/TabItem';
 Object `playerStats` is a child of `Match` object.
 
 ## Object description
-See [Player Match Stats](./../../../api-reference/objects/PlayerMatchStatsV2) chapter.
+See [Player Match Stats](/api-reference/objects/PlayerMatchStatsV2) chapter.
 
 ## Business purpose
 :::info[no-header]
 The `playerStats` object aggregates performance statistics for all players participating in a match. Each statistic is composed of a metric key (such as `SHOTS_TOTAL` or `GOALS_PREVENTED`) and its corresponding numeric value (integer or float).
 
-For a complete list of supported metrics, please refer to the [Player Match Stats Enum](./../../../api-reference/enums/PlayerMatchMetric).
+For a complete list of supported metrics, please refer to the [Player Match Stats Enum](/api-reference/enums/PlayerMatchMetric).
 
 **Note:** Player match statistics are currently available for selected competitions only (200+ as of December 2025).
 :::
@@ -27,8 +27,8 @@ In addition to the raw metric value, ranking attributes are available for each m
 The following attributes are available:
 
 * **rankOverall** - The rank of the player among all players in the match based on the specific metric value. If two or more players share the same value, they are assigned the same rank.
-* **rankOverallComposite** - Similar to `rankOverall`, but uses a secondary metric to resolve ties (where applicable). For example, if two or more players have the same number of `PASSES_ACCURATE`, the player with the lower `PASSES_TOTAL` receives the higher rank (because they have better passes accuracy). If no secondary metric is applicable, `rankOverallComposite` returns the same rank as `rankOverall`. 
-* **rankInTeam** - The rank of the player within their own team based on the metric value. If two or more players share the same value, they are assigned the same rank. 
+* **rankOverallComposite** - Similar to `rankOverall`, but uses a secondary metric to resolve ties (where applicable). For example, if two or more players have the same number of `PASSES_ACCURATE`, the player with the lower `PASSES_TOTAL` receives the higher rank (because they have better passes accuracy). If no secondary metric is applicable, `rankOverallComposite` returns the same rank as `rankOverall`.
+* **rankInTeam** - The rank of the player within their own team based on the metric value. If two or more players share the same value, they are assigned the same rank.
 * **rankInTeamComposite** - The same logic as `rankOverallComposite` (resolving ties via secondary metrics), but applied only within the player's team. If no secondary metric is applicable, `rankOverallTeampComposite` returns the same rank as `rankTeamOverall`.
 
 ### Tie-Breaking Criteria
@@ -69,121 +69,121 @@ You can control the response order using the `order` parameter. This parameter a
 If the primary sorting criterion results in a tie, the subsequent criteria in the array determine the final order.
 :::
 <Tabs>
-    <TabItem value="query" label="Query" default>
-    ```graphql showLineNumbers title="Query: Player match statistics with ordering" 
-    query Match ($matchId: ID!) {
-      match(id: $matchId) {    
-        id
-        homeTeam{
-          localizedName {
-            text
-          }
-        }
-        awayTeam{
-          localizedName {
-            text
-          }
-        }
-        playerStats (
-          order: [
-            {
-              metric: SHOTS_TOTAL
-              direction: DESC
-            },
-            {
-              metric: SHOTS_ON_TARGET
-                direction: DESC
-            }
-          ])
-         {
-          player {
-            localizedName {
-              text
-            }
-          }      
-          shotsTotal {        
-            value        
-          }
-          shotsOnTarget {      
-            value        
-          }
-        }    
+<TabItem value="query" label="Query" default>
+```graphql showLineNumbers title="Query: Player match statistics with ordering" 
+query Match ($matchId: ID!) {
+  match(id: $matchId) {    
+    id
+    homeTeam{
+      localizedName {
+        text
       }
     }
-    ```
-    </TabItem>
-    <TabItem value="variables" label="Variables">
-    ```json showLineNumbers title="Variables: ID of desired match"
-    {
-        //Premier League, Chelsea - Arsenal 1:1, 30.11.2025
-        "matchId": "1935259480686333952"
-    }
-    ```
-    </TabItem>
-    <TabItem value="response" label="Response">
-    ```json showLineNumbers title="Response: Ordered players by their stats"
-    {
-      "data": {
-        "match": {
-          "id": "1935259480686333952",
-          "homeTeam": {
-            "localizedName": {
-              "text": "Chelsea"
-            }
-          },
-          "awayTeam": {
-            "localizedName": {
-              "text": "Arsenal"
-            }
-          },
-          "playerStats": [
-            {
-              "player": {
-                "localizedName": {
-                  "text": "Merino Zazon Mikel"
-                }
-              },
-              "shotsTotal": {
-                "value": 3
-              },
-              "shotsOnTarget": {
-                "value": 2
-              }
-            },
-            {
-              "player": {
-                "localizedName": {
-                  "text": "Saka Bukayo"
-                }
-              },
-              "shotsTotal": {
-                "value": 3
-              },
-              "shotsOnTarget": {
-                "value": 1
-              }
-            },
-            {
-              "player": {
-                "localizedName": {
-                  "text": "Neto Pedro"
-                }
-              },
-              "shotsTotal": {
-                "value": 3
-              },
-              "shotsOnTarget": {
-                "value": 0
-              }
-            },
-            "..."
-            "..."
-          ]
-        }
+    awayTeam{
+      localizedName {
+        text
       }
     }
-    ```
-    </TabItem>
+    playerStats (
+      order: [
+        {
+          metric: SHOTS_TOTAL
+          direction: DESC
+        },
+        {
+          metric: SHOTS_ON_TARGET
+            direction: DESC
+        }
+      ])
+     {
+      player {
+        localizedName {
+          text
+        }
+      }      
+      shotsTotal {        
+        value        
+      }
+      shotsOnTarget {      
+        value        
+      }
+    }    
+  }
+}
+```
+</TabItem>
+<TabItem value="variables" label="Variables">
+```json showLineNumbers title="Variables: ID of desired match"
+{
+    //Premier League, Chelsea - Arsenal 1:1, 30.11.2025
+    "matchId": "1935259480686333952"
+}
+```
+</TabItem>
+<TabItem value="response" label="Response">
+```json showLineNumbers title="Response: Ordered players by their stats"
+{
+  "data": {
+    "match": {
+      "id": "1935259480686333952",
+      "homeTeam": {
+        "localizedName": {
+          "text": "Chelsea"
+        }
+      },
+      "awayTeam": {
+        "localizedName": {
+          "text": "Arsenal"
+        }
+      },
+      "playerStats": [
+        {
+          "player": {
+            "localizedName": {
+              "text": "Merino Zazon Mikel"
+            }
+          },
+          "shotsTotal": {
+            "value": 3
+          },
+          "shotsOnTarget": {
+            "value": 2
+          }
+        },
+        {
+          "player": {
+            "localizedName": {
+              "text": "Saka Bukayo"
+            }
+          },
+          "shotsTotal": {
+            "value": 3
+          },
+          "shotsOnTarget": {
+            "value": 1
+          }
+        },
+        {
+          "player": {
+            "localizedName": {
+              "text": "Neto Pedro"
+            }
+          },
+          "shotsTotal": {
+            "value": 3
+          },
+          "shotsOnTarget": {
+            "value": 0
+          }
+        },
+        "..."
+        "..."
+      ]
+    }
+  }
+}
+```
+</TabItem>
 </Tabs>
 
 ### Player match stats using ranking
@@ -196,7 +196,7 @@ However, `rankComposite` resolves ties by incorporating a secondary metric: `LON
 * **James and Cucurella** remain tied for **4th place**, as they both have 3 total long passes.
 * **Rice** is ranked **6th** (4 total long passes, lower accuracy as James and Cucurella).
 * **Chalobah** is ranked **7th** (5 total long passes, lower accuracy as Rice).
-:::
+  :::
 
 <Tabs>
     <TabItem value="query1" label="Query" default>

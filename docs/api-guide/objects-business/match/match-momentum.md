@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 Object `Momentum` is a child of `Match` object.
 
 ## Object description
-See the [Match Momentum object](../../../api-reference/objects/MatchMomentum)
+See the [Match Momentum object](/api-reference/objects/MatchMomentum)
 
 ## Business purpose
 :::info[no-header]

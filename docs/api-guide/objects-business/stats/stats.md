@@ -11,9 +11,9 @@ The Football API allows you to query metrics at multiple levels of detail. We di
 
 The most granular metrics are provided at the match level.
 
-See the [Player Match Stats](stats-player-match.md) documentation for details on how to get **player metrics for a specific match**.
+See the [Player Match Stats](/api-guide/objects-business/stats/stats-player-match) documentation for details on how to get **player metrics for a specific match**.
 
-See the [Team Match Stats](stats-team-match.md) documentation for details on how to get **team metrics for a specific match**.
+See the [Team Match Stats](/api-guide/objects-business/stats/stats-team-match) documentation for details on how to get **team metrics for a specific match**.
 
 ## Aggregated metrics
 

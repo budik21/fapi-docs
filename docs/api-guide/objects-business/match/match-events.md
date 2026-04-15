@@ -18,11 +18,11 @@ The data is relevant for `IN_MATCH` phase of the match. Of course, you can also 
 As of January 2026, the API supports a limited set of event types: **period start and end, foul, and card**. Additional types, including **shots, goals, and passes**, are currently under development. These and other events will be introduced during the first half of 2026 (H1 2026) and will be documented here as they become available.
 :::
 
-Each event is described by one unique enumerated [event type](../../../api-reference/enums/MatchEventType) which express what has happened followed by set of [common attributes](../../../api-reference/objects/MatchEventsResult).
+Each event is described by one unique enumerated [event type](/api-reference/enums/MatchEventType) which express what has happened followed by set of [common attributes](/api-reference/objects/MatchEventsResult).
 Additionally, each event type has its own specific attributes that extend the common ones. To access fields on specific event implementations, use GraphQL Inline Fragments (see examples below). 
 
 ## Object attributes
-See the [Match Event object](../../../api-reference/objects/MatchEventsResult) for getting complete list of common attributes which are available for all event types.
+See the [Match Event object](/api-reference/objects/MatchEventsResult) for getting complete list of common attributes which are available for all event types.
 
 See the sections below for more details on each event type and their specific attributes.
 * [Card Event](#card-event)
@@ -159,7 +159,7 @@ The **Card Event** can be related to **Foul event**, as cards are typically issu
 
 If a card is issued due to a foul, you can get more context about the incident by adding the `Foul object` with their specific attributes to your query, see [Foul event](#foul-event) for more details and following example.
 
-See the [Card object](../../../api-reference/objects/MatchEventCardEvent) to get full list of specific attributes.
+See the [Card object](/api-reference/objects/MatchEventCardEvent) to get full list of specific attributes.
 
 
 ### How to get match event data: CARD
@@ -334,7 +334,7 @@ Foul event represents a rule violation committed by a player during the match. T
 
 A **Foul Event** may be linked to a **Card Event** if the infraction warrants a booking. However, the card reference remains `null` for common fouls where no disciplinary action is taken, see [Card event](#card-event) for more details and following example.
 
-See the [Foul object](../../../api-reference/objects/MatchEventFoulEvent) to get full list of specific attributes.
+See the [Foul object](/api-reference/objects/MatchEventFoulEvent) to get full list of specific attributes.
 
 ### How to get match event data: FOUL
 <Tabs>
@@ -503,7 +503,7 @@ Period Start and End Event represents referee-led decisions regarding the timing
 This event type captures key metadata: the specific action taken, the period context, and the precise timestamp within the match.
 :::
 
-See the [Period Start and End object](../../../api-reference/objects/MatchEventPeriodStartEndEvent) to get full list of specific attributes.
+See the [Period Start and End object](/api-reference/objects/MatchEventPeriodStartEndEvent) to get full list of specific attributes.
 
 ### How to get match event data: PERIOD_START_END
 <Tabs>

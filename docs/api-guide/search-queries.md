@@ -337,7 +337,91 @@ Searching for `"startsWith": "Chance"` returns the competition because Chance Li
 
 ## Seasons
 
-_(to be documented)_
+The [Season](./objects-business/season) object represents a specific timeframe of a competition — for example, the *2025/2026* campaign of the English Premier League. Every season belongs to exactly one [Competition](./objects-business/competition) and contains one or more **Season Stages**.
+
+:::info[Season as a nested object]
+The `Season` object is also available as a nested object within the [Competition](/api-reference/objects/Competition) response. When querying a competition, you can request its seasons directly as child objects without a separate query.
+
+However, the `seasons` Search Query is useful when you need to work with seasons independently — for example, to **list all seasons of a specific competition**, sorted and paginated, or to retrieve season details when you already know the competition ID.
+:::
+
+The typical use case is retrieving all seasons for a known competition. The competition ID can be obtained by searching in [Competitions](#competitions).
+
+### How to get all seasons for a competition
+
+This example retrieves all seasons of the **English Premier League**, sorted from the most recent to the oldest by end date.
+
+<Tabs>
+    <TabItem value="seasonsQuery" label="Query" default>
+        ```graphql showLineNumbers title="Get all seasons for a specific competition"
+        query PremierLeagueSeasons($filter: SeasonsFilter!, $pagination: Pagination!, $sort: SeasonSort) {
+          seasons(filter: $filter, pagination: $pagination, sort: $sort) {
+            items {
+              id
+              startDate
+              endDate
+              localizedName {
+                text
+              }
+            }
+          }
+        }
+        ```
+    </TabItem>
+    <TabItem value="seasonsVariables" label="Variables">
+        ```json showLineNumbers title="Filter by competition ID with descending sort by end date"
+        {
+          "filter": {
+            "competitionID": "1897647557501517826"
+          },
+          "pagination": {
+            "after": null,
+            "first": 10
+          },
+          "sort": {
+            "field": "END_DATE",
+            "direction": "DESC"
+          }
+        }
+        ```
+    </TabItem>
+    <TabItem value="seasonsResult" label="Result">
+        ```json showLineNumbers title="Seasons of the English Premier League, newest first"
+        {
+          "data": {
+            "seasons": {
+              "items": [
+                {
+                  "id": "1897647557501517830",
+                  "startDate": "2025-08-16",
+                  "endDate": "2026-05-24",
+                  "localizedName": {
+                    "text": "Premier League 2025/2026"
+                  }
+                },
+                {
+                  "id": "1897647557501517829",
+                  "startDate": "2024-08-17",
+                  "endDate": "2025-05-25",
+                  "localizedName": {
+                    "text": "Premier League 2024/2025"
+                  }
+                },
+                {
+                  "id": "1897647557501517828",
+                  "startDate": "2023-08-12",
+                  "endDate": "2024-05-19",
+                  "localizedName": {
+                    "text": "Premier League 2023/2024"
+                  }
+                }
+              ]
+            }
+          }
+        }
+        ```
+    </TabItem>
+</Tabs>
 
 ## Season Stages
 
